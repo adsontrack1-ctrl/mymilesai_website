@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyMilesAI — Admin Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080B14;
+  --surface: #0D1117;
+  --surface2: #161B27;
+  --surface3: #1E2535;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(255,255,255,0.12);
+  --text: #E8EBF4;
+  --text2: #8B92A8;
+  --text3: #4A5068;
+  --accent: #D6006E;
+  --accent2: #6C3CE0;
+  --mint: #00C896;
+  --amber: #F59E0B;
+  --coral: #EF4444;
+  --blue: #3B82F6;
+  --font-display: 'Syne', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-body: 'Outfit', sans-serif;
+  --r: 12px;
+  --r2: 16px;
+  --sidebar-w: 240px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--text); min-height:100vh; display:flex; overflow-x:hidden; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  position: fixed; top:0; left:0; height:100vh; z-index:100;
+  transition: transform .3s;
+}
+.sidebar-logo {
+  padding: 22px 20px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+}
+.logo-mark {
+  width: 34px; height: 34px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 14px; font-weight: 800; color: #fff;
+}
+.logo-text { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--text); }
+.logo-text span { color: var(--accent); }
+.logo-badge {
+  margin-left: auto; padding: 2px 8px; border-radius: 20px;
+  background: rgba(214,0,110,0.15); border: 1px solid rgba(214,0,110,0.3);
+  font-size: 9px; font-weight: 700; color: var(--accent); letter-spacing: 1px; text-transform: uppercase;
+}
+.nav-section { padding: 16px 12px 8px; }
+.nav-label { font-size: 9px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 2px; padding: 0 8px; margin-bottom: 6px; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: var(--r); cursor: pointer;
+  font-size: 13px; font-weight: 500; color: var(--text2);
+  transition: all .2s; margin-bottom: 2px; position: relative;
+}
+.nav-item:hover { background: var(--surface2); color: var(--text); }
+.nav-item.active { background: linear-gradient(135deg, rgba(214,0,110,0.12), rgba(108,60,224,0.08)); color: var(--text); border: 1px solid rgba(214,0,110,0.15); }
+.nav-item.active::before { content:''; position:absolute; left:0; top:25%; height:50%; width:3px; background: var(--accent); border-radius: 2px; }
+.nav-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+.nav-badge { margin-left:auto; padding: 1px 7px; border-radius:10px; font-size:10px; font-weight:700; background: rgba(214,0,110,0.2); color: var(--accent); }
+.nav-badge.green { background: rgba(0,200,150,0.15); color: var(--mint); }
+.nav-badge.amber { background: rgba(245,158,11,0.15); color: var(--amber); }
+.sidebar-footer {
+  margin-top: auto; padding: 16px;
+  border-top: 1px solid var(--border);
+}
+.admin-chip {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: var(--r);
+  background: var(--surface2); border: 1px solid var(--border);
+}
+.admin-avatar {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: #fff; flex-shrink: 0;
+}
+.admin-info { flex:1; min-width:0; }
+.admin-name { font-size: 12px; font-weight: 600; color: var(--text); }
+.admin-role { font-size: 10px; color: var(--text3); }
+.admin-dot { width:7px; height:7px; border-radius:50%; background: var(--mint); box-shadow: 0 0 6px rgba(0,200,150,0.5); }
+
+/* ── MAIN ── */
+.main { margin-left: var(--sidebar-w); flex:1; display:flex; flex-direction:column; min-height:100vh; }
+
+/* ── TOPBAR ── */
+.topbar {
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 28px; border-bottom: 1px solid var(--border);
+  background: rgba(8,11,20,0.8); backdrop-filter: blur(12px);
+  position: sticky; top:0; z-index:50;
+}
+.topbar-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; flex:1; }
+.topbar-title span { color: var(--text2); font-weight: 400; font-size: 14px; margin-left: 8px; }
+.topbar-search {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 14px; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--r); width: 260px;
+}
+.topbar-search input { background:none; border:none; outline:none; color:var(--text); font-family:var(--font-body); font-size:13px; flex:1; }
+.topbar-search input::placeholder { color: var(--text3); }
+.search-icon { color: var(--text3); font-size: 13px; }
+.topbar-actions { display: flex; gap: 8px; }
+.topbar-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: var(--r);
+  border: 1px solid var(--border); background: var(--surface2);
+  color: var(--text2); font-family: var(--font-body); font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all .2s;
+}
+.topbar-btn:hover { border-color: var(--border2); color: var(--text); }
+.topbar-btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color:#fff; border:none; }
+.status-dot { width:8px; height:8px; border-radius:50%; background: var(--mint); box-shadow: 0 0 8px rgba(0,200,150,0.5); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.5} }
+.time-display { font-family: var(--font-mono); font-size: 11px; color: var(--text3); }
+
+/* ── CONTENT ── */
+.content { padding: 24px 28px; flex:1; }
+.tab-panel { display:none; animation: fadeIn .3s ease; }
+.tab-panel.active { display:block; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── KPI GRID ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+.kpi-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: 18px 20px; position: relative; overflow: hidden;
+  transition: all .3s; cursor: default;
+}
+.kpi-card:hover { border-color: var(--border2); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+.kpi-card::after {
+  content:''; position:absolute; top:-40px; right:-40px;
+  width:100px; height:100px; border-radius:50%; filter:blur(40px); opacity:.15; pointer-events:none;
+}
+.kpi-card.c1::after { background: var(--accent); }
+.kpi-card.c2::after { background: var(--mint); }
+.kpi-card.c3::after { background: var(--accent2); }
+.kpi-card.c4::after { background: var(--amber); }
+.kpi-card.c5::after { background: var(--blue); }
+.kpi-card.c6::after { background: var(--coral); }
+.kpi-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: 12px; }
+.kpi-label { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; }
+.kpi-icon { font-size: 18px; opacity: .7; }
+.kpi-val { font-family: var(--font-display); font-size: 32px; font-weight: 800; line-height:1; letter-spacing: -1px; }
+.kpi-val.c1 { color: var(--accent); }
+.kpi-val.c2 { color: var(--mint); }
+.kpi-val.c3 { color: var(--accent2); }
+.kpi-val.c4 { color: var(--amber); }
+.kpi-val.c5 { color: var(--blue); }
+.kpi-val.c6 { color: var(--coral); }
+.kpi-sub { font-size: 11px; color: var(--text3); margin-top: 6px; display:flex; align-items:center; gap:5px; }
+.kpi-trend { display:inline-flex; align-items:center; gap:3px; font-size:10px; font-weight:700; padding: 2px 6px; border-radius:6px; }
+.kpi-trend.up { background: rgba(0,200,150,0.12); color: var(--mint); }
+.kpi-trend.dn { background: rgba(239,68,68,0.12); color: var(--coral); }
+
+/* ── TWO-COL GRID ── */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.grid3 { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 20px; }
+
+/* ── PANEL ── */
+.panel {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--r2); overflow: hidden;
+}
+.panel-hdr {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 20px; border-bottom: 1px solid var(--border);
+}
+.panel-title { font-family: var(--font-display); font-size: 14px; font-weight: 700; display:flex; align-items:center; gap:8px; }
+.panel-title-icon { font-size: 15px; }
+.panel-actions { display:flex; gap:8px; }
+.panel-btn {
+  padding: 5px 12px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface2); color: var(--text2); font-family:var(--font-body);
+  font-size: 11px; font-weight: 600; cursor: pointer; transition: all .2s;
+}
+.panel-btn:hover { color:var(--text); border-color:var(--border2); }
+.panel-btn.accent { background: rgba(214,0,110,0.15); color:var(--accent); border-color:rgba(214,0,110,0.25); }
+.panel-body { padding: 16px 20px; }
+
+/* ── TABLE ── */
+.data-table { width:100%; border-collapse:collapse; }
+.data-table th {
+  font-size: 10px; font-weight: 700; color: var(--text3); text-transform:uppercase;
+  letter-spacing: 1px; padding: 8px 12px; text-align:left;
+  border-bottom: 1px solid var(--border); background: var(--surface2);
+}
+.data-table td { padding: 11px 12px; font-size: 13px; color: var(--text2); border-bottom: 1px solid rgba(255,255,255,0.03); }
+.data-table tr:hover td { background: rgba(255,255,255,0.02); color: var(--text); }
+.data-table tr:last-child td { border-bottom: none; }
+
+/* ── BADGES ── */
+.badge { display:inline-flex; align-items:center; gap:4px; padding: 3px 8px; border-radius: 6px; font-size:11px; font-weight:700; white-space:nowrap; }
+.badge-green { background: rgba(0,200,150,0.12); color: var(--mint); }
+.badge-amber { background: rgba(245,158,11,0.12); color: var(--amber); }
+.badge-red { background: rgba(239,68,68,0.12); color: var(--coral); }
+.badge-blue { background: rgba(59,130,246,0.12); color: var(--blue); }
+.badge-purple { background: rgba(108,60,224,0.12); color: #A78BFA; }
+.badge-gray { background: rgba(255,255,255,0.06); color: var(--text3); }
+.badge-dot { width:5px; height:5px; border-radius:50%; background:currentColor; }
+
+/* ── USER PROFILE PANEL ── */
+.user-profile-card {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: 20px; margin-bottom: 16px;
+}
+.user-profile-header { display:flex; gap:16px; align-items:flex-start; margin-bottom:16px; }
+.user-avatar-lg {
+  width:56px; height:56px; border-radius:16px; flex-shrink:0;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-size:20px; font-weight:800; color:#fff;
+}
+.user-meta { flex:1; }
+.user-meta-name { font-family:var(--font-display); font-size:18px; font-weight:700; }
+.user-meta-email { font-size:12px; color:var(--text3); font-family:var(--font-mono); margin-top:3px; }
+.user-meta-badges { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
+.user-stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+.user-stat { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:12px; text-align:center; }
+.user-stat-val { font-family:var(--font-display); font-size:20px; font-weight:700; color:var(--accent); }
+.user-stat-lbl { font-size:9px; color:var(--text3); text-transform:uppercase; letter-spacing:1px; margin-top:3px; }
+
+/* ── CHART BAR ── */
+.bar-chart { display:flex; align-items:flex-end; gap:4px; height:80px; padding: 0 4px; }
+.bar-col { flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; }
+.bar-fill { width:100%; border-radius:4px 4px 0 0; transition:height .8s cubic-bezier(.22,1,.36,1); min-height:4px; }
+.bar-lbl { font-size:8px; color:var(--text3); font-family:var(--font-mono); }
+
+/* ── ACTIVITY FEED ── */
+.activity-item { display:flex; gap:12px; padding: 10px 0; border-bottom:1px solid rgba(255,255,255,0.03); }
+.activity-item:last-child { border-bottom:none; }
+.activity-icon { width:30px; height:30px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0; }
+.activity-content { flex:1; min-width:0; }
+.activity-text { font-size:12px; color:var(--text2); line-height:1.5; }
+.activity-text strong { color:var(--text); }
+.activity-time { font-size:10px; color:var(--text3); font-family:var(--font-mono); margin-top:2px; }
+
+/* ── INFRA CARDS ── */
+.infra-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:20px; }
+.infra-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r2); padding:18px 20px; }
+.infra-hdr { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+.infra-title { font-size:13px; font-weight:700; display:flex; align-items:center; gap:8px; }
+.infra-icon { font-size:16px; }
+.progress-bar { height:6px; background:var(--surface3); border-radius:3px; overflow:hidden; margin: 8px 0 4px; }
+.progress-fill { height:100%; border-radius:3px; transition:width 1s cubic-bezier(.22,1,.36,1); }
+.progress-fill.green { background:linear-gradient(90deg,var(--mint),#34D399); }
+.progress-fill.amber { background:linear-gradient(90deg,var(--amber),#FBBF24); }
+.progress-fill.red { background:linear-gradient(90deg,var(--coral),#F87171); }
+.progress-fill.blue { background:linear-gradient(90deg,var(--blue),#60A5FA); }
+.progress-fill.purple { background:linear-gradient(90deg,var(--accent2),#A78BFA); }
+.infra-detail { display:flex; justify-content:space-between; font-size:11px; color:var(--text3); }
+.infra-val { font-family:var(--font-mono); font-size:11px; font-weight:600; }
+.infra-val.green { color:var(--mint); }
+.infra-val.amber { color:var(--amber); }
+.infra-val.red { color:var(--coral); }
+
+/* ── TICKET ── */
+.ticket-item {
+  display:flex; gap:14px; padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  cursor:pointer; transition:background .15s;
+}
+.ticket-item:hover { background:rgba(255,255,255,0.02); border-radius:8px; padding-left:8px; }
+.ticket-item:last-child { border-bottom:none; }
+.ticket-priority { width:3px; border-radius:3px; flex-shrink:0; }
+.ticket-priority.high { background:var(--coral); }
+.ticket-priority.med { background:var(--amber); }
+.ticket-priority.low { background:var(--mint); }
+.ticket-content { flex:1; min-width:0; }
+.ticket-title { font-size:13px; font-weight:600; color:var(--text); margin-bottom:4px; }
+.ticket-meta { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.ticket-user { font-size:11px; color:var(--text3); font-family:var(--font-mono); }
+.ticket-time { font-size:10px; color:var(--text3); margin-left:auto; white-space:nowrap; }
+
+/* ── SEARCH BOX ── */
+.lookup-box {
+  display:flex; gap:8px; padding:16px 20px;
+  border-bottom:1px solid var(--border);
+}
+.lookup-input {
+  flex:1; padding:10px 16px; background:var(--surface2); border:1px solid var(--border);
+  border-radius:10px; color:var(--text); font-family:var(--font-mono); font-size:13px; outline:none;
+  transition:border-color .2s;
+}
+.lookup-input:focus { border-color: var(--accent); }
+.lookup-btn {
+  padding:10px 20px; border-radius:10px; border:none;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff; font-family:var(--font-body); font-size:13px; font-weight:700;
+  cursor:pointer; transition:opacity .2s;
+}
+.lookup-btn:hover { opacity:.9; }
+
+/* ── SECTION HEADER ── */
+.section-hdr { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.section-title { font-family:var(--font-display); font-size:16px; font-weight:700; }
+.section-subtitle { font-size:12px; color:var(--text3); margin-top:2px; }
+
+/* ── ALERT BANNER ── */
+.alert-banner {
+  display:flex; align-items:center; gap:12px;
+  padding:12px 16px; border-radius:var(--r); margin-bottom:14px;
+  font-size:12px; font-weight:500;
+}
+.alert-banner.warn { background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.2); color:var(--amber); }
+.alert-banner.info { background:rgba(59,130,246,0.08); border:1px solid rgba(59,130,246,0.2); color:var(--blue); }
+.alert-banner.success { background:rgba(0,200,150,0.08); border:1px solid rgba(0,200,150,0.2); color:var(--mint); }
+.alert-banner.danger { background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.2); color:var(--coral); }
+
+/* ── DETAIL ROW ── */
+.detail-row { display:flex; align-items:center; padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.03); }
+.detail-row:last-child { border-bottom:none; }
+.detail-key { font-size:11px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:.8px; width:140px; flex-shrink:0; }
+.detail-val { font-size:13px; color:var(--text); font-family:var(--font-mono); }
+.detail-val.normal { font-family:var(--font-body); }
+
+/* ── CAPACITY GAUGE ── */
+.gauge-row { display:flex; gap:16px; flex-wrap:wrap; }
+.gauge-item { flex:1; min-width:180px; background:var(--surface2); border:1px solid var(--border); border-radius:var(--r2); padding:16px; }
+.gauge-label { font-size:11px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px; display:flex; justify-content:space-between; }
+.gauge-num { font-family:var(--font-display); font-size:26px; font-weight:800; line-height:1; }
+.gauge-max { font-size:12px; color:var(--text3); font-weight:400; }
+.gauge-action { margin-top:10px; padding:7px 14px; border-radius:8px; border:1px solid var(--border2); background:none; color:var(--text2); font-family:var(--font-body); font-size:11px; font-weight:600; cursor:pointer; width:100%; transition:all .2s; }
+.gauge-action:hover { background:var(--surface3); color:var(--text); }
+.gauge-action.upgrade { background:linear-gradient(135deg,rgba(214,0,110,0.15),rgba(108,60,224,0.1)); color:var(--accent); border-color:rgba(214,0,110,0.3); }
+
+/* ── MINI SPARKLINE ── */
+.sparkline-wrap { display:flex; align-items:flex-end; gap:2px; height:30px; }
+.spark-bar { flex:1; border-radius:2px; min-height:2px; opacity:.7; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--surface3); border-radius:3px; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-mark">M</div>
+    <div class="logo-text">My<span>Miles</span>AI</div>
+    <div class="logo-badge">Admin</div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Operations</div>
+    <div class="nav-item active" onclick="switchTab('ops')">
+      <span class="nav-icon">⚡</span> Operations HQ
+    </div>
+    <div class="nav-item" onclick="switchTab('infra')">
+      <span class="nav-icon">🏗</span> Infrastructure
+    </div>
+    <div class="nav-item" onclick="switchTab('capacity')">
+      <span class="nav-icon">📊</span> Capacity & Scale
+      <span class="nav-badge amber">!</span>
+    </div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Users</div>
+    <div class="nav-item" onclick="switchTab('users')">
+      <span class="nav-icon">👥</span> User Database
+      <span class="nav-badge green">6</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('lookup')">
+      <span class="nav-icon">🔍</span> Account Lookup
+    </div>
+    <div class="nav-item" onclick="switchTab('trips')">
+      <span class="nav-icon">🚗</span> Trip Analytics
+      <span class="nav-badge green">11</span>
+    </div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">Support</div>
+    <div class="nav-item" onclick="switchTab('support')">
+      <span class="nav-icon">🎫</span> Support Tickets
+      <span class="nav-badge">3</span>
+    </div>
+    <div class="nav-item" onclick="switchTab('impersonate')">
+      <span class="nav-icon">👁</span> Impersonate User
+    </div>
+  </div>
+
+  <div class="nav-section">
+    <div class="nav-label">System</div>
+    <div class="nav-item" onclick="switchTab('backup')">
+      <span class="nav-icon">💾</span> Backup & Recovery
+    </div>
+    <div class="nav-item" onclick="switchTab('logs')">
+      <span class="nav-icon">📋</span> System Logs
+    </div>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="admin-chip">
+      <div class="admin-avatar">AS</div>
+      <div class="admin-info">
+        <div class="admin-name">Swaran (Admin)</div>
+        <div class="admin-role">Super Administrator</div>
+      </div>
+      <div class="admin-dot"></div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-title" id="topbar-title">Operations HQ <span>Live overview of MyMilesAI</span></div>
+    <div class="topbar-search">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Search users, trips, tickets...">
+    </div>
+    <div class="topbar-actions">
+      <div class="status-dot"></div>
+      <div class="time-display" id="clock">--:--:--</div>
+      <button class="topbar-btn" onclick="switchTab('backup')">💾 Backup Now</button>
+      <button class="topbar-btn primary">🚨 Alert</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ═══════════════════════════════════════
+         TAB 1: OPERATIONS HQ
+    ═══════════════════════════════════════ -->
+    <div class="tab-panel active" id="tab-ops">
+      <div class="alert-banner info" style="margin-bottom:16px">
+        ℹ️ <strong>MyMilesAI Rel 5.4</strong> deployed successfully — Build 52 ready for TestFlight. 6 active users · 11 trips logged · Database healthy.
+      </div>
+
+      <!-- KPIs -->
+      <div class="kpi-grid">
+        <div class="kpi-card c2">
+          <div class="kpi-top"><div class="kpi-label">Total Users</div><div class="kpi-icon">👥</div></div>
+          <div class="kpi-val c2">6</div>
+          <div class="kpi-sub"><span class="kpi-trend up">↑ +2</span> this week</div>
+        </div>
+        <div class="kpi-card c1">
+          <div class="kpi-top"><div class="kpi-label">Active (30d)</div><div class="kpi-icon">⚡</div></div>
+          <div class="kpi-val c1">4</div>
+          <div class="kpi-sub"><span class="kpi-trend up">↑ 67%</span> activity rate</div>
+        </div>
+        <div class="kpi-card c3">
+          <div class="kpi-top"><div class="kpi-label">Total Trips</div><div class="kpi-icon">🚗</div></div>
+          <div class="kpi-val c3">11</div>
+          <div class="kpi-sub"><span class="kpi-trend up">↑ +3</span> today</div>
+        </div>
+        <div class="kpi-card c4">
+          <div class="kpi-top"><div class="kpi-label">Total Deductions</div><div class="kpi-icon">💰</div></div>
+          <div class="kpi-val c4">$247</div>
+          <div class="kpi-sub">saved by users so far</div>
+        </div>
+      </div>
+
+      <div class="grid3">
+        <!-- Activity Feed -->
+        <div class="panel">
+          <div class="panel-hdr">
+            <div class="panel-title"><span class="panel-title-icon">📡</span> Live Activity Feed</div>
+            <div class="panel-actions">
+              <button class="panel-btn">Pause</button>
+              <button class="panel-btn accent">Export</button>
+            </div>
+          </div>
+          <div class="panel-body" style="padding:12px 20px">
+            <div class="activity-item">
+              <div class="activity-icon" style="background:rgba(0,200,150,0.12)">🚗</div>
+              <div class="activity-content">
+                <div class="activity-text"><strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="077274627547736274732964686a">[email&#160;protected]</a></strong> completed a 8.4 mi Business trip — <strong>+$6.09</strong></div>
+                <div class="activity-time">2 min ago · Client Meeting</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon" style="background:rgba(108,60,224,0.12)">👤</div>
+              <div class="activity-content">
+                <div class="activity-text"><strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6e1d1d2e060f1c07040f1d400d0103">[email&#160;protected]</a></strong> signed in via Google OAuth</div>
+                <div class="activity-time">18 min ago · iOS 18.2 · iPhone 15 Pro Max</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon" style="background:rgba(214,0,110,0.12)">📱</div>
+              <div class="activity-content">
+                <div class="activity-text"><strong>Build 52</strong> synced to TestFlight — Rel 5.4 PWA deployed</div>
+                <div class="activity-time">1 hr ago · Xcode 15 · Team YPUWY268S7</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon" style="background:rgba(245,158,11,0.12)">⚠️</div>
+              <div class="activity-content">
+                <div class="activity-text"><strong>GPS permission</strong> denied — tester on iPhone 16 Pro Max</div>
+                <div class="activity-time">2 hr ago · Build 51 · Uday's device</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon" style="background:rgba(59,130,246,0.12)">💾</div>
+              <div class="activity-content">
+                <div class="activity-text"><strong>Supabase backup</strong> completed — 96 kB trips, 32 kB profiles</div>
+                <div class="activity-time">6 hr ago · West US · Auto</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon" style="background:rgba(0,200,150,0.12)">✅</div>
+              <div class="activity-content">
+                <div class="activity-text"><strong>Apple Sign-In</strong> configured — Key 4G2Y8S76VN active</div>
+                <div class="activity-time">Yesterday · Service ID configured</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Status -->
+        <div class="panel">
+          <div class="panel-hdr">
+            <div class="panel-title"><span class="panel-title-icon">🟢</span> System Status</div>
+          </div>
+          <div class="panel-body">
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--surface2);border-radius:10px">
+                <span style="font-size:12px;font-weight:600">GitHub Pages (PWA)</span>
+                <span class="badge badge-green"><span class="badge-dot"></span> Live</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--surface2);border-radius:10px">
+                <span style="font-size:12px;font-weight:600">Supabase DB</span>
+                <span class="badge badge-green"><span class="badge-dot"></span> Healthy</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--surface2);border-radius:10px">
+                <span style="font-size:12px;font-weight:600">Cloudflare Worker</span>
+                <span class="badge badge-green"><span class="badge-dot"></span> Active</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--surface2);border-radius:10px">
+                <span style="font-size:12px;font-weight:600">Google Maps API</span>
+                <span class="badge badge-green"><span class="badge-dot"></span> OK</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--surface2);border-radius:10px">
+                <span style="font-size:12px;font-weight:600">TestFlight Build 52</span>
+                <span class="badge badge-amber"><span class="badge-dot"></span> Pending</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--surface2);border-radius:10px">
+                <span style="font-size:12px;font-weight:600">mymilesai.com SSL</span>
+                <span class="badge badge-amber"><span class="badge-dot"></span> DNS Issue</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:var(--surface2);border-radius:10px">
+                <span style="font-size:12px;font-weight:600">Apple Auth (SIWA)</span>
+                <span class="badge badge-green"><span class="badge-dot"></span> Active</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trip & User Activity bars -->
+      <div class="grid2">
+        <div class="panel">
+          <div class="panel-hdr">
+            <div class="panel-title"><span class="panel-title-icon">📈</span> Daily Trip Volume (Last 14 days)</div>
+          </div>
+          <div class="panel-body">
+            <div class="bar-chart" id="trip-chart"></div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-hdr">
+            <div class="panel-title"><span class="panel-title-icon">👥</span> User Signups (Last 14 days)</div>
+          </div>
+          <div class="panel-body">
+            <div class="bar-chart" id="user-chart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         TAB 2: INFRASTRUCTURE
+    ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="tab-infra">
+      <div class="section-hdr">
+        <div><div class="section-title">Infrastructure Overview</div><div class="section-subtitle">All services, databases, and integrations</div></div>
+        <button class="panel-btn accent">🔄 Refresh All</button>
+      </div>
+
+      <div class="infra-grid">
+        <div class="infra-card">
+          <div class="infra-hdr"><div class="infra-title"><span class="infra-icon">🗄</span> Supabase DB</div><span class="badge badge-green">Healthy</span></div>
+          <div class="detail-row"><div class="detail-key">Project</div><div class="detail-val">dxpuuiqibtizewbbffjk</div></div>
+          <div class="detail-row"><div class="detail-key">Region</div><div class="detail-val">West US</div></div>
+          <div class="detail-row"><div class="detail-key">Plan</div><div class="detail-val">Free</div></div>
+          <div class="detail-row"><div class="detail-key">Tables</div><div class="detail-val">3 (profiles, trips, settings)</div></div>
+          <div class="detail-row"><div class="detail-key">DB Size</div><div class="detail-val">144 kB / 500 MB</div></div>
+          <div class="progress-bar"><div class="progress-fill green" style="width:0.03%"></div></div>
+          <div class="infra-detail"><span>0.03% used</span><span class="infra-val green">499.9 MB free</span></div>
+        </div>
+
+        <div class="infra-card">
+          <div class="infra-hdr"><div class="infra-title"><span class="infra-icon">🌐</span> GitHub Pages PWA</div><span class="badge badge-green">Live</span></div>
+          <div class="detail-row"><div class="detail-key">Repo</div><div class="detail-val">mile-tracker-1</div></div>
+          <div class="detail-row"><div class="detail-key">Branch</div><div class="detail-val">main</div></div>
+          <div class="detail-row"><div class="detail-key">Version</div><div class="detail-val">Rel 5.4</div></div>
+          <div class="detail-row"><div class="detail-key">Build</div><div class="detail-val">#142 — 1 min ago</div></div>
+          <div class="detail-row"><div class="detail-key">URL</div><div class="detail-val" style="font-size:11px">adsontrack1-ctrl.github.io/...</div></div>
+          <div class="progress-bar"><div class="progress-fill blue" style="width:62%"></div></div>
+          <div class="infra-detail"><span>GitHub storage</span><span class="infra-val">62% repo limit</span></div>
+        </div>
+
+        <div class="infra-card">
+          <div class="infra-hdr"><div class="infra-title"><span class="infra-icon">⚡</span> Cloudflare Worker</div><span class="badge badge-green">Active</span></div>
+          <div class="detail-row"><div class="detail-key">URL</div><div class="detail-val" style="font-size:11px">mymilesai-ai.mymilesai...</div></div>
+          <div class="detail-row"><div class="detail-key">Account</div><div class="detail-val" style="font-size:11px"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1971786b70467f786b7459766c6d75767672377a7674">[email&#160;protected]</a></div></div>
+          <div class="detail-row"><div class="detail-key">Requests/day</div><div class="detail-val">~48</div></div>
+          <div class="detail-row"><div class="detail-key">Daily limit</div><div class="detail-val">100,000</div></div>
+          <div class="progress-bar"><div class="progress-fill green" style="width:0.05%"></div></div>
+          <div class="infra-detail"><span>0.05% of limit</span><span class="infra-val green">Way under limit</span></div>
+        </div>
+
+        <div class="infra-card">
+          <div class="infra-hdr"><div class="infra-title"><span class="infra-icon">🗺</span> Google Maps API</div><span class="badge badge-green">OK</span></div>
+          <div class="detail-row"><div class="detail-key">Project</div><div class="detail-val">mymilesai</div></div>
+          <div class="detail-row"><div class="detail-key">APIs</div><div class="detail-val" style="font-size:11px">Places, Distance, Geocoding, Maps JS</div></div>
+          <div class="detail-row"><div class="detail-key">Monthly calls</div><div class="detail-val">~320</div></div>
+          <div class="detail-row"><div class="detail-key">Free tier</div><div class="detail-val">$200/mo credit</div></div>
+          <div class="progress-bar"><div class="progress-fill green" style="width:8%"></div></div>
+          <div class="infra-detail"><span>8% of budget</span><span class="infra-val green">$184 remaining</span></div>
+        </div>
+
+        <div class="infra-card">
+          <div class="infra-hdr"><div class="infra-title"><span class="infra-icon">🍎</span> App Store Connect</div><span class="badge badge-amber">Pending</span></div>
+          <div class="detail-row"><div class="detail-key">App ID</div><div class="detail-val">6760873036</div></div>
+          <div class="detail-row"><div class="detail-key">Bundle</div><div class="detail-val" style="font-size:11px">com.harijasllc.mymilesaiapp</div></div>
+          <div class="detail-row"><div class="detail-key">Latest build</div><div class="detail-val">5.6 (51) — Complete ✅</div></div>
+          <div class="detail-row"><div class="detail-key">Next build</div><div class="detail-val">5.6 (52) — Pending upload</div></div>
+          <div class="detail-row"><div class="detail-key">Testers</div><div class="detail-val">3 (Mandeep, Uday, SS)</div></div>
+          <div style="margin-top:10px"><button class="gauge-action upgrade">📤 Open TestFlight →</button></div>
+        </div>
+
+        <div class="infra-card">
+          <div class="infra-hdr"><div class="infra-title"><span class="infra-icon">🌍</span> Domain / DNS</div><span class="badge badge-amber">Issue</span></div>
+          <div class="detail-row"><div class="detail-key">Domain</div><div class="detail-val">mymilesai.com</div></div>
+          <div class="detail-row"><div class="detail-key">Registrar</div><div class="detail-val">GoDaddy</div></div>
+          <div class="detail-row"><div class="detail-key">SSL</div><div class="detail-val" style="color:var(--amber)">Privacy Error</div></div>
+          <div class="detail-row"><div class="detail-key">A Records</div><div class="detail-val" style="font-size:11px">185.199.108-111.153</div></div>
+          <div class="detail-row"><div class="detail-key">CNAME</div><div class="detail-val" style="font-size:11px">adsontrack1-ctrl.github.io</div></div>
+          <div style="margin-top:10px"><button class="gauge-action" style="color:var(--amber);border-color:rgba(245,158,11,0.3)">⚠️ Fix DNS →</button></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         TAB 3: CAPACITY & SCALE
+    ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="tab-capacity">
+      <div class="section-hdr">
+        <div><div class="section-title">Capacity & Scaling Dashboard</div><div class="section-subtitle">Current usage vs. limits — know when to upgrade</div></div>
+      </div>
+
+      <div class="alert-banner warn">⚠️ <strong>Supabase Free Plan:</strong> At current growth rate you'll hit the 50K MAU limit in ~8 months. Consider upgrading to Pro ($25/mo) when you reach 500 users.
+      </div>
+
+      <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+        <div class="kpi-card c2">
+          <div class="kpi-top"><div class="kpi-label">DB Storage Used</div><div class="kpi-icon">🗄</div></div>
+          <div class="kpi-val c2">144kB</div>
+          <div class="kpi-sub">of 500MB free tier</div>
+          <div class="progress-bar" style="margin-top:10px"><div class="progress-fill green" style="width:0.03%"></div></div>
+        </div>
+        <div class="kpi-card c3">
+          <div class="kpi-top"><div class="kpi-label">Monthly Active Users</div><div class="kpi-icon">👥</div></div>
+          <div class="kpi-val c3">6</div>
+          <div class="kpi-sub">of 50,000 MAU limit</div>
+          <div class="progress-bar" style="margin-top:10px"><div class="progress-fill green" style="width:0.012%"></div></div>
+        </div>
+        <div class="kpi-card c4">
+          <div class="kpi-top"><div class="kpi-label">API Requests/mo</div><div class="kpi-icon">⚡</div></div>
+          <div class="kpi-val c4">~960</div>
+          <div class="kpi-sub">of 2M free tier limit</div>
+          <div class="progress-bar" style="margin-top:10px"><div class="progress-fill green" style="width:0.048%"></div></div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <div class="panel-hdr"><div class="panel-title"><span class="panel-title-icon">📦</span> Upgrade Planner</div></div>
+          <div class="panel-body">
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="padding:14px;background:var(--surface2);border:1px solid var(--border);border-radius:12px">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                  <span style="font-size:13px;font-weight:700">Supabase Free → Pro</span>
+                  <span class="badge badge-gray">When: 500+ users</span>
+                </div>
+                <div style="font-size:12px;color:var(--text3);margin-bottom:8px">Unlocks: 8GB DB, 100K MAU, daily backups, custom domains, Point-in-time recovery</div>
+                <div style="font-size:14px;font-weight:700;color:var(--mint)">$25/mo · Upgrade trigger: 500 users</div>
+              </div>
+              <div style="padding:14px;background:var(--surface2);border:1px solid var(--border);border-radius:12px">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                  <span style="font-size:13px;font-weight:700">GitHub Pages → Vercel Pro</span>
+                  <span class="badge badge-gray">When: 10K+ visits/mo</span>
+                </div>
+                <div style="font-size:12px;color:var(--text3);margin-bottom:8px">Unlocks: Analytics, 100GB bandwidth, custom domains with SSL, edge functions</div>
+                <div style="font-size:14px;font-weight:700;color:var(--mint)">$20/mo · Currently free</div>
+              </div>
+              <div style="padding:14px;background:var(--surface2);border:1px solid var(--border);border-radius:12px">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                  <span style="font-size:13px;font-weight:700">Cloudflare Workers Paid</span>
+                  <span class="badge badge-green">Not needed yet</span>
+                </div>
+                <div style="font-size:12px;color:var(--text3);margin-bottom:8px">100K requests/day free. At current rate you'd need paid at ~2,000 users</div>
+                <div style="font-size:14px;font-weight:700;color:var(--text3)">$5/mo · When: 2,000+ users</div>
+              </div>
+              <div style="padding:14px;background:var(--surface2);border:1px solid var(--border);border-radius:12px">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                  <span style="font-size:13px;font-weight:700">Google Maps API Billing</span>
+                  <span class="badge badge-green">$200 credit covers ~3K users</span>
+                </div>
+                <div style="font-size:12px;color:var(--text3);margin-bottom:8px">At 3,000 users you'll exceed the $200/mo free credit. Need billing enabled.</div>
+                <div style="font-size:14px;font-weight:700;color:var(--text3)">~$0.002/call · When: 3,000+ users</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-hdr"><div class="panel-title"><span class="panel-title-icon">🎯</span> Growth Projections</div></div>
+          <div class="panel-body">
+            <table class="data-table">
+              <thead><tr><th>Users</th><th>Monthly Cost</th><th>Key Action</th></tr></thead>
+              <tbody>
+                <tr><td><span class="badge badge-green">1–100</span></td><td style="color:var(--mint);font-weight:700">$0/mo</td><td style="font-size:11px;color:var(--text3)">Current: all free</td></tr>
+                <tr><td><span class="badge badge-blue">100–500</span></td><td style="color:var(--blue);font-weight:700">$0–5/mo</td><td style="font-size:11px;color:var(--text3)">RevenueCat + Stripe</td></tr>
+                <tr><td><span class="badge badge-amber">500–2K</span></td><td style="color:var(--amber);font-weight:700">$25–30/mo</td><td style="font-size:11px;color:var(--text3)">Supabase Pro upgrade</td></tr>
+                <tr><td><span class="badge badge-purple">2K–10K</span></td><td style="color:#A78BFA;font-weight:700">$50–80/mo</td><td style="font-size:11px;color:var(--text3)">+ Cloudflare paid</td></tr>
+                <tr><td><span class="badge badge-red">10K+</span></td><td style="color:var(--coral);font-weight:700">$150+/mo</td><td style="font-size:11px;color:var(--text3)">Vercel Pro + CDN</td></tr>
+              </tbody>
+            </table>
+            <div style="margin-top:16px;padding:14px;background:rgba(0,200,150,0.06);border:1px solid rgba(0,200,150,0.15);border-radius:10px">
+              <div style="font-size:12px;font-weight:700;color:var(--mint);margin-bottom:4px">💡 Recommendation</div>
+              <div style="font-size:12px;color:var(--text3)">Set up RevenueCat + Stripe billing now (before users arrive). Pro plan at $6.99/mo × 100 paying users = <strong style="color:var(--mint)">$699/mo revenue</strong> vs $25/mo infra cost.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         TAB 4: USER DATABASE
+    ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="tab-users">
+      <div class="section-hdr">
+        <div><div class="section-title">User Database</div><div class="section-subtitle">All registered users — click to view full profile</div></div>
+        <div style="display:flex;gap:8px">
+          <button class="panel-btn">Export CSV</button>
+          <button class="panel-btn accent">+ Invite User</button>
+        </div>
+      </div>
+
+      <div class="kpi-grid" style="margin-bottom:16px">
+        <div class="kpi-card c2" style="padding:14px 16px">
+          <div class="kpi-top"><div class="kpi-label">Total Users</div></div>
+          <div class="kpi-val c2" style="font-size:26px">6</div>
+          <div class="kpi-sub">across all plans</div>
+        </div>
+        <div class="kpi-card c1" style="padding:14px 16px">
+          <div class="kpi-top"><div class="kpi-label">Active (7d)</div></div>
+          <div class="kpi-val c1" style="font-size:26px">3</div>
+          <div class="kpi-sub">50% weekly retention</div>
+        </div>
+        <div class="kpi-card c3" style="padding:14px 16px">
+          <div class="kpi-top"><div class="kpi-label">Pro Subscribers</div></div>
+          <div class="kpi-val c3" style="font-size:26px">0</div>
+          <div class="kpi-sub">billing not yet live</div>
+        </div>
+        <div class="kpi-card c4" style="padding:14px 16px">
+          <div class="kpi-top"><div class="kpi-label">Churned (30d)</div></div>
+          <div class="kpi-val c4" style="font-size:26px">1</div>
+          <div class="kpi-sub">17% churn rate</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-hdr">
+          <div class="panel-title"><span class="panel-title-icon">👥</span> All Users</div>
+          <div class="panel-actions">
+            <button class="panel-btn">All</button>
+            <button class="panel-btn">Active</button>
+            <button class="panel-btn">Inactive</button>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>User</th><th>Auth Method</th><th>Plan</th><th>Trips</th><th>Miles</th><th>Deduction</th><th>Last Active</th><th>Status</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="users-table">
+            <tr>
+              <td>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff">AS</div>
+                  <div><div style="font-size:12px;font-weight:600;color:var(--text)">Swaran</div><div style="font-size:10px;color:var(--text3);font-family:var(--font-mono)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d6a5a1b7a4b7b8a3a596afb7beb9b9f8b5b9bb">[email&#160;protected]</a></div></div>
+                </div>
+              </td>
+              <td><span class="badge badge-blue">Google</span></td>
+              <td><span class="badge badge-purple">Admin</span></td>
+              <td style="font-family:var(--font-mono);font-weight:600">5</td>
+              <td style="font-family:var(--font-mono)">67.7 mi</td>
+              <td style="color:var(--mint);font-family:var(--font-mono);font-weight:600">$49.07</td>
+              <td style="font-size:11px;color:var(--text3)">Today</td>
+              <td><span class="badge badge-green"><span class="badge-dot"></span> Active</span></td>
+              <td><button class="panel-btn accent" onclick="switchTab('impersonate')">View</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#3B82F6,#6366F1);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff">MK</div>
+                  <div><div style="font-size:12px;font-weight:600;color:var(--text)">Mandeep</div><div style="font-size:10px;color:var(--text3);font-family:var(--font-mono)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="eb868a858f8e8e9bab9f8e989fc5888486">[email&#160;protected]</a></div></div>
+                </div>
+              </td>
+              <td><span class="badge badge-blue">Apple</span></td>
+              <td><span class="badge badge-gray">Free</span></td>
+              <td style="font-family:var(--font-mono);font-weight:600">3</td>
+              <td style="font-family:var(--font-mono)">23.1 mi</td>
+              <td style="color:var(--mint);font-family:var(--font-mono);font-weight:600">$16.75</td>
+              <td style="font-size:11px;color:var(--text3)">2d ago</td>
+              <td><span class="badge badge-green"><span class="badge-dot"></span> Active</span></td>
+              <td><button class="panel-btn accent" onclick="switchTab('impersonate')">View</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#F59E0B,#EF4444);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff">UK</div>
+                  <div><div style="font-size:12px;font-weight:600;color:var(--text)">Uday</div><div style="font-size:10px;color:var(--text3);font-family:var(--font-mono)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="99ecfdf8e0d9edfceaedb7faf6f4">[email&#160;protected]</a></div></div>
+                </div>
+              </td>
+              <td><span class="badge badge-blue">Email/OTP</span></td>
+              <td><span class="badge badge-gray">Free</span></td>
+              <td style="font-family:var(--font-mono);font-weight:600">2</td>
+              <td style="font-family:var(--font-mono)">12.4 mi</td>
+              <td style="color:var(--mint);font-family:var(--font-mono);font-weight:600">$8.99</td>
+              <td style="font-size:11px;color:var(--text3)">3d ago</td>
+              <td><span class="badge badge-amber"><span class="badge-dot"></span> GPS Issue</span></td>
+              <td><button class="panel-btn accent" onclick="switchTab('impersonate')">View</button></td>
+            </tr>
+            <tr>
+              <td>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#00C896,#3B82F6);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff">T1</div>
+                  <div><div style="font-size:12px;font-weight:600;color:var(--text)">Tester 1</div><div style="font-size:10px;color:var(--text3);font-family:var(--font-mono)"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6b1f0e181f0e195a2b1f0e181f45080406">[email&#160;protected]</a></div></div>
+                </div>
+              </td>
+              <td><span class="badge badge-blue">Google</span></td>
+              <td><span class="badge badge-gray">Free</span></td>
+              <td style="font-family:var(--font-mono);font-weight:600">1</td>
+              <td style="font-family:var(--font-mono)">5.2 mi</td>
+              <td style="color:var(--mint);font-family:var(--font-mono);font-weight:600">$3.77</td>
+              <td style="font-size:11px;color:var(--text3)">1 week</td>
+              <td><span class="badge badge-gray"><span class="badge-dot"></span> Inactive</span></td>
+              <td><button class="panel-btn" onclick="switchTab('impersonate')">View</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         TAB 5: ACCOUNT LOOKUP
+    ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="tab-lookup">
+      <div class="section-hdr">
+        <div><div class="section-title">Account Lookup</div><div class="section-subtitle">Find any user by email, ID, or phone</div></div>
+      </div>
+
+      <div class="panel" style="margin-bottom:20px">
+        <div class="lookup-box">
+          <input class="lookup-input" placeholder="Enter email address, user ID, or Apple ID..." id="lookup-input">
+          <button class="lookup-btn" onclick="doLookup()">🔍 Look Up</button>
+          <button class="lookup-btn" style="background:var(--surface2);border:1px solid var(--border);color:var(--text2)" onclick="loadDemo()">Load Demo</button>
+        </div>
+        <div id="lookup-result" style="padding:16px 20px;display:none">
+          <div class="user-profile-card">
+            <div class="user-profile-header">
+              <div class="user-avatar-lg">AS</div>
+              <div class="user-meta">
+                <div class="user-meta-name">Swaran (Admin)</div>
+                <div class="user-meta-email"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="562521372437382325162f373e39397835393b">[email&#160;protected]</a></div>
+                <div class="user-meta-badges">
+                  <span class="badge badge-purple">Super Admin</span>
+                  <span class="badge badge-blue">Google Auth</span>
+                  <span class="badge badge-green"><span class="badge-dot"></span> Active</span>
+                  <span class="badge badge-gray">iPhone 15 Pro Max</span>
+                  <span class="badge badge-gray">Build 51</span>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <button class="panel-btn accent" onclick="switchTab('impersonate')">👁 Impersonate</button>
+                <button class="panel-btn">📧 Send Email</button>
+                <button class="panel-btn" style="color:var(--coral);border-color:rgba(239,68,68,0.2)">🚫 Suspend</button>
+              </div>
+            </div>
+            <div class="user-stats-grid">
+              <div class="user-stat"><div class="user-stat-val">5</div><div class="user-stat-lbl">Trips</div></div>
+              <div class="user-stat"><div class="user-stat-val" style="color:var(--mint)">67.7</div><div class="user-stat-lbl">Total Miles</div></div>
+              <div class="user-stat"><div class="user-stat-val" style="color:var(--amber)">$49</div><div class="user-stat-lbl">Deduction</div></div>
+              <div class="user-stat"><div class="user-stat-val" style="color:var(--accent2)">3🔥</div><div class="user-stat-lbl">Streak</div></div>
+            </div>
+          </div>
+
+          <div class="grid2" style="margin-bottom:0">
+            <div class="panel">
+              <div class="panel-hdr"><div class="panel-title">Account Details</div></div>
+              <div class="panel-body">
+                <div class="detail-row"><div class="detail-key">User ID</div><div class="detail-val">uuid-abc-123</div></div>
+                <div class="detail-row"><div class="detail-key">Email</div><div class="detail-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="671410061506091214271e060f08084904080a">[email&#160;protected]</a></div></div>
+                <div class="detail-row"><div class="detail-key">Auth Provider</div><div class="detail-val">Google OAuth</div></div>
+                <div class="detail-row"><div class="detail-key">Signed Up</div><div class="detail-val">2026-03-15</div></div>
+                <div class="detail-row"><div class="detail-key">Last Login</div><div class="detail-val">2026-03-31 22:50</div></div>
+                <div class="detail-row"><div class="detail-key">Device</div><div class="detail-val">iPhone 15 Pro Max</div></div>
+                <div class="detail-row"><div class="detail-key">App Build</div><div class="detail-val">5.6 (51)</div></div>
+                <div class="detail-row"><div class="detail-key">iOS Version</div><div class="detail-val">iOS 18.2</div></div>
+                <div class="detail-row"><div class="detail-key">Country</div><div class="detail-val">US · California</div></div>
+                <div class="detail-row"><div class="detail-key">Tax Rate</div><div class="detail-val">$0.725/mi (IRS 2026)</div></div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-hdr"><div class="panel-title">Recent Trips</div></div>
+              <div class="panel-body" style="padding:10px 16px">
+                <div class="activity-item">
+                  <div class="activity-icon" style="background:rgba(108,60,224,0.12)">🚗</div>
+                  <div class="activity-content"><div class="activity-text"><strong>Business</strong> · 8.4 mi · $6.09</div><div class="activity-time">Today · Client Meeting · Downtown → Westside</div></div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon" style="background:rgba(214,0,110,0.12)">🏠</div>
+                  <div class="activity-content"><div class="activity-text"><strong>Personal</strong> · 3.2 mi</div><div class="activity-time">Today · Home → Costco</div></div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon" style="background:rgba(108,60,224,0.12)">✈️</div>
+                  <div class="activity-content"><div class="activity-text"><strong>Business</strong> · 12.1 mi · $8.77</div><div class="activity-time">Yesterday · Airport run</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         TAB 6: TRIP ANALYTICS
+    ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="tab-trips">
+      <div class="section-hdr">
+        <div><div class="section-title">Trip Analytics</div><div class="section-subtitle">All trips across all users</div></div>
+        <button class="panel-btn accent">Export All</button>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-card c2"><div class="kpi-top"><div class="kpi-label">Total Trips</div></div><div class="kpi-val c2">11</div><div class="kpi-sub">all time</div></div>
+        <div class="kpi-card c1"><div class="kpi-top"><div class="kpi-label">Total Miles</div></div><div class="kpi-val c1">108.4</div><div class="kpi-sub">business + personal</div></div>
+        <div class="kpi-card c3"><div class="kpi-top"><div class="kpi-label">Business %</div></div><div class="kpi-val c3">73%</div><div class="kpi-sub">8 of 11 trips</div></div>
+        <div class="kpi-card c4"><div class="kpi-top"><div class="kpi-label">Total Deductions</div></div><div class="kpi-val c4">$57</div><div class="kpi-sub">saved by all users</div></div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-hdr"><div class="panel-title"><span class="panel-title-icon">🚗</span> All Trips</div></div>
+        <table class="data-table">
+          <thead><tr><th>User</th><th>From</th><th>To</th><th>Miles</th><th>Type</th><th>Deduction</th><th>Purpose</th><th>Date</th></tr></thead>
+          <tbody>
+            <tr><td style="font-size:11px;color:var(--text3);font-family:var(--font-mono)">swaranus@...</td><td>123 Main St</td><td>456 Oak Ave</td><td style="font-family:var(--font-mono);font-weight:600">8.4</td><td><span class="badge badge-purple">Business</span></td><td style="color:var(--mint);font-family:var(--font-mono)">$6.09</td><td style="font-size:11px">Client Meeting</td><td style="font-size:11px;color:var(--text3)">Today</td></tr>
+            <tr><td style="font-size:11px;color:var(--text3);font-family:var(--font-mono)">swaranus@...</td><td>Home, Maple Dr</td><td>Costco, Regent</td><td style="font-family:var(--font-mono);font-weight:600">3.2</td><td><span class="badge badge-red">Personal</span></td><td style="color:var(--text3);font-family:var(--font-mono)">—</td><td style="font-size:11px">—</td><td style="font-size:11px;color:var(--text3)">Today</td></tr>
+            <tr><td style="font-size:11px;color:var(--text3);font-family:var(--font-mono)">swaranus@...</td><td>Office HQ</td><td>Airport T2</td><td style="font-family:var(--font-mono);font-weight:600">12.1</td><td><span class="badge badge-purple">Business</span></td><td style="color:var(--mint);font-family:var(--font-mono)">$8.77</td><td style="font-size:11px">Airport</td><td style="font-size:11px;color:var(--text3)">Yesterday</td></tr>
+            <tr><td style="font-size:11px;color:var(--text3);font-family:var(--font-mono)">mandeep@...</td><td>Home</td><td>Client Site A</td><td style="font-family:var(--font-mono);font-weight:600">9.8</td><td><span class="badge badge-purple">Business</span></td><td style="color:var(--mint);font-family:var(--font-mono)">$7.11</td><td style="font-size:11px">Client</td><td style="font-size:11px;color:var(--text3)">2d ago</td></tr>
+            <tr><td style="font-size:11px;color:var(--text3);font-family:var(--font-mono)">uday@...</td><td>Residence</td><td>Warehouse</td><td style="font-family:var(--font-mono);font-weight:600">6.2</td><td><span class="badge badge-purple">Business</span></td><td style="color:var(--mint);font-family:var(--font-mono)">$4.50</td><td style="font-size:11px">Supply Run</td><td style="font-size:11px;color:var(--text3)">3d ago</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         TAB 7: SUPPORT TICKETS
+    ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="tab-support">
+      <div class="section-hdr">
+        <div><div class="section-title">Customer Support</div><div class="section-subtitle">User-reported issues — click to open & resolve</div></div>
+        <div style="display:flex;gap:8px">
+          <button class="panel-btn">All (3)</button>
+          <button class="panel-btn" style="color:var(--coral)">Open (2)</button>
+          <button class="panel-btn" style="color:var(--mint)">Resolved (1)</button>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <div class="panel-hdr"><div class="panel-title"><span class="panel-title-icon">🎫</span> Active Tickets</div></div>
+          <div class="panel-body" style="padding:12px 20px">
+            <div class="ticket-item" onclick="openTicket(1)">
+              <div class="ticket-priority high"></div>
+              <div class="ticket-content">
+                <div class="ticket-title">GPS not tracking on iPhone 16 Pro Max</div>
+                <div class="ticket-meta">
+                  <span class="badge badge-red">High</span>
+                  <span class="badge badge-amber">GPS Issue</span>
+                  <span class="ticket-user"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="037667627a43776670772d606c6e">[email&#160;protected]</a></span>
+                </div>
+              </div>
+              <div class="ticket-time">2h ago</div>
+            </div>
+            <div class="ticket-item" onclick="openTicket(2)">
+              <div class="ticket-priority med"></div>
+              <div class="ticket-content">
+                <div class="ticket-title">Trip deduction amount seems wrong</div>
+                <div class="ticket-meta">
+                  <span class="badge badge-amber">Medium</span>
+                  <span class="badge badge-blue">Billing</span>
+                  <span class="ticket-user"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="92fff3fcf6f7f7e2d2e6f7e1e6bcf1fdff">[email&#160;protected]</a></span>
+                </div>
+              </div>
+              <div class="ticket-time">1d ago</div>
+            </div>
+            <div class="ticket-item" onclick="openTicket(3)">
+              <div class="ticket-priority low"></div>
+              <div class="ticket-content">
+                <div class="ticket-title">App crashes when adding manual trip ✅</div>
+                <div class="ticket-meta">
+                  <span class="badge badge-green">Resolved</span>
+                  <span class="badge badge-gray">Crash</span>
+                  <span class="ticket-user"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="afdbcadcdbcadd9eefdbcadcdb81ccc0c2">[email&#160;protected]</a></span>
+                </div>
+              </div>
+              <div class="ticket-time">3d ago</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" id="ticket-detail">
+          <div class="panel-hdr"><div class="panel-title"><span class="panel-title-icon">📋</span> Ticket #1 — GPS Issue</div><button class="panel-btn accent" onclick="switchTab('impersonate')">👁 View Account</button></div>
+          <div class="panel-body">
+            <div class="detail-row"><div class="detail-key">Reporter</div><div class="detail-val normal"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="710415100831051402055f121e1c">[email&#160;protected]</a></div></div>
+            <div class="detail-row"><div class="detail-key">Device</div><div class="detail-val">iPhone 16 Pro Max</div></div>
+            <div class="detail-row"><div class="detail-key">Build</div><div class="detail-val">5.6 (51)</div></div>
+            <div class="detail-row"><div class="detail-key">iOS</div><div class="detail-val">iOS 18.3.1</div></div>
+            <div class="detail-row"><div class="detail-key">GPS Permission</div><div class="detail-val" style="color:var(--coral)">Denied</div></div>
+            <div style="margin-top:12px;padding:12px;background:var(--surface2);border-radius:10px;font-size:12px;color:var(--text2);line-height:1.6">
+              "The app is not tracking my trips automatically. I drove to work but nothing was recorded. The GPS bar shows Monitoring but nothing happens."
+            </div>
+            <div style="margin-top:12px">
+              <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Root Cause</div>
+              <div class="alert-banner warn" style="margin-bottom:8px">NSLocationAlwaysAndWhenInUseUsageDescription missing in Info.plist — known issue from Build 39, partially fixed in Build 51.</div>
+              <div style="font-size:12px;font-weight:700;color:var(--text3);margin-bottom:6px">Resolution Steps:</div>
+              <div style="font-size:12px;color:var(--text2);line-height:1.8">
+                1. Ask user to go to Settings → Privacy → Location Services → MyMilesAI → set to "Always"<br>
+                2. If still failing, confirm Build 52 fixes the NSLocation plist entry<br>
+                3. Assign Build 52 to TestFlight when ready
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:14px">
+              <button class="lookup-btn" style="flex:1;padding:10px">✅ Mark Resolved</button>
+              <button class="panel-btn" style="flex:1">📧 Reply to User</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         TAB 8: IMPERSONATE USER
+    ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="tab-impersonate">
+      <div class="section-hdr">
+        <div><div class="section-title">User Impersonation</div><div class="section-subtitle">Log into any account to diagnose issues — all actions are logged</div></div>
+      </div>
+
+      <div class="alert-banner danger" style="margin-bottom:20px">
+        🔒 <strong>Admin Only.</strong> All impersonation sessions are logged with timestamp, admin ID, and reason. Any changes made will affect the real user account.
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <div class="panel-hdr"><div class="panel-title"><span class="panel-title-icon">👁</span> Start Impersonation Session</div></div>
+          <div class="panel-body">
+            <div style="margin-bottom:14px">
+              <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Select User</div>
+              <select style="width:100%;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--font-body);font-size:13px;outline:none">
+                <option><template class="__cf_email__" data-cfemail="0370746271626d7670437a626b6c6c2d606c6e">[email&#160;protected]</template> (Admin)</option>
+                <option><template class="__cf_email__" data-cfemail="026f636c6667677242766771762c616d6f">[email&#160;protected]</template></option>
+                <option><template class="__cf_email__" data-cfemail="d5a0b1b4ac95a1b0a6a1fbb6bab8">[email&#160;protected]</template> ⚠️ GPS Issue</option>
+                <option><template class="__cf_email__" data-cfemail="0f7b6a7c7b6a7d3e4f7b6a7c7b216c6062">[email&#160;protected]</template></option>
+              </select>
+            </div>
+            <div style="margin-bottom:14px">
+              <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Reason (Required)</div>
+              <input style="width:100%;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--font-body);font-size:13px;outline:none" placeholder="e.g. Investigating GPS tracking issue — Ticket #1">
+            </div>
+            <div style="margin-bottom:14px">
+              <div style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Session Duration</div>
+              <select style="width:100%;padding:10px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:var(--font-body);font-size:13px;outline:none">
+                <option>15 minutes</option>
+                <option>30 minutes</option>
+                <option>1 hour</option>
+              </select>
+            </div>
+            <button class="lookup-btn" style="width:100%;padding:12px">👁 Start Impersonation Session</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-hdr"><div class="panel-title"><span class="panel-title-icon">📋</span> What You'll See</div></div>
+          <div class="panel-body">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="padding:10px 12px;background:var(--surface2);border-radius:10px;font-size:12px;color:var(--text2)">✅ Full trip history (all trips, dates, routes)</div>
+              <div style="padding:10px 12px;background:var(--surface2);border-radius:10px;font-size:12px;color:var(--text2)">✅ User settings (unit, work days, tax rate)</div>
+              <div style="padding:10px 12px;background:var(--surface2);border-radius:10px;font-size:12px;color:var(--text2)">✅ GPS permission state and device info</div>
+              <div style="padding:10px 12px;background:var(--surface2);border-radius:10px;font-size:12px;color:var(--text2)">✅ Subscription status and billing</div>
+              <div style="padding:10px 12px;background:var(--surface2);border-radius:10px;font-size:12px;color:var(--text2)">✅ Auth tokens and session info</div>
+              <div style="padding:10px 12px;background:var(--surface2);border-radius:10px;font-size:12px;color:var(--text2)">✅ Can add/edit trips on behalf of user</div>
+              <div style="padding:10px 12px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.1);border-radius:10px;font-size:12px;color:var(--coral)">🚫 Cannot see raw passwords or payment cards</div>
+              <div style="padding:10px 12px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.1);border-radius:10px;font-size:12px;color:var(--coral)">🚫 Cannot change email or auth credentials</div>
+            </div>
+
+            <div style="margin-top:16px;padding:12px;background:rgba(108,60,224,0.08);border:1px solid rgba(108,60,224,0.15);border-radius:10px">
+              <div style="font-size:11px;font-weight:700;color:#A78BFA;margin-bottom:4px">📝 Implementation Note</div>
+              <div style="font-size:11px;color:var(--text3)">This requires a Supabase service_role key (server-side only) to query any user's data. Never expose service_role in client JS. Build a secured API endpoint at /api/admin/impersonate that validates the admin session first.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         TAB 9: BACKUP & RECOVERY
+    ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="tab-backup">
+      <div class="section-hdr">
+        <div><div class="section-title">Backup & Recovery</div><div class="section-subtitle">All data sources — local, GitHub, Supabase</div></div>
+        <button class="panel-btn accent" onclick="runBackup()">💾 Run Full Backup Now</button>
+      </div>
+
+      <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+        <div class="kpi-card c2"><div class="kpi-top"><div class="kpi-label">Last Backup</div></div><div class="kpi-val c2" style="font-size:22px">Today</div><div class="kpi-sub">Build52 · 2026-03-31</div></div>
+        <div class="kpi-card c3"><div class="kpi-top"><div class="kpi-label">Repos Backed Up</div></div><div class="kpi-val c3">4</div><div class="kpi-sub">iOS, PWA, website, VisitorIQ</div></div>
+        <div class="kpi-card c4"><div class="kpi-top"><div class="kpi-label">Recovery Point</div></div><div class="kpi-val c4" style="font-size:22px">Build 42</div><div class="kpi-sub">Last known stable build</div></div>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <div class="panel-hdr"><div class="panel-title"><span class="panel-title-icon">📦</span> Backup Sources</div></div>
+          <div class="panel-body" style="padding:12px 20px">
+            <div class="activity-item">
+              <div class="activity-icon" style="background:rgba(0,200,150,0.12)">📱</div>
+              <div class="activity-content">
+                <div class="activity-text"><strong>MyMilesAI iOS</strong> — ~/Desktop/MyMilesAI-iOS-Build52-2026-03-31</div>
+                <div class="activity-time">Today · Full project backup · ~245 MB</div>
+              </div>
+              <span class="badge badge-green">✅ Done</span>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon" style="background:rgba(59,130,246,0.12)">🌐</div>
+              <div class="activity-content">
+                <div class="activity-text"><strong>PWA Source</strong> — index-Rel5.4-Build52-2026-03-31.html</div>
+                <div class="activity-time">Today · Desktop backup · ~330 kB</div>
+              </div>
+              <span class="badge badge-green">✅ Done</span>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon" style="background:rgba(108,60,224,0.12)">🗄</div>
+              <div class="activity-content">
+                <div class="activity-text"><strong>Supabase DB</strong> — profiles (6), trips (11), settings</div>
+                <div class="activity-time">6h ago · Auto backup · 144 kB total</div>
+              </div>
+              <span class="badge badge-green">✅ Auto</span>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon" style="background:rgba(245,158,11,0.12)">📂</div>
+              <div class="activity-content">
+                <div class="activity-text"><strong>GitHub full-backup</strong> — adsontrack1-ctrl/full-backup</div>
+                <div class="activity-time">2d ago · Build42 snapshot · Private repo</div>
+              </div>
+              <span class="badge badge-amber">⏳ Needs B52</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-hdr"><div class="panel-title"><span class="panel-title-icon">🔄</span> Push Build 52 to full-backup</div></div>
+          <div class="panel-body">
+            <div style="font-size:12px;color:var(--text3);margin-bottom:14px;line-height:1.7">Run this in Terminal to push today's backup to your GitHub full-backup repo:</div>
+            <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;font-family:var(--font-mono);font-size:11px;color:var(--mint);line-height:2;overflow-x:auto">
+              cd ~/Desktop<br>
+              git clone https://github.com/<br>
+              &nbsp;&nbsp;adsontrack1-ctrl/full-backup.git<br>
+              cp -r MyMilesAI-iOS-Build52-2026-03-31 \<br>
+              &nbsp;&nbsp;full-backup/<br>
+              cd full-backup<br>
+              git add .<br>
+              git commit -m "Build52 — 2026-03-31 — Rel 5.4"<br>
+              git push origin main
+            </div>
+            <div style="margin-top:12px;display:flex;gap:8px">
+              <button class="lookup-btn" style="flex:1;padding:10px;font-size:12px">📋 Copy Commands</button>
+              <button class="panel-btn" style="flex:1">🌐 Open GitHub</button>
+            </div>
+
+            <div style="margin-top:16px;padding:12px;background:rgba(0,200,150,0.06);border:1px solid rgba(0,200,150,0.15);border-radius:10px">
+              <div style="font-size:11px;font-weight:700;color:var(--mint);margin-bottom:4px">💡 Backup Checklist</div>
+              <div style="display:flex;flex-direction:column;gap:5px;font-size:11px;color:var(--text3)">
+                <div>✅ Local: ~/Desktop/MyMilesAI-iOS-Build52-2026-03-31</div>
+                <div>✅ Local PWA: ~/Desktop/index-Rel5.4-Build52-...</div>
+                <div>⏳ GitHub: Push to full-backup repo</div>
+                <div>⏳ Supabase: Enable daily auto-backup (Pro)</div>
+                <div>⏳ TestFlight: Archive + upload Build 52</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════
+         TAB 10: SYSTEM LOGS
+    ═══════════════════════════════════════ -->
+    <div class="tab-panel" id="tab-logs">
+      <div class="section-hdr">
+        <div><div class="section-title">System Logs</div><div class="section-subtitle">All admin actions, errors, deployments</div></div>
+        <button class="panel-btn">Download Logs</button>
+      </div>
+
+      <div class="panel">
+        <div style="padding:12px 20px;border-bottom:1px solid var(--border);display:flex;gap:8px">
+          <button class="panel-btn accent">All</button>
+          <button class="panel-btn">Errors</button>
+          <button class="panel-btn">Deployments</button>
+          <button class="panel-btn">Auth</button>
+          <button class="panel-btn">Admin</button>
+        </div>
+        <div style="padding:0">
+          <table class="data-table">
+            <thead><tr><th>Time</th><th>Level</th><th>Source</th><th>Message</th><th>User</th></tr></thead>
+            <tbody>
+              <tr><td style="font-family:var(--font-mono);font-size:10px;color:var(--text3);white-space:nowrap">22:53:20</td><td><span class="badge badge-red">ERROR</span></td><td style="font-size:11px">altool</td><td style="font-size:11px">Auth context delegate failed — app-specific password required</td><td style="font-size:11px;color:var(--text3)">swaranus</td></tr>
+              <tr><td style="font-family:var(--font-mono);font-size:10px;color:var(--text3);white-space:nowrap">22:51:00</td><td><span class="badge badge-green">INFO</span></td><td style="font-size:11px">git</td><td style="font-size:11px">Rel 5.4 PWA sync + build 52 — pushed to mymilesai-ios</td><td style="font-size:11px;color:var(--text3)">swaranus</td></tr>
+              <tr><td style="font-family:var(--font-mono);font-size:10px;color:var(--text3);white-space:nowrap">22:44:00</td><td><span class="badge badge-green">DEPLOY</span></td><td style="font-size:11px">GitHub Pages</td><td style="font-size:11px">Rel 5.4 — #142 deployed successfully (38s)</td><td style="font-size:11px;color:var(--text3)">CI/CD</td></tr>
+              <tr><td style="font-family:var(--font-mono);font-size:10px;color:var(--text3);white-space:nowrap">22:38:00</td><td><span class="badge badge-green">DEPLOY</span></td><td style="font-size:11px">GitHub Pages</td><td style="font-size:11px">Rel 5.3 — #141 deployed successfully (36s)</td><td style="font-size:11px;color:var(--text3)">CI/CD</td></tr>
+              <tr><td style="font-family:var(--font-mono);font-size:10px;color:var(--text3);white-space:nowrap">22:28:00</td><td><span class="badge badge-green">DEPLOY</span></td><td style="font-size:11px">GitHub Pages</td><td style="font-size:11px">Rel 5.2 — #140 deployed successfully (42s)</td><td style="font-size:11px;color:var(--text3)">CI/CD</td></tr>
+              <tr><td style="font-family:var(--font-mono);font-size:10px;color:var(--text3);white-space:nowrap">17:21:00</td><td><span class="badge badge-green">DEPLOY</span></td><td style="font-size:11px">TestFlight</td><td style="font-size:11px">Build 5.6 (51) — Complete, available to 3 testers</td><td style="font-size:11px;color:var(--text3)">swaranus</td></tr>
+              <tr><td style="font-family:var(--font-mono);font-size:10px;color:var(--text3);white-space:nowrap">16:20:00</td><td><span class="badge badge-amber">WARN</span></td><td style="font-size:11px">GPS</td><td style="font-size:11px">GPS permission denied — <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="087d6c6971487c6d7b7c266b6765">[email&#160;protected]</a> · iPhone 16 Pro Max</td><td style="font-size:11px;color:var(--text3)">uday</td></tr>
+              <tr><td style="font-family:var(--font-mono);font-size:10px;color:var(--text3);white-space:nowrap">09:14:00</td><td><span class="badge badge-blue">AUTH</span></td><td style="font-size:11px">Supabase</td><td style="font-size:11px">Google OAuth sign-in — <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="364541574457584345764f575e59591855595b">[email&#160;protected]</a></td><td style="font-size:11px;color:var(--text3)">swaranus</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</main>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Tab switching
+const tabTitles = {
+  ops: ['Operations HQ', 'Live overview of MyMilesAI'],
+  infra: ['Infrastructure', 'All services, databases and integrations'],
+  capacity: ['Capacity & Scale', 'Monitor usage and plan upgrades'],
+  users: ['User Database', 'All registered users'],
+  lookup: ['Account Lookup', 'Find any user by email or ID'],
+  trips: ['Trip Analytics', 'All trips across all users'],
+  support: ['Support Tickets', 'User-reported issues'],
+  impersonate: ['Impersonate User', 'Log in as any user to diagnose issues'],
+  backup: ['Backup & Recovery', 'All data sources'],
+  logs: ['System Logs', 'All admin actions and events'],
+};
+
+function switchTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const panel = document.getElementById('tab-' + id);
+  if (panel) panel.classList.add('active');
+  const navItems = document.querySelectorAll('.nav-item');
+  navItems.forEach(n => { if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'" + id + "'")) n.classList.add('active'); });
+  const t = tabTitles[id] || [id, ''];
+  document.getElementById('topbar-title').innerHTML = t[0] + ' <span>' + t[1] + '</span>';
+}
+
+// Clock
+function updateClock() {
+  const now = new Date();
+  const t = now.toLocaleTimeString('en-US', {hour12:false});
+  document.getElementById('clock').textContent = t;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// Bar charts
+function makeChart(id, data, color) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const max = Math.max(...data);
+  const days = ['M','T','W','T','F','S','S','M','T','W','T','F','S','S'];
+  el.innerHTML = data.map((v,i) => `
+    <div class="bar-col">
+      <div class="bar-fill" style="height:${Math.max(4, (v/max)*70)}px;background:${v === max ? color : color+'55'}"></div>
+      <div class="bar-lbl">${days[i]}</div>
+    </div>`).join('');
+}
+makeChart('trip-chart', [0,1,0,2,1,0,1,0,2,1,3,1,2,3], 'var(--accent2)');
+makeChart('user-chart', [0,0,1,0,0,0,1,0,0,0,1,0,2,1], 'var(--accent)');
+
+// Lookup demo
+function doLookup() {
+  document.getElementById('lookup-result').style.display = 'block';
+}
+function loadDemo() {
+  document.getElementById('lookup-input').value = 'swaranus@yahoo.com';
+  document.getElementById('lookup-result').style.display = 'block';
+}
+
+// Backup
+function runBackup() {
+  alert('Full backup initiated!\n\n✅ Supabase snapshot queued\n✅ GitHub repos tagged\n✅ Local backup path: ~/Desktop/MyMilesAI-iOS-Build52-2026-03-31\n\nCheck System Logs for status.');
+}
+
+function openTicket(id) {
+  // Highlight selected ticket
+  document.querySelectorAll('.ticket-item').forEach((t,i) => {
+    t.style.background = i === id-1 ? 'rgba(255,255,255,0.03)' : '';
+  });
+}
+</script>
+
+<!-- TWO-LEVEL AUTH OVERLAY -->
+<div id="auth-overlay" style="position:fixed;inset:0;z-index:9999;background:#080B14;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif">
+  <div style="width:440px;padding:0 20px">
+    <div style="text-align:center;margin-bottom:32px">
+      <div style="width:60px;height:60px;border-radius:18px;background:linear-gradient(135deg,#D6006E,#6C3CE0);display:inline-flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:#fff;font-family:'Syne',sans-serif;margin-bottom:12px">M</div>
+      <div style="font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:#E8EBF4">MyMiles<span style="color:#D6006E">AI</span></div>
+      <div style="font-size:11px;color:#4A5068;margin-top:4px;letter-spacing:2px;text-transform:uppercase">Admin Command Center</div>
+    </div>
+
+    <!-- STEP 1 -->
+    <div id="auth-step1">
+      <div style="background:#0D1117;border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:30px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:22px">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(214,0,110,0.15);border:1px solid rgba(214,0,110,0.25);display:flex;align-items:center;justify-content:center;font-size:16px">🔐</div>
+          <div style="flex:1">
+            <div style="font-size:15px;font-weight:700;color:#E8EBF4">Level 1 Authentication</div>
+            <div style="font-size:11px;color:#4A5068">Enter your administrator password</div>
+          </div>
+          <div style="padding:4px 10px;border-radius:20px;background:rgba(214,0,110,0.12);border:1px solid rgba(214,0,110,0.2);font-size:10px;font-weight:700;color:#D6006E;letter-spacing:1px">1 OF 2</div>
+        </div>
+        <input type="password" id="auth-pass" placeholder="Admin password" autocomplete="off"
+          style="width:100%;padding:14px 18px;background:#161B27;border:1px solid rgba(255,255,255,0.08);border-radius:12px;color:#E8EBF4;font-family:'JetBrains Mono',monospace;font-size:15px;outline:none;margin-bottom:12px;box-sizing:border-box;letter-spacing:3px"
+          onkeydown="if(event.key==='Enter')checkPass()">
+        <div id="auth-err1" style="color:#EF4444;font-size:12px;margin-bottom:12px;display:none;padding:10px 14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.15);border-radius:10px">❌ Incorrect password. All attempts are logged.</div>
+        <button onclick="checkPass()" style="width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,#D6006E,#6C3CE0);color:#fff;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer">Continue to 2FA →</button>
+      </div>
+      <div style="text-align:center;margin-top:14px;font-size:11px;color:#4A5068;line-height:1.6">🔒 Authorized access only &nbsp;·&nbsp; All attempts logged &nbsp;·&nbsp; Session expires in 4h</div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div id="auth-step2" style="display:none">
+      <div style="background:#0D1117;border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:30px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:22px">
+          <div style="width:36px;height:36px;border-radius:10px;background:rgba(0,200,150,0.15);border:1px solid rgba(0,200,150,0.25);display:flex;align-items:center;justify-content:center;font-size:16px">📱</div>
+          <div style="flex:1">
+            <div style="font-size:15px;font-weight:700;color:#E8EBF4">Level 2 — Verification Code</div>
+            <div style="font-size:11px;color:#4A5068">Enter the 6-digit admin code</div>
+          </div>
+          <div style="padding:4px 10px;border-radius:20px;background:rgba(0,200,150,0.12);border:1px solid rgba(0,200,150,0.2);font-size:10px;font-weight:700;color:#00C896;letter-spacing:1px">2 OF 2</div>
+        </div>
+
+        <div style="background:#161B27;border:1px solid rgba(0,200,150,0.15);border-radius:12px;padding:18px;margin-bottom:16px;text-align:center">
+          <div style="font-size:10px;color:#4A5068;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px">Current Admin Code</div>
+          <div id="totp-display" style="font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:700;color:#00C896;letter-spacing:10px"></div>
+          <div style="margin-top:10px">
+            <div id="totp-bar" style="height:3px;background:linear-gradient(90deg,#00C896,#3B82F6);border-radius:2px;transition:width 1s linear;width:100%;max-width:200px;margin:0 auto"></div>
+          </div>
+          <div style="font-size:10px;color:#4A5068;margin-top:6px">Refreshes in <span id="totp-sec">30</span>s</div>
+        </div>
+
+        <input type="text" id="auth-pin" placeholder="000000" maxlength="6" autocomplete="off"
+          style="width:100%;padding:14px 18px;background:#161B27;border:1px solid rgba(255,255,255,0.08);border-radius:12px;color:#E8EBF4;font-family:'JetBrains Mono',monospace;font-size:26px;outline:none;margin-bottom:12px;box-sizing:border-box;letter-spacing:10px;text-align:center"
+          oninput="if(this.value.length===6)checkPin()" onkeydown="if(event.key==='Enter')checkPin()">
+        <div id="auth-err2" style="color:#EF4444;font-size:12px;margin-bottom:12px;display:none;padding:10px 14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.15);border-radius:10px">❌ Wrong code. Copy the code shown above exactly.</div>
+        <button onclick="checkPin()" style="width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,#00C896,#3B82F6);color:#fff;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:8px">✅ Enter Dashboard</button>
+        <button onclick="document.getElementById('
