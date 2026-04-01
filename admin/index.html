@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MyMilesAI Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=JetBrains+Mono:wght@500;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#080B14;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'Outfit',sans-serif}
+.card{width:440px;padding:0 20px}
+.logo{text-align:center;margin-bottom:32px}
+.logo-icon{width:60px;height:60px;border-radius:18px;background:linear-gradient(135deg,#D6006E,#6C3CE0);display:inline-flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:#fff;font-family:'Syne',sans-serif;margin-bottom:12px}
+.logo-name{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;color:#E8EBF4}
+.logo-name span{color:#D6006E}
+.logo-sub{font-size:11px;color:#4A5068;margin-top:4px;letter-spacing:2px;text-transform:uppercase}
+.box{background:#0D1117;border:1px solid rgba(255,255,255,0.07);border-radius:20px;padding:30px}
+.row{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+.ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.ttl{font-size:15px;font-weight:700;color:#E8EBF4}
+.sub{font-size:11px;color:#4A5068}
+.bdg{margin-left:auto;padding:4px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:1px}
+.inp{width:100%;padding:14px 18px;background:#161B27;border:1px solid rgba(255,255,255,0.08);border-radius:12px;color:#E8EBF4;font-family:'JetBrains Mono',monospace;font-size:15px;outline:none;margin-bottom:12px;box-sizing:border-box;letter-spacing:3px}
+.inp:focus{border-color:#D6006E}
+.err{color:#EF4444;font-size:12px;margin-bottom:12px;display:none;padding:10px 14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.15);border-radius:10px}
+.btn{width:100%;padding:14px;border-radius:12px;border:none;color:#fff;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer}
+.btnb{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:none;color:#4A5068;font-family:'Outfit',sans-serif;font-size:12px;cursor:pointer;margin-top:8px}
+.tbox{background:#161B27;border:1px solid rgba(0,200,150,0.15);border-radius:12px;padding:18px;margin-bottom:16px;text-align:center}
+.tlbl{font-size:10px;color:#4A5068;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.tcode{font-family:'JetBrains Mono',monospace;font-size:32px;font-weight:700;color:#00C896;letter-spacing:10px}
+.tbar{height:3px;background:linear-gradient(90deg,#00C896,#3B82F6);border-radius:2px;transition:width 1s linear;max-width:200px;margin:10px auto 0}
+.ttim{font-size:10px;color:#4A5068;margin-top:6px}
+.note{text-align:center;margin-top:14px;font-size:11px;color:#4A5068;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="card">
+<div class="logo">
+  <div class="logo-icon">M</div>
+  <div class="logo-name">MyMiles<span>AI</span></div>
+  <div class="logo-sub">Admin Command Center</div>
+</div>
+<div id="s1">
+  <div class="box">
+    <div class="row">
+      <div class="ico" style="background:rgba(214,0,110,0.15);border:1px solid rgba(214,0,110,0.25)">&#128272;</div>
+      <div><div class="ttl">Level 1 &mdash; Admin Password</div><div class="sub">Enter your administrator password</div></div>
+      <div class="bdg" style="background:rgba(214,0,110,0.12);border:1px solid rgba(214,0,110,0.2);color:#D6006E">1 OF 2</div>
+    </div>
+    <input type="password" id="pw" class="inp" placeholder="Admin password" onkeydown="if(event.key==='Enter')a1()">
+    <div id="e1" class="err">Incorrect password. All attempts are logged.</div>
+    <button class="btn" style="background:linear-gradient(135deg,#D6006E,#6C3CE0)" onclick="a1()">Continue to 2FA &rarr;</button>
+  </div>
+  <div class="note">&#128274; Authorized access only &middot; All attempts logged &middot; Session expires in 4h</div>
+</div>
+<div id="s2" style="display:none">
+  <div class="box">
+    <div class="row">
+      <div class="ico" style="background:rgba(0,200,150,0.15);border:1px solid rgba(0,200,150,0.25)">&#128241;</div>
+      <div><div class="ttl">Level 2 &mdash; Verification Code</div><div class="sub">Enter the 6-digit code shown below</div></div>
+      <div class="bdg" style="background:rgba(0,200,150,0.12);border:1px solid rgba(0,200,150,0.2);color:#00C896">2 OF 2</div>
+    </div>
+    <div class="tbox">
+      <div class="tlbl">Current Admin Code</div>
+      <div class="tcode" id="tc"></div>
+      <div class="tbar" id="tb"></div>
+      <div class="ttim">Refreshes in <span id="ts">30</span>s</div>
+    </div>
+    <input type="text" id="pin" class="inp" placeholder="000000" maxlength="6" style="font-size:26px;letter-spacing:10px;text-align:center" oninput="if(this.value.length===6)a2()" onkeydown="if(event.key==='Enter')a2()">
+    <div id="e2" class="err">Wrong code. Copy the code shown above exactly.</div>
+    <button class="btn" style="background:linear-gradient(135deg,#00C896,#3B82F6);margin-bottom:8px" onclick="a2()">&#9989; Enter Dashboard</button>
+    <button class="btnb" onclick="document.getElementById('s2').style.display='none';document.getElementById('s1').style.display='block'">&larr; Back</button>
+  </div>
+</div>
+</div>
+<script>
+var P="MyMilesAI@Harijas2026!";
+function c30(){var s="MYMILESAI_HARIJAS_LLC_SECRET_2026",w=Math.floor(Date.now()/30000),h=0;for(var i=0;i<(s+w).length;i++){h=Math.imul(31,h)+(s+w).charCodeAt(i)|0;}return String(Math.abs(h)%1000000).padStart(6,"0");}
+function tk(){var c=c30(),d=document.getElementById("tc");if(d)d.textContent=c;var s=30-(Math.floor(Date.now()/1000)%30);var sc=document.getElementById("ts");if(sc)sc.textContent=s;var b=document.getElementById("tb");if(b)b.style.width=((s/30)*100)+"%";}
+setInterval(tk,1000);tk();
+function a1(){if(document.getElementById("pw").value===P){document.getElementById("s1").style.display="none";document.getElementById("s2").style.display="block";document.getElementById("pin").focus();document.getElementById("e1").style.display="none";}else{document.getElementById("e1").style.display="block";}}
+function a2(){if(document.getElementById("pin").value===c30()){sessionStorage.setItem("mma",Date.now()+14400000);window.location.href="/admin/dashboard.html";}else{document.getElementById("e2").style.display="block";document.getElementById("pin").value="";}}
+var ss=sessionStorage.getItem("mma");if(ss&&Date.now()<+ss)window.location.href="/admin/dashboard.html";
+setTimeout(function(){var p=document.getElementById("pw");if(p)p.focus();},200);
+</script>
+</body>
+</html>
