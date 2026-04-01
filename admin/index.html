@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- v3 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -19,7 +20,7 @@ body{background:#080B14;display:flex;align-items:center;justify-content:center;m
 .ico{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
 .ttl{font-size:15px;font-weight:700;color:#E8EBF4}
 .sub{font-size:11px;color:#4A5068}
-.inp{width:100%;padding:14px 18px;background:#161B27;border:1px solid rgba(255,255,255,0.08);border-radius:12px;color:#E8EBF4;font-family:'JetBrains Mono',monospace;font-size:15px;outline:none;margin-bottom:12px;box-sizing:border-box;letter-spacing:3px}
+.inp{width:100%;padding:14px 18px;background:#161B27;border:1px solid rgba(255,255,255,0.08);border-radius:12px;color:#E8EBF4;font-family:'JetBrains Mono',monospace;font-size:15px;outline:none;margin-bottom:12px;box-sizing:border-box}
 .inp:focus{border-color:#D6006E}
 .err{color:#EF4444;font-size:12px;margin-bottom:12px;display:none;padding:10px 14px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.15);border-radius:10px}
 .btn{width:100%;padding:14px;border-radius:12px;border:none;color:#fff;font-family:'Outfit',sans-serif;font-size:15px;font-weight:700;cursor:pointer;background:linear-gradient(135deg,#D6006E,#6C3CE0)}
@@ -38,26 +39,26 @@ body{background:#080B14;display:flex;align-items:center;justify-content:center;m
       <div class="ico" style="background:rgba(214,0,110,0.15);border:1px solid rgba(214,0,110,0.25)">&#128272;</div>
       <div><div class="ttl">Admin Login</div><div class="sub">Enter your administrator password</div></div>
     </div>
-    <input type="password" id="pw" class="inp" placeholder="Admin password" onkeydown="if(event.key==='Enter')a1()" autofocus>
-    <div id="e1" class="err">Incorrect password. All attempts are logged.</div>
-    <button class="btn" onclick="a1()">Enter Dashboard &rarr;</button>
+    <input type="password" id="pw" class="inp" placeholder="Admin password" onkeydown="if(event.key==='Enter')go()" autofocus>
+    <div id="err" class="err">Incorrect password.</div>
+    <button class="btn" onclick="go()">Enter Dashboard &rarr;</button>
   </div>
   <div class="note">&#128274; Authorized access only &middot; Session expires in 4h</div>
 </div>
 <script>
-var P="MyMilesAI@Harijas2026!";
-function a1(){
+var P="Harijas2026";
+function go(){
   if(document.getElementById("pw").value===P){
     sessionStorage.setItem("mma",Date.now()+14400000);
     window.location.href="dashboard.html";
   }else{
-    document.getElementById("e1").style.display="block";
+    document.getElementById("err").style.display="block";
     document.getElementById("pw").select();
   }
 }
-var ss=sessionStorage.getItem("mma");
-if(ss&&Date.now()<+ss)window.location.href="dashboard.html";
-setTimeout(function(){var p=document.getElementById("pw");if(p)p.focus();},200);
+if(sessionStorage.getItem("mma")&&Date.now()<+sessionStorage.getItem("mma"))
+  window.location.href="dashboard.html";
+setTimeout(function(){document.getElementById("pw").focus();},100);
 </script>
 </body>
 </html>
