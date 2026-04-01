@@ -1764,77 +1764,171 @@ setLocale(detectLocale());
 
 </script>
 
-<!-- MYMILESAI AUTH + DASHBOARD -->
-<div id="authOv" style="display:none;position:fixed;inset:0;background:rgba(10,12,22,.82);backdrop-filter:blur(16px);z-index:9999;align-items:center;justify-content:center;padding:20px;"><div style="background:#fff;border-radius:28px;padding:44px 40px;width:100%;max-width:420px;box-shadow:0 32px 80px rgba(0,0,0,.25);position:relative;animation:mmUp .35s cubic-bezier(.34,1.56,.64,1);"><button onclick="closeSignIn()" style="position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:1.5px solid #e5e7eb;background:#f9fafb;font-size:16px;cursor:pointer;color:#6b7280;display:flex;align-items:center;justify-content:center;">&#x2715;</button><div style="text-align:center;margin-bottom:32px;"><div style="width:56px;height:56px;background:linear-gradient(135deg,#2563EB,#7C3AED);border-radius:16px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 8px 24px rgba(37,99,235,.3);">&#x1F697;</div><h2 style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#111827;margin-bottom:8px;">Welcome back</h2><p style="font-size:14px;color:#6b7280;">Sign in to your MyMilesAI account</p></div><button onclick="doGoogle()" style="width:100%;height:52px;border-radius:12px;border:1.5px solid #e5e7eb;background:#f9fafb;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px;color:#111827;transition:background .2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='#f9fafb'"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>Continue with Google</button><button onclick="doApple()" style="width:100%;height:52px;border-radius:12px;border:none;background:#111827;color:#fff;font-size:15px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:20px;" onmouseover="this.style.background='#1f2937'" onmouseout="this.style.background='#111827'"><svg width="14" height="18" viewBox="0 0 814 1000" fill="white"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 790.7 0 663 0 541.8c0-207.5 135.4-317.3 269-317.3 70.1 0 128.4 45.8 170.5 45.8 40.4 0 103.6-48.2 183.6-48.2zM520.2 93.3c33.3-40.9 57.2-97.7 57.2-154.5 0-8.1-.7-16.2-2.1-23.7-54.3 2.1-118.5 36.2-157.6 83.7-30.1 34.8-58.6 91.6-58.6 149.2 0 8.8 1.5 17.6 2.2 20.3 3.5.5 9.1 1.3 14.6 1.3 48.6 0 109.5-32.4 144.3-76.3z"/></svg>Continue with Apple</button><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;"><div style="flex:1;height:1px;background:#e5e7eb;"></div><span style="font-size:12px;color:#9ca3af;font-weight:500;">or email</span><div style="flex:1;height:1px;background:#e5e7eb;"></div></div><input type="email" id="aEm" placeholder="your@email.com" style="width:100%;height:50px;border-radius:12px;border:1.5px solid #e5e7eb;background:#f9fafb;padding:0 16px;font-size:15px;outline:none;margin-bottom:12px;box-sizing:border-box;font-family:inherit;transition:border .2s;" onfocus="this.style.borderColor='#2563EB';this.style.background='#fff'" onblur="this.style.borderColor='#e5e7eb';this.style.background='#f9fafb'" onkeydown="if(event.key==='Enter')doEmail()"><button onclick="doEmail()" style="width:100%;height:50px;border-radius:12px;border:none;background:linear-gradient(135deg,#2563EB,#7C3AED);color:#fff;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(37,99,235,.3);transition:transform .2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">Send Magic Link &#x2192;</button><p style="text-align:center;font-size:12px;color:#9ca3af;margin-top:14px;">No password &#xB7; Privacy-first &#xB7; Free to start</p></div></div>
-<div id="dashPg" style="display:none;position:fixed;inset:0;background:#F5F4F2;z-index:9000;overflow-y:auto;"><nav style="position:sticky;top:0;z-index:10;height:64px;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;padding:0 32px;"><div style="display:flex;align-items:center;gap:10px;font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;color:#111827;"><div style="width:34px;height:34px;background:linear-gradient(135deg,#2563EB,#7C3AED);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;">&#x1F697;</div>MyMilesAI</div><div style="display:flex;align-items:center;gap:12px;"><span id="dUN" style="font-size:14px;color:#6b7280;"></span><button onclick="openAt()" style="padding:9px 20px;border-radius:100px;background:linear-gradient(135deg,#2563EB,#7C3AED);color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer;">+ Add Trip</button><button onclick="doOut()" style="padding:9px 20px;border-radius:100px;border:1.5px solid #e5e7eb;background:transparent;font-size:14px;font-weight:600;color:#374151;cursor:pointer;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='transparent'">Sign Out</button></div></nav><div style="max-width:1200px;margin:0 auto;padding:32px 24px;"><div style="margin-bottom:28px;"><h1 id="dGr" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#111827;margin-bottom:4px;">Good morning &#x1F44B;</h1><p style="font-size:14px;color:#9ca3af;">Your 2026 mileage summary</p></div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;" id="kpiRow"><div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px 24px;box-shadow:0 1px 4px rgba(0,0,0,.04);"><div style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">&#x1F4BC; Business Miles</div><div id="kB" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#111827;">0.0</div></div><div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px 24px;box-shadow:0 1px 4px rgba(0,0,0,.04);"><div style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">&#x1F4B0; Tax Deduction</div><div id="kD" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#16a34a;">$0.00</div></div><div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px 24px;box-shadow:0 1px 4px rgba(0,0,0,.04);"><div style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">&#x1F464; Personal Miles</div><div id="kP" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#111827;">0.0</div></div><div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px 24px;box-shadow:0 1px 4px rgba(0,0,0,.04);"><div style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;">&#x1F697; Total Trips</div><div id="kT" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#111827;">0</div></div></div><div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04);margin-bottom:20px;"><div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid #e5e7eb;"><div style="font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;color:#111827;">Recent Trips</div><button onclick="openAt()" style="font-size:13px;font-weight:700;color:#2563EB;background:none;border:none;cursor:pointer;">+ Add Trip</button></div><table style="width:100%;border-collapse:collapse;"><thead><tr style="background:#f9fafb;"><th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb;">Route</th><th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb;">Category</th><th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb;">Miles</th><th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb;">Deduction</th></tr></thead><tbody id="dBdy"><tr><td colspan="4" style="text-align:center;padding:48px;color:#9ca3af;font-size:14px;">No trips yet &#x2014; <span onclick="openAt()" style="color:#2563EB;cursor:pointer;font-weight:600;">add your first &#x2192;</span></td></tr></tbody></table></div><div style="background:linear-gradient(135deg,rgba(37,99,235,.05),rgba(124,58,237,.03));border:1px solid rgba(37,99,235,.12);border-radius:16px;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;"><div><div style="font-size:15px;font-weight:700;color:#111827;margin-bottom:4px;">&#x1F4B0; 2026 IRS Standard Mileage Rate</div><div style="font-size:13px;color:#6b7280;">Every business mile = <strong>$0.70</strong> tax deduction. Medical &amp; charity also qualify.</div></div><div style="font-family:'Playfair Display',Georgia,serif;font-size:40px;font-weight:700;color:#16a34a;">$0.70<span style="font-size:16px;font-weight:500;color:#9ca3af;">/mi</span></div></div></div></div>
-<div id="atOv" style="display:none;position:fixed;inset:0;background:rgba(10,12,22,.82);backdrop-filter:blur(16px);z-index:9500;align-items:center;justify-content:center;padding:20px;"><div style="background:#fff;border-radius:28px;padding:40px;width:100%;max-width:480px;box-shadow:0 32px 80px rgba(0,0,0,.25);position:relative;animation:mmUp .35s cubic-bezier(.34,1.56,.64,1);"><button onclick="closeAt()" style="position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:1.5px solid #e5e7eb;background:#f9fafb;font-size:16px;cursor:pointer;color:#6b7280;display:flex;align-items:center;justify-content:center;">&#x2715;</button><h3 style="font-family:'Playfair Display',Georgia,serif;font-size:24px;font-weight:700;color:#111827;margin-bottom:24px;">Add Trip</h3><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;"><div><label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px;">From</label><input id="tF" placeholder="Start address" style="width:100%;height:46px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;padding:0 14px;font-size:14px;box-sizing:border-box;outline:none;font-family:inherit;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"></div><div><label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px;">To</label><input id="tTo" placeholder="Destination" style="width:100%;height:46px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;padding:0 14px;font-size:14px;box-sizing:border-box;outline:none;font-family:inherit;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"></div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;"><div><label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px;">Date</label><input id="tDt" type="date" style="width:100%;height:46px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;padding:0 14px;font-size:14px;box-sizing:border-box;outline:none;font-family:inherit;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"></div><div><label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px;">Miles</label><input id="tMi" type="number" placeholder="0.0" step="0.1" min="0" style="width:100%;height:46px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;padding:0 14px;font-size:14px;box-sizing:border-box;outline:none;font-family:inherit;" oninput="calcDed()" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"></div></div><label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:8px;">Category</label><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;" id="cBts"><button onclick="pCat(this)" data-cat="business" style="padding:11px;border-radius:10px;border:1.5px solid #2563EB;background:rgba(37,99,235,.06);color:#2563EB;font-size:13px;font-weight:700;cursor:pointer;">&#x1F4BC; Business</button><button onclick="pCat(this)" data-cat="personal" style="padding:11px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;color:#374151;font-size:13px;font-weight:600;cursor:pointer;">&#x1F464; Personal</button><button onclick="pCat(this)" data-cat="medical" style="padding:11px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;color:#374151;font-size:13px;font-weight:600;cursor:pointer;">&#x1F3E5; Medical</button><button onclick="pCat(this)" data-cat="charity" style="padding:11px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;color:#374151;font-size:13px;font-weight:600;cursor:pointer;">&#x2764;&#xFE0F; Charity</button></div><div id="dPv" style="display:none;background:rgba(22,163,74,.06);border:1px solid rgba(22,163,74,.2);border-radius:10px;padding:10px 14px;font-size:13px;font-weight:700;color:#16a34a;margin-bottom:14px;"></div><input id="tNt" placeholder="Notes &#x2014; client name, purpose..." style="width:100%;height:44px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;padding:0 14px;font-size:14px;box-sizing:border-box;outline:none;font-family:inherit;margin-bottom:16px;" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"><button onclick="saveTr()" style="width:100%;height:52px;border-radius:12px;border:none;background:linear-gradient(135deg,#2563EB,#7C3AED);color:#fff;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 6px 24px rgba(37,99,235,.25);transition:transform .2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">Save Trip &#x2192;</button></div></div>
-<style>@keyframes mmUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}</style>
+
+<!-- MYMILESAI SIGN IN + DASHBOARD -->
+<style>@keyframes mmUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}.mmOv{display:none;position:fixed;inset:0;background:rgba(10,12,22,.82);backdrop-filter:blur(16px);z-index:9999;align-items:center;justify-content:center;padding:20px;}.mmBox{background:#fff;border-radius:28px;width:100%;max-width:420px;box-shadow:0 32px 80px rgba(0,0,0,.25);position:relative;animation:mmUp .35s cubic-bezier(.34,1.56,.64,1);padding:44px 40px;}.mmClose{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:1.5px solid #e5e7eb;background:#f9fafb;font-size:16px;cursor:pointer;color:#6b7280;}.mmInput{width:100%;height:50px;border-radius:12px;border:1.5px solid #e5e7eb;background:#f9fafb;padding:0 16px;font-size:15px;outline:none;box-sizing:border-box;font-family:inherit;transition:border .2s;}.mmBtn{width:100%;height:52px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;border:none;}.mmBtnPrimary{background:linear-gradient(135deg,#2563EB,#7C3AED);color:#fff;box-shadow:0 4px 20px rgba(37,99,235,.3);}.mmBtnGoogle{background:#f9fafb;border:1.5px solid #e5e7eb;color:#111827;display:flex;align-items:center;justify-content:center;gap:10px;}.mmBtnApple{background:#111827;color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;}</style>
+<div id="authOv" class="mmOv" onclick="if(event.target===this)closeSignIn()">
+<div class="mmBox">
+<button class="mmClose" onclick="closeSignIn()">&#x2715;</button>
+<div style="text-align:center;margin-bottom:28px"><div style="width:56px;height:56px;background:linear-gradient(135deg,#2563EB,#7C3AED);border-radius:16px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 8px 24px rgba(37,99,235,.3)">&#x1F697;</div>
+<h2 style="font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:700;color:#111827;margin-bottom:8px">Welcome back</h2>
+<p style="font-size:14px;color:#6b7280">Sign in to your MyMilesAI account</p></div>
+<button class="mmBtn mmBtnGoogle" onclick="doGoogle()" style="margin-bottom:10px"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>Continue with Google</button>
+<button class="mmBtn mmBtnApple" onclick="doApple()" style="margin-bottom:20px"><svg width="14" height="18" viewBox="0 0 814 1000" fill="white"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 790.7 0 663 0 541.8c0-207.5 135.4-317.3 269-317.3 70.1 0 128.4 45.8 170.5 45.8 40.4 0 103.6-48.2 183.6-48.2zM520.2 93.3c33.3-40.9 57.2-97.7 57.2-154.5 0-8.1-.7-16.2-2.1-23.7-54.3 2.1-118.5 36.2-157.6 83.7-30.1 34.8-58.6 91.6-58.6 149.2 0 8.8 1.5 17.6 2.2 20.3 3.5.5 9.1 1.3 14.6 1.3 48.6 0 109.5-32.4 144.3-76.3z"/></svg>Continue with Apple</button>
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div style="flex:1;height:1px;background:#e5e7eb"></div><span style="font-size:12px;color:#9ca3af;font-weight:500">or email</span><div style="flex:1;height:1px;background:#e5e7eb"></div></div>
+<input type="email" id="aEm" class="mmInput" placeholder="your@email.com" style="margin-bottom:12px" onfocus="this.style.borderColor='#2563EB';this.style.background='#fff'" onblur="this.style.borderColor='#e5e7eb';this.style.background='#f9fafb'" onkeydown="if(event.key==='Enter')doEmail()">
+<button class="mmBtn mmBtnPrimary" onclick="doEmail()">Send Magic Link &#x2192;</button>
+<p style="text-align:center;font-size:12px;color:#9ca3af;margin-top:14px">No password &#xB7; Privacy-first &#xB7; Free to start</p>
+</div></div>
+<div id="dashPg" style="display:none;position:fixed;inset:0;background:#F5F4F2;z-index:9000;overflow-y:auto">
+<nav style="position:sticky;top:0;z-index:10;height:64px;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;padding:0 32px">
+<div style="display:flex;align-items:center;gap:10px;font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;color:#111827"><div style="width:34px;height:34px;background:linear-gradient(135deg,#2563EB,#7C3AED);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px">&#x1F697;</div>MyMilesAI</div>
+<div style="display:flex;align-items:center;gap:12px"><span id="dUN" style="font-size:14px;color:#6b7280"></span>
+<button onclick="openAt()" style="padding:9px 20px;border-radius:100px;background:linear-gradient(135deg,#2563EB,#7C3AED);color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer">+ Add Trip</button>
+<button onclick="doOut()" style="padding:9px 20px;border-radius:100px;border:1.5px solid #e5e7eb;background:transparent;font-size:14px;font-weight:600;color:#374151;cursor:pointer">Sign Out</button></div></nav>
+<div style="max-width:1200px;margin:0 auto;padding:32px 24px">
+<h1 id="dGr" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#111827;margin-bottom:4px">Good morning &#x1F44B;</h1>
+<p style="font-size:14px;color:#9ca3af;margin-bottom:28px">Your 2026 mileage summary</p>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px">
+<div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px 24px"><div style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">&#x1F4BC; Business Miles</div><div id="kB" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#111827">0.0</div></div>
+<div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px 24px"><div style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">&#x1F4B0; Tax Deduction</div><div id="kD" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#16a34a">$0.00</div></div>
+<div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px 24px"><div style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">&#x1F464; Personal Miles</div><div id="kP" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#111827">0.0</div></div>
+<div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px 24px"><div style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">&#x1F697; Total Trips</div><div id="kT" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#111827">0</div></div></div>
+<div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;overflow:hidden;margin-bottom:20px">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid #e5e7eb"><div style="font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;color:#111827">Recent Trips</div><button onclick="openAt()" style="font-size:13px;font-weight:700;color:#2563EB;background:none;border:none;cursor:pointer">+ Add Trip</button></div>
+<table style="width:100%;border-collapse:collapse"><thead><tr style="background:#f9fafb">
+<th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb">Route</th>
+<th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb">Category</th>
+<th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb">Miles</th>
+<th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb">Deduction</th>
+</tr></thead><tbody id="dBdy"><tr><td colspan="4" style="text-align:center;padding:48px;color:#9ca3af;font-size:14px">No trips yet &#x2014; <span onclick="openAt()" style="color:#2563EB;cursor:pointer;font-weight:600">add your first &#x2192;</span></td></tr></tbody></table></div>
+<div style="background:linear-gradient(135deg,rgba(37,99,235,.05),rgba(124,58,237,.03));border:1px solid rgba(37,99,235,.12);border-radius:16px;padding:20px 28px;display:flex;align-items:center;justify-content:space-between">
+<div><div style="font-size:15px;font-weight:700;color:#111827;margin-bottom:4px">&#x1F4B0; 2026 IRS Standard Mileage Rate</div><div style="font-size:13px;color:#6b7280">Every business mile = <strong>$0.70</strong> tax deduction. Medical &amp; charity also qualify.</div></div>
+<div style="font-family:'Playfair Display',Georgia,serif;font-size:40px;font-weight:700;color:#16a34a">$0.70<span style="font-size:16px;font-weight:500;color:#9ca3af">/mi</span></div>
+</div></div></div>
+<div id="atOv" class="mmOv" onclick="if(event.target===this)closeAt()">
+<div class="mmBox" style="max-width:480px"><button class="mmClose" onclick="closeAt()">&#x2715;</button>
+<h3 style="font-family:'Playfair Display',Georgia,serif;font-size:24px;font-weight:700;color:#111827;margin-bottom:24px">Add Trip</h3>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+<div><label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px">From</label><input id="tF" class="mmInput" placeholder="Start address" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"></div>
+<div><label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px">To</label><input id="tTo" class="mmInput" placeholder="Destination" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+<div><label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px">Date</label><input id="tDt" type="date" class="mmInput" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"></div>
+<div><label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px">Miles</label><input id="tMi" type="number" class="mmInput" placeholder="0.0" step="0.1" min="0" oninput="calcDed()" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"></div></div>
+<label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:8px">Category</label>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px" id="cBts">
+<button onclick="pCat(this)" data-cat="business" style="padding:11px;border-radius:10px;border:1.5px solid #2563EB;background:rgba(37,99,235,.06);color:#2563EB;font-size:13px;font-weight:700;cursor:pointer">&#x1F4BC; Business</button>
+<button onclick="pCat(this)" data-cat="personal" style="padding:11px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;color:#374151;font-size:13px;font-weight:600;cursor:pointer">&#x1F464; Personal</button>
+<button onclick="pCat(this)" data-cat="medical" style="padding:11px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;color:#374151;font-size:13px;font-weight:600;cursor:pointer">&#x1F3E5; Medical</button>
+<button onclick="pCat(this)" data-cat="charity" style="padding:11px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;color:#374151;font-size:13px;font-weight:600;cursor:pointer">&#x2764;&#xFE0F; Charity</button></div>
+<div id="dPv" style="display:none;background:rgba(22,163,74,.06);border:1px solid rgba(22,163,74,.2);border-radius:10px;padding:10px 14px;font-size:13px;font-weight:700;color:#16a34a;margin-bottom:14px"></div>
+<input id="tNt" class="mmInput" placeholder="Notes &#x2014; client name, purpose..." style="margin-bottom:16px" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'">
+<button class="mmBtn mmBtnPrimary" onclick="saveTr()">Save Trip &#x2192;</button>
+</div></div>
 <script>
 (function(){
 var _u=null,_tr=[],IRS=0.70;
-function login(e,n){_u={email:e,name:n||e.split('@')[0]};closeSignIn();showDash();}
-window.openSignIn=function(){document.getElementById('authOv').style.display='flex';};
-window.closeSignIn=function(){document.getElementById('authOv').style.display='none';};
-document.getElementById('authOv').addEventListener('click',function(e){if(e.target===this)closeSignIn();});
-document.getElementById('atOv').addEventListener('click',function(e){if(e.target===this)closeAt();});
-window.doGoogle=function(){login('user@gmail.com','Demo User');};
-window.doApple=function(){login('user@icloud.com','Demo User');};
-window.doEmail=function(){var em=document.getElementById('aEm').value.trim();if(!em||!em.includes('@')){document.getElementById('aEm').style.borderColor='#ef4444';return;}login(em);};
+function fmt(n){return(n<0?"":"")+n.toFixed(2);}
+function login(e,n){_u={email:e,name:n||e.split("@")[0]};closeSignIn();showDash();}
+window.openSignIn=function(){document.getElementById("authOv").style.display="flex";};
+window.closeSignIn=function(){document.getElementById("authOv").style.display="none";};
+window.doGoogle=function(){login("user@gmail.com","Demo User");};
+window.doApple=function(){login("user@icloud.com","Demo User");};
+window.doEmail=function(){
+  var em=document.getElementById("aEm").value.trim();
+  if(!em||!em.includes("@")){document.getElementById("aEm").style.borderColor="#ef4444";return;}
+  login(em);
+};
 window.showDash=function(){
   window._user=_u;
-  document.getElementById('dashPg').style.display='block';
+  document.getElementById("dashPg").style.display="block";
   var h=new Date().getHours();
-  document.getElementById('dGr').textContent=(h<12?'Good morning':h<17?'Good afternoon':'Good evening')+', '+_u.name+' 👋';
-  document.getElementById('dUN').textContent=_u.email;
-  var si=document.getElementById('navSignInBtn');if(si)si.style.display='none';
-  var db=document.getElementById('navDashBtn');if(db){db.style.display='inline-flex';db.onclick=function(){document.getElementById('dashPg').style.display='block';return false;};}
+  var g=h<12?"Good morning":h<17?"Good afternoon":"Good evening";
+  document.getElementById("dGr").textContent=g+", "+_u.name+" 👋";
+  document.getElementById("dUN").textContent=_u.email;
+  var si=document.getElementById("navSignInBtn");if(si)si.style.display="none";
+  var db=document.getElementById("navDashBtn");if(db){db.style.display="inline-flex";db.onclick=function(){document.getElementById("dashPg").style.display="block";return false;};}
   refresh();
 };
-window.doOut=function(){_u=null;_tr=[];window._user=null;document.getElementById('dashPg').style.display='none';var si=document.getElementById('navSignInBtn');if(si)si.style.display='inline-flex';var db=document.getElementById('navDashBtn');if(db)db.style.display='none';};
+window.doOut=function(){
+  _u=null;_tr=[];window._user=null;
+  document.getElementById("dashPg").style.display="none";
+  var si=document.getElementById("navSignInBtn");if(si)si.style.display="inline-flex";
+  var db=document.getElementById("navDashBtn");if(db)db.style.display="none";
+};
 function refresh(){
-  var b=_tr.filter(function(t){return t.c==='business';}).reduce(function(s,t){return s+t.m;},0);
-  var p=_tr.filter(function(t){return t.c==='personal';}).reduce(function(s,t){return s+t.m;},0);
-  var d=_tr.reduce(function(s,t){return s+t.d;},0);
-  document.getElementById('kB').textContent=b.toFixed(1);
-  document.getElementById('kP').textContent=p.toFixed(1);
-  document.getElementById('kD').textContent='
-</html>
-+d.toFixed(2);
-  document.getElementById('kT').textContent=_tr.length;
-  var body=document.getElementById('dBdy');
-  if(!_tr.length){body.innerHTML='<tr><td colspan="4" style="text-align:center;padding:48px;color:#9ca3af;font-size:14px;">No trips yet — <span onclick="openAt()" style="color:#2563EB;cursor:pointer;font-weight:600;">add your first →</span></td></tr>';return;}
-  var cl={business:'#2563EB',personal:'#ef4444',medical:'#16a34a',charity:'#dc2626'};
-  var lb={business:'💼 Business',personal:'👤 Personal',medical:'🏥 Medical',charity:'❤️ Charity'};
+  var b=0,p=0,d=0;
+  _tr.forEach(function(t){if(t.c==="business")b+=t.m;else if(t.c==="personal")p+=t.m;d+=t.d;});
+  document.getElementById("kB").textContent=b.toFixed(1);
+  document.getElementById("kP").textContent=p.toFixed(1);
+  document.getElementById("kD").textContent="$"+d.toFixed(2);
+  document.getElementById("kT").textContent=_tr.length;
+  var body=document.getElementById("dBdy");
+  if(!_tr.length){body.innerHTML="<tr><td colspan='4' style='text-align:center;padding:48px;color:#9ca3af;font-size:14px'>No trips yet — <span onclick='openAt()' style='color:#2563EB;cursor:pointer;font-weight:600'>add your first →<\/span><\/td><\/tr>";return;}
+  var cl={business:"#2563EB",personal:"#ef4444",medical:"#16a34a",charity:"#dc2626"};
+  var lb={business:"💼 Business",personal:"👤 Personal",medical:"🏥 Medical",charity:"❤ Charity"};
   body.innerHTML=_tr.slice(0,15).map(function(t){
     var fc=cl[t.c];
-    return '<tr style="border-bottom:1px solid #f3f4f6;"><td style="padding:14px 24px;"><div style="font-weight:600;color:#111827;font-size:14px;">'+(t.f.length>22?t.f.slice(0,22)+'…':t.f)+' → '+(t.t.length>22?t.t.slice(0,22)+'…':t.t)+'</div><div style="font-size:12px;color:#9ca3af;margin-top:2px;">'+t.dt+'</div></td>'
-    +'<td style="padding:14px 24px;"><span style="border-radius:100px;padding:3px 10px;font-size:11px;font-weight:700;color:'+fc+';background:'+fc+'1a;">'+lb[t.c]+'</span></td>'
-    +'<td style="padding:14px 24px;font-size:14px;font-weight:600;color:#111827;">'+t.m.toFixed(1)+' mi</td>'
-    +'<td style="padding:14px 24px;font-size:14px;font-weight:700;color:'+(t.d>0?'#16a34a':'#9ca3af')+';">'+(t.d>0?'+
-</html>
-+t.d.toFixed(2):'—')+'</td></tr>';
-  }).join('');
+    var from=t.f.length>22?t.f.slice(0,22)+"…":t.f;
+    var to=t.t.length>22?t.t.slice(0,22)+"…":t.t;
+    var ded=t.d>0?"+$"+t.d.toFixed(2):"—";
+    var dedColor=t.d>0?"#16a34a":"#9ca3af";
+    return "<tr style='border-bottom:1px solid #f3f4f6'>"
+      +"<td style='padding:14px 24px'><div style='font-weight:600;color:#111827;font-size:14px'>"+from+" → "+to+"<\/div><div style='font-size:12px;color:#9ca3af;margin-top:2px'>"+t.dt+"<\/div><\/td>"
+      +"<td style='padding:14px 24px'><span style='border-radius:100px;padding:3px 10px;font-size:11px;font-weight:700;color:"+fc+";background:"+fc+"1a'>"+lb[t.c]+"<\/span><\/td>"
+      +"<td style='padding:14px 24px;font-size:14px;font-weight:600;color:#111827'>"+t.m.toFixed(1)+" mi<\/td>"
+      +"<td style='padding:14px 24px;font-size:14px;font-weight:700;color:"+dedColor+"'>"+ded+"<\/td><\/tr>";
+  }).join("");
 }
-window.openAt=function(){if(!_u){openSignIn();return;}document.getElementById('tDt').value=new Date().toISOString().slice(0,10);['tF','tTo','tMi','tNt'].forEach(function(id){document.getElementById(id).value='';});document.getElementById('dPv').style.display='none';document.querySelectorAll('#cBts button').forEach(function(b,i){b.style.borderColor=i===0?'#2563EB':'#e5e7eb';b.style.background=i===0?'rgba(37,99,235,.06)':'#f9fafb';b.style.color=i===0?'#2563EB':'#374151';});document.getElementById('atOv').style.display='flex';};
-window.closeAt=function(){document.getElementById('atOv').style.display='none';};
-window.pCat=function(el){document.querySelectorAll('#cBts button').forEach(function(b){b.style.borderColor='#e5e7eb';b.style.background='#f9fafb';b.style.color='#374151';});el.style.borderColor='#2563EB';el.style.background='rgba(37,99,235,.06)';el.style.color='#2563EB';calcDed();};
-window.calcDed=function(){var m=parseFloat(document.getElementById('tMi').value)||0,c=(document.querySelector('#cBts button[style*="#2563EB"]')||{dataset:{cat:'business'}}).dataset.cat,d=['business','medical','charity'].includes(c)?m*IRS:0,el=document.getElementById('dPv');if(m>0&&d>0){el.textContent='💰 Est. deduction: +
-</html>
-+d.toFixed(2)+' ('+m.toFixed(1)+' mi × 
-</html>
-+IRS+'/mi)';el.style.display='block';}else el.style.display='none';};
+window.openAt=function(){
+  if(!_u){openSignIn();return;}
+  document.getElementById("tDt").value=new Date().toISOString().slice(0,10);
+  ["tF","tTo","tMi","tNt"].forEach(function(id){document.getElementById(id).value="";});
+  document.getElementById("dPv").style.display="none";
+  document.querySelectorAll("#cBts button").forEach(function(b,i){
+    b.style.borderColor=i===0?"#2563EB":"#e5e7eb";
+    b.style.background=i===0?"rgba(37,99,235,.06)":"#f9fafb";
+    b.style.color=i===0?"#2563EB":"#374151";
+  });
+  document.getElementById("atOv").style.display="flex";
+};
+window.closeAt=function(){document.getElementById("atOv").style.display="none";};
+window.pCat=function(el){
+  document.querySelectorAll("#cBts button").forEach(function(b){b.style.borderColor="#e5e7eb";b.style.background="#f9fafb";b.style.color="#374151";});
+  el.style.borderColor="#2563EB";el.style.background="rgba(37,99,235,.06)";el.style.color="#2563EB";
+  calcDed();
+};
+window.calcDed=function(){
+  var m=parseFloat(document.getElementById("tMi").value)||0;
+  var sel=document.querySelector("#cBts button[style*='#2563EB']");
+  var c=sel?sel.dataset.cat:"business";
+  var d=["business","medical","charity"].includes(c)?m*IRS:0;
+  var el=document.getElementById("dPv");
+  if(m>0&&d>0){el.textContent="💰 Est. deduction: +$"+d.toFixed(2)+" ("+m.toFixed(1)+" mi × $"+IRS+"/mi)";el.style.display="block";}
+  else el.style.display="none";
+};
 window.saveTr=function(){
-  var f=document.getElementById('tF').value.trim(),to=document.getElementById('tTo').value.trim(),m=parseFloat(document.getElementById('tMi').value)||0,dt=document.getElementById('tDt').value,nt=document.getElementById('tNt').value.trim();
-  if(!f||!to||!m){if(!f)document.getElementById('tF').style.borderColor='#ef4444';if(!to)document.getElementById('tTo').style.borderColor='#ef4444';if(!m)document.getElementById('tMi').style.borderColor='#ef4444';return;}
-  var c=(document.querySelector('#cBts button[style*="#2563EB"]')||{dataset:{cat:'business'}}).dataset.cat,d=['business','medical','charity'].includes(c)?m*IRS:0;
+  var f=document.getElementById("tF").value.trim();
+  var to=document.getElementById("tTo").value.trim();
+  var m=parseFloat(document.getElementById("tMi").value)||0;
+  var dt=document.getElementById("tDt").value;
+  var nt=document.getElementById("tNt").value.trim();
+  if(!f||!to||!m){
+    if(!f)document.getElementById("tF").style.borderColor="#ef4444";
+    if(!to)document.getElementById("tTo").style.borderColor="#ef4444";
+    if(!m)document.getElementById("tMi").style.borderColor="#ef4444";
+    return;
+  }
+  var sel=document.querySelector("#cBts button[style*='#2563EB']");
+  var c=sel?sel.dataset.cat:"business";
+  var d=["business","medical","charity"].includes(c)?m*IRS:0;
   _tr.unshift({f:f,t:to,m:m,dt:dt,c:c,d:d,n:nt});
   closeAt();refresh();
-  var toast=document.createElement('div');
-  toast.style.cssText='position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;padding:12px 28px;border-radius:14px;font-size:13px;font-weight:600;z-index:99999;box-shadow:0 8px 32px rgba(0,0,0,.3);white-space:nowrap;animation:mmUp .3s ease;';
-  toast.innerHTML='✅ Trip saved'+(d>0?' — +
-</html>
-+d.toFixed(2)+' deduction':'');
-  document.body.appendChild(toast);setTimeout(function(){toast.remove();},3000);
+  var toast=document.createElement("div");
+  toast.style.cssText="position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;padding:12px 28px;border-radius:14px;font-size:13px;font-weight:600;z-index:99999;box-shadow:0 8px 32px rgba(0,0,0,.3);white-space:nowrap;animation:mmUp .3s ease;";
+  toast.innerHTML=d>0?"✅ Trip saved — +$"+d.toFixed(2)+" deduction":"✅ Trip saved";
+  document.body.appendChild(toast);
+  setTimeout(function(){toast.remove();},3000);
 };
 })();
 </script>
