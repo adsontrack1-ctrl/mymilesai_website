@@ -1990,6 +1990,7 @@ window.doEmail=function(){
   sbSendOtpCode(em);
 };
 window.showDash=function(){
+  if(!_u && window._currentUser) _u = {email: window._currentUser.email, name: window._currentUser.email.split('@')[0]};
   window._user=_u;
   document.getElementById("dashPg").style.display="block";
   var h=new Date().getHours();
@@ -2001,6 +2002,7 @@ window.showDash=function(){
   refresh();
 };
 window.doOut=function(){
+  sbSignOut();
   _u=null;_tr=[];window._user=null;
   document.getElementById("dashPg").style.display="none";
   var si=document.getElementById("navSignInBtn");if(si)si.style.display="inline-flex";
