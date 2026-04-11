@@ -2249,8 +2249,26 @@ window.exportPDF=function(){
   doc.save('mymilesai-report-'+dateStr+'.pdf');
   showToast('PDF downloaded!');
 };
-window.exportSheets=function(){showToast('Google Sheets export coming soon');};
-window.exportQB=function(){showToast('QuickBooks export coming soon');};
+window.exportSheets=function(){
+  var el=document.getElementById('integrationNotice');
+  if(el) el.remove();
+  var notice=document.createElement('div');
+  notice.id='integrationNotice';
+  notice.style.cssText='margin-top:12px;padding:16px 20px;border-radius:14px;background:#f5f3ff;border:1px solid #ddd6fe;display:flex;align-items:center;justify-content:space-between;gap:12px';
+  notice.innerHTML='<div><p style="font-size:14px;font-weight:600;color:#3b0764;margin:0 0 2px">Google Sheets integration coming soon</p><p style="font-size:12px;color:#6b21a8;margin:0">Open your mileage data directly in Google Sheets. For now, download Excel/CSV and open in Sheets manually.</p></div><button onclick="this.parentElement.remove()" style="background:none;border:none;font-size:18px;color:#6b21a8;cursor:pointer;padding:4px">\xd7</button>';
+  var exportSection=document.querySelector('#dashPg [onclick*=exportCSV]');
+  if(exportSection) exportSection.closest('[style*=border-radius]').appendChild(notice);
+};
+window.exportQB=function(){
+  var el=document.getElementById('integrationNotice');
+  if(el) el.remove();
+  var notice=document.createElement('div');
+  notice.id='integrationNotice';
+  notice.style.cssText='margin-top:12px;padding:16px 20px;border-radius:14px;background:#f0f9ff;border:1px solid #bae6fd;display:flex;align-items:center;justify-content:space-between;gap:12px';
+  notice.innerHTML='<div><p style="font-size:14px;font-weight:600;color:#0c4a6e;margin:0 0 2px">QuickBooks integration coming soon</p><p style="font-size:12px;color:#0369a1;margin:0">Auto-sync your mileage as expenses. For now, download Excel/CSV and import into QuickBooks manually.</p></div><button onclick="this.parentElement.remove()" style="background:none;border:none;font-size:18px;color:#0369a1;cursor:pointer;padding:4px">\xd7</button>';
+  var exportSection=document.querySelector('#dashPg [onclick*=exportCSV]');
+  if(exportSection) exportSection.closest('[style*=border-radius]').appendChild(notice);
+};
 window.emailReport=function(){
   if(!_tr.length){showToast('No trips to export');return;}
   var b=0,p=0,d=0;
@@ -2260,21 +2278,14 @@ window.emailReport=function(){
   window.open('mailto:?subject='+subject+'&body='+body);
 };
 window.exportFreshBooks=function(){
-  if(!_tr.length){showToast('No trips to export');return;}
-  var header=['Date','Client/Project','From','To','Distance','Category','Deduction','Notes'];
-  var rows=_tr.map(function(r){return[r.dt||'','',r.f,r.t,r.m.toFixed(2),r.c,r.d.toFixed(2),r.n||''];});
-  var csv=[header].concat(rows).map(function(row){return row.map(function(v){return'"'+String(v).replace(/"/g,'""')+'"';}).join(',');}).join('\r\n');
-  var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;
-  var dateStr=new Date().toISOString().split('T')[0];
-  a.download='mymilesai-freshbooks-'+dateStr+'.csv';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  showToast('FreshBooks CSV downloaded!');
+  var el=document.getElementById('integrationNotice');
+  if(el) el.remove();
+  var notice=document.createElement('div');
+  notice.id='integrationNotice';
+  notice.style.cssText='margin-top:12px;padding:16px 20px;border-radius:14px;background:#f0fdf4;border:1px solid #bbf7d0;display:flex;align-items:center;justify-content:space-between;gap:12px';
+  notice.innerHTML='<div><p style="font-size:14px;font-weight:600;color:#14532d;margin:0 0 2px">FreshBooks integration coming soon</p><p style="font-size:12px;color:#166534;margin:0">Auto-sync your mileage as expenses. For now, download Excel/CSV and import into FreshBooks manually.</p></div><button onclick="this.parentElement.remove()" style="background:none;border:none;font-size:18px;color:#166534;cursor:pointer;padding:4px">\xd7</button>';
+  var exportSection=document.querySelector('#dashPg [onclick*=exportCSV]');
+  if(exportSection) exportSection.closest('[style*=border-radius]').appendChild(notice);
 };
 window.upgradeSubscription=function(){showToast('Stripe billing coming soon — thank you for your patience!');};
 window.manageSubscription=function(){showToast('Stripe billing coming soon — thank you for your patience!');};
