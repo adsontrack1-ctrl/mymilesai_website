@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MyMilesAI — #1 Mileage Tracking App for Tax Deductions (2026)</title>
-<meta name="description" content="MyMilesAI auto-tracks every business mile with GPS, classifies trips with AI, and calculates IRS/CRA tax deductions. Privacy-first, works offline. Free beta — $6.99/mo at launch.">
+<meta name="description" content="MyMilesAI auto-tracks every business mile with GPS, classifies trips with AI, and calculates IRS/CRA tax deductions. Privacy-first, works offline. $6.99/month or $69.99/year.">
 <meta name="keywords" content="mileage tracker app, IRS mileage deduction, business mileage log, GPS trip tracker, tax deduction calculator, CRA mileage rate, automatic mileage tracking, self-employed mileage, rideshare driver tax, real estate agent mileage, delivery driver mileage tracker, mileage reimbursement app">
 <meta name="robots" content="index, follow">
 <meta name="author" content="MyMilesAI">
@@ -12,7 +12,7 @@
 
 <!-- Open Graph -->
 <meta property="og:title" content="MyMilesAI — Auto Mileage Tracking for Tax Deductions">
-<meta property="og:description" content="GPS mileage tracker with AI trip classification. IRS/CRA compliant reports. Privacy-first — all data stays on your device. Free beta.">
+<meta property="og:description" content="GPS mileage tracker with AI trip classification. IRS/CRA compliant reports. Privacy-first — all data stays on your device. ">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://mymilesai.com">
 <meta property="og:site_name" content="MyMilesAI">
@@ -25,7 +25,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MyMilesAI — Smart Mileage Tracking App">
-<meta name="twitter:description" content="Auto-track every business mile, AI-classify trips, maximize IRS/CRA deductions. Free beta on TestFlight.">
+<meta name="twitter:description" content="Auto-track every business mile, AI-classify trips, maximize IRS/CRA deductions. 10-day free trial — no credit card required.">
 
 <!-- Structured Data — SoftwareApplication (for Google rich results) -->
 <script type="application/ld+json">
@@ -86,7 +86,7 @@
       "name": "What is the best mileage tracking app for tax deductions in 2026?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "MyMilesAI is a mileage tracking app that auto-tracks business miles with GPS, classifies trips using AI, and calculates IRS and CRA tax deductions in real time. It costs $6.99/month (free during beta) and stores all data on your device for privacy. It works offline and supports both US (IRS $0.725/mile) and Canada (CRA $0.73/km) rates."
+        "text": "MyMilesAI is a mileage tracking app that auto-tracks business miles with GPS, classifies trips using AI, and calculates IRS and CRA tax deductions in real time. It costs $6.99/month (free on your trial) and stores all data on your device for privacy. It works offline and supports both US (IRS $0.725/mile) and Canada (CRA $0.73/km) rates."
       }
     },
     {
@@ -780,6 +780,18 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
   .hero{padding:130px 0 80px;}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+const _sb=supabase.createClient('https://dxpuuiqibtizewbbffjk.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4cHV1aXFpYnRpemV3YmJmZmprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA4NzM2MDAsImV4cCI6MjAyNjQ0OTYwMH0.placeholder');
+_sb.auth.onAuthStateChange(async(e,s)=>{if(s){window._sbUser=s.user;document.getElementById('navDashBtn')?.setAttribute('style','display:flex');document.getElementById('navSignInBtn')?.setAttribute('style','display:none');const{data}=await _sb.from('trips').select('*').eq('user_id',s.user.id).order('date',{ascending:false}).limit(50);if(data&&typeof renderDashboard==='function')renderDashboard(data);}else{window._sbUser=null;document.getElementById('navDashBtn')?.setAttribute('style','display:none');document.getElementById('navSignInBtn')?.setAttribute('style','display:flex');}});
+async function signInWithGoogle(){await _sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:window.location.origin}});}
+async function signInWithApple(){await _sb.auth.signInWithOAuth({provider:'apple',options:{redirectTo:window.location.origin}});}
+async function signInWithMagicLink(email){const{error}=await _sb.auth.signInWithOtp({email,options:{emailRedirectTo:window.location.origin}});return!error;}
+async function sbSaveTrip(t){if(!window._sbUser)return;const{data}=await _sb.from('trips').insert({...t,user_id:window._sbUser.id}).select().single();return data;}
+async function sbDeleteTrip(id){if(!window._sbUser)return;await _sb.from('trips').delete().eq('id',id).eq('user_id',window._sbUser.id);}
+function openAuthModal(){const m=document.getElementById('authModal');if(m)m.style.display='flex';}
+function closeAuthModal(){const m=document.getElementById('authModal');if(m)m.style.display='none';}
+</script>
 </head>
 <body>
 
@@ -825,9 +837,9 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
   <div class="nav-links">
     <a href="#features">Features</a><a href="#how">How It Works</a><a href="#pricing">Pricing</a><a href="blog/">Blog</a><a href="about.html">About</a>
     <button class="locale-toggle" id="localeToggle" onclick="toggleLocale()"><span class="lt-flag" id="locFlag">🇺🇸</span><span class="lt-label" id="locLabel">MI</span></button>
-    <a href="#" onclick="openSignIn();return false;" id="navSignInBtn" style="display:inline-flex;align-items:center;padding:9px 22px;border-radius:100px;font-size:14px;font-weight:600;color:#374151;border:1.5px solid #d1d5db;text-decoration:none;margin-right:8px;background:transparent;transition:background .2s;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='transparent'">Sign In</a>
+    <a href="#" onclick="openSignIn();return false;" id="navSignInBtn" onclick="openAuthModal()" style="cursor:pointer" style="display:inline-flex;align-items:center;padding:9px 22px;border-radius:100px;font-size:14px;font-weight:600;color:#374151;border:1.5px solid #d1d5db;text-decoration:none;margin-right:8px;background:transparent;transition:background .2s;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='transparent'">Sign In</a>
     <a href="#" onclick="if(window._user)showDash();else openSignIn();return false;" id="navDashBtn" style="display:none;align-items:center;padding:9px 22px;border-radius:100px;font-size:14px;font-weight:600;color:#2563EB;border:1.5px solid rgba(37,99,235,.3);text-decoration:none;margin-right:8px;background:rgba(37,99,235,.06);">Dashboard</a>
-    <a href="#cta" class="btn btn-primary">Join the Beta <svg width="14" height="14" style="margin-left:2px"><use href="#i-arrow"/></svg></a>
+    
   </div>
   <button class="mobile-toggle" onclick="document.getElementById('mobileNav').classList.add('open')">&#9776;</button>
 </div>
@@ -840,7 +852,7 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
   <a href="blog/" onclick="this.parentElement.classList.remove('open')">Blog</a>
   <a href="#faq" onclick="this.parentElement.classList.remove('open')">FAQ</a>
   <a href="#contact" onclick="this.parentElement.classList.remove('open')">Contact</a>
-  <a href="#cta" class="btn btn-primary" onclick="this.parentElement.classList.remove('open')">Join the Beta</a>
+  <a href="#cta" class="btn btn-primary" onclick="this.parentElement.classList.remove('open')">Sign In</a>
 </div>
 
 <!-- HERO -->
@@ -848,11 +860,11 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
   <div class="hero-bg"><div class="hero-orb o1"></div><div class="hero-orb o2"></div><div class="hero-orb o3"></div><div class="hero-grid"></div></div>
   <div class="container hero-inner">
     <div class="hero-content">
-      <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span> <span class="hero-beta-badge">Beta</span> Now on TestFlight &middot; Free to try</div>
+      
       <h1>Track every <span class="loc" data-us="mile" data-ca="kilometre">mile</span>.<br>Claim every <em>dollar.</em></h1>
       <p class="hero-desc">MyMilesAI automatically logs your trips with GPS, classifies them with AI, and calculates your <span class="loc" data-us="IRS" data-ca="CRA">IRS</span> tax deductions &mdash; all hands-free.</p>
       <div class="hero-ctas">
-        <a href="#cta" class="btn btn-primary btn-lg">Join the Beta Free <svg width="16" height="16"><use href="#i-arrow"/></svg></a>
+        <a href="#cta" class="btn btn-primary btn-lg">Sign In Free <svg width="16" height="16"><use href="#i-arrow"/></svg></a>
         <a href="#calculator" class="btn btn-outline btn-lg">Calculate My Savings</a>
       </div>
       <div class="hero-trust">
@@ -1039,7 +1051,7 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
     <div class="s-desc" style="margin:0 auto">No complicated setup. Download, drive, and watch your deductions grow automatically.</div>
   </div>
   <div class="how-steps">
-    <div class="how-step reveal"><div class="how-step-icon"><svg><use href="#i-phone"/></svg></div><div class="how-step-num">1</div><h3>Download &amp; Setup</h3><p>Install MyMilesAI via TestFlight, enter your name, choose miles or km, and enable GPS. Under 30 seconds.</p></div>
+    <div class="how-step reveal"><div class="how-step-icon"><svg><use href="#i-phone"/></svg></div><div class="how-step-num">1</div><h3>Download &amp; Setup</h3><p>Install MyMilesAI via MyMilesAI, enter your name, choose miles or km, and enable GPS. Under 30 seconds.</p></div>
     <div class="how-step reveal"><div class="how-step-icon"><svg><use href="#i-car"/></svg></div><div class="how-step-num">2</div><h3>Just Drive</h3><p>MyMilesAI detects driving automatically. Every trip logged with distance, route, time, and speed &mdash; fully hands-free.</p></div>
     <div class="how-step reveal"><div class="how-step-icon"><svg><use href="#i-dollar"/></svg></div><div class="how-step-num">3</div><h3>Claim Deductions</h3><p>Export IRS/CRA-ready reports at tax time. Business miles calculated at the standard rate, instantly.</p></div>
   </div>
@@ -1120,7 +1132,7 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
   </div>
   <div class="pain-vs reveal" style="margin-top:28px;">
     <h3>All of this for <em style="color:var(--sapphire-l)">$6.99/mo.</em></h3>
-    <p>Free during beta. No credit card required. Cancel anytime, no questions asked.</p>
+    <p>10-day free trial. No credit card required. Cancel anytime, no questions asked.</p>
     <a href="#cta" class="btn btn-primary btn-lg" style="display:inline-flex">Start Tracking Free <svg width="16" height="16"><use href="#i-arrow"/></svg></a>
   </div>
 </div>
@@ -1132,14 +1144,14 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
   <div class="reveal" style="text-align:center">
     <div class="s-label sapphire"><svg width="12" height="12"><use href="#i-star"/></svg> Early Feedback</div>
     <h2 class="s-title">What beta testers <em>are saying.</em></h2>
-    <div class="s-desc" style="margin:0 auto">Real feedback from our TestFlight community.</div>
+    <div class="s-desc" style="margin:0 auto">Real feedback from our MyMilesAI community.</div>
   </div>
   <div class="test-grid">
     <div class="test-card reveal"><div class="test-stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><div class="test-text">&ldquo;I was losing trips with my old mileage app and paying $9/month for the privilege. MyMilesAI catches every drive, the AI classification saves me 20 minutes a day, and it costs half the price.&rdquo;</div><div class="test-author"><div class="test-av" style="background:linear-gradient(135deg,var(--sapphire),var(--sapphire-l))"><svg><use href="#i-user"/></svg></div><div><div class="test-name">Sarah M.</div><div class="test-role">Real Estate Agent &middot; Beta Tester</div></div></div></div>
     <div class="test-card reveal"><div class="test-stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><div class="test-text">&ldquo;Finally an app that doesn&rsquo;t upload my location to some server. The on-device privacy sold me instantly. Plus the UI is beautiful.&rdquo;</div><div class="test-author"><div class="test-av" style="background:linear-gradient(135deg,var(--mint),#6EE7B7)"><svg><use href="#i-user"/></svg></div><div><div class="test-name">Marcus K.</div><div class="test-role">Freelance Consultant &middot; Beta Tester</div></div></div></div>
     <div class="test-card reveal"><div class="test-stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><div class="test-text">&ldquo;My accountant loved the PDF reports. Everything formatted perfectly for filing. At $6.99 this will pay for itself on the first drive.&rdquo;</div><div class="test-author"><div class="test-av" style="background:linear-gradient(135deg,var(--gold),var(--gold-l))"><svg><use href="#i-user"/></svg></div><div><div class="test-name">Lisa R.</div><div class="test-role">Sales Manager &middot; Beta Tester</div></div></div></div>
   </div>
-  <div class="test-note reveal">* Beta feedback from TestFlight testers. Names changed for privacy.</div>
+  <div class="test-note reveal">* Beta feedback from MyMilesAI testers. Names changed for privacy.</div>
 </div>
 </section>
 <!-- PRICING -->
@@ -1149,53 +1161,10 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
 <div class="container pricing-inner">
   <div class="reveal" style="text-align:center">
     <div class="s-label"><svg width="12" height="12" style="color:var(--sapphire-l)"><use href="#i-zap"/></svg> Pricing</div>
-    <h2 class="s-title">Half the price. <em>Twice</em> the features.</h2>
-    <div class="s-desc" style="margin:0 auto">Free during beta. Lock in early pricing before we launch publicly.</div>
+    <h2 class="s-title">One plan. <em>Everything</em> included.</h2>
+    <div class="s-desc" style="margin:0 auto">10-day free trial. Lock in early pricing before we launch publicly.</div>
   </div>
-  <div class="price-cards">
-    <div class="price-card reveal">
-      <div class="price-name">Free</div><div class="price-desc">For occasional drivers</div>
-      <div class="price-amt"><span class="price-dollar">$0</span><span class="price-period">/forever</span></div>
-      <div class="price-trial">Always free</div>
-      <ul class="price-features">
-        <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>20 trips per month</li>
-        <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Manual trip logging</li>
-        <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Basic CSV export</li>
-        <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>IRS / CRA rate calculations</li>
-        <li><span class="pf-x">&mdash;</span><span style="opacity:.35">Auto GPS tracking</span></li>
-        <li><span class="pf-x">&mdash;</span><span style="opacity:.35">AI classification</span></li>
-      </ul>
-      <button class="price-btn secondary" onclick="scrollCTA()">Join Beta Free</button>
-    </div>
-    <div class="price-card pop reveal">
-      <div class="price-name">Pro</div><div class="price-desc">For busy professionals</div>
-      <div class="price-amt"><span class="price-dollar">$6.99</span><span class="price-period">/month at launch</span><p style="margin:6px 0 18px;font-size:11px;font-weight:800;color:#d4a843;letter-spacing:.05em;font-family:monospace;">🎉 INTRO: $69/year — save 17%</p><span style="display:none"></div>
-      <div class="price-trial" style="background:rgba(27,77,219,.1);border-color:rgba(27,77,219,.15);color:var(--sapphire-l)">Free during beta</div>
-      <ul class="price-features">
-        <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Unlimited trips</li>
-        <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Auto GPS tracking</li>
-        <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>AI trip classification</li>
-        <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>PDF &amp; CSV reports</li>
-        <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Live map view</li>
-        <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Work hours auto-classify</li>
-      </ul>
-      <button class="price-btn primary" onclick="scrollCTA()">Get Full Access Free <svg width="14" height="14"><use href="#i-arrow"/></svg></button>
-    </div>
-    <div class="price-card reveal">
-      <div class="price-name">Business</div><div class="price-desc">For teams &amp; fleets</div>
-      <div class="price-amt"><span class="price-dollar">$9.99</span><span class="price-period">/user/mo at launch</span></div>
-      <div class="price-trial">Coming soon</div>
-      <ul class="price-features">
-        <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Everything in Pro</li>
-        <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Team dashboard</li>
-        <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Multi-driver management</li>
-        <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Admin reporting</li>
-        <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>API access</li>
-        <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Priority support</li>
-      </ul>
-      <button class="price-btn secondary" onclick="scrollCTA()">Join Waitlist</button>
-    </div>
-  </div>
+  <div class="price-cards" style="justify-content:center"><div class="price-card pop reveal" style="max-width:440px;width:100%"><div class="price-name">MyMilesAI Pro</div><div class="price-desc">Everything included — unlimited, hands-free</div><div class="price-amt"><span style="font-size:18px;color:var(--text3);text-decoration:line-through;font-weight:500">$699</span>&nbsp;<span class="price-dollar">$69.99</span><span class="price-period">/year</span><p style="margin:6px 0 0;font-size:13px;color:var(--text2)">or <strong>$6.99/month</strong> — cancel anytime</p><p style="margin:8px 0 16px;font-size:11px;font-weight:800;color:#d4a843;letter-spacing:.05em;font-family:monospace;">&#127881; FOUNDING MEMBER RATE — limited time</p></div><div class="price-trial" style="background:rgba(27,77,219,.1);border-color:rgba(27,77,219,.15);color:var(--sapphire-l)">10-day free trial &mdash; no credit card required</div><ul class="price-features"><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Unlimited trips &mdash; no caps ever</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Auto GPS tracking</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>AI trip classification</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>IRS &amp; CRA compliant PDF reports</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>CSV, Excel &amp; Google Sheets export</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Live map view &amp; route history</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>AI tax assistant</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Accountant portal</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Privacy-first — data stays on your device</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>US &amp; Canada locale auto-detect</li></ul><button class="price-btn primary" onclick="openAuthModal()">Start 10-day free trial <svg width="14" height="14"><use href="#i-arrow"/></svg></button><p style="text-align:center;font-size:12px;color:var(--text3);margin-top:12px">No credit card &nbsp;&middot;&nbsp; Cancel anytime &nbsp;&middot;&nbsp; 30-day money-back guarantee</p></div></div>
   <div class="pricing-note">Beta access is completely free &middot; Lock in early pricing when we launch</div>
   <div class="pricing-cards-note">
     <span><svg width="14" height="14" style="color:#6EE7B7"><use href="#i-lock"/></svg> Privacy-first design</span>
@@ -1220,8 +1189,8 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
     <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Does it work offline?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>Yes &mdash; unlike many mileage apps that require an internet connection. MyMilesAI tracks and stores trips entirely on your device. No signal? No problem.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What&rsquo;s the current IRS mileage rate?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>For 2026, the IRS rate is $0.725/mile for business. In Canada, the CRA rate is $0.73/km for the first 5,000 km and $0.67/km after. MyMilesAI updates rates automatically.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How does AI classification work?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>It learns your patterns &mdash; frequent destinations, time of day, work hours. Over time it auto-classifies trips. You can always swipe to override.</p></div></div>
-    <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I join the beta?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>Enter your email below and we&rsquo;ll send a TestFlight invite. Beta is free with all Pro features unlocked. Currently iOS only; Android coming soon.</p></div></div>
-    <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Will my beta data transfer to the live app?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>Yes. All trips logged during beta carry over. Your data is on-device so it persists through updates.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I join the beta?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>Enter your email below and we&rsquo;ll send a MyMilesAI invite. Beta is free with all Pro features unlocked. Currently iOS only; Android coming soon.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Will my beta data transfer to the live app?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>Yes. All trips logged on your trial carry over. Your data is on-device so it persists through updates.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I switch from another mileage app?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>Absolutely. Export your CSV from your current app, install MyMilesAI, and start tracking immediately. No data migration needed &mdash; your new trips begin logging on day one.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I cancel my subscription?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>You can cancel anytime with zero hassle. If you subscribed via the App Store, go to Settings &gt; Apple ID &gt; Subscriptions &gt; MyMilesAI &gt; Cancel. If you subscribed via our website, go to your account settings or email <a href="/cdn-cgi/l/email-protection#5e2d2b2e2e312c2a1e33273337323b2d3f37703d3133"><span class="__cf_email__" data-cfemail="f4878184849b8680b4998d999d989187959dda979b99">[email&#160;protected]</span></a> and we&rsquo;ll cancel it immediately. No cancellation fees, no penalties, no questions asked. Your Pro features stay active until the end of your billing period.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What&rsquo;s your refund policy?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>If you&rsquo;re not satisfied within the first 30 days of a paid subscription, email <a href="/cdn-cgi/l/email-protection#2655535656495452664b5f4b4f4a4355474f0845494b"><span class="__cf_email__" data-cfemail="5b282e2b2b34292f1b36223632373e283a3275383436">[email&#160;protected]</span></a> for a full refund. For App Store purchases, you can also request a refund directly through Apple. After 30 days, you can cancel anytime but refunds are prorated at our discretion.</p></div></div>
@@ -1401,13 +1370,13 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
     <div class="cta-box-grid"></div>
     <div class="s-label sapphire"><svg width="12" height="12"><use href="#i-fire"/></svg> Limited Beta</div>
     <h2 class="s-title">Get early access <em>free.</em></h2>
-    <div class="s-desc" style="margin:0 auto 12px">Join our TestFlight beta and get all Pro features unlocked at no cost.</div>
+    <div class="s-desc" style="margin:0 auto 12px">Join our MyMilesAI beta and get all Pro features unlocked at no cost.</div>
     <div class="cta-spots"><span class="icon" style="color:var(--rose)"><svg><use href="#i-fire"/></svg></span><span id="spotsLeft">47 beta spots remaining this week</span></div>
     <div class="cta-form">
       <input type="email" class="cta-input" id="ctaEmail" placeholder="Enter your email address...">
       <button class="cta-btn-primary" id="ctaBtn" onclick="handleBetaSignup()">Get Access <svg width="14" height="14"><use href="#i-arrow"/></svg></button>
     </div>
-    <div class="cta-note">iOS via TestFlight &middot; Android coming soon &middot; No credit card required</div>
+    <div class="cta-note">iOS via MyMilesAI &middot; Android coming soon &middot; No credit card required</div>
     <div class="cta-earlybird"><svg width="16" height="16" style="flex-shrink:0"><use href="#i-lock"/></svg> Beta users lock in $6.99/mo pricing forever when we launch</div>
   </div>
 </div>
@@ -1421,8 +1390,8 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
     <p style="margin-bottom:16px;">MyMilesAI is a mile tracker app built for self-employed professionals, freelancers, 1099 contractors, gig workers, real estate agents, delivery drivers, rideshare drivers, and anyone who drives for business. The app automatically tracks every trip using GPS, classifies drives as business or personal using AI, and calculates your tax deductions in real time based on the current IRS standard mileage rate ($0.725 per mile for 2026) or the CRA automobile allowance rate ($0.73 per kilometre in Canada).</p>
     <p style="margin-bottom:16px;">Unlike other mileage trackers, MyMilesAI is built with a privacy-first approach. All trip data, GPS coordinates, routes, work mileage records, and odometer readings are stored locally on your device. Nothing is uploaded to the cloud. The app works fully offline, tracks trips in low-signal areas, and never requires an internet connection to start logging a drive. Your business expense data stays on your phone.</p>
     <p style="margin-bottom:16px;">MyMilesAI generates IRS-compliant and CRA-compliant mileage logs that can be exported as PDF or CSV files and shared directly with your accountant. These reports support Schedule C filings, tax write-off documentation, and mileage reimbursement claims. The built-in mileage calculator shows your deductions in real time. Features include work-hours auto-classification, swipe-to-classify gestures, Smart Pause GPS logic, and undo-delete for accidentally removed trips. Your daily commute is automatically excluded from business mileage calculations.</p>
-    <p style="margin-bottom:16px;">The app offers a free tier with 20 trips per month and a Pro plan at $6.99 per month with unlimited trips, auto GPS tracking, AI classification, and full export capabilities. During the current beta period, all Pro features are available for free via Apple TestFlight. MyMilesAI supports both the United States and Canada with automatic locale detection, making it the ideal business expense tracker for professionals in both countries.</p>
-    <p>For questions or support, contact <a href="/cdn-cgi/l/email-protection#72010702021d0006321f0b1f1b1e1701131b5c111d1f" style="color:var(--sapphire);"><span class="__cf_email__" data-cfemail="7e0d0b0e0e110c0a3e13071317121b0d1f17501d1113">[email&#160;protected]</span></a>. MyMilesAI is available as a free beta on iOS via TestFlight, with Android support coming soon.</p>
+    <p style="margin-bottom:16px;">The app offers a free tier with 20 trips per month and a Pro plan at $6.99 per month with unlimited trips, auto GPS tracking, AI classification, and full export capabilities. During the current beta period, all Pro features are available for free via Apple MyMilesAI. MyMilesAI supports both the United States and Canada with automatic locale detection, making it the ideal business expense tracker for professionals in both countries.</p>
+    <p>For questions or support, contact <a href="/cdn-cgi/l/email-protection#72010702021d0006321f0b1f1b1e1701131b5c111d1f" style="color:var(--sapphire);"><span class="__cf_email__" data-cfemail="7e0d0b0e0e110c0a3e13071317121b0d1f17501d1113">[email&#160;protected]</span></a>. MyMilesAI is available as a free beta on iOS via MyMilesAI, with Android support coming soon.</p>
   </div>
 </div>
 </section>
@@ -1473,7 +1442,7 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
     <p style="font-size:13px;color:var(--text3);margin-bottom:24px;">Last updated: March 2026</p>
     <div style="font-size:15px;color:var(--text2);line-height:1.75;">
       <p style="margin-bottom:16px"><strong style="color:var(--dark)">Your data stays on your device.</strong> MyMilesAI is built with a privacy-first architecture. All trip data, GPS coordinates, and mileage records are stored locally on your phone. We do not upload, transmit, or store your location data on external servers.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">What we collect:</strong> When you sign up for beta access, we collect your email address solely to send TestFlight invitations and product updates. We do not share this with third parties.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">What we collect:</strong> When you sign up for beta access, we collect your email address solely to send MyMilesAI invitations and product updates. We do not share this with third parties.</p>
       <p style="margin-bottom:16px"><strong style="color:var(--dark)">GPS &amp; Location:</strong> Location data is used exclusively within the app to calculate trip distances and routes. This data never leaves your device. GPS permissions can be revoked at any time.</p>
       <p style="margin-bottom:16px"><strong style="color:var(--dark)">No advertising:</strong> We do not serve ads, use advertising SDKs, or share data with ad networks.</p>
       <p style="margin-bottom:16px"><strong style="color:var(--dark)">Data exports:</strong> When you export reports, files are generated locally and shared only through your device&rsquo;s share sheet.</p>
@@ -1932,5 +1901,7 @@ window.saveTr=function(){
 };
 })();
 </script>
+<div id="authModal" style="display:none;position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:1rem"><div style="background:#fff;border-radius:20px;padding:2rem 2.5rem;width:100%;max-width:380px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.2)"><button onclick="closeAuthModal()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8">&#x2715;</button><div style="text-align:center;margin-bottom:1.5rem"><svg width="36" height="36" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#1B4DDB"/><path d="M5 20c0-2 1-3.5 2.5-4.5L10 12h12l2.5 3.5c1.5 1 2.5 2.5 2.5 4.5v1H5v-1z" fill="white"/><circle cx="10" cy="22" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg><h2 style="font-size:22px;font-weight:700;margin:12px 0 4px">Welcome back</h2><p style="font-size:13px;color:#64748b;margin:0">Sign in to MyMilesAI</p></div><button onclick="signInWithGoogle()" style="width:100%;padding:11px;margin-bottom:10px;border:1.5px solid #e2e8f0;border-radius:12px;background:#fff;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;color:#0f172a"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Continue with Google</button><button onclick="signInWithApple()" style="width:100%;padding:11px;margin-bottom:16px;border:1.5px solid #e2e8f0;border-radius:12px;background:#fff;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;color:#0f172a"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>Continue with Apple</button><div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:12px;color:#94a3b8"><span style="flex:1;height:1px;background:#e2e8f0"></span>or continue with email<span style="flex:1;height:1px;background:#e2e8f0"></span></div><input type="email" id="magicEmail" placeholder="your@email.com" style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:8px;box-sizing:border-box;outline:none" onfocus="this.style.borderColor='#1B4DDB'" onblur="this.style.borderColor='#e2e8f0'"><button onclick="(async()=>{const e=document.getElementById('magicEmail').value;const m=document.getElementById('magicMsg');if(!e||!e.includes('@')){m.textContent='Please enter a valid email.';m.style.color='#dc2626';return;}const ok=await signInWithMagicLink(e);m.textContent=ok?'Check your email for the sign-in link!':'Something went wrong. Try again.';m.style.color=ok?'#16a34a':'#dc2626';})()" style="width:100%;padding:12px;font-size:14px;font-weight:600;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;transition:background .15s">Send magic link &rarr;</button><p id="magicMsg" style="text-align:center;font-size:12px;margin:8px 0 0;min-height:16px"></p><p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:12px">No password &nbsp;&middot;&nbsp; Privacy-first &nbsp;&middot;&nbsp; 10-day free trial included</p></div></div>
 </body>
 </html>
+
