@@ -2229,6 +2229,8 @@ window.loadSupabaseTrips=function(trips){
       } catch(e){ console.log('Path parse error:',e); }
     }
     var cat=(t.type||'personal').toLowerCase();
+    if(cat==='biz') cat='business';
+    if(cat==='pers') cat='personal';
     if(cat!=='business'&&cat!=='personal'&&cat!=='medical'&&cat!=='charity') cat='personal';
     var dist=parseFloat(t.miles)||0;
     var ded=calcDeduction(dist,cat);
