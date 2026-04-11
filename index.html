@@ -2285,8 +2285,8 @@ window.renderFilteredTrips=function renderFilteredTrips(){var now=new Date();var
     <button onclick="document.getElementById('authModal').style.display='none'" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8;line-height:1">&#x2715;</button>
     <div style="text-align:center;margin-bottom:1.5rem">
       <svg width="36" height="36" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#1B4DDB"/><path d="M5 20c0-2 1-3.5 2.5-4.5L10 12h12l2.5 3.5c1.5 1 2.5 2.5 2.5 4.5v1H5v-1z" fill="white"/><circle cx="10" cy="22" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg>
-      <h2 id="authModalTitle" style="font-size:22px;font-weight:700;margin:12px 0 4px;font-family:inherit">Sign in to MyMilesAI</h2>
-      <p id="authModalSubtitle" style="font-size:13px;color:#64748b;margin:0">Enter your email to receive a verification code</p>
+      <h2 id="authModalTitle" style="font-size:22px;font-weight:700;margin:12px 0 4px;font-family:inherit">Sign in or create account</h2>
+      <p id="authModalSubtitle" style="font-size:13px;color:#64748b;margin:0">New or returning — just enter your email</p>
     </div>
 
     <!-- Step 1: Social + Email -->
@@ -2307,7 +2307,8 @@ window.renderFilteredTrips=function renderFilteredTrips(){var now=new Date();var
         onfocus="this.style.borderColor='#1B4DDB';this.style.background='#fff'"
         onblur="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'"
         onkeydown="if(event.key==='Enter')document.getElementById('authSendBtn').click()">
-      <div style="display:flex;align-items:flex-start;gap:8px;margin:8px 0 12px"><input type="checkbox" id="authAgree" style="margin-top:3px;width:16px;height:16px;accent-color:#1B4DDB;cursor:pointer;flex-shrink:0"><label for="authAgree" style="font-size:12px;color:#64748b;line-height:1.4;cursor:pointer">By signing in, I agree to the <a href="#terms" style="color:#1B4DDB;text-decoration:underline">Terms of Service</a> and <a href="#privacy" style="color:#1B4DDB;text-decoration:underline">Privacy Policy</a></label></div>
+      <div style="display:flex;align-items:flex-start;gap:8px;margin:8px 0 4px"><input type="checkbox" id="authAgree" style="margin-top:3px;width:16px;height:16px;accent-color:#1B4DDB;cursor:pointer;flex-shrink:0"><label for="authAgree" style="font-size:12px;color:#64748b;line-height:1.4;cursor:pointer">By signing in, I agree to the <a href="#terms" style="color:#1B4DDB;text-decoration:underline">Terms of Service</a> and <a href="#privacy" style="color:#1B4DDB;text-decoration:underline">Privacy Policy</a></label></div>
+      <p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:4px">New users will have an account created automatically. Existing users will be signed in.</p>
       <button id="authSendBtn" onclick="(async function(){
         var ag=document.getElementById('authAgree');if(ag&&!ag.checked){var m1=document.getElementById('authMsg1');if(m1){m1.textContent='Please agree to Terms of Service first';m1.style.color='#dc2626';}return;}
         var email = document.getElementById('authEmail').value.trim();
