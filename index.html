@@ -821,6 +821,7 @@ window.addEventListener('DOMContentLoaded',function(){
       if(modal) modal.style.display='none';
       // Load trips from Supabase
       loadTrips(user.id);
+      if(typeof showDash === 'function') showDash();
       // Show welcome toast
       showToast('Welcome back, ' + (user.email || 'there') + '!');
     } else {
@@ -838,7 +839,7 @@ window.addEventListener('DOMContentLoaded',function(){
       
       _db.from('trips')
         .select('*')
-        .order('start_time', {ascending: false})
+        .order('created_at', {ascending: false})
         .limit(100)
         .then(function(res){
           console.log('TRIPS RESULT:', JSON.stringify(res).slice(0, 300));
@@ -1678,6 +1679,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     const h=a.getAttribute('href');
     if(h==='#privacy'){e.preventDefault();document.getElementById('privacyModal').style.display='block';return;}
     if(h==='#terms'){e.preventDefault();document.getElementById('termsModal').style.display='block';return;}
+    if(h==='#') return;
     const t=document.querySelector(h);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
   });
 });
