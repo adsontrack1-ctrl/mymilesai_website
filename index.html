@@ -1953,8 +1953,8 @@ setLocale(detectLocale());
 <th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb">Deduction</th>
 </tr></thead><tbody id="dBdy"><tr><td colspan="4" style="text-align:center;padding:48px;color:#9ca3af;font-size:14px">No trips yet &#x2014; <span onclick="openAt()" style="color:#2563EB;cursor:pointer;font-weight:600">add your first &#x2192;</span></td></tr></tbody></table></div>
 <div style="background:linear-gradient(135deg,rgba(37,99,235,.05),rgba(124,58,237,.03));border:1px solid rgba(37,99,235,.12);border-radius:16px;padding:20px 28px;display:flex;align-items:center;justify-content:space-between">
-<div><div style="font-size:15px;font-weight:700;color:#111827;margin-bottom:4px">&#x1F4B0; 2026 IRS Standard Mileage Rate</div><div style="font-size:13px;color:#6b7280">Every business mile = <strong>$0.70</strong> tax deduction. Medical &amp; charity also qualify.</div></div>
-<div style="font-family:'Playfair Display',Georgia,serif;font-size:40px;font-weight:700;color:#16a34a">$0.70<span style="font-size:16px;font-weight:500;color:#9ca3af">/mi</span></div>
+<div><div style="font-size:15px;font-weight:700;color:#111827;margin-bottom:4px">&#x1F4B0; 2026 IRS Standard Mileage Rate</div><div style="font-size:13px;color:#6b7280">Every business mile = <strong>$0.725</strong> tax deduction. Medical &amp; charity also qualify.</div></div>
+<div style="font-family:'Playfair Display',Georgia,serif;font-size:40px;font-weight:700;color:#16a34a">$0.725<span style="font-size:16px;font-weight:500;color:#9ca3af">/mi</span></div>
 </div></div></div>
 <div id="atOv" class="mmOv" onclick="if(event.target===this)closeAt()">
 <div class="mmBox" style="max-width:480px"><button class="mmClose" onclick="closeAt()">&#x2715;</button>
@@ -1977,10 +1977,10 @@ setLocale(detectLocale());
 </div></div>
 <script>
 (function(){
-var _u=null,_tr=[],IRS=0.70;
+var _u=null,_tr=[],IRS=0.725;
 function fmt(n){return(n<0?"":"")+n.toFixed(2);}
 function login(e,n){_u={email:e,name:n||e.split("@")[0]};closeSignIn();showDash();}
-window.openSignIn=function(){document.getElementById("authOv").style.display="flex";};
+window.openSignIn=function(){document.getElementById("authModal").style.display="flex";};
 window.closeSignIn=function(){document.getElementById("authOv").style.display="none";};
 window.doGoogle=function(){login("user@gmail.com","Demo User");};
 window.doApple=function(){login("user@icloud.com","Demo User");};
