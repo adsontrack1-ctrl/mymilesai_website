@@ -1979,15 +1979,15 @@ setLocale(detectLocale());
 (function(){
 var _u=null,_tr=[],IRS=0.725;
 function fmt(n){return(n<0?"":"")+n.toFixed(2);}
-function login(e,n){_u={email:e,name:n||e.split("@")[0]};closeSignIn();showDash();}
+// login() removed — auth is handled by Supabase
 window.openSignIn=function(){document.getElementById("authModal").style.display="flex";};
 window.closeSignIn=function(){document.getElementById("authOv").style.display="none";};
-window.doGoogle=function(){login("user@gmail.com","Demo User");};
-window.doApple=function(){login("user@icloud.com","Demo User");};
+window.doGoogle=function(){sbSignInGoogle();};
+window.doApple=function(){sbSignInApple();};
 window.doEmail=function(){
   var em=document.getElementById("aEm").value.trim();
   if(!em||!em.includes("@")){document.getElementById("aEm").style.borderColor="#ef4444";return;}
-  login(em);
+  sbSendOtpCode(em);
 };
 window.showDash=function(){
   window._user=_u;
