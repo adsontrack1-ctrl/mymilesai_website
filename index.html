@@ -1927,8 +1927,8 @@ setLocale(detectLocale());
 <button class="mmBtn mmBtnApple" onclick="doApple()" style="margin-bottom:20px"><svg width="14" height="18" viewBox="0 0 814 1000" fill="white"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 790.7 0 663 0 541.8c0-207.5 135.4-317.3 269-317.3 70.1 0 128.4 45.8 170.5 45.8 40.4 0 103.6-48.2 183.6-48.2zM520.2 93.3c33.3-40.9 57.2-97.7 57.2-154.5 0-8.1-.7-16.2-2.1-23.7-54.3 2.1-118.5 36.2-157.6 83.7-30.1 34.8-58.6 91.6-58.6 149.2 0 8.8 1.5 17.6 2.2 20.3 3.5.5 9.1 1.3 14.6 1.3 48.6 0 109.5-32.4 144.3-76.3z"/></svg>Continue with Apple</button>
 <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div style="flex:1;height:1px;background:#e5e7eb"></div><span style="font-size:12px;color:#9ca3af;font-weight:500">or email</span><div style="flex:1;height:1px;background:#e5e7eb"></div></div>
 <input type="email" id="aEm" class="mmInput" placeholder="your@email.com" style="margin-bottom:12px" onfocus="this.style.borderColor='#2563EB';this.style.background='#fff'" onblur="this.style.borderColor='#e5e7eb';this.style.background='#f9fafb'" onkeydown="if(event.key==='Enter')doEmail()">
-<button class="mmBtn mmBtnPrimary" onclick="doEmail()">Send Magic Link &#x2192;</button>
-<p style="text-align:center;font-size:12px;color:#9ca3af;margin-top:14px">No password &#xB7; Privacy-first &#xB7; Free to start</p>
+<button class="mmBtn mmBtnPrimary" onclick="doEmail()">Send Verification Code &#x2192;</button>
+<p style="text-align:center;font-size:12px;color:#9ca3af;margin-top:14px">No password &#xB7; Privacy-first &#xB7; </p>
 </div></div>
 <div id="dashPg" style="display:none;position:fixed;inset:0;background:#F5F4F2;z-index:9000;overflow-y:auto">
 <nav style="position:sticky;top:0;z-index:10;height:64px;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;padding:0 32px">
@@ -2131,7 +2131,7 @@ window.saveTr=function(){
         Send verification code &rarr;
       </button>
       <p id="authMsg1" style="text-align:center;font-size:12px;margin:8px 0 0;min-height:16px"></p>
-      <p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:12px">No password &nbsp;&middot;&nbsp; Privacy-first &nbsp;&middot;&nbsp; 10-day free trial</p>
+      <p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:12px"></p>
     </div>
 
     <!-- Step 2: Enter 6-digit code -->
@@ -2188,33 +2188,7 @@ window.saveTr=function(){
   </div>
 </div>
 
-<div id="authModal" style="display:none;position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:1rem">
-  <div style="background:#fff;border-radius:20px;padding:2rem 2.5rem;width:100%;max-width:380px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.2)">
-    <button onclick="document.getElementById('authModal').style.display='none'" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8;line-height:1">&#x2715;</button>
-    <div style="text-align:center;margin-bottom:1.5rem">
-      <svg width="36" height="36" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#1B4DDB"/><path d="M5 20c0-2 1-3.5 2.5-4.5L10 12h12l2.5 3.5c1.5 1 2.5 2.5 2.5 4.5v1H5v-1z" fill="white"/><circle cx="10" cy="22" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg>
-      <h2 style="font-size:22px;font-weight:700;margin:12px 0 4px;font-family:inherit">Welcome back</h2>
-      <p style="font-size:13px;color:#64748b;margin:0">Sign in to MyMilesAI</p>
-    </div>
-    <button onclick="sbSignInGoogle()" style="width:100%;padding:11px;margin-bottom:10px;border:1.5px solid #e2e8f0;border-radius:12px;background:#fff;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;color:#0f172a;box-sizing:border-box">
-      <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-      Continue with Google
-    </button>
-    <button onclick="sbSignInApple()" style="width:100%;padding:11px;margin-bottom:16px;border:1.5px solid #e2e8f0;border-radius:12px;background:#fff;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;color:#0f172a;box-sizing:border-box">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      Continue with Apple
-    </button>
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:12px;color:#94a3b8">
-      <span style="flex:1;height:1px;background:#e2e8f0"></span>or continue with email<span style="flex:1;height:1px;background:#e2e8f0"></span>
-    </div>
-    <input type="email" id="authEmail" placeholder="your@email.com" style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:8px;box-sizing:border-box;outline:none">
-    <button onclick="(async function(){var e=document.getElementById('authEmail').value.trim();var m=document.getElementById('authMsg');if(!e||!e.includes('@')){m.textContent='Enter a valid email.';m.style.color='#dc2626';return;}m.textContent='Sending...';m.style.color='#64748b';var ok=await sbSignInMagicLink(e);m.textContent=ok?'Check your email for the sign-in link!':'Error — try again.';m.style.color=ok?'#16a34a':'#dc2626';})()" style="width:100%;padding:12px;font-size:14px;font-weight:600;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;box-sizing:border-box">
-      Send magic link &rarr;
-    </button>
-    <p id="authMsg" style="text-align:center;font-size:12px;margin:8px 0 0;min-height:16px"></p>
-    <p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:12px">No password &nbsp;&middot;&nbsp; Privacy-first &nbsp;&middot;&nbsp; 10-day free trial</p>
-  </div>
-</div>
+
 </body>
 </html>
 
