@@ -1934,10 +1934,10 @@ setLocale(detectLocale());
 <span style="font-size:12px;color:#475569">Auto-synced</span>
 </div>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
-<div style="background:rgba(27,77,219,.18);border:1px solid rgba(27,77,219,.3);border-radius:14px;padding:16px 18px"><div style="font-size:11px;font-weight:700;color:#93c5fd;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Business <span class="lbl-unit">mi</span></div><div id="kBh" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#60a5fa">0.0</div></div>
-<div style="background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.25);border-radius:14px;padding:16px 18px"><div style="font-size:11px;font-weight:700;color:#f9a8d4;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Personal <span class="lbl-unit">mi</span></div><div id="kPh" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#ec4899">0.0</div></div>
-<div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:14px;padding:16px 18px"><div style="font-size:11px;font-weight:700;color:#86efac;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Tax Deduction</div><div id="kDh" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#22c55e">$0.00</div></div>
-<div style="background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.25);border-radius:14px;padding:16px 18px"><div style="font-size:11px;font-weight:700;color:#c4b5fd;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Total Trips</div><div id="kTh" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#a78bfa">0</div></div>
+<div style="background:rgba(27,77,219,.18);border:1px solid rgba(27,77,219,.3);border-radius:14px;padding:16px 18px"><div style="font-size:11px;font-weight:700;color:#93c5fd;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Business <span class="lbl-unit">mi</span></div><div id="kB" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#60a5fa">0.0</div></div>
+<div style="background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.25);border-radius:14px;padding:16px 18px"><div style="font-size:11px;font-weight:700;color:#f9a8d4;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Personal <span class="lbl-unit">mi</span></div><div id="kP" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#ec4899">0.0</div></div>
+<div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:14px;padding:16px 18px"><div style="font-size:11px;font-weight:700;color:#86efac;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Tax Deduction</div><div id="kD" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#22c55e">$0.00</div></div>
+<div style="background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.25);border-radius:14px;padding:16px 18px"><div style="font-size:11px;font-weight:700;color:#c4b5fd;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Total Trips</div><div id="kT" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#a78bfa">0</div></div>
 </div></div>
 <!-- Three info cards row -->
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
@@ -1968,13 +1968,6 @@ setLocale(detectLocale());
 <button onclick="emailReport()" style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:10px;border:1.5px solid #e2e8f0;background:#f8fafc;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B4DDB" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg>Email Report</button>
 <button onclick="exportFreshBooks()" style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:10px;border:1.5px solid #e2e8f0;background:#f8fafc;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer"><svg width="16" height="16" fill="none" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2" stroke="#22c55e" stroke-width="2"/><line x1="2" y1="10" x2="22" y2="10" stroke="#22c55e" stroke-width="2"/><line x1="6" y1="15" x2="10" y2="15" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/></svg>FreshBooks</button>
 </div></div>
-<!-- Detail stat cards -->
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px">
-<div style="background:#fff;border:1px solid #f1f5f9;border-radius:16px;padding:18px 20px"><div style="font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1B4DDB" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="2" y1="12" x2="22" y2="12"/></svg>Business <span class="lbl-unit">mi</span></div><div id="kB" style="font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:700;color:#1B4DDB">0.0 mi</div></div>
-<div style="background:#fff;border:1px solid #f1f5f9;border-radius:16px;padding:18px 20px"><div style="font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Personal <span class="lbl-unit">mi</span></div><div id="kP" style="font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:700;color:#ec4899">0.0 mi</div></div>
-<div style="background:#fff;border:1px solid #f1f5f9;border-radius:16px;padding:18px 20px"><div style="font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Tax Deduction</div><div id="kD" style="font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:700;color:#22c55e">$0.00</div></div>
-<div style="background:#fff;border:1px solid #f1f5f9;border-radius:16px;padding:18px 20px"><div style="font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="11" width="22" height="9" rx="2"/><path d="M5 11V8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/><circle cx="7" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg>Total Trips</div><div id="kT" style="font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:700;color:#7C3AED">0</div></div>
-</div>
 <!-- Recent trips -->
 <div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;overflow:hidden">
 <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid #f1f5f9">
@@ -2049,11 +2042,13 @@ window.showDash=function(){
   if(!_u) return;
   window._user=_u;
   document.getElementById('dashPg').style.display='block';
+  var rawName=(_u.name||_u.email.split('@')[0]);
+  var cleanName=rawName.replace(/[_\.]/g,' ').replace(/[0-9]+$/g,'').trim().split(' ').map(function(w){return w?w.charAt(0).toUpperCase()+w.slice(1):''}).join(' ').trim()||rawName;
   var h=new Date().getHours();
   var g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
-  document.getElementById('dGr').textContent=g+', '+_u.name;
+  document.getElementById('dGr').textContent=g+', '+cleanName;
   document.getElementById('dUN').textContent=_u.email;
-  var av=document.getElementById('dAv');if(av) av.textContent=(_u.name||_u.email).charAt(0).toUpperCase();
+  var av=document.getElementById('dAv');if(av) av.textContent=cleanName.charAt(0).toUpperCase();
   document.querySelectorAll('.lbl-unit').forEach(function(el){el.textContent=UNIT;});
   document.querySelectorAll('.lbl-rate-label').forEach(function(el){el.textContent=RATE_LABEL;});
   document.querySelectorAll('.lbl-rate').forEach(function(el){el.textContent='$'+RATE+'/'+UNIT;});
@@ -2085,14 +2080,10 @@ function refresh(){
     else if(t.c==='personal') p+=t.m;
     else d+=t.d;
   });
-  var kB=document.getElementById('kB');if(kB)kB.textContent=b.toFixed(1)+' '+UNIT;
-  var kP=document.getElementById('kP');if(kP)kP.textContent=p.toFixed(1)+' '+UNIT;
+  var kB=document.getElementById('kB');if(kB)kB.textContent=b.toFixed(1);
+  var kP=document.getElementById('kP');if(kP)kP.textContent=p.toFixed(1);
   var kD=document.getElementById('kD');if(kD)kD.textContent='$'+fmt(d);
   var kT=document.getElementById('kT');if(kT)kT.textContent=_tr.length;
-  var kBh=document.getElementById('kBh');if(kBh)kBh.textContent=b.toFixed(1);
-  var kPh=document.getElementById('kPh');if(kPh)kPh.textContent=p.toFixed(1);
-  var kDh=document.getElementById('kDh');if(kDh)kDh.textContent='$'+fmt(d);
-  var kTh=document.getElementById('kTh');if(kTh)kTh.textContent=_tr.length;
   var pct=Math.min(100,(d/5000)*100);
   var ytdBar=document.getElementById('ytdBar');if(ytdBar)ytdBar.style.width=pct.toFixed(1)+'%';
   var ytdAmt=document.getElementById('ytdAmount');if(ytdAmt)ytdAmt.textContent='$'+fmt(d)+' saved this year';
@@ -2313,8 +2304,8 @@ window.loadSupabaseTrips=function(trips){
         }
       } catch(e){ console.log('Path parse error:',e); }
     }
-    if(fromName==='Unknown') fromName=t.purpose||t.notes||'Manual trip';
-    if(toName==='Unknown') toName=t.trip_date||(t.created_at?t.created_at.split('T')[0]:'')||'';
+    if(!fromName||fromName==='Unknown'||fromName==='\u2014') fromName=t.purpose||('Trip on '+(t.trip_date||''));
+    if(!toName||toName==='Unknown'||toName==='\u2014') toName=t.notes||(t.miles?parseFloat(t.miles).toFixed(1)+' '+UNIT:'');
     var cat=(t.type||'personal').toLowerCase();
     if(cat==='biz') cat='business';
     if(cat==='pers') cat='personal';
