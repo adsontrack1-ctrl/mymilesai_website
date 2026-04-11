@@ -142,7 +142,7 @@
 </script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%231B4DDB'/%3E%3Cstop offset='100%25' stop-color='%234A7AFF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Cg transform='translate(50,50)'%3E%3Cpath d='M-32 6h64c2 0 3-1 3-3v-3c0-1-1-2-2-2h-8l-5-8c-1-2-3-3-5-3h-18c-3 0-5 1-7 3l-8 8h-11c-2 0-3 1-3 3v2c0 2 1 3 3 3z' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='-18' cy='8' r='5.5' fill='%230A0A14' stroke='white' stroke-width='2'/%3E%3Ccircle cx='20' cy='8' r='5.5' fill='%230A0A14' stroke='white' stroke-width='2'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
   --sapphire:#1B4DDB;--sapphire-d:#1340B8;--sapphire-l:#4A7AFF;--sapphire-ul:#EEF3FF;
@@ -1934,30 +1934,79 @@ setLocale(detectLocale());
 </div></div>
 <div id="dashPg" style="display:none;position:fixed;inset:0;background:#F5F4F2;z-index:9000;overflow-y:auto">
 <nav style="position:sticky;top:0;z-index:10;height:64px;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;padding:0 32px">
-<div style="display:flex;align-items:center;gap:10px;font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;color:#111827"><div style="width:34px;height:34px;background:linear-gradient(135deg,#2563EB,#7C3AED);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px">&#x1F697;</div>MyMilesAI</div>
-<div style="display:flex;align-items:center;gap:12px"><span id="dUN" style="font-size:14px;color:#6b7280"></span>
-<button onclick="openAt()" style="padding:9px 20px;border-radius:100px;background:linear-gradient(135deg,#2563EB,#7C3AED);color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer">+ Add Trip</button>
-<button onclick="doOut()" style="padding:9px 20px;border-radius:100px;border:1.5px solid #e5e7eb;background:transparent;font-size:14px;font-weight:600;color:#374151;cursor:pointer">Sign Out</button></div></nav>
-<div style="max-width:1200px;margin:0 auto;padding:32px 24px">
-<h1 id="dGr" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#111827;margin-bottom:4px">Good morning &#x1F44B;</h1>
-<p style="font-size:14px;color:#9ca3af;margin-bottom:28px">Your 2026 mileage summary</p>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px">
-<div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px 24px"><div style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">&#x1F4BC; Business Miles</div><div id="kB" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#111827">0.0</div></div>
-<div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px 24px"><div style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">&#x1F4B0; Tax Deduction</div><div id="kD" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#16a34a">$0.00</div></div>
-<div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px 24px"><div style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">&#x1F464; Personal Miles</div><div id="kP" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#111827">0.0</div></div>
-<div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px 24px"><div style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">&#x1F697; Total Trips</div><div id="kT" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#111827">0</div></div></div>
-<div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;overflow:hidden;margin-bottom:20px">
-<div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid #e5e7eb"><div style="font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;color:#111827">Recent Trips</div><button onclick="openAt()" style="font-size:13px;font-weight:700;color:#2563EB;background:none;border:none;cursor:pointer">+ Add Trip</button></div>
-<table style="width:100%;border-collapse:collapse"><thead><tr style="background:#f9fafb">
-<th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb">Route</th>
-<th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb">Category</th>
-<th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb">Miles</th>
-<th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb">Deduction</th>
-</tr></thead><tbody id="dBdy"><tr><td colspan="4" style="text-align:center;padding:48px;color:#9ca3af;font-size:14px">No trips yet &#x2014; <span onclick="openAt()" style="color:#2563EB;cursor:pointer;font-weight:600">add your first &#x2192;</span></td></tr></tbody></table></div>
-<div style="background:linear-gradient(135deg,rgba(37,99,235,.05),rgba(124,58,237,.03));border:1px solid rgba(37,99,235,.12);border-radius:16px;padding:20px 28px;display:flex;align-items:center;justify-content:space-between">
-<div><div style="font-size:15px;font-weight:700;color:#111827;margin-bottom:4px">&#x1F4B0; 2026 IRS Standard Mileage Rate</div><div style="font-size:13px;color:#6b7280">Every business mile = <strong>$0.725</strong> tax deduction. Medical &amp; charity also qualify.</div></div>
-<div style="font-family:'Playfair Display',Georgia,serif;font-size:40px;font-weight:700;color:#16a34a">$0.725<span style="font-size:16px;font-weight:500;color:#9ca3af">/mi</span></div>
-</div></div></div>
+<div style="display:flex;align-items:center;gap:10px;font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;color:#0f172a"><div style="width:34px;height:34px;background:linear-gradient(135deg,#1B4DDB,#7C3AED);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px">&#x1F697;</div>MyMilesAI</div>
+<div style="display:flex;align-items:center;gap:12px">
+<button onclick="openAt()" style="padding:9px 20px;border-radius:100px;background:linear-gradient(135deg,#1B4DDB,#7C3AED);color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer">+ Add Trip</button>
+<button onclick="doOut()" style="padding:9px 20px;border-radius:100px;border:1.5px solid #e5e7eb;background:transparent;font-size:14px;font-weight:600;color:#374151;cursor:pointer">Sign Out</button>
+</div></nav>
+<div style="max-width:1100px;margin:0 auto;padding:32px 24px">
+<!-- User header -->
+<div style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
+<div id="dAv" style="width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#7C3AED,#1B4DDB);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0">M</div>
+<div style="flex:1">
+<div id="dGr" style="font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;color:#0f172a">Good morning &#x1F44B;</div>
+<div style="display:flex;align-items:center;gap:8px;margin-top:3px"><div style="width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0"></div><span id="dUN" style="font-size:13px;color:#64748b"></span></div>
+</div>
+<button onclick="doOut()" style="padding:8px 18px;border-radius:100px;border:1.5px solid #e5e7eb;background:#fff;font-size:13px;font-weight:600;color:#64748b;cursor:pointer">Sign Out</button>
+</div>
+<!-- Dark hero card -->
+<div style="background:#0f172a;border-radius:20px;padding:28px 32px;margin-bottom:20px">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:8px">
+<div><div style="font-size:11px;font-weight:700;color:#475569;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">2026 Tax Year Summary</div>
+<div style="display:flex;align-items:center;gap:8px"><div style="width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,#1B4DDB,#7C3AED);display:flex;align-items:center;justify-content:center;font-size:12px">&#x1F697;</div><span style="font-family:'Playfair Display',Georgia,serif;font-size:17px;font-weight:700;color:#f8fafc">MyMilesAI</span></div></div>
+<span style="font-size:12px;color:#475569">Auto-synced</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+<div style="background:rgba(27,77,219,.18);border:1px solid rgba(27,77,219,.3);border-radius:14px;padding:16px 18px"><div style="font-size:11px;font-weight:700;color:#93c5fd;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Business <span class="lbl-unit">mi</span></div><div id="kBh" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#60a5fa">0.0</div></div>
+<div style="background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.25);border-radius:14px;padding:16px 18px"><div style="font-size:11px;font-weight:700;color:#f9a8d4;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Personal <span class="lbl-unit">mi</span></div><div id="kPh" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#ec4899">0.0</div></div>
+<div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:14px;padding:16px 18px"><div style="font-size:11px;font-weight:700;color:#86efac;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Tax Deduction</div><div id="kDh" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#22c55e">$0.00</div></div>
+<div style="background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.25);border-radius:14px;padding:16px 18px"><div style="font-size:11px;font-weight:700;color:#c4b5fd;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Total Trips</div><div id="kTh" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#a78bfa">0</div></div>
+</div></div>
+<!-- Three info cards row -->
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
+<div style="background:#fff;border-radius:16px;padding:20px;border:1px solid #f1f5f9;border-left:4px solid #22c55e">
+<div style="font-size:11px;font-weight:700;color:#64748b;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px">&#x1F4B0; <span class="lbl-rate-label">IRS</span> Rate 2026</div>
+<div style="font-family:'Playfair Display',Georgia,serif;font-size:30px;font-weight:700;color:#22c55e"><span class="lbl-rate">$0.725/mi</span></div>
+<div style="font-size:12px;color:#94a3b8;margin-top:6px">Per <span class="lbl-unit">mi</span> business deduction</div>
+</div>
+<div style="background:#0f172a;border-radius:16px;padding:20px">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div style="font-size:11px;font-weight:700;color:#475569;letter-spacing:.06em;text-transform:uppercase">Subscription</div><span style="padding:3px 10px;border-radius:100px;background:rgba(34,197,94,.15);color:#22c55e;font-size:11px;font-weight:700">Pro Trial</span></div>
+<div style="font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;color:#f8fafc;margin-bottom:12px">All features unlocked</div>
+<button onclick="upgradeSubscription()" style="width:100%;padding:9px;border-radius:10px;background:linear-gradient(135deg,#1B4DDB,#7C3AED);color:#fff;font-size:13px;font-weight:700;border:none;cursor:pointer;margin-bottom:6px">Upgrade &#x2014; $69.99/yr</button>
+<button onclick="manageSubscription()" style="width:100%;padding:8px;border-radius:10px;background:rgba(255,255,255,.06);color:#94a3b8;font-size:12px;font-weight:600;border:1px solid rgba(255,255,255,.08);cursor:pointer">Manage subscription</button>
+</div>
+<div style="background:#fff;border-radius:16px;padding:20px;border:1px solid #f1f5f9;border-left:4px solid #f59e0b">
+<div style="font-size:11px;font-weight:700;color:#64748b;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px">&#x1F4C8; Year-to-Date Savings</div>
+<div id="ytdAmount" style="font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;color:#0f172a;margin-bottom:10px">$0.00 saved this year</div>
+<div style="background:#f1f5f9;border-radius:100px;height:8px;overflow:hidden"><div id="ytdBar" style="height:100%;width:0%;background:linear-gradient(90deg,#f59e0b,#22c55e);border-radius:100px;transition:width .5s ease"></div></div>
+<div style="font-size:11px;color:#94a3b8;margin-top:6px">Goal: $5,000 deduction</div>
+</div></div>
+<!-- Export reports -->
+<div style="background:#fff;border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1px solid #f1f5f9">
+<div style="font-size:14px;font-weight:700;color:#0f172a;margin-bottom:14px">Export Reports</div>
+<div style="display:flex;gap:10px;flex-wrap:wrap">
+<button onclick="exportCSV()" style="display:flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;border:1.5px solid #e2e8f0;background:#f8fafc;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer"><svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#22c55e" stroke-width="2" stroke-linejoin="round"/><polyline points="14,2 14,8 20,8" stroke="#22c55e" stroke-width="2" stroke-linejoin="round"/><line x1="8" y1="13" x2="16" y2="13" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="17" x2="16" y2="17" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/></svg>Excel / CSV</button>
+<button onclick="exportPDF()" style="display:flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;border:1.5px solid #e2e8f0;background:#f8fafc;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer"><svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#ef4444" stroke-width="2" stroke-linejoin="round"/><polyline points="14,2 14,8 20,8" stroke="#ef4444" stroke-width="2" stroke-linejoin="round"/></svg>PDF</button>
+<button onclick="exportSheets()" style="display:flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;border:1.5px solid #e2e8f0;background:#f8fafc;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer"><svg width="16" height="16" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#1B4DDB" stroke-width="2"/><line x1="3" y1="9" x2="21" y2="9" stroke="#1B4DDB" stroke-width="2"/><line x1="9" y1="3" x2="9" y2="21" stroke="#1B4DDB" stroke-width="2"/></svg>Google Sheets</button>
+<button onclick="exportQB()" style="display:flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;border:1.5px solid #e2e8f0;background:#f8fafc;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer"><svg width="16" height="16" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#7C3AED" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>QuickBooks</button>
+<button onclick="exportCSV()" style="display:flex;align-items:center;gap:7px;padding:9px 18px;border-radius:10px;border:1.5px solid #1B4DDB;background:rgba(27,77,219,.06);font-size:13px;font-weight:700;color:#1B4DDB;cursor:pointer"><svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="#1B4DDB" stroke-width="2" stroke-linecap="round"/><polyline points="7,10 12,15 17,10" stroke="#1B4DDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="15" x2="12" y2="3" stroke="#1B4DDB" stroke-width="2" stroke-linecap="round"/></svg>Export All</button>
+</div></div>
+<!-- Detail stat cards -->
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px">
+<div style="background:#fff;border:1px solid #f1f5f9;border-radius:16px;padding:18px 20px"><div style="font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">&#x1F4BC; Business <span class="lbl-unit">mi</span></div><div id="kB" style="font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:700;color:#1B4DDB">0.0 mi</div></div>
+<div style="background:#fff;border:1px solid #f1f5f9;border-radius:16px;padding:18px 20px"><div style="font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">&#x1F497; Personal <span class="lbl-unit">mi</span></div><div id="kP" style="font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:700;color:#ec4899">0.0 mi</div></div>
+<div style="background:#fff;border:1px solid #f1f5f9;border-radius:16px;padding:18px 20px"><div style="font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">&#x1F4B0; Tax Deduction</div><div id="kD" style="font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:700;color:#22c55e">$0.00</div></div>
+<div style="background:#fff;border:1px solid #f1f5f9;border-radius:16px;padding:18px 20px"><div style="font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">&#x1F697; Total Trips</div><div id="kT" style="font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:700;color:#7C3AED">0</div></div>
+</div>
+<!-- Recent trips -->
+<div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;overflow:hidden">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid #f1f5f9">
+<div style="display:flex;align-items:center;gap:10px"><span style="font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;color:#0f172a">Recent Trips</span><span id="tripCount" style="padding:2px 10px;border-radius:100px;background:#f1f5f9;font-size:12px;font-weight:700;color:#64748b">0 trips</span></div>
+<button onclick="openAt()" style="display:flex;align-items:center;gap:6px;padding:9px 18px;border-radius:100px;background:linear-gradient(135deg,#1B4DDB,#7C3AED);color:#fff;font-size:13px;font-weight:700;border:none;cursor:pointer">+ Add Trip</button>
+</div>
+<div id="tripsList" style="padding:12px 16px"></div>
+</div>
+</div></div>
 <div id="atOv" class="mmOv" onclick="if(event.target===this)closeAt()">
 <div class="mmBox" style="max-width:480px"><button class="mmClose" onclick="closeAt()">&#x2715;</button>
 <h3 style="font-family:'Playfair Display',Georgia,serif;font-size:24px;font-weight:700;color:#111827;margin-bottom:24px">Add Trip</h3>
@@ -1979,111 +2028,198 @@ setLocale(detectLocale());
 </div></div>
 <script>
 (function(){
-var _u=null,_tr=[],IRS=0.725;
-function fmt(n){return(n<0?"":"")+n.toFixed(2);}
-// login() removed — auth is handled by Supabase
-window.openSignIn=function(){document.getElementById("authModal").style.display="flex";};
-window.closeSignIn=function(){document.getElementById("authOv").style.display="none";};
+// ── Locale detection via timezone ──
+var _u=null,_tr=[];
+var _tz=(typeof Intl!=='undefined')?Intl.DateTimeFormat().resolvedOptions().timeZone:'';
+var _CA=['Toronto','Vancouver','Winnipeg','Edmonton','Calgary','Regina','Halifax','Moncton','Whitehorse','Yellowknife','Iqaluit','Glace_Bay','Goose_Bay','Dawson','Creston','Thunder_Bay','Rankin_Inlet'].some(function(z){return _tz.indexOf(z)>-1;});
+var UNIT=_CA?'km':'mi';
+var RATE_LABEL=_CA?'CRA':'IRS';
+var RATE=_CA?0.73:0.725;
+
+function calcDeduction(dist,cat){
+  if(!['business','medical','charity'].includes(cat)) return 0;
+  if(_CA&&cat==='business'){
+    var prev=_tr.filter(function(t){return t.c==='business';}).reduce(function(s,t){return s+t.m;},0);
+    var total=prev+dist;
+    var tier1=Math.min(total,5000)-Math.min(prev,5000);
+    var tier2=Math.max(0,total-5000)-Math.max(0,prev-5000);
+    return Math.max(0,tier1)*0.73+Math.max(0,tier2)*0.67;
+  }
+  return dist*RATE;
+}
+function fmt(n){return n.toFixed(2);}
+
+if(typeof window.showToast!=='function'){
+  window.showToast=function(msg){
+    var t=document.createElement('div');
+    t.style.cssText='position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:12px 28px;border-radius:14px;font-size:14px;font-weight:600;z-index:99999;box-shadow:0 8px 32px rgba(0,0,0,.3);white-space:nowrap;pointer-events:none;';
+    t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.remove();},3000);
+  };
+}
+
+window.openSignIn=function(){document.getElementById('authModal').style.display='flex';};
+window.closeSignIn=function(){document.getElementById('authOv').style.display='none';};
 window.doGoogle=function(){sbSignInGoogle();};
 window.doApple=function(){sbSignInApple();};
 window.doEmail=function(){
-  var em=document.getElementById("aEm").value.trim();
-  if(!em||!em.includes("@")){document.getElementById("aEm").style.borderColor="#ef4444";return;}
+  var em=document.getElementById('aEm').value.trim();
+  if(!em||!em.includes('@')){document.getElementById('aEm').style.borderColor='#ef4444';return;}
   sbSendOtpCode(em);
 };
+
 window.showDash=function(){
-  if(!_u && window._currentUser) _u = {email: window._currentUser.email, name: window._currentUser.email.split('@')[0]};
+  if(!_u&&window._currentUser) _u={email:window._currentUser.email,name:window._currentUser.email.split('@')[0]};
+  if(!_u) return;
   window._user=_u;
-  document.getElementById("dashPg").style.display="block";
+  document.getElementById('dashPg').style.display='block';
   var h=new Date().getHours();
-  var g=h<12?"Good morning":h<17?"Good afternoon":"Good evening";
-  document.getElementById("dGr").textContent=g+", "+_u.name+" 👋";
-  document.getElementById("dUN").textContent=_u.email;
-  var si=document.getElementById("navSignInBtn");if(si)si.style.display="none";
-  var db=document.getElementById("navDashBtn");if(db){db.style.display="inline-flex";db.onclick=function(){document.getElementById("dashPg").style.display="block";return false;};}
+  var g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+  document.getElementById('dGr').textContent=g+', '+_u.name+' \uD83D\uDC4B';
+  document.getElementById('dUN').textContent=_u.email;
+  var av=document.getElementById('dAv');if(av) av.textContent=(_u.name||_u.email).charAt(0).toUpperCase();
+  document.querySelectorAll('.lbl-unit').forEach(function(el){el.textContent=UNIT;});
+  document.querySelectorAll('.lbl-rate-label').forEach(function(el){el.textContent=RATE_LABEL;});
+  document.querySelectorAll('.lbl-rate').forEach(function(el){el.textContent='$'+RATE+'/'+UNIT;});
+  var si=document.getElementById('navSignInBtn');if(si)si.style.display='none';
+  var db=document.getElementById('navDashBtn');if(db){db.style.display='inline-flex';db.onclick=function(){document.getElementById('dashPg').style.display='block';return false;};}
+  if(window._userTrips&&window._userTrips.length>0){
+    _tr=window._userTrips.map(function(t){
+      var dist=parseFloat(t.distance_miles||t.miles||t.distance||t.distance_km||0);
+      var cat=(t.category||t.trip_type||t.type||'business').toLowerCase();
+      if(!['business','personal','medical','charity'].includes(cat)) cat='business';
+      return {f:t.start_location||t.from_location||t.origin||t.start_address||'\u2014',t:t.end_location||t.to_location||t.destination||t.end_address||'\u2014',m:dist,dt:(t.date||t.created_at)?new Date(t.date||t.created_at).toLocaleDateString():'',c:cat,d:dist*RATE,n:t.notes||''};
+    });
+  }
   refresh();
 };
+
 window.doOut=function(){
   sbSignOut();
   _u=null;_tr=[];window._user=null;
-  document.getElementById("dashPg").style.display="none";
-  var si=document.getElementById("navSignInBtn");if(si)si.style.display="inline-flex";
-  var db=document.getElementById("navDashBtn");if(db)db.style.display="none";
+  document.getElementById('dashPg').style.display='none';
+  var si=document.getElementById('navSignInBtn');if(si)si.style.display='inline-flex';
+  var db=document.getElementById('navDashBtn');if(db)db.style.display='none';
 };
+
 function refresh(){
   var b=0,p=0,d=0;
-  _tr.forEach(function(t){if(t.c==="business")b+=t.m;else if(t.c==="personal")p+=t.m;d+=t.d;});
-  document.getElementById("kB").textContent=b.toFixed(1);
-  document.getElementById("kP").textContent=p.toFixed(1);
-  document.getElementById("kD").textContent="$"+d.toFixed(2);
-  document.getElementById("kT").textContent=_tr.length;
-  var body=document.getElementById("dBdy");
-  if(!_tr.length){body.innerHTML="<tr><td colspan='4' style='text-align:center;padding:48px;color:#9ca3af;font-size:14px'>No trips yet — <span onclick='openAt()' style='color:#2563EB;cursor:pointer;font-weight:600'>add your first →<\/span><\/td><\/tr>";return;}
-  var cl={business:"#2563EB",personal:"#ef4444",medical:"#16a34a",charity:"#dc2626"};
-  var lb={business:"💼 Business",personal:"👤 Personal",medical:"🏥 Medical",charity:"❤ Charity"};
-  body.innerHTML=_tr.slice(0,15).map(function(t){
-    var fc=cl[t.c];
-    var from=t.f.length>22?t.f.slice(0,22)+"…":t.f;
-    var to=t.t.length>22?t.t.slice(0,22)+"…":t.t;
-    var ded=t.d>0?"+$"+t.d.toFixed(2):"—";
-    var dedColor=t.d>0?"#16a34a":"#9ca3af";
-    return "<tr style='border-bottom:1px solid #f3f4f6'>"
-      +"<td style='padding:14px 24px'><div style='font-weight:600;color:#111827;font-size:14px'>"+from+" → "+to+"<\/div><div style='font-size:12px;color:#9ca3af;margin-top:2px'>"+t.dt+"<\/div><\/td>"
-      +"<td style='padding:14px 24px'><span style='border-radius:100px;padding:3px 10px;font-size:11px;font-weight:700;color:"+fc+";background:"+fc+"1a'>"+lb[t.c]+"<\/span><\/td>"
-      +"<td style='padding:14px 24px;font-size:14px;font-weight:600;color:#111827'>"+t.m.toFixed(1)+" mi<\/td>"
-      +"<td style='padding:14px 24px;font-size:14px;font-weight:700;color:"+dedColor+"'>"+ded+"<\/td><\/tr>";
-  }).join("");
+  _tr.forEach(function(t){
+    if(t.c==='business'){b+=t.m;d+=t.d;}
+    else if(t.c==='personal') p+=t.m;
+    else d+=t.d;
+  });
+  var kB=document.getElementById('kB');if(kB)kB.textContent=b.toFixed(1)+' '+UNIT;
+  var kP=document.getElementById('kP');if(kP)kP.textContent=p.toFixed(1)+' '+UNIT;
+  var kD=document.getElementById('kD');if(kD)kD.textContent='$'+fmt(d);
+  var kT=document.getElementById('kT');if(kT)kT.textContent=_tr.length;
+  var kBh=document.getElementById('kBh');if(kBh)kBh.textContent=b.toFixed(1);
+  var kPh=document.getElementById('kPh');if(kPh)kPh.textContent=p.toFixed(1);
+  var kDh=document.getElementById('kDh');if(kDh)kDh.textContent='$'+fmt(d);
+  var kTh=document.getElementById('kTh');if(kTh)kTh.textContent=_tr.length;
+  var pct=Math.min(100,(d/5000)*100);
+  var ytdBar=document.getElementById('ytdBar');if(ytdBar)ytdBar.style.width=pct.toFixed(1)+'%';
+  var ytdAmt=document.getElementById('ytdAmount');if(ytdAmt)ytdAmt.textContent='$'+fmt(d)+' saved this year';
+  var tc=document.getElementById('tripCount');if(tc)tc.textContent=_tr.length+' trip'+(_tr.length===1?'':'s');
+  renderTrips();
 }
+
+window.renderTrips=function(){
+  var el=document.getElementById('tripsList');if(!el) return;
+  if(!_tr.length){
+    el.innerHTML='<div style="text-align:center;padding:48px 24px;color:#94a3b8"><div style="font-size:32px;margin-bottom:12px">\uD83D\uDDFA\uFE0F</div><div style="font-size:15px;font-weight:600;color:#64748b;margin-bottom:4px">No trips yet</div><div style="font-size:13px">Add your first trip to start tracking</div><button onclick="openAt()" style="margin-top:16px;padding:10px 24px;background:#1B4DDB;color:#fff;border:none;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer">+ Add Trip</button></div>';
+    return;
+  }
+  var catColor={business:'#1B4DDB',personal:'#ec4899',medical:'#22c55e',charity:'#f59e0b'};
+  var catLabel={business:'\uD83D\uDCBC Business',personal:'\uD83D\uDC97 Personal',medical:'\uD83C\uDFE5 Medical',charity:'\u2764\uFE0F Charity'};
+  el.innerHTML=_tr.map(function(t,i){
+    var col=catColor[t.c]||'#64748b';
+    var from=(t.f||'').length>28?(t.f||'').slice(0,28)+'\u2026':(t.f||'\u2014');
+    var to=(t.t||'').length>28?(t.t||'').slice(0,28)+'\u2026':(t.t||'\u2014');
+    var ded=t.d>0?'+$'+fmt(t.d):'\u2014';
+    var dedCol=t.d>0?'#22c55e':'#94a3b8';
+    return '<div style="background:#fff;border-radius:14px;padding:14px 18px;margin-bottom:8px;border:1px solid #f1f5f9;display:flex;align-items:center;gap:14px">'
+      +'<div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0;width:12px">'
+      +'<div style="width:10px;height:10px;border-radius:50%;background:'+col+'"></div>'
+      +'<div style="width:2px;height:20px;background:'+col+'33"></div>'
+      +'<div style="width:10px;height:10px;border-radius:50%;border:2px solid '+col+';background:'+col+'22"></div>'
+      +'</div>'
+      +'<div style="flex:1;min-width:0">'
+      +'<div style="font-size:14px;font-weight:600;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+from+' \u2192 '+to+'</div>'
+      +'<div style="font-size:12px;color:#94a3b8;margin-top:2px">'+t.dt+'</div>'
+      +'</div>'
+      +'<span style="padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700;color:'+col+';background:'+col+'1a;flex-shrink:0">'+catLabel[t.c]+'</span>'
+      +'<div style="text-align:right;flex-shrink:0">'
+      +'<div style="font-family:\'Playfair Display\',Georgia,serif;font-size:17px;font-weight:700;color:#0f172a">'+t.m.toFixed(1)+'<span style="font-size:12px;font-weight:500;color:#94a3b8"> '+UNIT+'</span></div>'
+      +'<div style="font-size:13px;font-weight:700;color:'+dedCol+'">'+ded+'</div>'
+      +'</div>'
+      +'<button onclick="window._deleteTr('+i+')" style="width:26px;height:26px;border-radius:50%;border:1px solid #e2e8f0;background:#f8fafc;color:#94a3b8;font-size:16px;cursor:pointer;flex-shrink:0;line-height:1;padding:0">\xD7</button>'
+      +'</div>';
+  }).join('');
+};
+window._deleteTr=function(i){_tr.splice(i,1);refresh();};
+
 window.openAt=function(){
   if(!_u){openSignIn();return;}
-  document.getElementById("tDt").value=new Date().toISOString().slice(0,10);
-  ["tF","tTo","tMi","tNt"].forEach(function(id){document.getElementById(id).value="";});
-  document.getElementById("dPv").style.display="none";
-  document.querySelectorAll("#cBts button").forEach(function(b,i){
-    b.style.borderColor=i===0?"#2563EB":"#e5e7eb";
-    b.style.background=i===0?"rgba(37,99,235,.06)":"#f9fafb";
-    b.style.color=i===0?"#2563EB":"#374151";
+  document.getElementById('tDt').value=new Date().toISOString().slice(0,10);
+  ['tF','tTo','tMi','tNt'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('dPv').style.display='none';
+  document.querySelectorAll('#cBts button').forEach(function(b,i){
+    b.style.borderColor=i===0?'#2563EB':'#e5e7eb';
+    b.style.background=i===0?'rgba(37,99,235,.06)':'#f9fafb';
+    b.style.color=i===0?'#2563EB':'#374151';
   });
-  document.getElementById("atOv").style.display="flex";
+  document.getElementById('atOv').style.display='flex';
 };
-window.closeAt=function(){document.getElementById("atOv").style.display="none";};
+window.closeAt=function(){document.getElementById('atOv').style.display='none';};
 window.pCat=function(el){
-  document.querySelectorAll("#cBts button").forEach(function(b){b.style.borderColor="#e5e7eb";b.style.background="#f9fafb";b.style.color="#374151";});
-  el.style.borderColor="#2563EB";el.style.background="rgba(37,99,235,.06)";el.style.color="#2563EB";
+  document.querySelectorAll('#cBts button').forEach(function(b){b.style.borderColor='#e5e7eb';b.style.background='#f9fafb';b.style.color='#374151';});
+  el.style.borderColor='#2563EB';el.style.background='rgba(37,99,235,.06)';el.style.color='#2563EB';
   calcDed();
 };
 window.calcDed=function(){
-  var m=parseFloat(document.getElementById("tMi").value)||0;
+  var m=parseFloat(document.getElementById('tMi').value)||0;
   var sel=document.querySelector("#cBts button[style*='#2563EB']");
-  var c=sel?sel.dataset.cat:"business";
-  var d=["business","medical","charity"].includes(c)?m*IRS:0;
-  var el=document.getElementById("dPv");
-  if(m>0&&d>0){el.textContent="💰 Est. deduction: +$"+d.toFixed(2)+" ("+m.toFixed(1)+" mi × $"+IRS+"/mi)";el.style.display="block";}
-  else el.style.display="none";
+  var c=sel?sel.dataset.cat:'business';
+  var d=calcDeduction(m,c);
+  var el=document.getElementById('dPv');
+  if(m>0&&d>0){el.textContent='\uD83D\uDCB0 Est. deduction: +$'+fmt(d)+' ('+m.toFixed(1)+' '+UNIT+' \xD7 $'+RATE+'/'+UNIT+')';el.style.display='block';}
+  else el.style.display='none';
 };
 window.saveTr=function(){
-  var f=document.getElementById("tF").value.trim();
-  var to=document.getElementById("tTo").value.trim();
-  var m=parseFloat(document.getElementById("tMi").value)||0;
-  var dt=document.getElementById("tDt").value;
-  var nt=document.getElementById("tNt").value.trim();
+  var f=document.getElementById('tF').value.trim();
+  var to=document.getElementById('tTo').value.trim();
+  var m=parseFloat(document.getElementById('tMi').value)||0;
+  var dt=document.getElementById('tDt').value;
+  var nt=document.getElementById('tNt').value.trim();
   if(!f||!to||!m){
-    if(!f)document.getElementById("tF").style.borderColor="#ef4444";
-    if(!to)document.getElementById("tTo").style.borderColor="#ef4444";
-    if(!m)document.getElementById("tMi").style.borderColor="#ef4444";
+    if(!f)document.getElementById('tF').style.borderColor='#ef4444';
+    if(!to)document.getElementById('tTo').style.borderColor='#ef4444';
+    if(!m)document.getElementById('tMi').style.borderColor='#ef4444';
     return;
   }
   var sel=document.querySelector("#cBts button[style*='#2563EB']");
-  var c=sel?sel.dataset.cat:"business";
-  var d=["business","medical","charity"].includes(c)?m*IRS:0;
+  var c=sel?sel.dataset.cat:'business';
+  var d=calcDeduction(m,c);
   _tr.unshift({f:f,t:to,m:m,dt:dt,c:c,d:d,n:nt});
+  if(_u&&typeof sbSaveTrip==='function') sbSaveTrip({from:f,to:to,distance:m,category:c,date:dt,notes:nt,deduction:d});
   closeAt();refresh();
-  var toast=document.createElement("div");
-  toast.style.cssText="position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;padding:12px 28px;border-radius:14px;font-size:13px;font-weight:600;z-index:99999;box-shadow:0 8px 32px rgba(0,0,0,.3);white-space:nowrap;animation:mmUp .3s ease;";
-  toast.innerHTML=d>0?"✅ Trip saved — +$"+d.toFixed(2)+" deduction":"✅ Trip saved";
-  document.body.appendChild(toast);
-  setTimeout(function(){toast.remove();},3000);
+  showToast(d>0?'\u2705 Trip saved \u2014 +$'+fmt(d)+' deduction':'\u2705 Trip saved');
 };
+window.exportCSV=function(){
+  if(!_tr.length){showToast('No trips to export');return;}
+  var rows=[['Date','From','To','Category',UNIT,'Deduction ($)','Notes']];
+  _tr.forEach(function(t){rows.push([t.dt,t.f,t.t,t.c,t.m.toFixed(2),t.d.toFixed(2),t.n]);});
+  var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+  var a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='mymilesai_trips_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+};
+window.exportPDF=function(){showToast('\uD83D\uDCC4 PDF export coming soon');};
+window.exportSheets=function(){showToast('\uD83D\uDCCA Google Sheets export coming soon');};
+window.exportQB=function(){showToast('\uD83D\uDCD2 QuickBooks export coming soon');};
+window.upgradeSubscription=function(){showToast('\uD83D\uDCB3 Stripe billing coming soon \u2014 thank you for your patience!');};
+window.manageSubscription=function(){showToast('\uD83D\uDCB3 Stripe billing coming soon \u2014 thank you for your patience!');};
 })();
 </script>
 <div id="authModal" style="display:none;position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:1rem">
