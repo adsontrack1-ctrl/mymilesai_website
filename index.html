@@ -831,41 +831,18 @@ window.addEventListener('DOMContentLoaded',function(){
     }
   });
 
-  // ── FIX 2: Load trips with correct query (handles RLS) ──
   function loadTrips(userId){
     _db.auth.getSession().then(function(res){
       var session = res.data.session;
       if(!session){ console.log('No session for trips fetch'); return; }
-      
-      _db.from('trips')
-        .select('*')
-        .order('created_at', {ascending: false})
-        .limit(100)
-        .then(function(res){
-          console.log('TRIPS RESULT:', JSON.stringify(res).slice(0, 300));
-          if(res.error){
-            console.warn('Trips error:', res.error.message);
-            // Try alternate column name for ordering
-            return _db.from('trips').select('*').limit(100);
-          }
-          return res;
-        })
-        .then(function(res){
-          if(!res || res.error){ console.warn('Trips fetch failed:', res?.error?.message); return; }
-          window._userTrips = res.data || [];
-          console.log('LOADED TRIPS:', window._userTrips.length);
-          // Render trips in dashboard if it exists
-          if(typeof window.renderDashboard === 'function'){
-            window.renderDashboard(window._userTrips);
-          }
-          // Show trips count in nav
-          var dashBtn = document.getElementById('navDashBtn');
-          if(dashBtn && window._userTrips.length > 0){
-            dashBtn.title = window._userTrips.length + ' trips loaded';
-          }
-          // Build and show trip summary modal
-          showTripsSummary(window._userTrips);
-        });
+      _db.from('trips').select('id,user_id,created_at,trip_date,path,source,type,miles,purpose,notes').order('created_at', {ascending: false}).limit(100).then(function(r){
+        console.log('TRIPS RESULT:', JSON.stringify(r));
+        if(r.error){ console.warn('Trips error:', r.error.message); return; }
+        var trips = r.data || [];
+        console.log('LOADED TRIPS:', trips.length);
+        window._userTrips = trips;
+        if(typeof window.loadSupabaseTrips === 'function') window.loadSupabaseTrips(trips);
+      });
     });
   }
 
@@ -2225,6 +2202,49 @@ window.exportSheets=function(){showToast('Google Sheets export coming soon');};
 window.exportQB=function(){showToast('QuickBooks export coming soon');};
 window.upgradeSubscription=function(){showToast('Stripe billing coming soon — thank you for your patience!');};
 window.manageSubscription=function(){showToast('Stripe billing coming soon — thank you for your patience!');};
+
+window.loadSupabaseTrips=function(trips){
+  _tr=[];
+  trips.forEach(function(t){
+    var fromName='Unknown';
+    var toName='Unknown';
+    if(t.path){
+      try{
+        var p=typeof t.path==='string'?JSON.parse(t.path):t.path;
+        if(Array.isArray(p)&&p.length>=2){
+          var first=p[0];
+          var last=p[p.length-1];
+          fromName=first.name||first.address||first.formatted_address||(first.latitude?first.latitude.toFixed(4)+', '+first.longitude.toFixed(4):'Start');
+          toName=last.name||last.address||last.formatted_address||(last.latitude?last.latitude.toFixed(4)+', '+last.longitude.toFixed(4):'End');
+        } else if(p.start&&p.end){
+          fromName=p.start.name||p.start.address||'Start';
+          toName=p.end.name||p.end.address||'End';
+        } else if(p.from&&p.to){
+          fromName=p.from.name||p.from.address||p.from;
+          toName=p.to.name||p.to.address||p.to;
+        } else if(p.origin&&p.destination){
+          fromName=p.origin.name||p.origin.address||p.origin;
+          toName=p.destination.name||p.destination.address||p.destination;
+        }
+      } catch(e){ console.log('Path parse error:',e); }
+    }
+    var cat=(t.type||'personal').toLowerCase();
+    if(cat!=='business'&&cat!=='personal'&&cat!=='medical'&&cat!=='charity') cat='personal';
+    var dist=parseFloat(t.miles)||0;
+    var ded=calcDeduction(dist,cat);
+    _tr.push({
+      f:typeof fromName==='string'?fromName:String(fromName),
+      t:typeof toName==='string'?toName:String(toName),
+      m:dist,
+      dt:t.trip_date||(t.created_at?t.created_at.split('T')[0]:''),
+      c:cat,
+      d:ded,
+      n:t.purpose||t.notes||'',
+      sbId:t.id
+    });
+  });
+  refresh();
+};
 })();
 </script>
 <div id="authModal" style="display:none;position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:1rem">
