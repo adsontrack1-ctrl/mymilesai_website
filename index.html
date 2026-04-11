@@ -4,511 +4,716 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MyMilesAI — #1 Mileage Tracking App for Tax Deductions (2026)</title>
-<meta name="description" content="MyMilesAI auto-tracks every business mile with GPS, classifies trips with AI, and calculates IRS/CRA tax deductions in real time. Privacy-first. Works offline. $6.99/month or $69.99/year.">
-<meta name="keywords" content="mileage tracker app, IRS mileage deduction 2026, CRA mileage rate 2026, self-employed mileage, GPS mileage tracking, tax deduction app, business miles, 1099 mileage, gig worker tax, real estate mileage">
+<meta name="description" content="MyMilesAI auto-tracks every business mile with GPS, classifies trips with AI, and calculates IRS/CRA tax deductions. Privacy-first. $6.99/month or $69.99/year.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://mymilesai.com">
 <meta property="og:title" content="MyMilesAI — #1 Mileage Tracking App for Tax Deductions (2026)">
-<meta property="og:description" content="Auto-track every business mile, classify trips with AI, and maximize your IRS/CRA tax deductions. Privacy-first, works offline.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://mymilesai.com">
-<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%231B4DDB'/><path d='M5 20c0-2 1-3.5 2.5-4.5L10 12h12l2.5 3.5c1.5 1 2.5 2.5 2.5 4.5v1H5v-1z' fill='white'/><circle cx='10' cy='22' r='2.5' fill='white'/><circle cx='22' cy='22' r='2.5' fill='white'/></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%231B4DDB'/><path d='M8 22l4-10 4 6 3-4 5 8H8z' fill='white'/></svg>">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--blue:#1B4DDB;--blue-dark:#1539b8;--blue-light:#EBF0FF;--gold:#f59e0b;--green:#16a34a;--mint:#10b981;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;--bg:#f8fafc}
-body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:#fff;font-size:15px;line-height:1.6;overflow-x:hidden}
-a{text-decoration:none;color:inherit}
-.site-nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:60px;border-bottom:1px solid var(--border);background:rgba(255,255,255,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:50}
-.nav-logo{display:flex;align-items:center;gap:9px;cursor:pointer}
-.nav-logo-text{font-size:16px;font-weight:600;letter-spacing:-.3px}
-.nav-logo-text em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--blue)}
-.nav-tabs{display:flex}
-.nav-tab{padding:0 18px;height:60px;display:flex;align-items:center;font-size:14px;font-weight:500;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+:root{--blue:#1B4DDB;--blue2:#4f86f7;--gold:#f59e0b;--text:#0a0a0a;--muted:#64748b;--border:#e5e7eb;--bg:#f9fafb;--white:#ffffff}
+body{font-family:'DM Sans',system-ui,sans-serif;color:var(--text);background:var(--white);line-height:1.6;overflow-x:hidden}
+/* NAV */
+.nav{display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:64px;background:var(--white);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.nav-left{display:flex;align-items:center;gap:10px}
+.nav-logo-icon{width:36px;height:36px;background:var(--blue);border-radius:9px;display:flex;align-items:center;justify-content:center}
+.nav-logo-icon svg{width:20px;height:20px}
+.nav-brand{font-family:'Bricolage Grotesque',sans-serif;font-size:17px;font-weight:700;letter-spacing:-0.3px}
+.nav-brand span{color:var(--blue)}
+.nav-tabs{display:flex;gap:2px}
+.nav-tab{padding:8px 18px;font-size:14px;font-weight:500;color:var(--muted);cursor:pointer;border-radius:8px;border:none;background:none;font-family:'DM Sans',sans-serif;transition:all .15s;border-bottom:2px solid transparent;border-radius:0}
 .nav-tab:hover{color:var(--text)}
 .nav-tab.active{color:var(--blue);border-bottom-color:var(--blue)}
-.nav-actions{display:flex;align-items:center;gap:10px}
-.btn-ghost{padding:8px 18px;font-size:13.5px;font-weight:500;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--text);cursor:pointer;font-family:inherit;transition:all .15s}
-.btn-ghost:hover{background:var(--bg)}
-.btn-cta-nav{padding:8px 18px;font-size:13.5px;font-weight:600;border:none;border-radius:8px;background:var(--blue);color:#fff;cursor:pointer;font-family:inherit;transition:all .15s}
-.btn-cta-nav:hover{background:var(--blue-dark)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.btn-signin{padding:8px 18px;font-size:14px;font-weight:500;border:1px solid var(--border);border-radius:10px;background:var(--white);color:var(--text);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.btn-signin:hover{background:var(--bg)}
+.btn-start{padding:8px 20px;font-size:14px;font-weight:600;border:none;border-radius:10px;background:var(--blue);color:#fff;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.btn-start:hover{background:#1638b8;transform:translateY(-1px)}
+/* PAGES */
 .page{display:none}
-.page.active{display:block;animation:fadeUp .22s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.hero{max-width:1180px;margin:0 auto;padding:5rem 2.5rem 3.5rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-.hero-badge{display:inline-flex;align-items:center;gap:7px;background:var(--blue-light);color:var(--blue);font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px;margin-bottom:1.25rem}
-.hero h1{font-size:44px;font-weight:600;line-height:1.1;letter-spacing:-.8px;margin-bottom:1.1rem}
-.hero h1 em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--blue);font-weight:400}
-.hero-desc{font-size:17px;color:var(--muted);line-height:1.75;margin-bottom:2rem}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:1.75rem}
-.btn-primary{padding:14px 28px;font-size:15px;font-weight:600;background:var(--blue);color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;transition:all .18s}
-.btn-primary:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(27,77,219,.3)}
-.btn-secondary{padding:14px 28px;font-size:15px;font-weight:500;background:transparent;color:var(--text);border:1.5px solid var(--border);border-radius:12px;cursor:pointer;font-family:inherit;transition:all .18s}
-.btn-secondary:hover{background:var(--bg)}
-.trust-pills{display:flex;gap:10px;flex-wrap:wrap}
-.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:20px;font-size:12.5px;font-weight:500;background:var(--bg);color:var(--muted);border:1px solid var(--border)}
-.pill-dot{width:6px;height:6px;border-radius:50%;background:var(--mint);flex-shrink:0}
-/* Phone scene */
-.phone-scene{display:flex;justify-content:center;align-items:center;position:relative}
-.phone-float{position:relative}
-.badge-float{position:absolute;background:#fff;border-radius:12px;padding:9px 14px;box-shadow:0 4px 20px rgba(0,0,0,.12);display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;white-space:nowrap;animation:floatB 4s ease-in-out infinite}
-.badge-float.top-right{top:60px;right:-80px;animation-delay:0s}
-.badge-float.bot-left{bottom:80px;left:-90px;animation-delay:2s}
-.badge-float.bot-right{bottom:160px;right:-85px;animation-delay:1s}
-@keyframes floatB{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-.bdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.bdot.g{background:#22c55e}
-.bicon{width:18px;height:18px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.bicon.g{background:#dcfce7}
-.bicon.b{background:var(--blue-light)}
-.bicon svg{width:11px;height:11px;stroke-width:2.5;fill:none}
-/* iPhone */
-.iphone{width:248px;height:520px;background:#000;border-radius:48px;position:relative;overflow:hidden;box-shadow:0 0 0 2px #2a2a2a,0 0 0 4px #1a1a1a,0 30px 80px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.06)}
-.dyn-island{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:80px;height:26px;background:#000;border-radius:20px;z-index:10}
-.iscreen{position:absolute;inset:0;background:linear-gradient(175deg,#08122a 0%,#0d1f4a 50%,#0a1535 100%);overflow:hidden}
-.app-bar{display:flex;justify-content:space-between;align-items:center;padding:54px 16px 8px}
-.app-hi{font-size:10px;color:rgba(255,255,255,.45);font-weight:400}
-.app-name{font-size:13px;color:#fff;font-weight:600;letter-spacing:-.2px;margin-top:1px}
-.app-icons{display:flex;gap:8px}
-.aib{width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center}
-.aib svg{width:12px;height:12px;stroke:#fff;fill:none;stroke-width:2}
-.gps-badge{margin:0 14px 10px;display:flex;align-items:center;gap:6px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);border-radius:8px;padding:5px 10px;width:fit-content}
-.gps-p{width:7px;height:7px;border-radius:50%;background:#10b981;animation:gpsp 1.5s infinite}
-@keyframes gpsp{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,.5)}50%{box-shadow:0 0 0 5px rgba(16,185,129,0)}}
-.gps-t{font-size:9px;font-weight:600;color:#10b981;letter-spacing:.05em;text-transform:uppercase}
-.gauge-wrap{margin:0 14px 12px;background:rgba(255,255,255,.05);border-radius:14px;padding:14px;text-align:center}
-.gauge-arc{position:relative;width:100px;height:55px;margin:0 auto 6px}
-.gauge-arc svg{width:100%;height:100%;overflow:visible}
-.gauge-val{font-size:28px;font-weight:700;color:#fff;line-height:1;letter-spacing:-1px}
-.gauge-val em{font-size:10px;font-weight:400;color:rgba(255,255,255,.4);font-style:normal;margin-left:1px}
-.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 14px 12px}
-.sbox{background:rgba(255,255,255,.06);border-radius:10px;padding:8px 6px;text-align:center}
-.sval{font-size:13px;font-weight:700;line-height:1}
-.sval.bl{color:#60a5fa}.sval.am{color:#fbbf24}.sval.gr{color:#34d399}
-.slbl{font-size:7.5px;color:rgba(255,255,255,.35);margin-top:2px;text-transform:uppercase;letter-spacing:.06em}
-.act-row{display:flex;gap:6px;margin:0 14px 12px}
-.act-btn{flex:1;background:rgba(255,255,255,.08);border-radius:8px;padding:6px 4px;text-align:center;font-size:8px;color:rgba(255,255,255,.6);font-weight:500}
-.act-btn.on{background:rgba(27,77,219,.35);color:#93c5fd}
-.trips-hd2{display:flex;justify-content:space-between;align-items:center;padding:0 14px;margin-bottom:6px}
-.trh-t{font-size:10px;font-weight:600;color:#fff}
-.trh-s{font-size:9px;color:#60a5fa}
-.trip-card2{margin:0 14px 6px;background:rgba(255,255,255,.06);border-radius:10px;padding:9px 10px}
-.tc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px}
-.tc-time{font-size:8px;color:rgba(255,255,255,.35)}
-.tc-type{font-size:8px;font-weight:700;padding:2px 7px;border-radius:5px;text-transform:uppercase;letter-spacing:.05em}
-.tc-type.biz{background:rgba(27,77,219,.35);color:#93c5fd}
-.tc-type.pers{background:rgba(255,255,255,.1);color:rgba(255,255,255,.5)}
-.tc-route{display:grid;grid-template-columns:12px 1fr auto;gap:4px;align-items:start}
-.rdots{display:flex;flex-direction:column;align-items:center;gap:2px;padding-top:2px}
-.rdot{width:5px;height:5px;border-radius:50%}
-.rdot.from{background:#60a5fa}.rdot.to{background:#34d399}
-.rline{width:1px;height:10px;background:rgba(255,255,255,.15)}
-.rtext{display:flex;flex-direction:column;gap:5px}
-.raddr{font-size:8.5px;color:rgba(255,255,255,.75);line-height:1.2}
-.rmiles{font-size:11px;font-weight:700;color:#fff;text-align:right;padding-top:3px}
-.rmeta{font-size:8px;color:rgba(255,255,255,.35);text-align:right;margin-top:2px}
-.bot-nav{position:absolute;bottom:0;left:0;right:0;background:rgba(10,18,42,.95);border-top:1px solid rgba(255,255,255,.08);display:flex;padding:8px 0 20px}
-.bni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
-.bni svg{width:16px;height:16px;stroke:rgba(255,255,255,.3);fill:none;stroke-width:1.8}
-.bni.on svg{stroke:var(--blue)}
-.bni-lbl{font-size:8px;color:rgba(255,255,255,.3)}
-.bni.on .bni-lbl{color:var(--blue)}
-.drive-btn{width:36px;height:36px;border-radius:12px;background:var(--blue);display:flex;align-items:center;justify-content:center;margin-bottom:2px}
-.drive-btn svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2}
-/* Sections */
-.section{max-width:1100px;margin:0 auto;padding:3.5rem 2.5rem}
-.eyebrow{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);margin-bottom:8px}
-.section-title{font-size:28px;font-weight:600;letter-spacing:-.4px;margin-bottom:.6rem;line-height:1.2}
-.section-title em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--blue);font-weight:400}
+.page.active{display:block}
+/* HOME HERO */
+.hero{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:0;min-height:calc(100vh - 64px);max-width:1280px;margin:0 auto;padding:3rem 4rem}
+.hero-left{padding-right:2rem}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:2rem}
+.hero-badge-dot{width:8px;height:8px;border-radius:50%;background:#22c55e}
+.hero h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(48px,5vw,72px);font-weight:700;line-height:1.05;letter-spacing:-2px;margin-bottom:1.5rem;color:var(--text)}
+.hero h1 .italic{font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;color:var(--blue)}
+.hero-desc{font-size:17px;color:var(--muted);line-height:1.7;margin-bottom:2rem;max-width:480px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:2rem}
+.btn-primary-lg{padding:14px 28px;font-size:15px;font-weight:700;background:var(--blue);color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;letter-spacing:-0.2px}
+.btn-primary-lg:hover{background:#1638b8;transform:translateY(-2px);box-shadow:0 8px 24px rgba(27,77,219,.3)}
+.btn-secondary-lg{padding:14px 28px;font-size:15px;font-weight:500;background:var(--white);color:var(--text);border:1px solid var(--border);border-radius:12px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.btn-secondary-lg:hover{background:var(--bg)}
+.hero-trust{display:flex;gap:20px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);font-weight:500}
+.trust-icon{font-size:14px}
+/* PHONE MOCKUP - original luxury design */
+.hero-right{display:flex;justify-content:center;align-items:center;position:relative}
+.phone-outer{position:relative;width:340px}
+.phone-float-1{position:absolute;left:-90px;top:120px;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(0,0,0,.1);z-index:10;white-space:nowrap}
+.phone-float-1 .f-icon{width:32px;height:32px;border-radius:8px;background:#f0fdf4;display:flex;align-items:center;justify-content:center;font-size:16px}
+.phone-float-1 .f-text{font-size:13px;font-weight:600;color:var(--text)}
+.phone-float-1 .f-sub{font-size:11px;color:#22c55e;font-weight:500}
+.phone-float-2{position:absolute;right:-80px;bottom:160px;background:var(--white);border:1px solid var(--border);border-radius:14px;padding:12px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(0,0,0,.1);z-index:10;white-space:nowrap}
+.phone-float-2 .f-icon{width:32px;height:32px;border-radius:8px;background:#eff6ff;display:flex;align-items:center;justify-content:center;font-size:16px}
+.phone-float-2 .f-text{font-size:13px;font-weight:600;color:var(--text)}
+.phone-float-2 .f-sub{font-size:11px;color:var(--muted);font-weight:500}
+/* The actual phone shell */
+.iphone{width:300px;height:620px;background:#1a1a2e;border-radius:50px;padding:14px;border:10px solid #2a2a3e;box-shadow:0 40px 80px rgba(0,0,0,.35),0 0 0 1px rgba(255,255,255,.05) inset;position:relative;overflow:hidden}
+.iphone-inner{background:#0f0f1a;border-radius:38px;height:100%;overflow:hidden;position:relative}
+/* Dynamic island */
+.dynamic-island{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:110px;height:30px;background:#000;border-radius:20px;z-index:10;display:flex;align-items:center;justify-content:center}
+.di-dot{width:10px;height:10px;border-radius:50%;background:#1a1a1a;border:2px solid #2a2a2a}
+/* App header */
+.app-header{background:linear-gradient(180deg,#0f0f1a 0%,#141428 100%);padding:50px 18px 16px;display:flex;justify-content:space-between;align-items:flex-start}
+.app-greeting{color:rgba(255,255,255,.5);font-size:11px;font-family:'DM Sans',sans-serif}
+.app-name{color:#fff;font-size:16px;font-weight:700;font-family:'DM Sans',sans-serif;margin-top:2px}
+.app-icons{display:flex;gap:10px}
+.app-icon-btn{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
+.app-icon-btn svg{width:14px;height:14px;stroke:rgba(255,255,255,.6);fill:none;stroke-width:1.5}
+/* GPS speedometer */
+.gps-bar{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);border-radius:8px;margin:0 18px 14px;padding:6px 12px;display:flex;align-items:center;justify-content:space-between}
+.gps-label{display:flex;align-items:center;gap:6px;font-size:10px;font-weight:700;color:#22c55e;font-family:'DM Sans',sans-serif;letter-spacing:.05em}
+.gps-pulse{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}50%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+.gps-brand{font-size:9px;color:rgba(255,255,255,.3);font-family:'DM Sans',sans-serif;font-weight:600;letter-spacing:.1em}
+/* Speedometer */
+.speedometer{margin:0 18px 14px;background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:18px;text-align:center;position:relative;overflow:hidden}
+.speedo-arc{width:120px;height:60px;margin:0 auto 8px;position:relative}
+.speedo-arc svg{width:120px;height:60px}
+.speedo-num{font-size:36px;font-weight:800;color:#fff;font-family:'DM Sans',sans-serif;line-height:1}
+.speedo-unit{font-size:10px;color:rgba(255,255,255,.4);font-family:'DM Sans',sans-serif;letter-spacing:.08em;margin-top:2px}
+.speedo-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.06)}
+.speedo-stat{text-align:center}
+.speedo-val{font-size:13px;font-weight:700;color:#fff;font-family:'DM Sans',sans-serif}
+.speedo-val.blue{color:#60a5fa}
+.speedo-val.gold{color:#f59e0b}
+.speedo-val.green{color:#34d399}
+.speedo-lbl{font-size:8px;color:rgba(255,255,255,.35);font-family:'DM Sans',sans-serif;text-transform:uppercase;letter-spacing:.06em;margin-top:1px}
+/* Action buttons */
+.app-actions{display:flex;gap:8px;margin:0 18px 14px}
+.app-action{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:8px 4px;display:flex;align-items:center;justify-content:center;gap:5px;font-size:10px;font-weight:600;color:rgba(255,255,255,.7);font-family:'DM Sans',sans-serif}
+.app-action.primary{background:rgba(27,77,219,.4);border-color:rgba(27,77,219,.5);color:#93c5fd}
+.app-action svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
+/* Recent trips */
+.trips-header{display:flex;justify-content:space-between;align-items:center;margin:0 18px 10px}
+.trips-title{font-size:12px;font-weight:700;color:rgba(255,255,255,.8);font-family:'DM Sans',sans-serif}
+.trips-see-all{font-size:10px;color:rgba(27,77,219,.8);font-family:'DM Sans',sans-serif;font-weight:600}
+.trip-card{margin:0 18px 8px;border-radius:12px;overflow:hidden}
+.trip-timeline{height:28px;background:linear-gradient(90deg,rgba(167,139,250,.15),rgba(99,102,241,.08));border-radius:6px;margin:0 18px;position:relative;margin-bottom:6px;overflow:hidden}
+.trip-timeline-line{position:absolute;top:50%;left:8px;right:8px;height:1px;background:rgba(167,139,250,.3)}
+.trip-timeline-dot{position:absolute;top:50%;width:6px;height:6px;border-radius:50%;background:#a78bfa;transform:translateY(-50%)}
+.trip-timeline-tag{position:absolute;right:8px;top:4px;font-size:8px;font-weight:700;color:#a78bfa;background:rgba(167,139,250,.15);padding:2px 6px;border-radius:4px;font-family:'DM Sans',sans-serif}
+.trip-detail{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:12px;margin:0 18px 6px;padding:10px 12px}
+.trip-det-row{display:flex;justify-content:space-between;align-items:flex-start}
+.trip-det-left{display:flex;gap:8px}
+.trip-det-dots{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:3px}
+.trip-det-dot{width:6px;height:6px;border-radius:50%}
+.trip-det-dot.from{background:#60a5fa}
+.trip-det-dot.to{background:#f472b6}
+.trip-det-line{width:1px;height:10px;background:rgba(255,255,255,.15)}
+.trip-det-addr{display:flex;flex-direction:column;gap:4px}
+.trip-addr{font-size:10px;color:rgba(255,255,255,.7);font-family:'DM Sans',sans-serif}
+.trip-det-right{text-align:right}
+.trip-miles{font-size:16px;font-weight:800;color:#fff;font-family:'DM Sans',sans-serif;line-height:1}
+.trip-mi-lbl{font-size:8px;color:rgba(255,255,255,.3);font-family:'DM Sans',sans-serif}
+.trip-tags{display:flex;gap:4px;margin-top:6px;align-items:center}
+.trip-tag-date{font-size:8px;color:rgba(255,255,255,.3);font-family:'DM Sans',sans-serif}
+.trip-tag-type{font-size:8px;padding:2px 6px;border-radius:4px;font-weight:700;font-family:'DM Sans',sans-serif}
+.trip-tag-type.biz{background:rgba(96,165,250,.15);color:#60a5fa}
+.trip-tag-deduction{font-size:8px;color:#34d399;font-weight:700;font-family:'DM Sans',sans-serif}
+/* Personal trip */
+.trip-detail.personal{border-color:rgba(248,113,113,.1)}
+.trip-tag-type.pers{background:rgba(248,113,113,.12);color:#f87171}
+.trip-detail-sub{font-size:9px;color:rgba(255,255,255,.3);font-family:'DM Sans',sans-serif;margin-top:3px}
+/* Bottom nav */
+.app-bottom-nav{position:absolute;bottom:0;left:0;right:0;background:rgba(15,15,26,.95);border-top:1px solid rgba(255,255,255,.06);display:flex;padding:10px 0 20px}
+.app-nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+.app-nav-icon{width:22px;height:22px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.app-nav-icon.active{background:var(--blue)}
+.app-nav-icon svg{width:13px;height:13px;stroke:rgba(255,255,255,.35);fill:none;stroke-width:2}
+.app-nav-icon.active svg{stroke:#fff}
+.app-nav-lbl{font-size:9px;color:rgba(255,255,255,.3);font-family:'DM Sans',sans-serif}
+.app-nav-lbl.active{color:var(--blue);font-weight:600}
+/* HOME SECTIONS */
+.section{max-width:1100px;margin:0 auto;padding:5rem 2rem}
+.eyebrow{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue);margin-bottom:8px}
+.section-h2{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(28px,3vw,40px);font-weight:700;letter-spacing:-1px;margin-bottom:.75rem;line-height:1.1}
+.section-h2 em{font-family:'Instrument Serif',serif;font-style:italic;color:var(--blue);font-weight:400}
 .section-sub{font-size:16px;color:var(--muted);margin-bottom:2.5rem;max-width:560px}
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
-.feat-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:all .22s}
-.feat-card:hover{border-color:var(--blue);background:#fff;transform:translateY(-3px);box-shadow:0 8px 28px rgba(27,77,219,.1)}
-.feat-icon{width:40px;height:40px;border-radius:12px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;margin-bottom:12px}
-.feat-icon svg{width:20px;height:20px;stroke:var(--blue);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.feat-card h3{font-size:14.5px;font-weight:600;margin-bottom:5px}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.feat-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:all .2s}
+.feat-card:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 12px 32px rgba(27,77,219,.08)}
+.feat-icon{width:40px;height:40px;border-radius:12px;background:#eff6ff;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.feat-icon svg{width:20px;height:20px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.feat-card h3{font-size:15px;font-weight:700;margin-bottom:6px;font-family:'Bricolage Grotesque',sans-serif}
 .feat-card p{font-size:13px;color:var(--muted);line-height:1.6}
-/* About */
-.about-hero{background:linear-gradient(135deg,#07102a 0%,#1B4DDB 100%);color:#fff;padding:4rem 2.5rem;text-align:center}
-.about-hero h1{font-size:34px;font-weight:600;letter-spacing:-.4px;margin-bottom:.75rem}
-.about-hero p{font-size:17px;color:rgba(255,255,255,.7);max-width:560px;margin:0 auto;line-height:1.7}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2.5rem}
-.step{text-align:center;padding:1.5rem 1rem}
-.step-num{width:42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem}
-.step h3{font-size:15px;font-weight:600;margin-bottom:6px}
-.step p{font-size:13px;color:var(--muted);line-height:1.6}
-.who-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:1.5rem}
-.who-pill{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px;font-size:14px;font-weight:600;transition:all .15s}
-.who-pill:hover{border-color:var(--blue);background:#fff}
-.who-pill span{display:block;font-size:11.5px;color:var(--muted);font-weight:400;margin-top:3px}
-.faq-item{border-bottom:1px solid var(--border);padding:1.1rem 0}
-.faq-q{font-size:14.5px;font-weight:500;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none;transition:color .15s}
-.faq-q:hover{color:var(--blue)}
-.faq-icon{color:#94a3b8;font-size:20px;flex-shrink:0;transition:transform .2s}
+/* ABOUT */
+.about-hero{background:linear-gradient(135deg,#080c1a 0%,#0f1f5c 50%,#1B4DDB 100%);color:#fff;padding:5rem 2rem;text-align:center}
+.about-hero h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(32px,4vw,52px);font-weight:700;letter-spacing:-1.5px;margin-bottom:1rem}
+.about-hero p{font-size:17px;color:rgba(255,255,255,.65);max-width:560px;margin:0 auto}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
+.step{text-align:center;padding:1.5rem}
+.step-num{width:44px;height:44px;border-radius:50%;background:var(--blue);color:#fff;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:'Bricolage Grotesque',sans-serif}
+.step h3{font-size:15px;font-weight:700;margin-bottom:8px;font-family:'Bricolage Grotesque',sans-serif}
+.step p{font-size:13px;color:var(--muted)}
+.who-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:1.5rem}
+.who-pill{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:14px;font-size:14px;font-weight:700;font-family:'Bricolage Grotesque',sans-serif}
+.who-pill span{display:block;font-size:11px;color:var(--muted);font-weight:400;margin-top:3px;font-family:'DM Sans',sans-serif}
+.faq-item{border-bottom:1px solid var(--border);padding:1.25rem 0}
+.faq-q{font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;user-select:none;font-family:'Bricolage Grotesque',sans-serif}
+.faq-icon{color:var(--muted);font-size:20px;flex-shrink:0;transition:transform .2s}
 .faq-q.open .faq-icon{transform:rotate(45deg);color:var(--blue)}
-.faq-a{font-size:13.5px;color:var(--muted);line-height:1.75;margin-top:10px;display:none}
+.faq-a{font-size:14px;color:var(--muted);line-height:1.7;margin-top:10px;display:none}
 .faq-a.open{display:block}
-/* Pricing */
-.pricing-top{text-align:center;padding:4rem 2.5rem 2rem}
-.pricing-top h1{font-size:32px;font-weight:600;letter-spacing:-.4px;margin-bottom:.6rem}
-.pricing-top p{font-size:16px;color:var(--muted);max-width:500px;margin:0 auto}
-.pricing-wrap{max-width:500px;margin:0 auto;padding:0 2.5rem 4rem}
-.plan{background:#fff;border:2.5px solid var(--blue);border-radius:22px;padding:2.25rem;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(27,77,219,.12)}
-.plan::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--blue),#6366f1,var(--gold))}
-.plan-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
-.plan-name{font-size:20px;font-weight:700}
-.plan-badge{font-size:11px;font-weight:700;background:var(--blue-light);color:var(--blue);padding:5px 12px;border-radius:20px}
-.trial-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:12px 16px;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px}
-.trial-box svg{width:18px;height:18px;stroke:#16a34a;fill:none;stroke-width:2.5;flex-shrink:0}
-.trial-box span{font-size:13.5px;font-weight:700;color:#15803d}
-.price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:5px}
-.price-orig{font-size:24px;color:#94a3b8;text-decoration:line-through;font-weight:500}
-.price-now{font-size:52px;font-weight:700;letter-spacing:-2px;color:var(--text)}
-.price-period{font-size:15px;color:var(--muted)}
-.price-alt{font-size:14px;color:var(--muted);margin-bottom:12px}
-.price-alt strong{color:var(--text)}
-.discount-tag{display:inline-flex;align-items:center;gap:6px;background:#fff7ed;border:1.5px solid #fed7aa;color:#c2410c;font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:1.5rem}
-.feat-list{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:2rem}
-.feat-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#374151;line-height:1.5}
-.check{width:20px;height:20px;border-radius:50%;background:var(--blue-light);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px}
-.check svg{width:11px;height:11px;stroke:var(--blue);fill:none;stroke-width:2.5}
-.btn-cta{width:100%;padding:15px;font-size:16px;font-weight:700;background:var(--blue);color:#fff;border:none;border-radius:14px;cursor:pointer;font-family:inherit;margin-bottom:12px;transition:all .2s}
-.btn-cta:hover{background:var(--blue-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(27,77,219,.35)}
-.plan-foot{text-align:center;font-size:12.5px;color:#94a3b8}
-.trust-row{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;padding:0 2.5rem 4rem}
-.trust-item{display:flex;align-items:center;gap:7px;font-size:13.5px;color:var(--muted)}
-.trust-item svg{width:16px;height:16px;stroke:#22c55e;fill:none;stroke-width:2.5}
-/* Blog */
-.blog-top{max-width:1100px;margin:0 auto;padding:3rem 2.5rem 1.75rem}
-.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:22px;max-width:1100px;margin:0 auto;padding:0 2.5rem 4rem}
-.blog-card{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all .22s;display:block;text-decoration:none}
-.blog-card:hover{border-color:var(--blue);transform:translateY(-3px);box-shadow:0 10px 32px rgba(27,77,219,.12)}
+/* PRICING */
+.pricing-hero{text-align:center;padding:5rem 2rem 2rem}
+.pricing-hero h1{font-family:'Bricolage Grotesque',sans-serif;font-size:clamp(32px,4vw,52px);font-weight:700;letter-spacing:-1.5px;margin-bottom:.75rem}
+.pricing-hero p{font-size:17px;color:var(--muted);max-width:480px;margin:0 auto}
+.plan-wrap{max-width:500px;margin:0 auto;padding:0 2rem 4rem}
+.plan{background:var(--white);border:2px solid var(--blue);border-radius:24px;padding:2.5rem;position:relative;overflow:hidden;box-shadow:0 20px 60px rgba(27,77,219,.12)}
+.plan::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--blue),var(--gold))}
+.plan-badge-wrap{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
+.plan-name{font-family:'Bricolage Grotesque',sans-serif;font-size:22px;font-weight:800}
+.plan-only{font-size:11px;font-weight:700;background:#eff6ff;color:var(--blue);padding:5px 12px;border-radius:20px;letter-spacing:.02em}
+.trial-banner{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:12px 16px;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px}
+.trial-banner svg{width:18px;height:18px;stroke:#16a34a;fill:none;stroke-width:2.5;flex-shrink:0}
+.trial-banner span{font-size:14px;font-weight:700;color:#15803d;font-family:'Bricolage Grotesque',sans-serif}
+.price-main{display:flex;align-items:baseline;gap:10px;margin-bottom:5px}
+.price-was{font-size:24px;color:#94a3b8;text-decoration:line-through;font-weight:500}
+.price-now{font-family:'Bricolage Grotesque',sans-serif;font-size:56px;font-weight:800;letter-spacing:-2px;color:var(--text)}
+.price-per{font-size:15px;color:var(--muted);margin-left:2px}
+.price-monthly{font-size:14px;color:var(--muted);margin-bottom:10px}
+.price-monthly strong{color:var(--text);font-weight:700}
+.founding-tag{display:inline-flex;align-items:center;gap:6px;background:#fff7ed;border:1px solid #fed7aa;color:#c2410c;font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:1.75rem;font-family:'Bricolage Grotesque',sans-serif}
+.features-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:2rem}
+.features-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:#374151}
+.check-circle{width:20px;height:20px;border-radius:50%;background:#eff6ff;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.check-circle svg{width:11px;height:11px;stroke:var(--blue);fill:none;stroke-width:3}
+.cta-btn{width:100%;padding:16px;font-size:16px;font-weight:800;background:var(--blue);color:#fff;border:none;border-radius:14px;cursor:pointer;font-family:'Bricolage Grotesque',sans-serif;margin-bottom:12px;transition:all .2s;letter-spacing:-0.3px}
+.cta-btn:hover{background:#1638b8;transform:translateY(-2px);box-shadow:0 8px 24px rgba(27,77,219,.3)}
+.plan-footer{text-align:center;font-size:12px;color:#94a3b8}
+.trust-strip{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;padding:0 2rem 4rem;max-width:700px;margin:0 auto}
+.trust-strip-item{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--muted);font-weight:500}
+.trust-strip-item svg{width:15px;height:15px;stroke:#22c55e;fill:none;stroke-width:2.5}
+/* BLOG */
+.blog-wrap{max-width:1100px;margin:0 auto;padding:3rem 2rem}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:24px;margin-top:2rem}
+.blog-card{background:var(--white);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:all .2s;display:block;text-decoration:none}
+.blog-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.1);border-color:var(--blue)}
 .blog-banner{height:130px;padding:16px;display:flex;flex-direction:column;justify-content:flex-end}
-.blog-rate{display:inline-block;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:5px;margin-bottom:7px}
-.blog-country{color:rgba(255,255,255,.55);font-size:10px;text-transform:uppercase;letter-spacing:.08em}
-.blog-body{padding:1.1rem}
-.blog-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--blue);margin-bottom:7px}
-.blog-card h3{font-size:14.5px;font-weight:600;line-height:1.4;margin-bottom:7px;color:var(--text)}
-.blog-card p{font-size:12.5px;color:var(--muted);line-height:1.55;margin-bottom:11px}
-.blog-meta{font-size:11.5px;color:#94a3b8}
-.blog-more{opacity:.55;cursor:default}.blog-more:hover{transform:none;box-shadow:none;border-color:var(--border)}
-/* Dashboard */
-.dash{max-width:920px;margin:0 auto;padding:2.25rem}
-.dash-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.75rem}
-.dash-top h2{font-size:22px;font-weight:600}
+.blog-rate-tag{display:inline-block;font-size:10px;font-weight:800;padding:3px 9px;border-radius:5px;margin-bottom:7px;font-family:'Bricolage Grotesque',sans-serif}
+.blog-country-tag{color:rgba(255,255,255,.5);font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:600}
+.blog-body{padding:1.125rem}
+.blog-category{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);margin-bottom:7px;font-family:'Bricolage Grotesque',sans-serif}
+.blog-card h3{font-size:15px;font-weight:700;line-height:1.4;margin-bottom:7px;color:var(--text);font-family:'Bricolage Grotesque',sans-serif}
+.blog-card p{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:10px}
+.blog-card-meta{font-size:11px;color:#94a3b8}
+/* DASHBOARD */
+.dash-wrap{max-width:960px;margin:0 auto;padding:2rem}
+.dash-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:2rem}
+.dash-top h2{font-family:'Bricolage Grotesque',sans-serif;font-size:24px;font-weight:800;letter-spacing:-.5px}
 .dash-top p{font-size:13px;color:var(--muted);margin-top:2px}
-.btn-signout{padding:7px 16px;font-size:13px;border:1px solid var(--border);border-radius:8px;background:transparent;cursor:pointer;color:var(--muted);font-family:inherit}
-.btn-signout:hover{background:var(--bg)}
-.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:1.75rem}
-.stat{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:1.1rem;text-align:center}
-.stat-label{font-size:11px;color:#94a3b8;font-weight:500;margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em}
-.stat-value{font-size:26px;font-weight:700}
-.stat-value.blue{color:var(--blue)}.stat-value.green{color:var(--green)}
-.trips-box{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden}
-.trips-hd{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.5rem;border-bottom:1px solid var(--border)}
-.trips-hd h3{font-size:16px;font-weight:600}
-.btn-add{padding:8px 16px;font-size:13px;font-weight:600;background:var(--blue);color:#fff;border:none;border-radius:9px;cursor:pointer;font-family:inherit}
-.btn-add:hover{background:var(--blue-dark)}
-.trip-row{display:grid;grid-template-columns:1fr auto auto auto;gap:14px;align-items:center;padding:12px 1.5rem;border-bottom:1px solid #f8fafc;transition:background .1s}
+.btn-signout{padding:8px 16px;font-size:13px;border:1px solid var(--border);border-radius:10px;background:var(--white);cursor:pointer;color:var(--muted);font-family:'DM Sans',sans-serif}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:2rem}
+.stat-card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.125rem;text-align:center}
+.stat-label{font-size:11px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;font-family:'DM Sans',sans-serif}
+.stat-value{font-size:26px;font-weight:800;font-family:'Bricolage Grotesque',sans-serif}
+.stat-value.blue{color:var(--blue)}.stat-value.green{color:#16a34a}
+.trips-panel{background:var(--white);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.trips-panel-head{display:flex;align-items:center;justify-content:space-between;padding:1.125rem 1.5rem;border-bottom:1px solid var(--border)}
+.trips-panel-head h3{font-size:16px;font-weight:700;font-family:'Bricolage Grotesque',sans-serif}
+.btn-add-trip{padding:8px 16px;font-size:13px;font-weight:700;background:var(--blue);color:#fff;border:none;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif}
+.trip-row{display:grid;grid-template-columns:1fr auto auto auto;gap:14px;align-items:center;padding:13px 1.5rem;border-bottom:1px solid var(--bg);transition:background .1s}
 .trip-row:hover{background:var(--bg)}.trip-row:last-child{border-bottom:none}
-.trip-route{font-size:13.5px;font-weight:500}
-.trip-date{font-size:11.5px;color:#94a3b8;margin-top:2px}
-.cat{font-size:11px;font-weight:700;padding:3px 9px;border-radius:6px}
-.cat.biz{background:var(--blue-light);color:var(--blue)}
-.cat.pers{background:#f1f5f9;color:#475569}
-.cat.med{background:#f0fdf4;color:var(--green)}
-.cat.char{background:#fff7ed;color:#c2410c}
-.trip-mi{font-size:13.5px;font-weight:600;text-align:right}
-.trip-ded{font-size:11.5px;color:var(--green);font-weight:600}
-.btn-del{background:none;border:none;color:#cbd5e1;cursor:pointer;padding:3px 7px;border-radius:6px;font-size:17px;line-height:1;transition:all .15s}
-.btn-del:hover{background:#fee2e2;color:#dc2626}
-.empty{text-align:center;padding:3rem 1rem;color:#94a3b8;font-size:14px}
-.add-wrap{display:none;padding:1.5rem;border-top:1px solid var(--border);background:var(--bg)}
-.add-wrap.open{display:block}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.trip-route-name{font-size:14px;font-weight:600;font-family:'Bricolage Grotesque',sans-serif}
+.trip-date-lbl{font-size:11px;color:#94a3b8;margin-top:2px}
+.trip-cat{font-size:11px;font-weight:700;padding:4px 10px;border-radius:6px;font-family:'DM Sans',sans-serif}
+.trip-cat.biz{background:#eff6ff;color:var(--blue)}.trip-cat.pers{background:#f1f5f9;color:#475569}.trip-cat.med{background:#f0fdf4;color:#16a34a}.trip-cat.char{background:#fff7ed;color:#c2410c}
+.trip-mi-lbl{font-size:14px;font-weight:700;text-align:right;font-family:'Bricolage Grotesque',sans-serif}
+.trip-ded-lbl{font-size:11px;color:#16a34a;font-weight:600}
+.btn-del-trip{background:none;border:none;color:#cbd5e1;cursor:pointer;padding:4px 8px;border-radius:6px;font-size:18px;line-height:1}
+.btn-del-trip:hover{background:#fee2e2;color:#dc2626}
+.empty-state{text-align:center;padding:3rem 1rem;color:#94a3b8;font-size:14px}
+.add-form-wrap{display:none;padding:1.5rem;border-top:1px solid var(--border);background:var(--bg)}
+.add-form-wrap.open{display:block}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .form-full{grid-column:1/-1}
-.form-grid input,.form-grid select{width:100%;padding:10px 13px;font-size:13.5px;border:1px solid var(--border);border-radius:9px;background:#fff;color:var(--text);font-family:inherit;transition:border-color .15s}
-.form-grid input:focus,.form-grid select:focus{outline:none;border-color:var(--blue)}
-.form-actions{grid-column:1/-1;display:flex;gap:10px;margin-top:4px}
-.btn-save{flex:1;padding:10px;font-size:14px;font-weight:600;background:var(--blue);color:#fff;border:none;border-radius:9px;cursor:pointer;font-family:inherit}
-.btn-save:hover{background:var(--blue-dark)}
-.btn-cancel{flex:1;padding:10px;font-size:14px;background:transparent;border:1.5px solid var(--border);border-radius:9px;cursor:pointer;color:var(--muted);font-family:inherit}
-.rate-bar{margin-top:1.25rem;background:var(--blue-light);border-radius:12px;padding:13px 18px;font-size:13.5px;color:var(--blue);text-align:center}
-.rate-bar strong{font-weight:700}
-/* Modal */
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(7,16,42,.6);z-index:100;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px)}
-.modal-bg.open{display:flex}
-.modal{background:#fff;border-radius:22px;padding:2.25rem;width:100%;max-width:380px;position:relative}
-.modal-x{position:absolute;top:16px;right:18px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8;line-height:1;font-family:inherit}
-.modal-x:hover{color:var(--text)}
+.form-row input,.form-row select{width:100%;padding:10px 13px;font-size:14px;border:1px solid var(--border);border-radius:10px;background:var(--white);color:var(--text);font-family:'DM Sans',sans-serif}
+.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--blue)}
+.form-btns{grid-column:1/-1;display:flex;gap:10px;margin-top:4px}
+.btn-form-save{flex:1;padding:10px;font-size:14px;font-weight:700;background:var(--blue);color:#fff;border:none;border-radius:10px;cursor:pointer;font-family:'Bricolage Grotesque',sans-serif}
+.btn-form-cancel{flex:1;padding:10px;font-size:14px;background:var(--white);border:1px solid var(--border);border-radius:10px;cursor:pointer;color:var(--muted);font-family:'DM Sans',sans-serif}
+.irs-bar{margin-top:1.25rem;background:#eff6ff;border-radius:12px;padding:12px 18px;font-size:13px;color:var(--blue);text-align:center;font-weight:600}
+.irs-bar strong{font-weight:800}
+/* LOGIN MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,20,.6);z-index:200;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--white);border-radius:24px;padding:2.5rem;width:100%;max-width:380px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.2)}
+.modal-close{position:absolute;top:16px;right:18px;background:none;border:none;font-size:24px;cursor:pointer;color:#94a3b8;line-height:1;font-family:'DM Sans',sans-serif}
 .modal-logo{display:flex;align-items:center;gap:10px;justify-content:center;margin-bottom:1.5rem}
-.modal h2{font-size:22px;font-weight:700;text-align:center;margin-bottom:5px}
+.modal-logo-icon{width:38px;height:38px;background:var(--blue);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.modal-logo-icon svg{width:20px;height:20px}
+.modal-logo-text{font-family:'Bricolage Grotesque',sans-serif;font-size:18px;font-weight:800}
+.modal-box h2{font-family:'Bricolage Grotesque',sans-serif;font-size:24px;font-weight:800;text-align:center;margin-bottom:5px;letter-spacing:-.5px}
 .modal-sub{font-size:14px;color:var(--muted);text-align:center;margin-bottom:1.5rem}
-.soc-btn{width:100%;padding:12px;margin-bottom:10px;border:1.5px solid var(--border);border-radius:12px;background:#fff;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;color:var(--text);transition:all .15s}
-.soc-btn:hover{background:var(--bg)}
-.divider{display:flex;align-items:center;gap:10px;margin:14px 0;font-size:12.5px;color:#94a3b8}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
-.modal input[type=email]{width:100%;padding:12px 14px;font-size:14px;border:1.5px solid var(--border);border-radius:12px;background:var(--bg);color:var(--text);font-family:inherit;margin-bottom:10px;transition:border-color .15s}
-.modal input[type=email]:focus{outline:none;border-color:var(--blue);background:#fff}
-.btn-magic{width:100%;padding:13px;font-size:15px;font-weight:600;background:var(--blue);color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;transition:all .15s}
-.btn-magic:hover{background:var(--blue-dark)}
-.modal-foot{font-size:12px;color:#94a3b8;text-align:center;margin-top:14px}
-/* Footer */
-.site-footer{background:var(--bg);border-top:1px solid var(--border);padding:3rem 2.5rem}
+.social-btn{width:100%;padding:12px;margin-bottom:10px;border:1px solid var(--border);border-radius:12px;background:var(--white);font-size:14px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:'DM Sans',sans-serif;color:var(--text);transition:all .15s}
+.social-btn:hover{background:var(--bg);border-color:#c7d2fe}
+.divider-or{display:flex;align-items:center;gap:10px;margin:14px 0;font-size:12px;color:#94a3b8}
+.divider-or::before,.divider-or::after{content:'';flex:1;height:1px;background:var(--border)}
+.modal-email{width:100%;padding:12px 14px;font-size:15px;border:1px solid var(--border);border-radius:12px;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;margin-bottom:10px}
+.modal-email:focus{outline:none;border-color:var(--blue);background:var(--white)}
+.magic-btn{width:100%;padding:13px;font-size:15px;font-weight:800;background:var(--blue);color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:'Bricolage Grotesque',sans-serif;transition:all .2s}
+.magic-btn:hover{background:#1638b8}
+.modal-note{font-size:11px;color:#94a3b8;text-align:center;margin-top:14px}
+/* FOOTER */
+.site-footer{background:var(--bg);border-top:1px solid var(--border);padding:3rem 2rem}
 .footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem}
-.footer-brand p{font-size:13.5px;color:var(--muted);margin-top:10px;line-height:1.7}
-.footer-col h4{font-size:13.5px;font-weight:600;margin-bottom:14px}
-.footer-col a{display:block;font-size:13.5px;color:var(--muted);margin-bottom:10px;cursor:pointer;transition:color .15s}
+.footer-brand-text{font-size:13px;color:var(--muted);margin-top:10px;line-height:1.7;max-width:240px}
+.footer-col h4{font-size:13px;font-weight:800;margin-bottom:14px;font-family:'Bricolage Grotesque',sans-serif}
+.footer-col a{display:block;font-size:13px;color:var(--muted);margin-bottom:9px;cursor:pointer;transition:color .15s}
 .footer-col a:hover{color:var(--blue)}
-.footer-bottom{max-width:1100px;margin:2rem auto 0;padding-top:1.75rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:12.5px;color:#94a3b8}
-@media(max-width:780px){
-  .hero{grid-template-columns:1fr;padding:2.5rem 1.5rem;gap:2.5rem}
-  .phone-scene{order:-1}.badge-float{display:none}
-  .stats{grid-template-columns:1fr 1fr}
-  .steps{grid-template-columns:1fr}
-  .footer-inner{grid-template-columns:1fr 1fr}
-  .nav-tab{padding:0 12px;font-size:13px}
-  .hero h1{font-size:34px}
-  .iphone{width:210px;height:440px}
-}
+.footer-bottom{max-width:1100px;margin:2rem auto 0;padding-top:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:12px;color:#94a3b8}
+@media(max-width:900px){.hero{grid-template-columns:1fr;min-height:auto;padding:2rem 1.5rem}.hero-right{order:-1}.steps-grid{grid-template-columns:1fr}.stats-row{grid-template-columns:1fr 1fr}.footer-inner{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.nav-tabs{display:none}.phone-float-1,.phone-float-2{display:none}.footer-inner{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<nav class="site-nav">
-  <div class="nav-logo" onclick="showTab('home')">
-    <svg width="30" height="30" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#1B4DDB"/><path d="M5 20c0-2 1-3.5 2.5-4.5L10 12h12l2.5 3.5c1.5 1 2.5 2.5 2.5 4.5v1H5v-1z" fill="white"/><circle cx="10" cy="22" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg>
-    <span class="nav-logo-text">MyMiles<em>AI</em></span>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-left">
+    <div class="nav-logo-icon"><svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 14l3-6 3 4 2-3 4 5H3z" fill="white"/></svg></div>
+    <span class="nav-brand">MyMiles<span>AI</span></span>
   </div>
   <div class="nav-tabs">
-    <div class="nav-tab active" id="tab-home" onclick="showTab('home')">Home</div>
-    <div class="nav-tab" id="tab-about" onclick="showTab('about')">About</div>
-    <div class="nav-tab" id="tab-pricing" onclick="showTab('pricing')">Pricing</div>
-    <div class="nav-tab" id="tab-blog" onclick="showTab('blog')">Blog</div>
+    <button class="nav-tab active" id="tab-home" onclick="showTab('home')">Home</button>
+    <button class="nav-tab" id="tab-about" onclick="showTab('about')">About</button>
+    <button class="nav-tab" id="tab-pricing" onclick="showTab('pricing')">Pricing</button>
+    <button class="nav-tab" id="tab-blog" onclick="showTab('blog')">Blog</button>
   </div>
-  <div class="nav-actions">
-    <button class="btn-ghost" id="nav-signin" onclick="openLogin()">Sign in</button>
-    <button class="btn-cta-nav" onclick="showTab('pricing')">Get started</button>
+  <div class="nav-right">
+    <button class="btn-signin" id="nav-signin" onclick="openLogin()">Sign In</button>
+    <button class="btn-start" onclick="showTab('pricing')">Get started</button>
   </div>
 </nav>
 
+<!-- HOME -->
 <div class="page active" id="page-home">
   <div class="hero">
-    <div>
-      <div class="hero-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>GPS tracking &amp; AI classification</div>
-      <h1>Track every mile.<br>Claim every <em>dollar.</em></h1>
-      <p class="hero-desc">MyMilesAI automatically logs your trips with GPS, classifies them with AI, and calculates your IRS/CRA tax deductions — all hands-free. Built for every professional who drives to earn.</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="showTab('pricing')">Start free — 10 days on us</button>
-        <button class="btn-secondary" onclick="showTab('about')">How it works</button>
+    <div class="hero-left">
+      <div class="hero-badge"><span class="hero-badge-dot"></span>Now live &nbsp;&middot;&nbsp; No credit card required</div>
+      <h1>Track every mile.<br>Claim every <span class="italic">dollar.</span></h1>
+      <p class="hero-desc">MyMilesAI automatically logs your trips with GPS, classifies them with AI, and calculates your IRS tax deductions &mdash; all hands-free.</p>
+      <div class="hero-actions">
+        <button class="btn-primary-lg" onclick="showTab('pricing')">Start free &mdash; 10 days on us</button>
+        <button class="btn-secondary-lg" onclick="showTab('about')">Calculate My Savings</button>
       </div>
-      <div class="trust-pills">
-        <span class="pill"><span class="pill-dot"></span>IRS $0.725/mile · 2026</span>
-        <span class="pill"><span class="pill-dot"></span>CRA $0.73/km · Canada</span>
-        <span class="pill">Privacy-first</span>
-        <span class="pill">Works offline</span>
+      <div class="hero-trust">
+        <span class="trust-item"><span class="trust-icon">&#x1F512;</span> Privacy-first</span>
+        <span class="trust-item"><span class="trust-icon">&#x1F30E;</span> US + Canada</span>
+        <span class="trust-item"><span class="trust-icon">&#x26A1;</span> 30-sec setup</span>
       </div>
     </div>
-    <div class="phone-scene">
-      <div class="phone-float">
-        <div class="badge-float top-right"><div class="bdot g"></div><span>Auto-tracking on</span></div>
-        <div class="badge-float bot-left"><div class="bicon g"><svg viewBox="0 0 24 24" stroke="#16a34a"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div><div style="font-size:11px;font-weight:700;color:#0f172a">+$5.88</div><div style="font-size:10px;color:#64748b">deduction logged</div></div></div>
-        <div class="badge-float bot-right"><div class="bicon b"><svg viewBox="0 0 24 24" stroke="#1B4DDB"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><span>AI classified</span></div>
+    <div class="hero-right">
+      <div class="phone-outer">
+        <!-- Float pill 1 -->
+        <div class="phone-float-1">
+          <div class="f-icon">&#x1F4B5;</div>
+          <div><div class="f-text">+$5.88 deduction</div><div class="f-sub">Just logged</div></div>
+        </div>
+        <!-- Float pill 2 -->
+        <div class="phone-float-2">
+          <div class="f-icon">&#x1F4CD;</div>
+          <div><div class="f-text">Auto-tracking on</div><div class="f-sub">GPS Active</div></div>
+        </div>
+        <!-- iPhone -->
         <div class="iphone">
-          <div class="dyn-island"></div>
-          <div class="iscreen">
-            <div class="app-bar">
-              <div><div class="app-hi">Good morning</div><div class="app-name">Welcome back</div></div>
+          <div class="iphone-inner">
+            <div class="dynamic-island"><div class="di-dot"></div></div>
+            <!-- App header -->
+            <div class="app-header">
+              <div><div class="app-greeting">Good morning</div><div class="app-name">Welcome back</div></div>
               <div class="app-icons">
-                <div class="aib"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></div>
-                <div class="aib"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                <div class="app-icon-btn"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></div>
+                <div class="app-icon-btn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2m0 18v-2m10-8h-2M4 12H2m15.07 7.07l-1.41-1.41M6.34 6.34L4.93 4.93"/></svg></div>
               </div>
             </div>
-            <div class="gps-badge"><div class="gps-p"></div><span class="gps-t">GPS Active</span><span style="font-size:8px;color:rgba(255,255,255,.4);margin-left:4px">MyMilesAI</span></div>
-            <div class="gauge-wrap">
-              <div class="gauge-arc">
-                <svg viewBox="0 0 100 56" style="width:100%;height:100%;overflow:visible">
-                  <path d="M10,50 A40,40 0 0,1 90,50" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="6" stroke-linecap="round"/>
-                  <path d="M10,50 A40,40 0 0,1 90,50" fill="none" stroke="url(#gg)" stroke-width="6" stroke-linecap="round" stroke-dasharray="126" stroke-dashoffset="52" id="gp"/>
-                  <defs><linearGradient id="gg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#10b981"/></linearGradient></defs>
+            <!-- GPS bar -->
+            <div class="gps-bar">
+              <div class="gps-label"><div class="gps-pulse"></div>GPS Active</div>
+              <div class="gps-brand">MyMilesAI</div>
+            </div>
+            <!-- Speedometer -->
+            <div class="speedometer">
+              <div class="speedo-arc">
+                <svg viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 55 A50 50 0 0 1 110 55" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8" stroke-linecap="round"/>
+                  <path id="speedo-arc-fill" d="M10 55 A50 50 0 0 1 110 55" fill="none" stroke="url(#speedo-grad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="60"/>
+                  <defs><linearGradient id="speedo-grad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#818cf8"/><stop offset="100%" stop-color="#f472b6"/></linearGradient></defs>
+                  <text x="60" y="52" text-anchor="middle" fill="white" font-size="22" font-weight="800" font-family="DM Sans,sans-serif" id="speedo-text">35</text>
                 </svg>
               </div>
-              <div class="gauge-val"><span id="spd">42</span><em>MPH</em></div>
-            </div>
-            <div class="stats-row">
-              <div class="sbox"><div class="sval bl" id="phb">67.4</div><div class="slbl">Business mi</div></div>
-              <div class="sbox"><div class="sval am">23.1</div><div class="slbl">Personal mi</div></div>
-              <div class="sbox"><div class="sval gr" id="phd">$47.18</div><div class="slbl">Deduction</div></div>
-            </div>
-            <div class="act-row">
-              <div class="act-btn on">⚡ Auto On</div>
-              <div class="act-btn">+ Add Manual</div>
-              <div class="act-btn">🗺 Map</div>
-            </div>
-            <div class="trips-hd2"><span class="trh-t">Recent Trips</span><span class="trh-s">See all →</span></div>
-            <div class="trip-card2">
-              <div class="tc-top"><span class="tc-time">2:30 PM · 18 min</span><span class="tc-type biz">Business</span></div>
-              <div class="tc-route">
-                <div class="rdots"><div class="rdot from"></div><div class="rline"></div><div class="rdot to"></div></div>
-                <div class="rtext"><div class="raddr">123 Main St, Downtown</div><div class="raddr">456 Oak Ave, Westside</div></div>
-                <div><div class="rmiles">8.4</div><div class="rmeta">miles</div></div>
+              <div class="speedo-unit">MPH</div>
+              <div class="speedo-stats">
+                <div class="speedo-stat"><div class="speedo-val blue" id="s-bmi">101.6</div><div class="speedo-lbl">BUSINESS MI</div></div>
+                <div class="speedo-stat"><div class="speedo-val gold">23.1</div><div class="speedo-lbl">PERSONAL MI</div></div>
+                <div class="speedo-stat"><div class="speedo-val green" id="s-ded">$73.69</div><div class="speedo-lbl">DEDUCTION</div></div>
               </div>
             </div>
-            <div class="trip-card2">
-              <div class="tc-top"><span class="tc-time">5:15 PM</span><span class="tc-type pers">Personal</span></div>
-              <div class="tc-route">
-                <div class="rdots"><div class="rdot from"></div><div class="rline"></div><div class="rdot to"></div></div>
-                <div class="rtext"><div class="raddr">Home, Maple Drive</div><div class="raddr">Costco, Regent Ave</div></div>
-                <div><div class="rmiles">3.2</div><div class="rmeta">miles</div></div>
+            <!-- Action buttons -->
+            <div class="app-actions">
+              <div class="app-action primary"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>Auto On</div>
+              <div class="app-action"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add Manual</div>
+              <div class="app-action"><svg viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>Map</div>
+            </div>
+            <!-- Recent trips header -->
+            <div class="trips-header"><div class="trips-title">Recent Trips</div><div class="trips-see-all">See all &rarr;</div></div>
+            <!-- Trip 1 - timeline -->
+            <div class="trip-timeline">
+              <div class="trip-timeline-line"></div>
+              <div class="trip-timeline-dot" style="left:8px"></div>
+              <div class="trip-timeline-dot" style="right:8px;background:#f472b6"></div>
+              <div class="trip-timeline-tag">BUSINESS</div>
+            </div>
+            <!-- Trip 1 detail -->
+            <div class="trip-detail">
+              <div class="trip-det-row">
+                <div class="trip-det-left">
+                  <div class="trip-det-dots"><div class="trip-det-dot from"></div><div class="trip-det-line"></div><div class="trip-det-dot to"></div></div>
+                  <div class="trip-det-addr"><div class="trip-addr">123 Main St, Downtown</div><div class="trip-addr">456 Oak Ave, Westside</div></div>
+                </div>
+                <div class="trip-det-right"><div class="trip-miles">8.4</div><div class="trip-mi-lbl">miles</div></div>
+              </div>
+              <div class="trip-tags">
+                <div class="trip-tag-date">Today</div>
+                <div class="trip-tag-type biz">Client Meeting</div>
+                <div class="trip-tag-deduction">+$5.88</div>
               </div>
             </div>
-            <div class="bot-nav">
-              <div class="bni on"><div class="drive-btn"><svg viewBox="0 0 24 24"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/><circle cx="12" cy="16" r="1"/><circle cx="20" cy="16" r="1"/></svg></div><span class="bni-lbl">Drive</span></div>
-              <div class="bni"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg><span class="bni-lbl">Trips</span></div>
-              <div class="bni"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span class="bni-lbl">Stats</span></div>
-              <div class="bni"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg><span class="bni-lbl">Alerts</span></div>
+            <!-- Trip 2 - personal -->
+            <div class="trip-detail personal" style="margin-bottom:0">
+              <div class="trip-det-row">
+                <div class="trip-det-left">
+                  <div class="trip-det-dots"><div class="trip-det-dot from" style="background:#f87171"></div><div class="trip-det-line"></div><div class="trip-det-dot to" style="background:#fb923c"></div></div>
+                  <div class="trip-det-addr">
+                    <div class="trip-addr">Home, Maple Drive</div>
+                    <div class="trip-addr">Costco, Regent Ave</div>
+                    <div class="trip-detail-sub" id="todays-total">today's deductions so far</div>
+                  </div>
+                </div>
+                <div class="trip-det-right"><div class="trip-miles" style="color:#f87171" id="personal-total">$66.09</div><div class="trip-mi-lbl">3.2 mi</div></div>
+              </div>
+              <div class="trip-tags"><div class="trip-tag-type pers">PERSONAL</div></div>
+            </div>
+            <!-- Bottom nav -->
+            <div class="app-bottom-nav">
+              <div class="app-nav-item"><div class="app-nav-icon active"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2"/></svg></div><div class="app-nav-lbl active">Drive</div></div>
+              <div class="app-nav-item"><div class="app-nav-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div><div class="app-nav-lbl">Trips</div></div>
+              <div class="app-nav-item"><div class="app-nav-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="app-nav-lbl">Stats</div></div>
+              <div class="app-nav-item"><div class="app-nav-icon"><svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></div><div class="app-nav-lbl">Alerts</div></div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="section" style="border-top:1px solid #f1f5f9">
-    <div class="eyebrow">Features</div>
-    <h2 class="section-title">Everything you need. <em>Nothing</em> you don't.</h2>
-    <p class="section-sub">From automatic GPS tracking to IRS-ready reports, MyMilesAI handles it all so you can focus on driving your business.</p>
-    <div class="feat-grid">
-      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></div><h3>Auto GPS tracking</h3><p>Detects driving automatically and logs every trip in the background. No buttons needed — just drive.</p></div>
-      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><h3>AI classification</h3><p>Learns your routes and auto-classifies trips as business or personal. Swipe to override anytime.</p></div>
-      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><h3>Real-time deductions</h3><p>See your IRS/CRA deductions tick up live as you drive. Know exactly what you're saving.</p></div>
-      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div><h3>IRS-ready reports</h3><p>Export compliant logs as PDF, CSV, Excel, or Google Sheets. One tap to your accountant.</p></div>
-      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h3>Privacy first</h3><p>All data stays on your device. No cloud uploads, no third-party tracking, no ads. Ever.</p></div>
-      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h3>Works offline</h3><p>No internet required. Tracks trips in low-signal areas. Reliable, everywhere.</p></div>
-    </div>
-  </div>
-</div>
-
-<div class="page" id="page-about">
-  <div class="about-hero"><p class="eyebrow" style="color:rgba(255,255,255,.55);margin-bottom:10px">About</p><h1>Built for people who drive to earn</h1><p>We built MyMilesAI because mileage tracking apps were too expensive, too complicated, and didn't respect your privacy.</p></div>
+  <!-- Features section -->
+  <div style="background:var(--bg);padding:1px 0">
   <div class="section">
-    <div class="eyebrow">How it works</div><h2 class="section-title">Start saving in <em>30 seconds</em></h2>
-    <div class="steps"><div class="step"><div class="step-num">1</div><h3>Download &amp; set up</h3><p>Sign up, choose miles or km, and enable GPS. Under 30 seconds from install to tracking.</p></div><div class="step"><div class="step-num">2</div><h3>Just drive</h3><p>Every trip logged automatically with distance, route, and time — fully hands-free.</p></div><div class="step"><div class="step-num">3</div><h3>Claim deductions</h3><p>Export IRS/CRA-ready reports at tax time. Business miles calculated instantly.</p></div></div>
-    <div style="margin-top:3rem"><div class="eyebrow">Who it's for</div><h2 class="section-title">Every professional who <em>drives to earn</em></h2>
-    <div class="who-grid"><div class="who-pill">Real estate agents<span>Showings, open houses &amp; closings</span></div><div class="who-pill">Delivery drivers<span>Route tracking &amp; multi-stop drops</span></div><div class="who-pill">Consultants<span>Client meetings &amp; site visits</span></div><div class="who-pill">Contractors<span>Job sites, supply runs &amp; bids</span></div><div class="who-pill">Medical &amp; pharma reps<span>Hospital rounds &amp; territory coverage</span></div><div class="who-pill">Rideshare drivers<span>Uber, Lyft, DoorDash &amp; more</span></div><div class="who-pill">Sales representatives<span>Territory coverage &amp; demos</span></div><div class="who-pill">Property managers<span>Multi-site inspections &amp; tours</span></div></div></div>
-    <div style="margin-top:3rem"><div class="eyebrow">FAQ</div><h2 class="section-title" style="margin-bottom:1.75rem">Frequently asked <em>questions</em></h2>
-    <div class="faq-item"><div class="faq-q" onclick="faq(this)">Does it drain my battery?<span class="faq-icon">+</span></div><div class="faq-a">We use low-power GPS and intelligent motion detection. Most users report less than 5% additional battery per day.</div></div>
-    <div class="faq-item"><div class="faq-q" onclick="faq(this)">How accurate is the GPS tracking?<span class="faq-icon">+</span></div><div class="faq-a">MyMilesAI uses native GPS with road-snapping for accuracy within 2–3% of actual distance — well within IRS mileage log requirements.</div></div>
-    <div class="faq-item"><div class="faq-q" onclick="faq(this)">Is my location data private?<span class="faq-icon">+</span></div><div class="faq-a">All trip data is stored locally on your device. We never upload your location, sell data, or serve ads. GPS permissions can be revoked at any time.</div></div>
-    <div class="faq-item"><div class="faq-q" onclick="faq(this)">Does it work offline?<span class="faq-icon">+</span></div><div class="faq-a">Yes — MyMilesAI tracks and stores trips entirely on your device. No signal? No problem.</div></div>
-    <div class="faq-item"><div class="faq-q" onclick="faq(this)">What are the 2026 mileage rates?<span class="faq-icon">+</span></div><div class="faq-a">The 2026 IRS rate is $0.725/mile for business. In Canada, the CRA rate is $0.73/km for the first 5,000 km and $0.67/km after.</div></div>
-    <div class="faq-item"><div class="faq-q" onclick="faq(this)">How do I cancel?<span class="faq-icon">+</span></div><div class="faq-a">Cancel anytime through the App Store, Google Play, your account settings, or by emailing support@mymilesai.com. No fees, no penalties.</div></div>
-    <div class="faq-item"><div class="faq-q" onclick="faq(this)">What's the refund policy?<span class="faq-icon">+</span></div><div class="faq-a">30-day money-back guarantee. Email support@mymilesai.com within 30 days for a full refund — no questions asked.</div></div></div>
+    <div class="eyebrow">Features</div>
+    <h2 class="section-h2">Everything you need. <em>Nothing</em> you don't.</h2>
+    <p class="section-sub">From automatic GPS tracking to IRS-ready reports, MyMilesAI handles it all so you can focus on what matters.</p>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg></div><h3>Auto GPS Tracking</h3><p>Detects driving automatically. Every trip logged in the background &mdash; no buttons needed.</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><h3>AI Classification</h3><p>Learns your routes and auto-classifies trips as business or personal. Swipe to override anytime.</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><h3>Real-Time Deductions</h3><p>See your IRS/CRA deductions tick up live as you drive. Know exactly what you're saving.</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg></div><h3>IRS-Ready Reports</h3><p>Export compliant logs as PDF, CSV, Excel, or Google Sheets. One tap to your accountant.</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h3>Privacy First</h3><p>All data stays on your device. No cloud uploads, no third-party tracking, no ads. Ever.</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><h3>Works Offline</h3><p>No internet required. Tracks trips anywhere, even in remote low-signal areas.</p></div>
+    </div>
+  </div>
   </div>
 </div>
 
+<!-- ABOUT -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <div class="eyebrow" style="color:rgba(255,255,255,.4);margin-bottom:10px">About</div>
+    <h1>Built for people who drive to earn</h1>
+    <p>We built MyMilesAI because existing mileage trackers were too expensive, too complicated, and didn't respect your privacy.</p>
+  </div>
+  <div class="section">
+    <div class="eyebrow">How it works</div>
+    <h2 class="section-h2">Start saving in <em>30 seconds</em></h2>
+    <div class="steps-grid">
+      <div class="step"><div class="step-num">1</div><h3>Download &amp; Set Up</h3><p>Sign up, choose miles or km, enable GPS. Under 30 seconds from install to tracking.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Just Drive</h3><p>Every trip is logged automatically with distance, route, and time &mdash; fully hands-free.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Claim Deductions</h3><p>Export IRS/CRA-ready reports at tax time. Business miles calculated at $0.725/mile.</p></div>
+    </div>
+    <div style="margin-top:3rem">
+      <div class="eyebrow">Who it's for</div>
+      <h2 class="section-h2">Every professional who <em>drives to earn</em></h2>
+      <div class="who-grid">
+        <div class="who-pill">Real estate agents<span>Showings, open houses &amp; closings</span></div>
+        <div class="who-pill">Delivery drivers<span>Route tracking &amp; multi-stop drops</span></div>
+        <div class="who-pill">Consultants<span>Client meetings &amp; site visits</span></div>
+        <div class="who-pill">Contractors<span>Job sites, supply runs &amp; bids</span></div>
+        <div class="who-pill">Medical &amp; pharma reps<span>Hospital rounds &amp; territory</span></div>
+        <div class="who-pill">Rideshare drivers<span>Uber, Lyft, DoorDash &amp; more</span></div>
+        <div class="who-pill">Sales representatives<span>Territory coverage &amp; demos</span></div>
+        <div class="who-pill">Property managers<span>Multi-site inspections &amp; tours</span></div>
+      </div>
+    </div>
+    <div style="margin-top:3rem">
+      <div class="eyebrow">FAQ</div>
+      <h2 class="section-h2" style="margin-bottom:1.5rem">Common <em>questions</em></h2>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Does it drain my battery?<span class="faq-icon">+</span></div><div class="faq-a">We use low-power GPS and intelligent motion detection. Most users report less than 5% additional battery drain per day.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">How accurate is the GPS tracking?<span class="faq-icon">+</span></div><div class="faq-a">Accuracy within 2&ndash;3% of actual distance, meeting IRS mileage log requirements.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Is my location data private?<span class="faq-icon">+</span></div><div class="faq-a">All trip data is stored locally on your device. We never upload your location, sell data, or serve ads.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">Does it work offline?<span class="faq-icon">+</span></div><div class="faq-a">Yes &mdash; MyMilesAI tracks and stores trips entirely on your device. No signal? No problem.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">What are the 2026 mileage rates?<span class="faq-icon">+</span></div><div class="faq-a">The 2026 IRS rate is $0.725/mile. In Canada, the CRA rate is $0.73/km for the first 5,000 km and $0.67/km after.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">How do I cancel?<span class="faq-icon">+</span></div><div class="faq-a">Cancel anytime through account settings or by emailing support@mymilesai.com. No fees, no penalties.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="faq(this)">What's the refund policy?<span class="faq-icon">+</span></div><div class="faq-a">30-day money-back guarantee. Email support@mymilesai.com within 30 days for a full refund.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
 <div class="page" id="page-pricing">
-  <div class="pricing-top"><div class="eyebrow">Pricing</div><h1>One plan. <em style="font-family:'Instrument Serif',serif;font-style:italic;color:#1B4DDB;font-weight:400">Everything</em> included.</h1><p>Try free for 10 days — no credit card required. Then lock in our founding member rate before it's gone.</p></div>
-  <div class="pricing-wrap">
+  <div class="pricing-hero">
+    <div class="eyebrow">Pricing</div>
+    <h1>One plan. <em style="font-family:'Instrument Serif',serif;font-style:italic;color:var(--blue);font-weight:400">Everything</em> included.</h1>
+    <p>Try free for 10 days &mdash; no credit card required. Then lock in our founding member rate.</p>
+  </div>
+  <div class="plan-wrap">
     <div class="plan">
-      <div class="plan-head"><div class="plan-name">MyMilesAI Pro</div><div class="plan-badge">Only plan you need</div></div>
-      <div class="trial-box"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>10-day free trial — no credit card required</span></div>
-      <div class="price-row"><span class="price-orig">$699</span><span class="price-now">$69.99</span><span class="price-period">/ year</span></div>
-      <div class="price-alt">or <strong>$6.99/month</strong> — cancel anytime</div>
-      <div class="discount-tag"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Founding member discount — limited time</div>
-      <ul class="feat-list">
-        <li><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Unlimited trips — no caps, ever</li>
-        <li><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Auto GPS tracking — fully hands-free</li>
-        <li><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>AI trip classification (business / personal)</li>
-        <li><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>IRS &amp; CRA compliant PDF reports</li>
-        <li><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>CSV, Excel &amp; Google Sheets export</li>
-        <li><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Live map view &amp; route history</li>
-        <li><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>AI tax assistant — ask anything</li>
-        <li><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Accountant portal (read-only access)</li>
-        <li><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Privacy-first — all data on your device</li>
-        <li><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>US &amp; Canada with locale auto-detect</li>
-        <li><span class="check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Priority email support</li>
+      <div class="plan-badge-wrap"><div class="plan-name">MyMilesAI Pro</div><div class="plan-only">Only plan you need</div></div>
+      <div class="trial-banner"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span>10-day free trial &mdash; no credit card required</span></div>
+      <div class="price-main"><span class="price-was">$699</span><span class="price-now">$69.99</span><span class="price-per">/ year</span></div>
+      <div class="price-monthly">or <strong>$6.99/month</strong> &mdash; cancel anytime</div>
+      <div class="founding-tag">&#x1F3F7; Founding member discount &mdash; limited time</div>
+      <ul class="features-list">
+        <li><span class="check-circle"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Unlimited trips &mdash; no caps, ever</li>
+        <li><span class="check-circle"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Auto GPS tracking &mdash; fully hands-free</li>
+        <li><span class="check-circle"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>AI trip classification (business / personal)</li>
+        <li><span class="check-circle"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>IRS &amp; CRA compliant PDF reports</li>
+        <li><span class="check-circle"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>CSV, Excel &amp; Google Sheets export</li>
+        <li><span class="check-circle"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Live map view &amp; route history</li>
+        <li><span class="check-circle"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>AI tax assistant</li>
+        <li><span class="check-circle"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Accountant portal (read-only access)</li>
+        <li><span class="check-circle"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Privacy-first &mdash; all data on your device</li>
+        <li><span class="check-circle"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>US &amp; Canada with locale auto-detect</li>
+        <li><span class="check-circle"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></span>Priority email support</li>
       </ul>
-      <button class="btn-cta" onclick="openLogin()">Start my 10-day free trial</button>
-      <div class="plan-foot">No credit card · Cancel anytime · 30-day money-back guarantee</div>
+      <button class="cta-btn" onclick="openLogin()">Start my 10-day free trial</button>
+      <div class="plan-footer">No credit card &nbsp;&middot;&nbsp; Cancel anytime &nbsp;&middot;&nbsp; 30-day money-back guarantee</div>
     </div>
   </div>
-  <div class="trust-row"><div class="trust-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No credit card for trial</div><div class="trust-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Cancel anytime, no fees</div><div class="trust-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>30-day money-back guarantee</div><div class="trust-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Data stays on your device</div></div>
+  <div class="trust-strip">
+    <div class="trust-strip-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No credit card for trial</div>
+    <div class="trust-strip-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Cancel anytime, no fees</div>
+    <div class="trust-strip-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>30-day money-back guarantee</div>
+    <div class="trust-strip-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Data stays on your device</div>
+  </div>
 </div>
 
+<!-- BLOG -->
 <div class="page" id="page-blog">
-  <div class="blog-top"><div class="eyebrow">Blog</div><h2 class="section-title">Tips, guides &amp; <em>tax insights</em></h2><p style="color:#64748b;font-size:14px;margin-top:5px">Expert articles for US and Canadian professionals who drive for business.</p></div>
-  <div class="blog-grid">
-    <a class="blog-card" href="https://mymilesai.com/blog/irs-mileage-rate-2026.html" target="_blank"><div class="blog-banner" style="background:linear-gradient(135deg,#0a2744,#0f3d72)"><div class="blog-rate" style="background:#22c55e;color:#fff">2026 IRS · $0.725/mile</div><div class="blog-country">United States</div></div><div class="blog-body"><div class="blog-tag">US Tax Rates · March 2026</div><h3>IRS Mileage Rate 2026: Everything You Need to Know</h3><p>The 2026 IRS standard mileage rate is $0.725 per mile. Learn who qualifies and how to calculate your deduction.</p><div class="blog-meta">March 2026 · 8 min read →</div></div></a>
-    <a class="blog-card" href="https://mymilesai.com/blog/cra-mileage-rate-2026.html" target="_blank"><div class="blog-banner" style="background:linear-gradient(135deg,#3b0a2a,#7b1d5a)"><div class="blog-rate" style="background:#f43f5e;color:#fff">2026 CRA · $0.73/km</div><div class="blog-country">Canada</div></div><div class="blog-body"><div class="blog-tag">Canada Tax Rates · March 2026</div><h3>CRA Mileage Rate 2026: Complete Canadian Guide</h3><p>The CRA rate is $0.73/km for the first 5,000 km. Everything Canadian drivers need to know.</p><div class="blog-meta">March 2026 · 7 min read →</div></div></a>
-    <a class="blog-card" href="https://mymilesai.com/blog/how-to-track-mileage-for-taxes.html" target="_blank"><div class="blog-banner" style="background:linear-gradient(135deg,#1B4DDB,#0f172a)"><div class="blog-rate" style="background:#f59e0b;color:#0f172a">Complete Guide</div><div class="blog-country">US &amp; Canada</div></div><div class="blog-body"><div class="blog-tag">Guide · US &amp; Canada</div><h3>How to Track Mileage for Taxes: The Complete 2026 Guide</h3><p>Step-by-step covering IRS and CRA requirements and the best tracking methods.</p><div class="blog-meta">March 2026 · 10 min read →</div></div></a>
-    <a class="blog-card" href="https://mymilesai.com/blog/mileage-deduction-self-employed.html" target="_blank"><div class="blog-banner" style="background:linear-gradient(135deg,#1a0a00,#78350f)"><div class="blog-rate" style="background:#f59e0b;color:#0f172a">Self-Employed</div><div class="blog-country">1099 · Freelancer</div></div><div class="blog-body"><div class="blog-tag">Self-Employed Guide</div><h3>Mileage Deduction for Self-Employed: Complete 2026 Guide</h3><p>How freelancers and 1099 contractors can maximize mileage deductions on Schedule C.</p><div class="blog-meta">March 2026 · 9 min read →</div></div></a>
-    <a class="blog-card" href="https://mymilesai.com/blog/delivery-driver-tax-deductions.html" target="_blank"><div class="blog-banner" style="background:linear-gradient(135deg,#3b0a0a,#991b1b)"><div class="blog-rate" style="background:#ef4444;color:#fff">Delivery Drivers</div><div class="blog-country">DoorDash · Uber Eats</div></div><div class="blog-body"><div class="blog-tag">Delivery Driver Guide</div><h3>Delivery Driver Tax Deductions 2026: The Full Guide</h3><p>Everything DoorDash and Uber Eats drivers need to know about mileage deductions.</p><div class="blog-meta">March 2026 · 8 min read →</div></div></a>
-    <a class="blog-card" href="https://mymilesai.com/blog/real-estate-agent-mileage.html" target="_blank"><div class="blog-banner" style="background:linear-gradient(135deg,#0a1a2e,#1B4DDB)"><div class="blog-rate" style="background:#60a5fa;color:#0a1a2e">Real Estate</div><div class="blog-country">Realtors · Agents</div></div><div class="blog-body"><div class="blog-tag">Real Estate Guide</div><h3>Real Estate Agent Mileage Deduction 2026</h3><p>How real estate agents can track and deduct mileage for showings and client meetings.</p><div class="blog-meta">March 2026 · 7 min read →</div></div></a>
-    <a class="blog-card" href="https://mymilesai.com/blog/rideshare-driver-mileage.html" target="_blank"><div class="blog-banner" style="background:linear-gradient(135deg,#052e16,#166534)"><div class="blog-rate" style="background:#22c55e;color:#052e16">Rideshare</div><div class="blog-country">Uber · Lyft</div></div><div class="blog-body"><div class="blog-tag">Rideshare Guide</div><h3>Rideshare Driver Mileage Deduction: Uber &amp; Lyft Guide 2026</h3><p>How Uber and Lyft drivers can track deadhead miles and maximize mileage deductions.</p><div class="blog-meta">March 2026 · 7 min read →</div></div></a>
-    <a class="blog-card blog-more" href="https://mymilesai.com/blog/" target="_blank"><div class="blog-banner" style="background:#f1f5f9;display:flex;align-items:center;justify-content:center"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div><div class="blog-body"><div class="blog-tag" style="color:#94a3b8">More articles</div><h3 style="color:#64748b">View all blog posts →</h3><p>Visit the full blog for all guides, tips, and tax insights.</p></div></a>
-  </div>
-</div>
-
-<div class="page" id="page-dashboard">
-  <div class="dash">
-    <div class="dash-top"><div><h2>Good morning 👋</h2><p id="dash-email">Your 2026 mileage summary</p></div><button class="btn-signout" onclick="signOut()">Sign out</button></div>
-    <div class="stats"><div class="stat"><div class="stat-label">Business miles</div><div class="stat-value blue" id="s-biz">0.0</div></div><div class="stat"><div class="stat-label">Tax deduction</div><div class="stat-value green" id="s-ded">$0.00</div></div><div class="stat"><div class="stat-label">Personal miles</div><div class="stat-value" id="s-pers">0.0</div></div><div class="stat"><div class="stat-label">Total trips</div><div class="stat-value" id="s-trips">0</div></div></div>
-    <div class="trips-box">
-      <div class="trips-hd"><h3>Recent trips</h3><button class="btn-add" onclick="toggleForm()">+ Add trip</button></div>
-      <div id="trips-list"></div>
-      <div class="add-wrap" id="add-form"><div class="form-grid"><input type="text" placeholder="From (e.g. 123 Main St)" id="f-from" class="form-full"><input type="text" placeholder="To (e.g. Client office)" id="f-to" class="form-full"><input type="number" placeholder="Miles" id="f-miles" min="0.1" step="0.1"><input type="date" id="f-date"><select id="f-cat"><option value="business">Business</option><option value="personal">Personal</option><option value="medical">Medical</option><option value="charity">Charity</option></select><div class="form-actions"><button class="btn-save" onclick="saveTrip()">Save trip</button><button class="btn-cancel" onclick="toggleForm()">Cancel</button></div></div></div>
+  <div class="blog-wrap">
+    <div class="eyebrow">Blog</div>
+    <h2 class="section-h2">Tips, guides &amp; <em>tax insights</em></h2>
+    <p style="color:var(--muted);font-size:14px;margin-top:6px">Expert articles for US and Canadian professionals who drive for business.</p>
+    <div class="blog-grid">
+      <a class="blog-card" href="https://mymilesai.com/blog/irs-mileage-rate-2026.html" target="_blank"><div class="blog-banner" style="background:linear-gradient(135deg,#0a2744,#0f3d72)"><div class="blog-rate-tag" style="background:#22c55e;color:#fff">2026 IRS &middot; $0.725/mile</div><div class="blog-country-tag">United States</div></div><div class="blog-body"><div class="blog-category">US Tax Rates &middot; 2026</div><h3>IRS Mileage Rate 2026: Everything You Need to Know</h3><p>The 2026 IRS standard mileage rate is $0.725 per mile. Learn who qualifies and how to calculate your deduction.</p><div class="blog-card-meta">March 2026 &middot; 8 min read &rarr;</div></div></a>
+      <a class="blog-card" href="https://mymilesai.com/blog/cra-mileage-rate-2026.html" target="_blank"><div class="blog-banner" style="background:linear-gradient(135deg,#3b0a2a,#7b1d5a)"><div class="blog-rate-tag" style="background:#f43f5e;color:#fff">2026 CRA &middot; $0.73/km</div><div class="blog-country-tag">Canada</div></div><div class="blog-body"><div class="blog-category">Canada Tax Rates &middot; 2026</div><h3>CRA Mileage Rate 2026: Complete Canadian Guide</h3><p>The CRA rate is $0.73/km for the first 5,000 km. Everything Canadian drivers need to know.</p><div class="blog-card-meta">March 2026 &middot; 7 min read &rarr;</div></div></a>
+      <a class="blog-card" href="https://mymilesai.com/blog/how-to-track-mileage-for-taxes.html" target="_blank"><div class="blog-banner" style="background:linear-gradient(135deg,#1B4DDB,#0f172a)"><div class="blog-rate-tag" style="background:#f59e0b;color:#0f172a">Complete Guide</div><div class="blog-country-tag">US &amp; Canada</div></div><div class="blog-body"><div class="blog-category">Guide &middot; US &amp; Canada</div><h3>How to Track Mileage for Taxes: The Complete 2026 Guide</h3><p>Step-by-step covering IRS and CRA requirements and the best tracking methods.</p><div class="blog-card-meta">March 2026 &middot; 10 min read &rarr;</div></div></a>
+      <a class="blog-card" href="https://mymilesai.com/blog/mileage-deduction-self-employed.html" target="_blank"><div class="blog-banner" style="background:linear-gradient(135deg,#1a0a00,#78350f)"><div class="blog-rate-tag" style="background:#f59e0b;color:#0f172a">Self-Employed</div><div class="blog-country-tag">1099 &middot; Freelancer</div></div><div class="blog-body"><div class="blog-category">Self-Employed Guide</div><h3>Mileage Deduction for Self-Employed: Complete 2026 Guide</h3><p>How freelancers and 1099 contractors can maximize mileage deductions on Schedule C.</p><div class="blog-card-meta">March 2026 &middot; 9 min read &rarr;</div></div></a>
+      <a class="blog-card" href="https://mymilesai.com/blog/delivery-driver-tax-deductions.html" target="_blank"><div class="blog-banner" style="background:linear-gradient(135deg,#3b0a0a,#991b1b)"><div class="blog-rate-tag" style="background:#ef4444;color:#fff">Delivery Drivers</div><div class="blog-country-tag">DoorDash &middot; Uber Eats</div></div><div class="blog-body"><div class="blog-category">Delivery Driver Guide</div><h3>Delivery Driver Tax Deductions 2026: The Full Guide</h3><p>Everything DoorDash and Uber Eats drivers need to know about mileage deductions.</p><div class="blog-card-meta">March 2026 &middot; 8 min read &rarr;</div></div></a>
+      <a class="blog-card" href="https://mymilesai.com/blog/real-estate-agent-mileage.html" target="_blank"><div class="blog-banner" style="background:linear-gradient(135deg,#0a1a2e,#1B4DDB)"><div class="blog-rate-tag" style="background:#60a5fa;color:#0a1a2e">Real Estate</div><div class="blog-country-tag">Realtors &middot; Agents</div></div><div class="blog-body"><div class="blog-category">Real Estate Guide</div><h3>Real Estate Agent Mileage Deduction 2026</h3><p>How real estate agents can track and deduct mileage for showings and client meetings.</p><div class="blog-card-meta">March 2026 &middot; 7 min read &rarr;</div></div></a>
+      <a class="blog-card" href="https://mymilesai.com/blog/rideshare-driver-mileage.html" target="_blank"><div class="blog-banner" style="background:linear-gradient(135deg,#052e16,#166534)"><div class="blog-rate-tag" style="background:#22c55e;color:#052e16">Rideshare</div><div class="blog-country-tag">Uber &middot; Lyft</div></div><div class="blog-body"><div class="blog-category">Rideshare Guide</div><h3>Rideshare Driver Mileage Deduction: Uber &amp; Lyft Guide 2026</h3><p>How Uber and Lyft drivers can track deadhead miles and maximize mileage deductions.</p><div class="blog-card-meta">March 2026 &middot; 7 min read &rarr;</div></div></a>
     </div>
-    <div class="rate-bar">2026 IRS rate: <strong>$0.725/mile</strong> &nbsp;·&nbsp; CRA rate: <strong>$0.73/km</strong></div>
   </div>
 </div>
 
+<!-- DASHBOARD -->
+<div class="page" id="page-dashboard">
+  <div class="dash-wrap">
+    <div class="dash-top"><div><h2>Good morning</h2><p id="dash-user">Your 2026 mileage summary</p></div><button class="btn-signout" onclick="signOut()">Sign out</button></div>
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-label">Business Miles</div><div class="stat-value blue" id="d-biz">0.0</div></div>
+      <div class="stat-card"><div class="stat-label">Tax Deduction</div><div class="stat-value green" id="d-ded">$0.00</div></div>
+      <div class="stat-card"><div class="stat-label">Personal Miles</div><div class="stat-value" id="d-pers">0.0</div></div>
+      <div class="stat-card"><div class="stat-label">Total Trips</div><div class="stat-value" id="d-trips">0</div></div>
+    </div>
+    <div class="trips-panel">
+      <div class="trips-panel-head"><h3>Recent Trips</h3><button class="btn-add-trip" onclick="toggleAddForm()">+ Add Trip</button></div>
+      <div id="trip-list"></div>
+      <div class="add-form-wrap" id="add-form">
+        <div class="form-row">
+          <input type="text" placeholder="From (e.g. 123 Main St)" id="f-from" class="form-full">
+          <input type="text" placeholder="To (e.g. Client office)" id="f-to" class="form-full">
+          <input type="number" placeholder="Miles" id="f-miles" min="0.1" step="0.1">
+          <input type="date" id="f-date">
+          <select id="f-cat"><option value="business">Business</option><option value="personal">Personal</option><option value="medical">Medical</option><option value="charity">Charity</option></select>
+          <div class="form-btns">
+            <button class="btn-form-save" onclick="saveTrip()">Save Trip</button>
+            <button class="btn-form-cancel" onclick="toggleAddForm()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="irs-bar">2026 IRS rate: <strong>$0.725/mile</strong> &nbsp;&middot;&nbsp; CRA rate: <strong>$0.73/km</strong></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
 <footer class="site-footer" id="site-footer">
   <div class="footer-inner">
-    <div class="footer-brand"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><svg width="28" height="28" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#1B4DDB"/><path d="M5 20c0-2 1-3.5 2.5-4.5L10 12h12l2.5 3.5c1.5 1 2.5 2.5 2.5 4.5v1H5v-1z" fill="white"/><circle cx="10" cy="22" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg><span style="font-weight:700;font-size:16px">MyMilesAI</span></div><p>Smart mileage tracking that maximizes your tax deductions. Built for professionals who drive to earn.</p></div>
+    <div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+        <div class="nav-logo-icon" style="width:32px;height:32px;border-radius:8px"><svg viewBox="0 0 20 20" fill="none"><path d="M3 14l3-6 3 4 2-3 4 5H3z" fill="white"/></svg></div>
+        <span class="nav-brand" style="font-size:16px">MyMiles<span>AI</span></span>
+      </div>
+      <p class="footer-brand-text">Smart mileage tracking that maximizes your tax deductions. Built for professionals who drive to earn.</p>
+    </div>
     <div class="footer-col"><h4>Product</h4><a onclick="showTab('home')">Features</a><a onclick="showTab('pricing')">Pricing</a><a onclick="showTab('about')">How it works</a><a onclick="openLogin()">Sign in</a></div>
     <div class="footer-col"><h4>Resources</h4><a onclick="showTab('blog')">Blog</a><a onclick="showTab('about')">FAQ</a><a href="mailto:support@mymilesai.com">Contact</a></div>
     <div class="footer-col"><h4>Legal</h4><a href="mailto:privacy@mymilesai.com">Privacy Policy</a><a href="mailto:support@mymilesai.com">Terms of Service</a><a href="mailto:support@mymilesai.com">Cancellation</a></div>
   </div>
-  <div class="footer-bottom"><span>© 2026 MyMilesAI. All rights reserved.</span><span>support@mymilesai.com</span></div>
+  <div class="footer-bottom"><span>&copy; 2026 MyMilesAI. All rights reserved.</span><span>support@mymilesai.com</span></div>
 </footer>
 
-<div class="modal-bg" id="modal">
-  <div class="modal">
-    <button class="modal-x" onclick="closeLogin()">×</button>
-    <div class="modal-logo"><svg width="30" height="30" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#1B4DDB"/><path d="M5 20c0-2 1-3.5 2.5-4.5L10 12h12l2.5 3.5c1.5 1 2.5 2.5 2.5 4.5v1H5v-1z" fill="white"/><circle cx="10" cy="22" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg><span style="font-weight:700;font-size:17px">MyMilesAI</span></div>
-    <h2>Welcome back</h2><p class="modal-sub">Sign in to your MyMilesAI account</p>
-    <button class="soc-btn" onclick="socialLogin('Google')"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Continue with Google</button>
-    <button class="soc-btn" onclick="socialLogin('Apple')"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>Continue with Apple</button>
-    <div class="divider">or</div>
-    <input type="email" placeholder="Enter your email" id="login-email">
-    <button class="btn-magic" onclick="magicLogin()">Send magic link →</button>
-    <div class="modal-foot">No password · Privacy-first · 10-day free trial included</div>
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeLogin()">&times;</button>
+    <div class="modal-logo">
+      <div class="modal-logo-icon"><svg viewBox="0 0 20 20" fill="none"><path d="M3 14l3-6 3 4 2-3 4 5H3z" fill="white"/></svg></div>
+      <span class="nav-brand" style="font-size:18px">MyMiles<span>AI</span></span>
+    </div>
+    <h2>Welcome back</h2>
+    <p class="modal-sub">Sign in to your MyMilesAI account</p>
+    <button class="social-btn" onclick="socialLogin('Google')">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      Continue with Google
+    </button>
+    <button class="social-btn" onclick="socialLogin('Apple')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Continue with Apple
+    </button>
+    <div class="divider-or">or</div>
+    <input type="email" class="modal-email" placeholder="Enter your email" id="login-email">
+    <button class="magic-btn" onclick="magicLogin()">Send magic link &rarr;</button>
+    <div class="modal-note">No password &nbsp;&middot;&nbsp; Privacy-first &nbsp;&middot;&nbsp; 10-day free trial included</div>
   </div>
 </div>
 
 <script>
 var IRS=0.725,trips=[],loggedIn=false,userEmail='',formOpen=false;
-function showTab(n){document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active')});var p=document.getElementById('page-'+n),t=document.getElementById('tab-'+n);if(p)p.classList.add('active');if(t)t.classList.add('active');var f=document.getElementById('site-footer');if(f)f.style.display=n==='dashboard'?'none':'block';}
+
+function showTab(n){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+  document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active')});
+  var p=document.getElementById('page-'+n),t=document.getElementById('tab-'+n);
+  if(p)p.classList.add('active');
+  if(t)t.classList.add('active');
+  var f=document.getElementById('site-footer');
+  if(f)f.style.display=n==='dashboard'?'none':'block';
+}
+
 function openLogin(){document.getElementById('modal').classList.add('open')}
 function closeLogin(){document.getElementById('modal').classList.remove('open')}
+
 function socialLogin(p){userEmail='user@'+p.toLowerCase()+'.com';finishLogin()}
-function magicLogin(){var e=document.getElementById('login-email').value.trim();if(!e||!e.includes('@')){alert('Please enter a valid email.');return}userEmail=e;finishLogin()}
-function finishLogin(){loggedIn=true;closeLogin();var b=document.getElementById('nav-signin');b.textContent='Dashboard';b.onclick=function(){showTab('dashboard')};document.getElementById('dash-email').textContent=userEmail+' · 2026 mileage summary';renderTrips();showTab('dashboard')}
-function signOut(){loggedIn=false;userEmail='';trips=[];var b=document.getElementById('nav-signin');b.textContent='Sign in';b.onclick=openLogin;showTab('home')}
-function toggleForm(){formOpen=!formOpen;var f=document.getElementById('add-form');if(formOpen){f.classList.add('open');document.getElementById('f-date').value=new Date().toISOString().split('T')[0]}else f.classList.remove('open')}
-function saveTrip(){var from=document.getElementById('f-from').value.trim(),to=document.getElementById('f-to').value.trim(),miles=parseFloat(document.getElementById('f-miles').value),date=document.getElementById('f-date').value,cat=document.getElementById('f-cat').value;if(!from||!to||isNaN(miles)||miles<=0){alert('Please fill in all fields.');return}trips.unshift({id:Date.now(),from:from,to:to,miles:miles,date:date,cat:cat});['f-from','f-to','f-miles'].forEach(function(id){document.getElementById(id).value=''});document.getElementById('f-cat').value='business';if(formOpen)toggleForm();renderTrips()}
+function magicLogin(){
+  var e=document.getElementById('login-email').value.trim();
+  if(!e||!e.includes('@')){alert('Please enter a valid email.');return}
+  userEmail=e;finishLogin();
+}
+function finishLogin(){
+  loggedIn=true;closeLogin();
+  var b=document.getElementById('nav-signin');
+  b.textContent='Dashboard';b.onclick=function(){showTab('dashboard')};
+  document.getElementById('dash-user').textContent=userEmail+' · 2026 mileage summary';
+  renderTrips();showTab('dashboard');
+}
+function signOut(){
+  loggedIn=false;userEmail='';trips=[];
+  var b=document.getElementById('nav-signin');
+  b.textContent='Sign In';b.onclick=openLogin;
+  showTab('home');
+}
+function toggleAddForm(){
+  formOpen=!formOpen;
+  var f=document.getElementById('add-form');
+  if(formOpen){f.classList.add('open');document.getElementById('f-date').value=new Date().toISOString().split('T')[0]}
+  else f.classList.remove('open');
+}
+function saveTrip(){
+  var from=document.getElementById('f-from').value.trim(),
+      to=document.getElementById('f-to').value.trim(),
+      miles=parseFloat(document.getElementById('f-miles').value),
+      date=document.getElementById('f-date').value,
+      cat=document.getElementById('f-cat').value;
+  if(!from||!to||isNaN(miles)||miles<=0){alert('Please fill in all fields.');return}
+  trips.unshift({id:Date.now(),from:from,to:to,miles:miles,date:date,cat:cat});
+  ['f-from','f-to','f-miles'].forEach(function(id){document.getElementById(id).value=''});
+  document.getElementById('f-cat').value='business';
+  if(formOpen)toggleAddForm();
+  renderTrips();
+}
 function deleteTrip(id){trips=trips.filter(function(t){return t.id!==id});renderTrips()}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 var cats={business:'biz',personal:'pers',medical:'med',charity:'char'};
-function renderTrips(){var biz=0,pers=0;trips.forEach(function(t){if(t.cat==='business')biz+=t.miles;else pers+=t.miles});document.getElementById('s-biz').textContent=biz.toFixed(1);document.getElementById('s-ded').textContent='$'+(biz*IRS).toFixed(2);document.getElementById('s-pers').textContent=pers.toFixed(1);document.getElementById('s-trips').textContent=trips.length;var l=document.getElementById('trips-list');if(!trips.length){l.innerHTML='<div class="empty">No trips yet — add your first trip above</div>';return}l.innerHTML=trips.map(function(t){var d=t.cat==='business'?'<div class="trip-ded">+$'+(t.miles*IRS).toFixed(2)+'</div>':'';return'<div class="trip-row"><div><div class="trip-route">'+esc(t.from)+' → '+esc(t.to)+'</div><div class="trip-date">'+t.date+'</div></div><span class="cat '+cats[t.cat]+'">'+t.cat+'</span><div class="trip-mi">'+t.miles.toFixed(1)+' mi'+d+'</div><button class="btn-del" onclick="deleteTrip('+t.id+')">×</button></div>'}).join('')}
+function renderTrips(){
+  var biz=0,pers=0;
+  trips.forEach(function(t){if(t.cat==='business')biz+=t.miles;else pers+=t.miles});
+  document.getElementById('d-biz').textContent=biz.toFixed(1);
+  document.getElementById('d-ded').textContent='$'+(biz*IRS).toFixed(2);
+  document.getElementById('d-pers').textContent=pers.toFixed(1);
+  document.getElementById('d-trips').textContent=trips.length;
+  var l=document.getElementById('trip-list');
+  if(!trips.length){l.innerHTML='<div class="empty-state">No trips yet — add your first trip above</div>';return}
+  l.innerHTML=trips.map(function(t){
+    var d=t.cat==='business'?'<div class="trip-ded-lbl">+$'+(t.miles*IRS).toFixed(2)+'</div>':'';
+    return '<div class="trip-row"><div><div class="trip-route-name">'+esc(t.from)+' → '+esc(t.to)+'</div><div class="trip-date-lbl">'+t.date+'</div></div><span class="trip-cat '+cats[t.cat]+'">'+t.cat+'</span><div class="trip-mi-lbl">'+t.miles.toFixed(1)+' mi'+d+'</div><button class="btn-del-trip" onclick="deleteTrip('+t.id+')">×</button></div>';
+  }).join('');
+}
 renderTrips();
-function faq(el){var a=el.nextElementSibling,o=a.classList.contains('open');document.querySelectorAll('.faq-a').forEach(function(x){x.classList.remove('open')});document.querySelectorAll('.faq-q').forEach(function(x){x.classList.remove('open')});if(!o){a.classList.add('open');el.classList.add('open')}}
-var spds=[0,12,28,42,55,42,35,48,42],si=0;
-setInterval(function(){si=(si+1)%spds.length;var e=document.getElementById('spd');if(e)e.textContent=spds[si];var pct=spds[si]/70;var gp=document.getElementById('gp');if(gp)gp.style.strokeDashoffset=126-(126*pct*.75);},2000);
-var bmi=67.4;
-setInterval(function(){bmi+=(Math.random()*.7+.1);var b=document.getElementById('phb'),d=document.getElementById('phd');if(b)b.textContent=bmi.toFixed(1);if(d)d.textContent='$'+(bmi*IRS).toFixed(2);},4000);
+
+function faq(el){
+  var a=el.nextElementSibling,o=a.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(function(x){x.classList.remove('open')});
+  document.querySelectorAll('.faq-q').forEach(function(x){x.classList.remove('open')});
+  if(!o){a.classList.add('open');el.classList.add('open')}
+}
+
+// Speedometer animation
+var speeds=[35,42,55,28,48,35,62,35],si=0;
+setInterval(function(){
+  si=(si+1)%speeds.length;
+  var s=speeds[si];
+  var txt=document.getElementById('speedo-text');
+  if(txt)txt.textContent=s;
+  var arc=document.getElementById('speedo-arc-fill');
+  if(arc){var offset=157-(s/80*157);arc.setAttribute('stroke-dashoffset',Math.max(0,offset))}
+},2500);
+
+// Live business miles tick
+var bizMi=101.6;
+setInterval(function(){
+  bizMi+=(Math.random()*0.6+0.1);
+  var b=document.getElementById('s-bmi'),d=document.getElementById('s-ded');
+  if(b)b.textContent=bizMi.toFixed(1);
+  if(d)d.textContent='$'+(bizMi*0.725).toFixed(2);
+},3500);
 </script>
 </body>
-        </html>
+  </html>
