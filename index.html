@@ -158,7 +158,7 @@
 html{scroll-behavior:smooth;}
 body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 .container{max-width:1240px;margin:0 auto;padding:0 28px;}
-.reveal{opacity:0;transform:translateY(36px);transition:all .8s var(--ease);}
+.reveal{opacity:1;transform:translateY(36px);transition:all .8s var(--ease);}
 .reveal.vis{opacity:1;transform:none;}
 
 @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-14px) rotate(1deg)}}
@@ -780,17 +780,80 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
   .hero{padding:130px 0 80px;}
 }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
 <script>
-const _sb=supabase.createClient('https://dxpuuiqibtizewbbffjk.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4cHV1aXFpYnRpemV3YmJmZmprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA4NzM2MDAsImV4cCI6MjAyNjQ0OTYwMH0.placeholder');
-_sb.auth.onAuthStateChange(async(e,s)=>{if(s){window._sbUser=s.user;document.getElementById('navDashBtn')?.setAttribute('style','display:flex');document.getElementById('navSignInBtn')?.setAttribute('style','display:none');const{data}=await _sb.from('trips').select('*').eq('user_id',s.user.id).order('date',{ascending:false}).limit(50);if(data&&typeof renderDashboard==='function')renderDashboard(data);}else{window._sbUser=null;document.getElementById('navDashBtn')?.setAttribute('style','display:none');document.getElementById('navSignInBtn')?.setAttribute('style','display:flex');}});
-async function signInWithGoogle(){await _sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:window.location.origin}});}
-async function signInWithApple(){await _sb.auth.signInWithOAuth({provider:'apple',options:{redirectTo:window.location.origin}});}
-async function signInWithMagicLink(email){const{error}=await _sb.auth.signInWithOtp({email,options:{emailRedirectTo:window.location.origin}});return!error;}
-async function sbSaveTrip(t){if(!window._sbUser)return;const{data}=await _sb.from('trips').insert({...t,user_id:window._sbUser.id}).select().single();return data;}
-async function sbDeleteTrip(id){if(!window._sbUser)return;await _sb.from('trips').delete().eq('id',id).eq('user_id',window._sbUser.id);}
-function openAuthModal(){const m=document.getElementById('authModal');if(m)m.style.display='flex';}
-function closeAuthModal(){const m=document.getElementById('authModal');if(m)m.style.display='none';}
+window.addEventListener('DOMContentLoaded',function(){
+  // Force all reveal elements visible immediately
+  var els = document.querySelectorAll('.reveal');
+  for(var i=0;i<els.length;i++){
+    els[i].style.opacity='1';
+    els[i].style.transform='translateY(0)';
+    els[i].classList.add('visible');
+  }
+});
+</script>
+<!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  var SUPA_URL = 'https://dxpuuiqibtizewbbffjk.supabase.co';
+  var SUPA_ANON = 'REPLACE_WITH_ANON_KEY';
+  
+  if(!window.supabase){console.warn('Supabase SDK not loaded');return;}
+  
+  var _db = window.supabase.createClient(SUPA_URL, SUPA_ANON);
+  window._db = _db;
+
+  // Auth state
+  _db.auth.onAuthStateChange(function(event, session){
+    var user = session ? session.user : null;
+    window._currentUser = user;
+    var dashBtn = document.getElementById('navDashBtn');
+    var signInBtn = document.getElementById('navSignInBtn');
+    if(user){
+      if(dashBtn) dashBtn.style.display='flex';
+      if(signInBtn) signInBtn.style.display='none';
+      loadUserTrips(user.id);
+    } else {
+      if(dashBtn) dashBtn.style.display='none';
+      if(signInBtn) signInBtn.style.display='';
+    }
+  });
+
+  function loadUserTrips(userId){
+    _db.from('trips').select('*').eq('user_id', userId).order('date',{ascending:false}).limit(100)
+      .then(function(res){
+        if(!res.error && res.data){
+          window._userTrips = res.data;
+          if(typeof window.renderDashboard === 'function') window.renderDashboard(res.data);
+          if(typeof window.updateStats === 'function') window.updateStats(res.data);
+        }
+      });
+  }
+
+  window.sbSignInGoogle = function(){
+    _db.auth.signInWithOAuth({provider:'google',options:{redirectTo:window.location.origin}});
+  };
+  window.sbSignInApple = function(){
+    _db.auth.signInWithOAuth({provider:'apple',options:{redirectTo:window.location.origin}});
+  };
+  window.sbSignInMagicLink = function(email){
+    return _db.auth.signInWithOtp({email:email,options:{emailRedirectTo:window.location.origin}})
+      .then(function(res){return !res.error;});
+  };
+  window.sbSaveTrip = function(trip){
+    if(!window._currentUser) return Promise.resolve(null);
+    return _db.from('trips').insert(Object.assign({},trip,{user_id:window._currentUser.id})).select().single()
+      .then(function(res){return res.data;});
+  };
+  window.sbDeleteTrip = function(id){
+    if(!window._currentUser) return Promise.resolve();
+    return _db.from('trips').delete().eq('id',id).eq('user_id',window._currentUser.id);
+  };
+  window.sbSignOut = function(){
+    _db.auth.signOut().then(function(){window.location.reload();});
+  };
+})();
 </script>
 </head>
 <body>
@@ -837,7 +900,7 @@ function closeAuthModal(){const m=document.getElementById('authModal');if(m)m.st
   <div class="nav-links">
     <a href="#features">Features</a><a href="#how">How It Works</a><a href="#pricing">Pricing</a><a href="blog/">Blog</a><a href="about.html">About</a>
     <button class="locale-toggle" id="localeToggle" onclick="toggleLocale()"><span class="lt-flag" id="locFlag">🇺🇸</span><span class="lt-label" id="locLabel">MI</span></button>
-    <a href="#" onclick="openSignIn();return false;" id="navSignInBtn" onclick="openAuthModal()" style="cursor:pointer" style="display:inline-flex;align-items:center;padding:9px 22px;border-radius:100px;font-size:14px;font-weight:600;color:#374151;border:1.5px solid #d1d5db;text-decoration:none;margin-right:8px;background:transparent;transition:background .2s;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='transparent'">Sign In</a>
+    <a href="#" onclick="openSignIn();return false;" id="navSignInBtn" onclick="document.getElementById('authModal').style.display='flex'" style="cursor:pointer" onclick="openAuthModal()" style="cursor:pointer" style="display:inline-flex;align-items:center;padding:9px 22px;border-radius:100px;font-size:14px;font-weight:600;color:#374151;border:1.5px solid #d1d5db;text-decoration:none;margin-right:8px;background:transparent;transition:background .2s;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='transparent'">Sign In</a>
     <a href="#" onclick="if(window._user)showDash();else openSignIn();return false;" id="navDashBtn" style="display:none;align-items:center;padding:9px 22px;border-radius:100px;font-size:14px;font-weight:600;color:#2563EB;border:1.5px solid rgba(37,99,235,.3);text-decoration:none;margin-right:8px;background:rgba(37,99,235,.06);">Dashboard</a>
     
   </div>
@@ -1902,6 +1965,34 @@ window.saveTr=function(){
 })();
 </script>
 <div id="authModal" style="display:none;position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:1rem"><div style="background:#fff;border-radius:20px;padding:2rem 2.5rem;width:100%;max-width:380px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.2)"><button onclick="closeAuthModal()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8">&#x2715;</button><div style="text-align:center;margin-bottom:1.5rem"><svg width="36" height="36" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#1B4DDB"/><path d="M5 20c0-2 1-3.5 2.5-4.5L10 12h12l2.5 3.5c1.5 1 2.5 2.5 2.5 4.5v1H5v-1z" fill="white"/><circle cx="10" cy="22" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg><h2 style="font-size:22px;font-weight:700;margin:12px 0 4px">Welcome back</h2><p style="font-size:13px;color:#64748b;margin:0">Sign in to MyMilesAI</p></div><button onclick="signInWithGoogle()" style="width:100%;padding:11px;margin-bottom:10px;border:1.5px solid #e2e8f0;border-radius:12px;background:#fff;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;color:#0f172a"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>Continue with Google</button><button onclick="signInWithApple()" style="width:100%;padding:11px;margin-bottom:16px;border:1.5px solid #e2e8f0;border-radius:12px;background:#fff;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;color:#0f172a"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>Continue with Apple</button><div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:12px;color:#94a3b8"><span style="flex:1;height:1px;background:#e2e8f0"></span>or continue with email<span style="flex:1;height:1px;background:#e2e8f0"></span></div><input type="email" id="magicEmail" placeholder="your@email.com" style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:8px;box-sizing:border-box;outline:none" onfocus="this.style.borderColor='#1B4DDB'" onblur="this.style.borderColor='#e2e8f0'"><button onclick="(async()=>{const e=document.getElementById('magicEmail').value;const m=document.getElementById('magicMsg');if(!e||!e.includes('@')){m.textContent='Please enter a valid email.';m.style.color='#dc2626';return;}const ok=await signInWithMagicLink(e);m.textContent=ok?'Check your email for the sign-in link!':'Something went wrong. Try again.';m.style.color=ok?'#16a34a':'#dc2626';})()" style="width:100%;padding:12px;font-size:14px;font-weight:600;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;transition:background .15s">Send magic link &rarr;</button><p id="magicMsg" style="text-align:center;font-size:12px;margin:8px 0 0;min-height:16px"></p><p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:12px">No password &nbsp;&middot;&nbsp; Privacy-first &nbsp;&middot;&nbsp; 10-day free trial included</p></div></div>
+
+<div id="authModal" style="display:none;position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:1rem">
+  <div style="background:#fff;border-radius:20px;padding:2rem 2.5rem;width:100%;max-width:380px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.2)">
+    <button onclick="document.getElementById('authModal').style.display='none'" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8;line-height:1">&#x2715;</button>
+    <div style="text-align:center;margin-bottom:1.5rem">
+      <svg width="36" height="36" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#1B4DDB"/><path d="M5 20c0-2 1-3.5 2.5-4.5L10 12h12l2.5 3.5c1.5 1 2.5 2.5 2.5 4.5v1H5v-1z" fill="white"/><circle cx="10" cy="22" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg>
+      <h2 style="font-size:22px;font-weight:700;margin:12px 0 4px;font-family:inherit">Welcome back</h2>
+      <p style="font-size:13px;color:#64748b;margin:0">Sign in to MyMilesAI</p>
+    </div>
+    <button onclick="sbSignInGoogle()" style="width:100%;padding:11px;margin-bottom:10px;border:1.5px solid #e2e8f0;border-radius:12px;background:#fff;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;color:#0f172a;box-sizing:border-box">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      Continue with Google
+    </button>
+    <button onclick="sbSignInApple()" style="width:100%;padding:11px;margin-bottom:16px;border:1.5px solid #e2e8f0;border-radius:12px;background:#fff;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;color:#0f172a;box-sizing:border-box">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Continue with Apple
+    </button>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:12px;color:#94a3b8">
+      <span style="flex:1;height:1px;background:#e2e8f0"></span>or continue with email<span style="flex:1;height:1px;background:#e2e8f0"></span>
+    </div>
+    <input type="email" id="authEmail" placeholder="your@email.com" style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:8px;box-sizing:border-box;outline:none">
+    <button onclick="(async function(){var e=document.getElementById('authEmail').value.trim();var m=document.getElementById('authMsg');if(!e||!e.includes('@')){m.textContent='Enter a valid email.';m.style.color='#dc2626';return;}m.textContent='Sending...';m.style.color='#64748b';var ok=await sbSignInMagicLink(e);m.textContent=ok?'Check your email for the sign-in link!':'Error — try again.';m.style.color=ok?'#16a34a':'#dc2626';})()" style="width:100%;padding:12px;font-size:14px;font-weight:600;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;box-sizing:border-box">
+      Send magic link &rarr;
+    </button>
+    <p id="authMsg" style="text-align:center;font-size:12px;margin:8px 0 0;min-height:16px"></p>
+    <p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:12px">No password &nbsp;&middot;&nbsp; Privacy-first &nbsp;&middot;&nbsp; 10-day free trial</p>
+  </div>
+</div>
 </body>
 </html>
 
