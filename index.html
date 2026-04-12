@@ -2020,7 +2020,7 @@ setLocale(detectLocale());
 <div style="display:flex;align-items:center;gap:10px"><span style="font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;color:#0f172a">Recent Trips</span><span id="tripCount" style="padding:2px 10px;border-radius:100px;background:#f1f5f9;font-size:12px;font-weight:700;color:#64748b">0 trips</span></div>
 <button onclick="openAt()" style="display:flex;align-items:center;gap:6px;padding:9px 18px;border-radius:100px;background:linear-gradient(135deg,#16a34a,#059669);color:#fff;font-size:13px;font-weight:700;border:none;cursor:pointer">+ Add Trip</button>
 </div>
-<div style="display:flex;gap:6px;padding:12px 16px 4px;flex-wrap:wrap" id="periodFilters"><button onclick="filterPeriod('day')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#f1f5f9;color:#64748b;border:none">Day</button><button onclick="filterPeriod('week')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#f1f5f9;color:#64748b;border:none">Week</button><button onclick="filterPeriod('month')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#1B4DDB;color:#fff;border:none">Month</button><button onclick="filterPeriod('year')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#f1f5f9;color:#64748b;border:none">Year</button><span style="flex:1"></span><span style="font-size:12px;color:#94a3b8" id="periodLabel">This Month</span></div>
+<div style="display:flex;gap:6px;padding:12px 16px 4px;flex-wrap:wrap" id="periodFilters"><button onclick="filterPeriod('day')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#f1f5f9;color:#64748b;border:none">Day</button><button onclick="filterPeriod('week')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#f1f5f9;color:#64748b;border:none">Week</button><button onclick="filterPeriod('month')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#f1f5f9;color:#64748b;border:none">Month</button><button onclick="filterPeriod('year')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#1B4DDB;color:#fff;border:none">Year</button><span style="flex:1"></span><span style="font-size:12px;color:#94a3b8" id="periodLabel">This Year</span></div>
 <div style="display:flex;gap:6px;padding:4px 16px 10px;flex-wrap:wrap" id="catFilters"><button onclick="filterCat('all')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#0f172a;color:#fff;border:none">All</button><button onclick="filterCat('business')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#f1f5f9;color:#64748b;border:none">Business</button><button onclick="filterCat('personal')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#f1f5f9;color:#64748b;border:none">Personal</button><button onclick="filterCat('unclassified')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#f1f5f9;color:#64748b;border:none">Unclass.</button></div>
 <div id="tripsList" style="padding:12px 16px"></div>
 </div>
@@ -2047,7 +2047,7 @@ setLocale(detectLocale());
 <script>
 (function(){
 // ── Locale detection via timezone ──
-var _u=null,_tr=[];
+var _u=null,_tr=[];window._tr=_tr;
 var _tz=(typeof Intl!=='undefined')?Intl.DateTimeFormat().resolvedOptions().timeZone:'';
 var _CA=['Toronto','Vancouver','Winnipeg','Edmonton','Calgary','Regina','Halifax','Moncton','Whitehorse','Yellowknife','Iqaluit','Glace_Bay','Goose_Bay','Dawson','Creston','Thunder_Bay','Rankin_Inlet'].some(function(z){return _tz.indexOf(z)>-1;});
 var UNIT=_CA?'km':'mi';
@@ -2311,7 +2311,7 @@ window._showCancelConfirm=function(){
 };
 
 window.loadSupabaseTrips=function(trips){
-  _tr=[];
+  _tr=[];window._tr=_tr;
   trips.forEach(function(t){
     var fromName='Unknown';
     var toName='Unknown';
@@ -2354,10 +2354,11 @@ window.loadSupabaseTrips=function(trips){
       sbId:t.id
     });
   });
+  window._tr=_tr;
   refresh();
 };
 
-var _filterPeriod='month';var _filterCat='all';
+var _filterPeriod='year';var _filterCat='all';window._filterPeriod=_filterPeriod;window._filterCat=_filterCat;
 window.openSubModal=function(){var m=document.getElementById('subModal');if(m){m.style.display='flex';}};
 window.closeSubModal=function(){var m=document.getElementById('subModal');if(m)m.style.display='none';var c=document.getElementById('cancelConfirm');if(c)c.style.display='none';};
 window.filterPeriod=function(p){_filterPeriod=p;document.querySelectorAll('#periodFilters button').forEach(function(b){b.style.background='#f1f5f9';b.style.color='#64748b';});event.target.style.background='#1B4DDB';event.target.style.color='#fff';var labels={day:'Today',week:'This Week',month:'This Month',year:'This Year'};var el=document.getElementById('periodLabel');if(el)el.textContent=labels[p]||p;renderFilteredTrips();};
