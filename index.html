@@ -1023,7 +1023,7 @@ window.addEventListener('DOMContentLoaded',function(){
       <h1>Track every <span class="loc" data-us="mile" data-ca="kilometre">mile</span>.<br>Claim every <em>dollar.</em></h1>
       <p class="hero-desc">MyMilesAI automatically logs your trips with GPS, classifies them with AI, and calculates your <span class="loc" data-us="IRS" data-ca="CRA">IRS</span> tax deductions &mdash; all hands-free.</p>
       <div class="hero-ctas">
-        <a href="#cta" class="btn btn-primary btn-lg">Sign In Free <svg width="16" height="16"><use href="#i-arrow"/></svg></a>
+        <a href="#" onclick="openSignUp();return false;" class="btn btn-primary btn-lg">Start Free Trial <svg width="16" height="16"><use href="#i-arrow"/></svg></a>
         <a href="#calculator" class="btn btn-outline btn-lg">Calculate My Savings</a>
       </div>
       <div class="hero-trust">
@@ -1292,7 +1292,7 @@ window.addEventListener('DOMContentLoaded',function(){
   <div class="pain-vs reveal" style="margin-top:28px;">
     <h3>All of this for <em style="color:var(--sapphire-l)">$6.99/mo.</em></h3>
     <p>10-day free trial. No credit card required. Cancel anytime, no questions asked.</p>
-    <a href="#cta" class="btn btn-primary btn-lg" style="display:inline-flex">Start Tracking Free <svg width="16" height="16"><use href="#i-arrow"/></svg></a>
+    <a href="#" onclick="openSignUp();return false;" class="btn btn-primary btn-lg" style="display:inline-flex">Start Free Trial <svg width="16" height="16"><use href="#i-arrow"/></svg></a>
   </div>
 </div>
 </section>
@@ -1323,7 +1323,7 @@ window.addEventListener('DOMContentLoaded',function(){
     <h2 class="s-title">One plan. <em>Everything</em> included.</h2>
     <div class="s-desc" style="margin:0 auto">10-day free trial. Lock in early pricing before we launch publicly.</div>
   </div>
-  <div class="price-cards" style="justify-content:center"><div class="price-card pop reveal" style="max-width:440px;width:100%"><div class="price-name">MyMilesAI Pro</div><div class="price-desc">Everything included — unlimited, hands-free</div><div class="price-amt"><span style="font-size:18px;color:var(--text3);text-decoration:line-through;font-weight:500">$699</span>&nbsp;<span class="price-dollar">$69.99</span><span class="price-period">/year</span><p style="margin:6px 0 0;font-size:13px;color:var(--text2)">or <strong>$6.99/month</strong> — cancel anytime</p><p style="margin:8px 0 16px;font-size:11px;font-weight:800;color:#d4a843;letter-spacing:.05em;font-family:monospace;">&#127881; FOUNDING MEMBER RATE — limited time</p></div><div class="price-trial" style="background:rgba(27,77,219,.1);border-color:rgba(27,77,219,.15);color:var(--sapphire-l)">10-day free trial &mdash; no credit card required</div><ul class="price-features"><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Unlimited trips &mdash; no caps ever</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Auto GPS tracking</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>AI trip classification</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>IRS &amp; CRA compliant PDF reports</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>CSV, Excel &amp; Google Sheets export</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Live map view &amp; route history</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>AI tax assistant</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Accountant portal</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Privacy-first — data stays on your device</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>US &amp; Canada locale auto-detect</li></ul><button class="price-btn primary" onclick="showToast('Stripe checkout coming soon \u2014 use Sign In to access your account')">Start 10-day Free Trial <svg width="14" height="14"><use href="#i-arrow"/></svg></button><p style="text-align:center;font-size:12px;color:var(--text3);margin-top:12px">No charge during trial &nbsp;&middot;&nbsp; Cancel anytime &nbsp;&middot;&nbsp; Credit card required</p></div></div>
+  <div class="price-cards" style="justify-content:center"><div class="price-card pop reveal" style="max-width:440px;width:100%"><div class="price-name">MyMilesAI Pro</div><div class="price-desc">Everything included — unlimited, hands-free</div><div class="price-amt"><span style="font-size:18px;color:var(--text3);text-decoration:line-through;font-weight:500">$699</span>&nbsp;<span class="price-dollar">$69.99</span><span class="price-period">/year</span><p style="margin:6px 0 0;font-size:13px;color:var(--text2)">or <strong>$6.99/month</strong> — cancel anytime</p><p style="margin:8px 0 16px;font-size:11px;font-weight:800;color:#d4a843;letter-spacing:.05em;font-family:monospace;">&#127881; FOUNDING MEMBER RATE — limited time</p></div><div class="price-trial" style="background:rgba(27,77,219,.1);border-color:rgba(27,77,219,.15);color:var(--sapphire-l)">10-day free trial &mdash; no credit card required</div><ul class="price-features"><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Unlimited trips &mdash; no caps ever</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Auto GPS tracking</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>AI trip classification</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>IRS &amp; CRA compliant PDF reports</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>CSV, Excel &amp; Google Sheets export</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Live map view &amp; route history</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>AI tax assistant</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Accountant portal</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Privacy-first — data stays on your device</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>US &amp; Canada locale auto-detect</li></ul><button class="price-btn primary" onclick="openSignUp()">Start 10-day Free Trial <svg width="14" height="14"><use href="#i-arrow"/></svg></button><p style="text-align:center;font-size:12px;color:var(--text3);margin-top:12px">Credit card required &nbsp;&middot;&nbsp; Cancel anytime during trial</p></div></div>
   <div class="pricing-note">Beta access is completely free &middot; Lock in early pricing when we launch</div>
   <div class="pricing-cards-note">
     <span><svg width="14" height="14" style="color:#6EE7B7"><use href="#i-lock"/></svg> Privacy-first design</span>
@@ -1533,7 +1533,7 @@ window.addEventListener('DOMContentLoaded',function(){
     <div class="cta-spots"><span class="icon" style="color:var(--rose)"><svg><use href="#i-fire"/></svg></span><span id="spotsLeft">47 beta spots remaining this week</span></div>
     <div class="cta-form">
       <input type="email" class="cta-input" id="ctaEmail" placeholder="Enter your email address...">
-      <button class="cta-btn-primary" id="ctaBtn" onclick="handleBetaSignup()">Get Access <svg width="14" height="14"><use href="#i-arrow"/></svg></button>
+      <button class="cta-btn-primary" id="ctaBtn" onclick="openSignUp()">Get Access <svg width="14" height="14"><use href="#i-arrow"/></svg></button>
     </div>
     <div class="cta-note">iOS via MyMilesAI &middot; Android coming soon &middot; No credit card required</div>
     <div class="cta-earlybird"><svg width="16" height="16" style="flex-shrink:0"><use href="#i-lock"/></svg> Beta users lock in $6.99/mo pricing forever when we launch</div>
@@ -1588,7 +1588,7 @@ window.addEventListener('DOMContentLoaded',function(){
 <div class="container sticky-bar-inner">
   <div class="sticky-bar-text"><strong>MyMilesAI Beta</strong> &mdash; All Pro features free. Limited spots.</div>
   <div class="sticky-bar-cta">
-    <a href="#cta" class="btn btn-primary">Get Beta Access <svg width="14" height="14"><use href="#i-arrow"/></svg></a>
+    <a href="#" onclick="openSignUp();return false;" class="btn btn-primary">Start Free Trial <svg width="14" height="14"><use href="#i-arrow"/></svg></a>
   </div>
 </div>
 </div>
@@ -2360,6 +2360,33 @@ window.loadSupabaseTrips=function(trips){
   refresh();
 };
 
+window.openSignUp=function(){
+  document.getElementById('signupModal').style.display='flex';
+  document.getElementById('signupStep1').style.display='block';
+  document.getElementById('signupStep2').style.display='none';
+  document.getElementById('signupStep3').style.display='none';
+};
+window.closeSignUp=function(){document.getElementById('signupModal').style.display='none';};
+window.signupToStep2=function(){
+  var name=document.getElementById('signupName').value.trim();
+  var email=document.getElementById('signupEmail').value.trim();
+  var agree=document.getElementById('signupAgree');
+  if(!name){showToast('Please enter your name');return;}
+  if(!email||!email.includes('@')){showToast('Please enter a valid email');return;}
+  if(agree&&!agree.checked){showToast('Please agree to Terms of Service');return;}
+  document.getElementById('signupStep1').style.display='none';
+  document.getElementById('signupStep2').style.display='block';
+};
+window.signupToStep3=function(plan){
+  window._selectedPlan=plan;
+  document.getElementById('signupStep2').style.display='none';
+  document.getElementById('signupStep3').style.display='block';
+};
+window.signupComplete=function(){
+  showToast('Stripe integration coming soon \u2014 sign in with your email to access the dashboard');
+  closeSignUp();
+  openSignIn();
+};
 var _filterPeriod='year';var _filterCat='all';window._filterPeriod=_filterPeriod;window._filterCat=_filterCat;
 window.openSubModal=function(){var m=document.getElementById('subModal');if(m){m.style.display='flex';}};
 window.closeSubModal=function(){var m=document.getElementById('subModal');if(m)m.style.display='none';var c=document.getElementById('cancelConfirm');if(c)c.style.display='none';};
@@ -2504,6 +2531,93 @@ window.renderFilteredTrips=function renderFilteredTrips(){var now=new Date();var
       </div>
     </div>
     <p style="font-size:12px;color:#94a3b8;text-align:center;margin:0">Questions? Contact <a href="mailto:support@mymilesai.com" style="color:#1B4DDB;text-decoration:none">support@mymilesai.com</a></p>
+  </div>
+</div>
+
+<!-- SIGN UP MODAL -->
+<div id="signupModal" style="display:none;position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:1rem;overflow-y:auto">
+  <div style="background:#fff;border-radius:20px;padding:2rem 2.5rem;width:100%;max-width:420px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.2);margin:auto">
+    <button onclick="closeSignUp()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8;line-height:1">&#x2715;</button>
+
+    <!-- Step 1: Name / Email / Phone -->
+    <div id="signupStep1">
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <svg width="36" height="36" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#1B4DDB"/><path d="M5 20c0-2 1-3.5 2.5-4.5L10 12h12l2.5 3.5c1.5 1 2.5 2.5 2.5 4.5v1H5v-1z" fill="white"/><circle cx="10" cy="22" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg>
+        <h2 style="font-size:22px;font-weight:700;margin:12px 0 4px;font-family:inherit;color:#0f172a">Start your free trial</h2>
+        <p style="font-size:13px;color:#64748b;margin:0">10 days free, then $69.99/year. Cancel anytime.</p>
+      </div>
+      <input id="signupName" type="text" placeholder="Your full name" autocomplete="name"
+        style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:10px;box-sizing:border-box;outline:none"
+        onfocus="this.style.borderColor='#1B4DDB';this.style.background='#fff'"
+        onblur="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'">
+      <input id="signupEmail" type="email" placeholder="your@email.com" autocomplete="email"
+        style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:10px;box-sizing:border-box;outline:none"
+        onfocus="this.style.borderColor='#1B4DDB';this.style.background='#fff'"
+        onblur="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'">
+      <input id="signupPhone" type="tel" placeholder="Phone number (optional)" autocomplete="tel"
+        style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:12px;box-sizing:border-box;outline:none"
+        onfocus="this.style.borderColor='#1B4DDB';this.style.background='#fff'"
+        onblur="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'">
+      <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:16px">
+        <input type="checkbox" id="signupAgree" style="margin-top:3px;width:16px;height:16px;accent-color:#1B4DDB;cursor:pointer;flex-shrink:0">
+        <label for="signupAgree" style="font-size:12px;color:#64748b;line-height:1.4;cursor:pointer">I agree to the <a href="#terms" style="color:#1B4DDB;text-decoration:underline" onclick="event.preventDefault();event.stopPropagation();document.getElementById('termsModal').style.display='block'">Terms of Service</a> and <a href="#privacy" style="color:#1B4DDB;text-decoration:underline" onclick="event.preventDefault();event.stopPropagation();document.getElementById('privacyModal').style.display='block'">Privacy Policy</a></label>
+      </div>
+      <button id="signupContinueBtn" onclick="signupToStep2()"
+        style="width:100%;padding:12px;font-size:14px;font-weight:600;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;margin-bottom:14px">
+        Continue to payment &#8594;
+      </button>
+      <p style="text-align:center;font-size:13px;color:#94a3b8;margin:0">Already have an account? <a href="#" onclick="event.preventDefault();closeSignUp();openSignIn();" style="color:#1B4DDB;text-decoration:none;font-weight:600">Sign in</a></p>
+    </div>
+
+    <!-- Step 2: Plan selection -->
+    <div id="signupStep2" style="display:none">
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <h2 style="font-size:22px;font-weight:700;margin:0 0 4px;font-family:inherit;color:#0f172a">Choose your plan</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
+        <!-- Monthly card -->
+        <div onclick="signupToStep3('monthly')" style="border:1.5px solid #e2e8f0;border-radius:14px;padding:18px 14px;cursor:pointer;transition:border-color .2s" onmouseover="this.style.borderColor='#1B4DDB'" onmouseout="this.style.borderColor='#e2e8f0'">
+          <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Monthly</div>
+          <div style="font-size:24px;font-weight:700;color:#0f172a;font-family:'Playfair Display',Georgia,serif">$6.99<span style="font-size:13px;font-weight:500;color:#64748b">/mo</span></div>
+          <ul style="list-style:none;padding:0;margin:12px 0 14px;font-size:12px;color:#64748b">
+            <li style="margin-bottom:4px">&#10003; Unlimited trips</li>
+            <li>&#10003; Cancel anytime</li>
+          </ul>
+          <button style="width:100%;padding:9px;border-radius:10px;background:#f1f5f9;color:#374151;font-size:13px;font-weight:600;border:none;cursor:pointer">Select</button>
+        </div>
+        <!-- Annual card -->
+        <div onclick="signupToStep3('annual')" style="border:2px solid #1B4DDB;border-radius:14px;padding:18px 14px;cursor:pointer;background:rgba(27,77,219,.02);position:relative">
+          <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#1B4DDB;color:#fff;font-size:10px;font-weight:700;padding:2px 10px;border-radius:100px;white-space:nowrap">Best value</div>
+          <div style="font-size:11px;font-weight:700;color:#1B4DDB;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Annual &mdash; save 17%</div>
+          <div style="font-size:24px;font-weight:700;color:#0f172a;font-family:'Playfair Display',Georgia,serif">$69.99<span style="font-size:13px;font-weight:500;color:#64748b">/yr</span></div>
+          <ul style="list-style:none;padding:0;margin:12px 0 14px;font-size:12px;color:#64748b">
+            <li style="margin-bottom:4px">&#10003; Unlimited trips</li>
+            <li style="margin-bottom:4px">&#10003; Cancel anytime</li>
+            <li>&#10003; Save $13.89/yr</li>
+          </ul>
+          <button style="width:100%;padding:9px;border-radius:10px;background:#1B4DDB;color:#fff;font-size:13px;font-weight:600;border:none;cursor:pointer">Select</button>
+        </div>
+      </div>
+      <p style="text-align:center;font-size:13px;color:#94a3b8;margin:0"><a href="#" onclick="event.preventDefault();document.getElementById('signupStep2').style.display='none';document.getElementById('signupStep1').style.display='block';" style="color:#1B4DDB;text-decoration:none">&#8592; Back</a></p>
+    </div>
+
+    <!-- Step 3: Payment -->
+    <div id="signupStep3" style="display:none">
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <h2 style="font-size:22px;font-weight:700;margin:0 0 4px;font-family:inherit;color:#0f172a">Payment details</h2>
+        <p style="font-size:13px;color:#64748b;margin:0">Your card will not be charged during the 10-day trial</p>
+      </div>
+      <div id="stripeCardElement" style="border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 16px;background:#f8fafc;color:#94a3b8;font-size:13px;margin-bottom:16px;min-height:48px;display:flex;align-items:center">Stripe payment form will load here</div>
+      <button onclick="signupComplete()"
+        style="width:100%;padding:12px;font-size:14px;font-weight:600;background:linear-gradient(135deg,#16a34a,#059669);color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;margin-bottom:12px">
+        Start free trial &#8594;
+      </button>
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:14px">
+        <span style="font-size:11px;color:#94a3b8;display:flex;align-items:center;gap:4px">&#128274; 256-bit SSL encrypted</span>
+        <span style="font-size:11px;color:#94a3b8">&#10003; Cancel anytime</span>
+      </div>
+      <p style="text-align:center;font-size:13px;color:#94a3b8;margin:0"><a href="#" onclick="event.preventDefault();document.getElementById('signupStep3').style.display='none';document.getElementById('signupStep2').style.display='block';" style="color:#1B4DDB;text-decoration:none">&#8592; Back</a></p>
+    </div>
   </div>
 </div>
 
