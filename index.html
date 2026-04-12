@@ -2012,7 +2012,7 @@ setLocale(detectLocale());
 <div style="background:#0f172a;border-radius:20px;padding:28px 32px;margin-bottom:20px">
 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:8px">
 <div><div style="font-size:11px;font-weight:700;color:#475569;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">2026 Tax Year Summary</div>
-<div style="display:flex;align-items:center;gap:8px"><div style="width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,#16a34a,#059669);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="11" width="22" height="9" rx="2"/><path d="M5 11V8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/><circle cx="7" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg></div><span style="font-family:'Playfair Display',Georgia,serif;font-size:17px;font-weight:700;color:#f8fafc">MyMilesAI</span></div></div>
+<div style="display:flex;align-items:center;gap:8px"><div style="width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,#16a34a,#059669);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="11" width="22" height="9" rx="2"/><path d="M5 11V8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/><circle cx="7" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg></div><span style="font-family:'Playfair Display',Georgia,serif;font-size:17px;font-weight:700"><span style="color:#16a34a">M</span><span style="color:#6B3FA0">y</span><span style="color:#D4537E">Miles</span><span style="color:#1B4DDB">AI</span></span></div></div>
 <span style="font-size:12px;color:#475569">Auto-synced</span>
 </div>
 <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
@@ -2063,9 +2063,13 @@ setLocale(detectLocale());
       <span id="scBizPct" style="padding:3px 10px;border-radius:100px;background:rgba(107,63,160,.1);color:#6B3FA0;font-size:11px;font-weight:700;white-space:nowrap">0%</span>
     </div>
     <div id="scBizDist" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#6B3FA0;line-height:1;margin-bottom:3px">0.0</div>
-    <div style="font-size:12px;color:#94a3b8;font-weight:500;margin-bottom:14px">Business <span class="lbl-unit">km</span></div>
-    <div style="height:5px;background:#f1f5f9;border-radius:100px;overflow:hidden">
-      <div id="scBizBar" style="height:100%;width:0%;background:repeating-linear-gradient(90deg,#6B3FA0 0,#6B3FA0 7px,transparent 7px,transparent 11px);transition:width .5s ease"></div>
+    <div style="font-size:12px;color:#94a3b8;font-weight:500;margin-bottom:10px">Business <span class="lbl-unit">km</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+      <span style="font-size:10px;color:#94a3b8;font-weight:500">of 5,000 goal</span>
+      <span id="scBizPctLabel" style="font-size:10px;color:#6B3FA0;font-weight:700">0%</span>
+    </div>
+    <div style="height:8px;background:#f1f5f9;border-radius:100px;overflow:hidden">
+      <div id="scBizBar" style="height:100%;width:0%;background:repeating-linear-gradient(90deg,#6B3FA0 0,#6B3FA0 10px,rgba(107,63,160,.25) 10px,rgba(107,63,160,.25) 14px);transition:width .6s ease"></div>
     </div>
   </div>
 
@@ -2078,9 +2082,13 @@ setLocale(detectLocale());
       <span id="scPersPct" style="padding:3px 10px;border-radius:100px;background:rgba(212,83,126,.1);color:#D4537E;font-size:11px;font-weight:700;white-space:nowrap">0%</span>
     </div>
     <div id="scPersDist" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#D4537E;line-height:1;margin-bottom:3px">0.0</div>
-    <div style="font-size:12px;color:#94a3b8;font-weight:500;margin-bottom:14px">Personal <span class="lbl-unit">km</span></div>
-    <div style="height:5px;background:#f1f5f9;border-radius:100px;overflow:hidden">
-      <div id="scPersBar" style="height:100%;width:0%;background:linear-gradient(90deg,#D4537E,#f472b6);border-radius:100px;transition:width .5s ease"></div>
+    <div style="font-size:12px;color:#94a3b8;font-weight:500;margin-bottom:10px">Personal <span class="lbl-unit">km</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+      <span style="font-size:10px;color:#94a3b8;font-weight:500">of 5,000 goal</span>
+      <span id="scPersPctLabel" style="font-size:10px;color:#D4537E;font-weight:700">0%</span>
+    </div>
+    <div style="height:8px;background:#f1f5f9;border-radius:100px;overflow:hidden">
+      <div id="scPersBar" style="height:100%;width:0%;background:linear-gradient(90deg,#D4537E,#f472b6);border-radius:100px;transition:width .6s ease"></div>
     </div>
   </div>
 
@@ -2094,9 +2102,14 @@ setLocale(detectLocale());
       <span id="scDedBadge" style="padding:3px 10px;border-radius:100px;background:rgba(22,163,74,.1);color:#16a34a;font-size:11px;font-weight:700;white-space:nowrap">+$0.00</span>
     </div>
     <div id="scDedAmt" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#16a34a;line-height:1;margin-bottom:3px">$0.00</div>
-    <div style="font-size:12px;color:#94a3b8;font-weight:500;margin-bottom:14px">Tax Deduction</div>
-    <div style="height:5px;background:#f1f5f9;border-radius:100px;overflow:hidden">
-      <div id="scDedBar" style="height:100%;width:0%;background:linear-gradient(90deg,#16a34a,#4ade80);border-radius:100px;transition:width .5s ease"></div>
+    <div style="font-size:12px;color:#94a3b8;font-weight:500;margin-bottom:10px">Tax Deduction</div>
+    <div id="scDedChart" style="display:flex;align-items:flex-end;gap:3px;height:28px">
+      <div class="sc-dc" style="flex:1;background:#f1f5f9;border-radius:3px 3px 0 0;height:35%;transition:background .4s,height .4s"></div>
+      <div class="sc-dc" style="flex:1;background:#f1f5f9;border-radius:3px 3px 0 0;height:55%;transition:background .4s,height .4s"></div>
+      <div class="sc-dc" style="flex:1;background:#f1f5f9;border-radius:3px 3px 0 0;height:75%;transition:background .4s,height .4s"></div>
+      <div class="sc-dc" style="flex:1;background:#f1f5f9;border-radius:3px 3px 0 0;height:55%;transition:background .4s,height .4s"></div>
+      <div class="sc-dc" style="flex:1;background:#f1f5f9;border-radius:3px 3px 0 0;height:100%;transition:background .4s,height .4s"></div>
+      <div class="sc-dc" style="flex:1;background:#f1f5f9;border-radius:3px 3px 0 0;height:65%;transition:background .4s,height .4s"></div>
     </div>
   </div>
 
@@ -2109,9 +2122,13 @@ setLocale(detectLocale());
       <span id="scTripsBadge" style="padding:3px 10px;border-radius:100px;background:#f1f5f9;color:#64748b;font-size:11px;font-weight:700;white-space:nowrap">0 trips</span>
     </div>
     <div id="scTrips" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#0f172a;line-height:1;margin-bottom:3px">0</div>
-    <div style="font-size:12px;color:#94a3b8;font-weight:500;margin-bottom:14px">Total Trips</div>
-    <div style="height:5px;background:#f1f5f9;border-radius:100px;overflow:hidden">
-      <div id="scTripsBar" style="height:100%;width:0%;background:linear-gradient(90deg,#D4537E,#f472b6);border-radius:100px;transition:width .5s ease"></div>
+    <div style="font-size:12px;color:#94a3b8;font-weight:500;margin-bottom:10px">Total Trips</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">
+      <span style="font-size:10px;color:#94a3b8;font-weight:500">of 50 trips</span>
+      <span id="scTripsPctLabel" style="font-size:10px;color:#D4537E;font-weight:700">0%</span>
+    </div>
+    <div style="height:8px;background:#f1f5f9;border-radius:100px;overflow:hidden">
+      <div id="scTripsBar" style="height:100%;width:0%;background:linear-gradient(90deg,#6B3FA0,#D4537E);border-radius:100px;transition:width .6s ease"></div>
     </div>
   </div>
 
@@ -2255,15 +2272,21 @@ function refresh(){
   sc=document.getElementById('scBizDist');if(sc)sc.textContent=b.toFixed(1);
   sc=document.getElementById('scBizPct');if(sc)sc.textContent=_bizPct+'%';
   sc=document.getElementById('scBizBar');if(sc)sc.style.width=_bizPct+'%';
+  sc=document.getElementById('scBizPctLabel');if(sc)sc.textContent=_bizPct+'%';
   sc=document.getElementById('scPersDist');if(sc)sc.textContent=p.toFixed(1);
   sc=document.getElementById('scPersPct');if(sc)sc.textContent=_persPct+'%';
   sc=document.getElementById('scPersBar');if(sc)sc.style.width=_persPct+'%';
+  sc=document.getElementById('scPersPctLabel');if(sc)sc.textContent=_persPct+'%';
   sc=document.getElementById('scDedAmt');if(sc)sc.textContent='$'+fmt(d);
   sc=document.getElementById('scDedBadge');if(sc)sc.textContent='+$'+fmt(d);
-  sc=document.getElementById('scDedBar');if(sc)sc.style.width=Math.min(100,(d/_goal)*100).toFixed(1)+'%';
+  var _dedPct=Math.min(100,(d/_goal)*100);
+  var _dThr=[0,16.7,33.3,50,66.7,83.3];
+  document.querySelectorAll('.sc-dc').forEach(function(b,i){b.style.background=_dedPct>_dThr[i]?'#16a34a':'#f1f5f9';});
   sc=document.getElementById('scTrips');if(sc)sc.textContent=_tr.length;
   sc=document.getElementById('scTripsBadge');if(sc)sc.textContent=_tr.length+' trip'+(_tr.length===1?'':'s');
-  sc=document.getElementById('scTripsBar');if(sc)sc.style.width=Math.min(100,(_tr.length/50)*100).toFixed(1)+'%';
+  var _trPct=Math.min(100,(_tr.length/50)*100);
+  sc=document.getElementById('scTripsBar');if(sc)sc.style.width=_trPct.toFixed(1)+'%';
+  sc=document.getElementById('scTripsPctLabel');if(sc)sc.textContent=Math.round(_trPct)+'%';
   renderFilteredTrips();
 }
 
