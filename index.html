@@ -2507,6 +2507,7 @@ window.openSignUp=function(){
   document.getElementById('signupStep1').style.display='block';
   document.getElementById('signupStep2').style.display='none';
   document.getElementById('signupStep3').style.display='none';
+  var sc=document.getElementById('signupCountry');if(sc)sc.value=LOC.country;
 };
 window.closeSignUp=function(){document.getElementById('signupModal').style.display='none';};
 window.signupToStep2=function(){
@@ -2842,10 +2843,20 @@ var _ml=document.getElementById('tMiLbl');if(_ml)_ml.textContent=UNIT==='km'?'Ki
         style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:10px;box-sizing:border-box;outline:none"
         onfocus="this.style.borderColor='#1B4DDB';this.style.background='#fff'"
         onblur="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'">
-      <input id="signupPhone" type="tel" placeholder="Phone number (optional)" autocomplete="tel"
-        style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:12px;box-sizing:border-box;outline:none"
+      <div id="signupPhoneWrap" style="display:flex;align-items:center;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;margin-bottom:10px;box-sizing:border-box;transition:border-color .15s,background .15s"
+        onfocusin="this.style.borderColor='#1B4DDB';this.style.background='#fff'"
+        onfocusout="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'">
+        <span style="padding:11px 10px 11px 14px;font-size:14px;color:#64748b;font-family:inherit;white-space:nowrap;border-right:1px solid #e2e8f0;user-select:none">+1</span>
+        <input id="signupPhone" type="tel" placeholder="Phone number (optional)" autocomplete="tel"
+          style="flex:1;padding:11px 14px;font-size:14px;border:none;background:transparent;color:#0f172a;font-family:inherit;box-sizing:border-box;outline:none;min-width:0">
+      </div>
+      <select id="signupCountry" onchange="setLocale(this.value)"
+        style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:12px;box-sizing:border-box;outline:none;cursor:pointer;appearance:auto"
         onfocus="this.style.borderColor='#1B4DDB';this.style.background='#fff'"
         onblur="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'">
+        <option value="US">🇺🇸 United States</option>
+        <option value="CA">🇨🇦 Canada</option>
+      </select>
       <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:16px">
         <input type="checkbox" id="signupAgree" style="margin-top:3px;width:16px;height:16px;accent-color:#1B4DDB;cursor:pointer;flex-shrink:0">
         <label for="signupAgree" style="font-size:12px;color:#64748b;line-height:1.4;cursor:pointer">I agree to the <a href="#terms" style="color:#1B4DDB;text-decoration:underline" onclick="event.preventDefault();event.stopPropagation();document.getElementById('termsModal').style.display='block'">Terms of Service</a> and <a href="#privacy" style="color:#1B4DDB;text-decoration:underline" onclick="event.preventDefault();event.stopPropagation();document.getElementById('privacyModal').style.display='block'">Privacy Policy</a></label>
