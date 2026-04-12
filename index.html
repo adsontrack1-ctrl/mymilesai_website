@@ -2026,8 +2026,8 @@ setLocale(detectLocale());
 <div id="tripsList" style="padding:14px 18px"></div>
 </div>
 </div></div>
-<div id="atOv" class="mmOv" onclick="if(event.target===this)closeAt()">
-<div class="mmBox" style="max-width:480px"><button class="mmClose" onclick="closeAt()">&#x2715;</button>
+<div id="atOv" class="mmOv" onclick="if(event.target===this){closeAt();resetAtForm();}">
+<div class="mmBox" style="max-width:480px"><button class="mmClose" onclick="closeAt();resetAtForm()">&#x2715;</button>
 <h3 style="font-family:'Playfair Display',Georgia,serif;font-size:24px;font-weight:700;color:#111827;margin-bottom:24px">Add Trip</h3>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
 <div><label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px">From</label><input id="tF" class="mmInput" placeholder="Start address" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"></div>
@@ -2043,7 +2043,7 @@ setLocale(detectLocale());
 <button onclick="pCat(this)" data-cat="charity" style="padding:11px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;color:#374151;font-size:13px;font-weight:600;cursor:pointer">Charity</button></div>
 <div id="dPv" style="display:none;background:rgba(22,163,74,.06);border:1px solid rgba(22,163,74,.2);border-radius:10px;padding:10px 14px;font-size:13px;font-weight:700;color:#16a34a;margin-bottom:14px"></div>
 <input id="tNt" class="mmInput" placeholder="Notes &#x2014; client name, purpose..." style="margin-bottom:16px" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'">
-<button class="mmBtn mmBtnPrimary" onclick="saveTr()">Save Trip &#x2192;</button>
+<button id="atSaveBtn" class="mmBtn mmBtnPrimary" onclick="saveTr()">Save Trip &#x2192;</button>
 </div></div>
 <script>
 (function(){
@@ -2391,7 +2391,99 @@ window.openSubModal=function(){var m=document.getElementById('subModal');if(m){m
 window.closeSubModal=function(){var m=document.getElementById('subModal');if(m)m.style.display='none';var c=document.getElementById('cancelConfirm');if(c)c.style.display='none';};
 window.filterPeriod=function(p){_filterPeriod=p;window._filterPeriod=_filterPeriod;document.querySelectorAll('#periodFilters button').forEach(function(b){b.style.background='#f1f5f9';b.style.color='#64748b';});event.target.style.background='#1B4DDB';event.target.style.color='#fff';updatePeriodLabel();renderFilteredTrips();};
 window.filterCat=function(c){_filterCat=c;window._filterCat=_filterCat;document.querySelectorAll('#catFilters button').forEach(function(b){b.style.background='#f1f5f9';b.style.color='#64748b';});event.target.style.background='#0f172a';event.target.style.color='#fff';renderFilteredTrips();};
-window.renderFilteredTrips=function renderFilteredTrips(){var now=new Date();var filtered=_tr.filter(function(t){var tripDate=null;if(t.dt){var d=t.dt;if(d.match(/^\d{4}-\d{2}-\d{2}/))tripDate=new Date(d);else{var parsed=Date.parse(d);if(!isNaN(parsed))tripDate=new Date(parsed);else{parsed=Date.parse(d+', '+now.getFullYear());if(!isNaN(parsed))tripDate=new Date(parsed);}}}if(!tripDate)tripDate=new Date();var pass=true;if(_filterPeriod==='day'){pass=tripDate.toDateString()===now.toDateString();}else if(_filterPeriod==='week'){var wa=new Date(now);wa.setDate(wa.getDate()-7);pass=tripDate>=wa;}else if(_filterPeriod==='month'){pass=tripDate.getMonth()===now.getMonth()&&tripDate.getFullYear()===now.getFullYear();}if(_filterCat!=='all'){if(_filterCat==='unclassified')pass=pass&&(!t.c||t.c==='unclassified');else pass=pass&&(t.c===_filterCat);}return pass;});var el=document.getElementById('tripCount');if(el)el.textContent=filtered.length+' trip'+(filtered.length!==1?'s':'');var body=document.getElementById('tripsList');if(!body)return;if(!filtered.length){var labels={day:'today',week:'this week',month:'this month',year:'this year'};body.innerHTML='<div style="text-align:center;padding:40px 20px;color:#94a3b8;font-size:14px">No trips '+labels[_filterPeriod]+(_filterCat!=='all'?' in '+_filterCat:'')+' <br><span onclick="openAt()" style="color:#1B4DDB;cursor:pointer;font-weight:600;margin-top:8px;display:inline-block">+ Add a trip</span></div>';return;}var catColor={business:'#1B4DDB',personal:'#ec4899',medical:'#16a34a',charity:'#dc2626'};var catBg={business:'rgba(27,77,219,.06)',personal:'rgba(236,72,153,.06)',medical:'rgba(22,163,74,.06)',charity:'rgba(220,38,38,.06)'};var catLabel={business:'Business',personal:'Personal',medical:'Medical',charity:'Charity'};body.innerHTML=filtered.slice(0,50).map(function(t){var dd=t.dt||'';var cc=catColor[t.c]||'#6b7280';var cb=catBg[t.c]||'#f3f4f6';var cl=catLabel[t.c]||t.c;return '<div style="border:1px solid #f1f5f9;border-radius:14px;padding:16px 20px;margin-bottom:10px"><div style="display:flex;align-items:center;gap:14px"><div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="width:10px;height:10px;border-radius:50%;border:2.5px solid '+cc+'"></div><div style="width:2.5px;height:20px;border-radius:2px;background:'+cc+'44"></div><div style="width:10px;height:10px;border-radius:50%;background:'+cc+'"></div></div><div style="flex:1"><p style="font-size:14px;font-weight:500;color:#111827;margin:0">'+t.f+' \u2192 '+t.t+'</p><p style="font-size:12px;color:#94a3b8;margin:4px 0 0">'+dd+'</p></div><span style="font-size:11px;font-weight:500;padding:3px 12px;border-radius:100px;background:'+cb+';color:'+cc+'">'+cl+'</span><div style="text-align:right"><p style="font-family:Playfair Display,serif;font-size:24px;font-weight:700;color:#111827;margin:0">'+t.m.toFixed(1)+'</p><p style="font-size:11px;color:#94a3b8;margin:0">km</p></div>'+(t.d>0?'<span style="font-size:12px;font-weight:600;color:#16a34a">+$'+t.d.toFixed(2)+'</span>':'')+'<button onclick="deleteTrip('+_tr.indexOf(t)+')" style="background:none;border:none;font-size:16px;color:#cbd5e1;cursor:pointer">\u00d7</button></div></div>';}).join('');if(filtered.length>50)body.innerHTML+='<p style="text-align:center;font-size:12px;color:#94a3b8">Showing 50 of '+filtered.length+'</p>';}
+window.renderFilteredTrips=function renderFilteredTrips(){var now=new Date();var filtered=_tr.filter(function(t){var tripDate=null;if(t.dt){var d=t.dt;if(d.match(/^\d{4}-\d{2}-\d{2}/))tripDate=new Date(d);else{var parsed=Date.parse(d);if(!isNaN(parsed))tripDate=new Date(parsed);else{parsed=Date.parse(d+', '+now.getFullYear());if(!isNaN(parsed))tripDate=new Date(parsed);}}}if(!tripDate)tripDate=new Date();var pass=true;if(_filterPeriod==='day'){pass=tripDate.toDateString()===now.toDateString();}else if(_filterPeriod==='week'){var wa=new Date(now);wa.setDate(wa.getDate()-7);pass=tripDate>=wa;}else if(_filterPeriod==='month'){pass=tripDate.getMonth()===now.getMonth()&&tripDate.getFullYear()===now.getFullYear();}if(_filterCat!=='all'){if(_filterCat==='unclassified')pass=pass&&(!t.c||t.c==='unclassified');else pass=pass&&(t.c===_filterCat);}return pass;});var el=document.getElementById('tripCount');if(el)el.textContent=filtered.length+' trip'+(filtered.length!==1?'s':'');var body=document.getElementById('tripsList');if(!body)return;if(!filtered.length){var labels={day:'today',week:'this week',month:'this month',year:'this year'};body.innerHTML='<div style="text-align:center;padding:40px 20px;color:#94a3b8;font-size:14px">No trips '+labels[_filterPeriod]+(_filterCat!=='all'?' in '+_filterCat:'')+' <br><span onclick="openAt()" style="color:#1B4DDB;cursor:pointer;font-weight:600;margin-top:8px;display:inline-block">+ Add a trip</span></div>';return;}var catColor={business:'#1B4DDB',personal:'#ec4899',medical:'#16a34a',charity:'#dc2626'};var catBg={business:'rgba(27,77,219,.06)',personal:'rgba(236,72,153,.06)',medical:'rgba(22,163,74,.06)',charity:'rgba(220,38,38,.06)'};var catLabel={business:'Business',personal:'Personal',medical:'Medical',charity:'Charity'};body.innerHTML=filtered.slice(0,50).map(function(t){
+  var idx=_tr.indexOf(t);
+  var dd=t.dt||'';
+  var fr=(t.f||'').length>32?(t.f||'').slice(0,32)+'\u2026':(t.f||'\u2014');
+  var to=(t.t||'').length>32?(t.t||'').slice(0,32)+'\u2026':(t.t||'\u2014');
+  var bannerGrad={business:'linear-gradient(90deg,#1B4DDB,#3b82f6)',personal:'linear-gradient(90deg,#D4537E,#f472b6)',medical:'linear-gradient(90deg,#16a34a,#4ade80)',charity:'linear-gradient(90deg,#f59e0b,#fcd34d)'};
+  var dotColor={business:'#1B4DDB',personal:'#D4537E',medical:'#16a34a',charity:'#f59e0b'};
+  var banner=bannerGrad[t.c]||'linear-gradient(90deg,#64748b,#94a3b8)';
+  var dot=dotColor[t.c]||'#64748b';
+  var dedHtml=(t.c==='business'&&t.d>0)?'<div style="font-size:13px;font-weight:700;color:#16a34a;margin-top:3px">+$'+t.d.toFixed(2)+'</div>':'';
+  return '<div style="border-radius:16px;overflow:hidden;margin-bottom:12px;box-shadow:0 2px 12px rgba(0,0,0,.07)">'
+    +'<div style="height:8px;background:'+banner+'"></div>'
+    +'<div style="background:#fff;padding:16px 20px">'
+    +'<div style="display:flex;align-items:center;gap:14px">'
+    +'<div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0">'
+    +'<div style="width:10px;height:10px;border-radius:50%;border:2.5px solid '+dot+';background:#fff"></div>'
+    +'<div style="width:2px;height:28px;border-radius:2px;background:'+dot+'44"></div>'
+    +'<div style="width:10px;height:10px;border-radius:50%;background:'+dot+'"></div>'
+    +'</div>'
+    +'<div style="flex:1;min-width:0">'
+    +'<div style="font-size:10px;font-weight:700;color:#94a3b8;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px">FROM</div>'
+    +'<div style="font-size:14px;font-weight:600;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+fr+'</div>'
+    +'<div style="height:10px"></div>'
+    +'<div style="font-size:10px;font-weight:700;color:#94a3b8;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px">TO</div>'
+    +'<div style="font-size:14px;font-weight:600;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+to+'</div>'
+    +'</div>'
+    +'<div style="text-align:right;flex-shrink:0;min-width:72px">'
+    +'<div style="font-family:\'Playfair Display\',Georgia,serif;font-size:28px;font-weight:700;color:#0f172a;line-height:1">'+t.m.toFixed(1)+'</div>'
+    +'<div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.05em">kilometers</div>'
+    +dedHtml
+    +'</div>'
+    +'</div>'
+    +'<div style="height:1px;background:#f1f5f9;margin:12px 0"></div>'
+    +'<div style="display:flex;align-items:center;justify-content:space-between">'
+    +'<span style="background:#f1f5f9;border-radius:100px;padding:4px 12px;font-size:12px;color:#64748b;font-weight:500">'+dd+'</span>'
+    +'<div style="display:flex;gap:8px">'
+    +'<button onclick="editTrip('+idx+')" style="padding:5px 14px;border-radius:8px;border:1.5px solid #1B4DDB;background:#fff;color:#1B4DDB;font-size:12px;font-weight:600;cursor:pointer">Edit</button>'
+    +'<button onclick="deleteTrip('+idx+')" style="padding:5px 14px;border-radius:8px;border:1.5px solid #fecaca;background:#fef2f2;color:#ef4444;font-size:12px;font-weight:600;cursor:pointer">Delete</button>'
+    +'</div>'
+    +'</div>'
+    +'</div>'
+    +'</div>';
+}).join('');if(filtered.length>50)body.innerHTML+='<p style="text-align:center;font-size:12px;color:#94a3b8">Showing 50 of '+filtered.length+'</p>';}
+window.deleteTrip=function(i){_tr.splice(i,1);refresh();};
+window.resetAtForm=function(){
+  window._editIdx=-1;
+  var h=document.querySelector('#atOv h3');if(h)h.textContent='Add Trip';
+  var btn=document.getElementById('atSaveBtn');
+  if(btn){btn.textContent='Save Trip \u2192';btn.onclick=function(){saveTr();};}
+};
+window._editIdx=-1;
+window.editTrip=function(idx){
+  if(!_u){openSignIn();return;}
+  var t=_tr[idx];if(!t)return;
+  window._editIdx=idx;
+  document.getElementById('tF').value=t.f||'';
+  document.getElementById('tTo').value=t.t||'';
+  document.getElementById('tMi').value=t.m||'';
+  document.getElementById('tDt').value=t.dt||'';
+  document.getElementById('tNt').value=t.n||'';
+  document.getElementById('dPv').style.display='none';
+  document.querySelectorAll('#cBts button').forEach(function(b){
+    var isSel=b.dataset.cat===t.c;
+    b.style.borderColor=isSel?'#2563EB':'#e5e7eb';
+    b.style.background=isSel?'rgba(37,99,235,.06)':'#f9fafb';
+    b.style.color=isSel?'#2563EB':'#374151';
+  });
+  calcDed();
+  var h=document.querySelector('#atOv h3');if(h)h.textContent='Edit Trip';
+  var btn=document.getElementById('atSaveBtn');
+  if(btn){btn.textContent='Update Trip \u2192';btn.onclick=function(){window._updateTr();};}
+  document.getElementById('atOv').style.display='flex';
+};
+window._updateTr=function(){
+  var f=document.getElementById('tF').value.trim();
+  var to=document.getElementById('tTo').value.trim();
+  var m=parseFloat(document.getElementById('tMi').value)||0;
+  var dt=document.getElementById('tDt').value;
+  var nt=document.getElementById('tNt').value.trim();
+  if(!f||!to||!m){
+    if(!f)document.getElementById('tF').style.borderColor='#ef4444';
+    if(!to)document.getElementById('tTo').style.borderColor='#ef4444';
+    if(!m)document.getElementById('tMi').style.borderColor='#ef4444';
+    return;
+  }
+  var sel=document.querySelector("#cBts button[style*='#2563EB']");
+  var c=sel?sel.dataset.cat:'business';
+  var d=calcDeduction(m,c);
+  _tr[window._editIdx]={f:f,t:to,m:m,dt:dt,c:c,d:d,n:nt};
+  resetAtForm();
+  closeAt();refresh();
+  showToast('Trip updated');
+};
 
 var _periodOffset=0;
 window.shiftPeriod=function(dir){_periodOffset+=dir;updatePeriodLabel();renderFilteredTrips();};
