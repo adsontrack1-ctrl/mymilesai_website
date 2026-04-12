@@ -2036,7 +2036,7 @@ setLocale(detectLocale());
 <div><label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px">To</label><input id="tTo" class="mmInput" placeholder="Destination" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"></div></div>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
 <div><label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px">Date</label><input id="tDt" type="date" class="mmInput" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"></div>
-<div><label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px">Miles</label><input id="tMi" type="number" class="mmInput" placeholder="0.0" step="0.1" min="0" oninput="calcDed()" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"></div></div>
+<div><label id="tMiLbl" style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px">Miles</label><input id="tMi" type="number" class="mmInput" placeholder="0.0" step="0.1" min="0" oninput="calcDed()" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"></div></div>
 <label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:8px">Category</label>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px" id="cBts">
 <button onclick="pCat(this)" data-cat="business" style="padding:11px;border-radius:10px;border:1.5px solid #2563EB;background:rgba(37,99,235,.06);color:#2563EB;font-size:13px;font-weight:700;cursor:pointer">Business</button>
@@ -2421,7 +2421,7 @@ window.renderFilteredTrips=function renderFilteredTrips(){var now=new Date();var
     +'</div>'
     +'<div style="text-align:right;flex-shrink:0;min-width:72px">'
     +'<div style="font-family:\'Playfair Display\',Georgia,serif;font-size:28px;font-weight:700;color:#0f172a;line-height:1">'+t.m.toFixed(1)+'</div>'
-    +'<div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.05em">kilometers</div>'
+    +'<div style="font-size:10px;color:#94a3b8;font-weight:600;text-transform:uppercase;letter-spacing:.05em">'+(UNIT==='km'?'kilometers':'miles')+'</div>'
     +dedHtml
     +'</div>'
     +'</div>'
@@ -2528,6 +2528,8 @@ window.initGoogleMaps=function(){
   acFrom.addListener('place_changed',autoCalcDist);
   acTo.addListener('place_changed',autoCalcDist);
 };
+// Set distance field label from locale (runs at page load; initGoogleMaps also refreshes it on Maps load)
+var _ml=document.getElementById('tMiLbl');if(_ml)_ml.textContent=UNIT==='km'?'Kilometers':'Miles';
 })();
 </script>
 <div id="authModal" style="display:none;position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:1rem">
