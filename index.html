@@ -951,6 +951,8 @@ window.addEventListener('DOMContentLoaded',function(){
   window.sbSignOut = function(){ _db.auth.signOut().then(function(){ window.location.reload(); }); };
 })();
 </script>
+<style>.pac-container{z-index:99999!important;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.12);border:1px solid #e2e8f0;font-family:inherit;margin-top:4px;}.pac-item{padding:8px 14px;font-size:13px;cursor:pointer;}.pac-item:hover{background:#f1f5f9;}.pac-item-query{font-weight:600;color:#0f172a;}</style>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdIn2U1A-aSpB1-0vXIVUDK1J5icG_GE&libraries=places&callback=initGoogleMaps"></script>
 </head>
 <body>
 
@@ -2488,6 +2490,44 @@ window._updateTr=function(){
 var _periodOffset=0;
 window.shiftPeriod=function(dir){_periodOffset+=dir;updatePeriodLabel();renderFilteredTrips();};
 window.updatePeriodLabel=function(){var now=new Date();var mo=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];var lb="";if(_filterPeriod==="day"){var d=new Date(now);d.setDate(d.getDate()+_periodOffset);lb=mo[d.getMonth()]+" "+d.getDate()+", "+d.getFullYear();}else if(_filterPeriod==="week"){var d=new Date(now);d.setDate(d.getDate()+(_periodOffset*7));var s=new Date(d);s.setDate(s.getDate()-s.getDay());var e=new Date(s);e.setDate(e.getDate()+6);lb=mo[s.getMonth()]+" "+s.getDate()+" – "+mo[e.getMonth()]+" "+e.getDate();}else if(_filterPeriod==="month"){var d=new Date(now.getFullYear(),now.getMonth()+_periodOffset,1);lb=mo[d.getMonth()]+" "+d.getFullYear();}else{lb=String(now.getFullYear()+_periodOffset);}var el=document.getElementById("periodNav");if(el)el.textContent=lb;var fw=document.getElementById("periodFwd");if(fw){fw.style.opacity=_periodOffset>=0?"0.3":"1";fw.style.pointerEvents=_periodOffset>=0?"none":"auto";}};
+window.initGoogleMaps=function(){
+  var fEl=document.getElementById('tF');
+  var tEl=document.getElementById('tTo');
+  var mEl=document.getElementById('tMi');
+  if(!fEl||!tEl||!mEl)return;
+  // Update the distance label to match locale unit
+  var lbl=mEl.parentElement&&mEl.parentElement.querySelector('label');
+  if(lbl)lbl.textContent=UNIT==='km'?'Kilometers':'Miles';
+  // Attach Places Autocomplete
+  var acFrom=new google.maps.places.Autocomplete(fEl,{types:['geocode']});
+  var acTo=new google.maps.places.Autocomplete(tEl,{types:['geocode']});
+  // Prevent form submit on Enter inside autocomplete
+  fEl.addEventListener('keydown',function(e){if(e.key==='Enter')e.preventDefault();});
+  tEl.addEventListener('keydown',function(e){if(e.key==='Enter')e.preventDefault();});
+  function autoCalcDist(){
+    var from=fEl.value.trim();
+    var to=tEl.value.trim();
+    if(!from||!to)return;
+    mEl.value='';
+    mEl.placeholder='Calculating\u2026';
+    mEl.style.borderColor='#e5e7eb';
+    new google.maps.DistanceMatrixService().getDistanceMatrix({
+      origins:[from],
+      destinations:[to],
+      travelMode:google.maps.TravelMode.DRIVING
+    },function(res,status){
+      mEl.placeholder='0.0';
+      if(status==='OK'&&res.rows[0]&&res.rows[0].elements[0].status==='OK'){
+        var meters=res.rows[0].elements[0].distance.value;
+        var dist=UNIT==='km'?meters/1000:meters/1609.344;
+        mEl.value=dist.toFixed(1);
+        if(typeof calcDed==='function')calcDed();
+      }
+    });
+  }
+  acFrom.addListener('place_changed',autoCalcDist);
+  acTo.addListener('place_changed',autoCalcDist);
+};
 })();
 </script>
 <div id="authModal" style="display:none;position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:1rem">
