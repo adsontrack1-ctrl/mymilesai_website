@@ -951,7 +951,42 @@ window.addEventListener('DOMContentLoaded',function(){
   window.sbSignOut = function(){ _db.auth.signOut().then(function(){ window.location.reload(); }); };
 })();
 </script>
-<style>.pac-container{z-index:99999!important;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.12);border:1px solid #e2e8f0;font-family:inherit;margin-top:4px;}.pac-item{padding:8px 14px;font-size:13px;cursor:pointer;}.pac-item:hover{background:#f1f5f9;}.pac-item-query{font-weight:600;color:#0f172a;}</style>
+<style>
+.pac-container{
+  z-index:99999!important;
+  border-radius:12px;
+  box-shadow:0 8px 32px rgba(0,0,0,.15);
+  border:1px solid #e2e8f0;
+  font-family:inherit;
+  margin-top:4px;
+  min-width:320px!important;
+  width:auto!important;
+  max-width:480px!important;
+  box-sizing:border-box;
+}
+.pac-item{
+  padding:10px 16px;
+  font-size:13px;
+  cursor:pointer;
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:unset!important;
+  line-height:1.4;
+}
+.pac-item:hover,.pac-item-selected{background:#f1f5f9;}
+.pac-item-query{
+  font-weight:600;
+  color:#0f172a;
+  white-space:normal!important;
+  overflow:visible!important;
+}
+.pac-matched{font-weight:700;color:#1B4DDB;}
+.pac-secondary-text{
+  white-space:normal!important;
+  overflow:visible!important;
+  display:inline;
+}
+</style>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdIn2U1A-aSpB1-0vXIVUDK1J5icG_GE&libraries=places&callback=initGoogleMaps"></script>
 </head>
 <body>
@@ -2501,6 +2536,16 @@ window.initGoogleMaps=function(){
   // Attach Places Autocomplete
   var acFrom=new google.maps.places.Autocomplete(fEl,{types:['geocode']});
   var acTo=new google.maps.places.Autocomplete(tEl,{types:['geocode']});
+  // Force dropdown to match the full modal width (runs once modal is visible)
+  function fixPacWidth(){
+    var containers=document.querySelectorAll('.pac-container');
+    var modalW=(document.querySelector('#atOv .mmBox')||{}).offsetWidth;
+    containers.forEach(function(c){
+      if(modalW&&modalW>320){c.style.minWidth=modalW+'px';c.style.maxWidth=modalW+'px';}
+    });
+  }
+  fEl.addEventListener('focus',fixPacWidth);
+  tEl.addEventListener('focus',fixPacWidth);
   // Prevent form submit on Enter inside autocomplete
   fEl.addEventListener('keydown',function(e){if(e.key==='Enter')e.preventDefault();});
   tEl.addEventListener('keydown',function(e){if(e.key==='Enter')e.preventDefault();});
