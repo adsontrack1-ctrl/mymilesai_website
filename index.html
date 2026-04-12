@@ -2505,31 +2505,52 @@ window.loadSupabaseTrips=function(trips){
 window.openSignUp=function(){
   document.getElementById('signupModal').style.display='flex';
   document.getElementById('signupStep1').style.display='block';
-  document.getElementById('signupStep2').style.display='none';
-  document.getElementById('signupStep3').style.display='none';
   var sc=document.getElementById('signupCountry');if(sc)sc.value=LOC.country;
 };
 window.closeSignUp=function(){document.getElementById('signupModal').style.display='none';};
-window.signupToStep2=function(){
+window.signupToPayment=async function(){
   var name=document.getElementById('signupName').value.trim();
   var email=document.getElementById('signupEmail').value.trim();
   var agree=document.getElementById('signupAgree');
   if(!name){showToast('Please enter your name');return;}
   if(!email||!email.includes('@')){showToast('Please enter a valid email');return;}
   if(agree&&!agree.checked){showToast('Please agree to Terms of Service');return;}
-  document.getElementById('signupStep1').style.display='none';
-  document.getElementById('signupStep2').style.display='block';
+  var btn=document.getElementById('signupContinueBtn');
+  var orig=btn.innerHTML;
+  btn.innerHTML='Redirecting to payment\u2026';btn.disabled=true;
+  try{
+    var country=(document.getElementById('signupCountry')||{}).value||'US';
+    localStorage.setItem('_signupEmail',email);
+    localStorage.setItem('_signupName',name);
+    var res=await window._db.functions.invoke('create-checkout',{
+      body:{email:email,name:name,country:country,
+            success_url:window.location.origin+window.location.pathname+'?checkout=success',
+            cancel_url:window.location.href}
+    });
+    if(res.error)throw new Error(res.error.message||'Checkout error');
+    var url=res.data&&res.data.url;
+    if(!url)throw new Error('No checkout URL returned');
+    window.location.href=url;
+  }catch(e){
+    console.error('Checkout error:',e);
+    showToast('Could not start checkout \u2014 '+e.message);
+    btn.innerHTML=orig;btn.disabled=false;
+  }
 };
-window.signupToStep3=function(plan){
-  window._selectedPlan=plan;
-  document.getElementById('signupStep2').style.display='none';
-  document.getElementById('signupStep3').style.display='block';
-};
-window.signupComplete=function(){
-  showToast('Stripe integration coming soon \u2014 sign in with your email to access the dashboard');
-  closeSignUp();
-  openSignIn();
-};
+// Handle return from Stripe Checkout
+(function(){
+  var p=new URLSearchParams(window.location.search);
+  if(p.get('checkout')==='success'){
+    history.replaceState({},'',window.location.pathname);
+    var pe=localStorage.getItem('_signupEmail')||'';
+    localStorage.removeItem('_signupEmail');localStorage.removeItem('_signupName');
+    setTimeout(function(){
+      showToast('Payment successful! Sign in below to access your dashboard.');
+      window.openSignIn();
+      if(pe){var el=document.getElementById('authEmail');if(el)el.value=pe;}
+    },600);
+  }
+})();
 var _filterPeriod='year';var _filterCat='all';window._filterPeriod=_filterPeriod;window._filterCat=_filterCat;
 window.openSubModal=function(){var m=document.getElementById('subModal');if(m){m.style.display='flex';}};
 window.closeSubModal=function(){var m=document.getElementById('subModal');if(m)m.style.display='none';var c=document.getElementById('cancelConfirm');if(c)c.style.display='none';};
@@ -2861,62 +2882,14 @@ var _ml=document.getElementById('tMiLbl');if(_ml)_ml.textContent=UNIT==='km'?'Ki
         <input type="checkbox" id="signupAgree" style="margin-top:3px;width:16px;height:16px;accent-color:#1B4DDB;cursor:pointer;flex-shrink:0">
         <label for="signupAgree" style="font-size:12px;color:#64748b;line-height:1.4;cursor:pointer">I agree to the <a href="#terms" style="color:#1B4DDB;text-decoration:underline" onclick="event.preventDefault();event.stopPropagation();document.getElementById('termsModal').style.display='block'">Terms of Service</a> and <a href="#privacy" style="color:#1B4DDB;text-decoration:underline" onclick="event.preventDefault();event.stopPropagation();document.getElementById('privacyModal').style.display='block'">Privacy Policy</a></label>
       </div>
-      <button id="signupContinueBtn" onclick="signupToStep2()"
-        style="width:100%;padding:12px;font-size:14px;font-weight:600;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;margin-bottom:14px">
+      <button id="signupContinueBtn" onclick="signupToPayment()"
+        style="width:100%;padding:12px;font-size:14px;font-weight:600;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;margin-bottom:8px">
         Continue to payment &#8594;
       </button>
+      <p style="text-align:center;font-size:12px;color:#94a3b8;margin:0 0 12px">10-day free trial. Cancel anytime &mdash; no charge if cancelled within trial.</p>
       <p style="text-align:center;font-size:13px;color:#94a3b8;margin:0">Already have an account? <a href="#" onclick="event.preventDefault();closeSignUp();openSignIn();" style="color:#1B4DDB;text-decoration:none;font-weight:600">Sign in</a></p>
     </div>
 
-    <!-- Step 2: Plan selection -->
-    <div id="signupStep2" style="display:none">
-      <div style="text-align:center;margin-bottom:1.5rem">
-        <h2 style="font-size:22px;font-weight:700;margin:0 0 4px;font-family:inherit;color:#0f172a">Choose your plan</h2>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
-        <!-- Monthly card -->
-        <div onclick="signupToStep3('monthly')" style="border:1.5px solid #e2e8f0;border-radius:14px;padding:18px 14px;cursor:pointer;transition:border-color .2s" onmouseover="this.style.borderColor='#1B4DDB'" onmouseout="this.style.borderColor='#e2e8f0'">
-          <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Monthly</div>
-          <div style="font-size:24px;font-weight:700;color:#0f172a;font-family:'Instrument Serif',Georgia,serif">$6.99<span style="font-size:13px;font-weight:500;color:#64748b">/mo</span></div>
-          <ul style="list-style:none;padding:0;margin:12px 0 14px;font-size:12px;color:#64748b">
-            <li style="margin-bottom:4px">&#10003; Unlimited trips</li>
-            <li>&#10003; Cancel anytime</li>
-          </ul>
-          <button style="width:100%;padding:9px;border-radius:10px;background:#f1f5f9;color:#374151;font-size:13px;font-weight:600;border:none;cursor:pointer">Select</button>
-        </div>
-        <!-- Annual card -->
-        <div onclick="signupToStep3('annual')" style="border:2px solid #1B4DDB;border-radius:14px;padding:18px 14px;cursor:pointer;background:rgba(27,77,219,.02);position:relative">
-          <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#1B4DDB;color:#fff;font-size:10px;font-weight:700;padding:2px 10px;border-radius:100px;white-space:nowrap">Best value</div>
-          <div style="font-size:11px;font-weight:700;color:#1B4DDB;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Annual &mdash; save 17%</div>
-          <div style="font-size:24px;font-weight:700;color:#0f172a;font-family:'Instrument Serif',Georgia,serif">$69.99<span style="font-size:13px;font-weight:500;color:#64748b">/yr</span></div>
-          <ul style="list-style:none;padding:0;margin:12px 0 14px;font-size:12px;color:#64748b">
-            <li style="margin-bottom:4px">&#10003; Unlimited trips</li>
-            <li style="margin-bottom:4px">&#10003; Cancel anytime</li>
-            <li>&#10003; Save $13.89/yr</li>
-          </ul>
-          <button style="width:100%;padding:9px;border-radius:10px;background:#1B4DDB;color:#fff;font-size:13px;font-weight:600;border:none;cursor:pointer">Select</button>
-        </div>
-      </div>
-      <p style="text-align:center;font-size:13px;color:#94a3b8;margin:0"><a href="#" onclick="event.preventDefault();document.getElementById('signupStep2').style.display='none';document.getElementById('signupStep1').style.display='block';" style="color:#1B4DDB;text-decoration:none">&#8592; Back</a></p>
-    </div>
-
-    <!-- Step 3: Payment -->
-    <div id="signupStep3" style="display:none">
-      <div style="text-align:center;margin-bottom:1.5rem">
-        <h2 style="font-size:22px;font-weight:700;margin:0 0 4px;font-family:inherit;color:#0f172a">Payment details</h2>
-        <p style="font-size:13px;color:#64748b;margin:0">Your card will not be charged during the 10-day trial</p>
-      </div>
-      <div id="stripeCardElement" style="border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 16px;background:#f8fafc;color:#94a3b8;font-size:13px;margin-bottom:16px;min-height:48px;display:flex;align-items:center">Stripe payment form will load here</div>
-      <button onclick="signupComplete()"
-        style="width:100%;padding:12px;font-size:14px;font-weight:600;background:linear-gradient(135deg,#16a34a,#059669);color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;margin-bottom:12px">
-        Start free trial &#8594;
-      </button>
-      <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:14px">
-        <span style="font-size:11px;color:#94a3b8;display:flex;align-items:center;gap:4px">&#128274; 256-bit SSL encrypted</span>
-        <span style="font-size:11px;color:#94a3b8">&#10003; Cancel anytime</span>
-      </div>
-      <p style="text-align:center;font-size:13px;color:#94a3b8;margin:0"><a href="#" onclick="event.preventDefault();document.getElementById('signupStep3').style.display='none';document.getElementById('signupStep2').style.display='block';" style="color:#1B4DDB;text-decoration:none">&#8592; Back</a></p>
-    </div>
   </div>
 </div>
 
