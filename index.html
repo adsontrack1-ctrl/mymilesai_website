@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MyMilesAI — #1 Mileage Tracking App for Tax Deductions (2026)</title>
-<meta name="description" content="MyMilesAI auto-tracks every business mile with GPS, classifies trips with AI, and calculates IRS/CRA tax deductions. Privacy-first, works offline. AI-powered mileage tracking for tax deductions. $6.99/mo.">
+<meta name="description" content="MyMilesAI auto-tracks every business mile with GPS, classifies trips with AI, and calculates IRS/CRA tax deductions. Privacy-first, works offline. $6.99/month or $69.99/year.">
 <meta name="keywords" content="mileage tracker app, IRS mileage deduction, business mileage log, GPS trip tracker, tax deduction calculator, CRA mileage rate, automatic mileage tracking, self-employed mileage, rideshare driver tax, real estate agent mileage, delivery driver mileage tracker, mileage reimbursement app">
 <meta name="robots" content="index, follow">
 <meta name="author" content="MyMilesAI">
@@ -25,7 +25,7 @@
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MyMilesAI — Smart Mileage Tracking App">
-<meta name="twitter:description" content="Auto-track every business mile, AI-classify trips, maximize IRS/CRA deductions. Free beta on TestFlight.">
+<meta name="twitter:description" content="Auto-track every business mile, AI-classify trips, maximize IRS/CRA deductions. 10-day free trial — no credit card required.">
 
 <!-- Structured Data — SoftwareApplication (for Google rich results) -->
 <script type="application/ld+json">
@@ -86,7 +86,7 @@
       "name": "What is the best mileage tracking app for tax deductions in 2026?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "MyMilesAI is a mileage tracking app that auto-tracks business miles with GPS, classifies trips using AI, and calculates IRS and CRA tax deductions in real time. It costs $6.99/month (free during beta) and stores all data on your device for privacy. It works offline and supports both US (IRS $0.725/mile) and Canada (CRA $0.73/km) rates."
+        "text": "MyMilesAI is a mileage tracking app that auto-tracks business miles with GPS, classifies trips using AI, and calculates IRS and CRA tax deductions in real time. It costs $6.99/month (free on your trial) and stores all data on your device for privacy. It works offline and supports both US (IRS $0.725/mile) and Canada (CRA $0.73/km) rates."
       }
     },
     {
@@ -142,8 +142,7 @@
 </script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%231B4DDB'/%3E%3Cstop offset='100%25' stop-color='%234A7AFF'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100' height='100' rx='22' fill='url(%23g)'/%3E%3Cg transform='translate(50,50)'%3E%3Cpath d='M-32 6h64c2 0 3-1 3-3v-3c0-1-1-2-2-2h-8l-5-8c-1-2-3-3-5-3h-18c-3 0-5 1-7 3l-8 8h-11c-2 0-3 1-3 3v2c0 2 1 3 3 3z' fill='none' stroke='white' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='-18' cy='8' r='5.5' fill='%230A0A14' stroke='white' stroke-width='2'/%3E%3Ccircle cx='20' cy='8' r='5.5' fill='%230A0A14' stroke='white' stroke-width='2'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
-<script src="https://js.stripe.com/v3/"></script>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
   --sapphire:#1B4DDB;--sapphire-d:#1340B8;--sapphire-l:#4A7AFF;--sapphire-ul:#EEF3FF;
@@ -159,7 +158,7 @@
 html{scroll-behavior:smooth;}
 body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 .container{max-width:1240px;margin:0 auto;padding:0 28px;}
-.reveal{opacity:0;transform:translateY(36px);transition:all .8s var(--ease);}
+.reveal{opacity:1;transform:translateY(36px);transition:all .8s var(--ease);}
 .reveal.vis{opacity:1;transform:none;}
 
 @keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-14px) rotate(1deg)}}
@@ -781,6 +780,177 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
   .hero{padding:130px 0 80px;}
 }
 </style>
+
+<script>
+window.addEventListener('DOMContentLoaded',function(){
+  // Force all reveal elements visible immediately
+  var els = document.querySelectorAll('.reveal');
+  for(var i=0;i<els.length;i++){
+    els[i].style.opacity='1';
+    els[i].style.transform='translateY(0)';
+    els[i].classList.add('visible');
+  }
+});
+</script>
+<!-- Supabase SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  var SUPA_URL = 'https://dxpuuiqibtizewbbffjk.supabase.co';
+  var SUPA_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4cHV1aXFpYnRpemV3YmJmZmprIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2NTQ1MDAsImV4cCI6MjA5MDIzMDUwMH0.GSVgcjCxenp4uwahNBnQn5MZzuFKIfcf3gt1AlsVEuc';
+  if(!window.supabase){console.warn('Supabase not loaded');return;}
+  var _db = window.supabase.createClient(SUPA_URL, SUPA_ANON, {
+    auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true }
+  });
+  window._db = _db;
+
+  // ── FIX 1: Proper auth state change + load trips ──
+  _db.auth.onAuthStateChange(function(event, session){
+    console.log('AUTH EVENT:', event, session ? session.user.email : 'no user');
+    var user = session ? session.user : null;
+    window._currentUser = user;
+    var dashBtn = document.getElementById('navDashBtn');
+    var signInBtn = document.getElementById('navSignInBtn');
+    
+    if(user){
+      // Show dashboard button, hide sign in
+      if(dashBtn){ dashBtn.style.display='flex'; dashBtn.style.alignItems='center'; }
+      if(signInBtn) signInBtn.style.display='none';
+      // Close auth modal if open
+      var modal = document.getElementById('authModal');
+      if(modal) modal.style.display='none';
+      // Load trips from Supabase
+      loadTrips(user.id);
+      if(typeof showDash === 'function') showDash();
+      // Show welcome toast
+      showToast('Welcome back, ' + (user.email || 'there') + '!');
+    } else {
+      if(dashBtn) dashBtn.style.display='none';
+      if(signInBtn) signInBtn.style.display='';
+      window._userTrips = [];
+    }
+  });
+
+  function loadTrips(userId){
+    _db.auth.getSession().then(function(res){
+      var session = res.data.session;
+      if(!session){ console.log('No session for trips fetch'); return; }
+      _db.from('trips').select('id,user_id,created_at,trip_date,path,source,type,miles,purpose,notes').order('created_at', {ascending: false}).limit(100).then(function(r){
+        console.log('TRIPS RESULT:', JSON.stringify(r));
+        if(r.error){ console.warn('Trips error:', r.error.message); return; }
+        var trips = r.data || [];
+        console.log('LOADED TRIPS:', trips.length);
+        window._userTrips = trips;
+        if(typeof window.loadSupabaseTrips === 'function') window.loadSupabaseTrips(trips);
+      });
+    });
+  }
+
+  // ── FIX 3: Show trips in a dashboard panel ──
+  function showTripsSummary(trips){
+    var panel = document.getElementById('tripsDashboard');
+    if(!panel) return;
+    if(!trips || trips.length === 0){
+      panel.innerHTML = '<p style="color:#64748b;text-align:center;padding:2rem">No trips found in your account.</p>';
+      return;
+    }
+    // Detect column names from first trip
+    var sample = trips[0];
+    console.log('TRIP SAMPLE KEYS:', JSON.stringify(Object.keys(sample)));
+    
+    var IRS = 0.725;
+    var totalMiles = 0;
+    var bizMiles = 0;
+    
+    var rows = trips.map(function(t){
+      // Support various column naming conventions
+      var miles = parseFloat(t.distance_miles || t.miles || t.distance || t.distance_km || 0);
+      var isBiz = (t.category || t.trip_type || t.type || '').toLowerCase().includes('busi');
+      var from = t.start_location || t.from_location || t.origin || t.start_address || 'Trip';
+      var to = t.end_location || t.to_location || t.destination || t.end_address || '';
+      var date = t.start_time || t.date || t.created_at || '';
+      var dateStr = date ? new Date(date).toLocaleDateString() : '';
+      
+      totalMiles += miles;
+      if(isBiz) bizMiles += miles;
+      
+      return '<tr style="border-bottom:1px solid #f1f5f9">' +
+        '<td style="padding:8px 12px;font-size:13px">' + dateStr + '</td>' +
+        '<td style="padding:8px 12px;font-size:13px">' + (from + (to ? ' → ' + to : '')).slice(0,40) + '</td>' +
+        '<td style="padding:8px 12px;font-size:13px;text-align:right">' + miles.toFixed(1) + '</td>' +
+        '<td style="padding:8px 12px;font-size:13px;color:' + (isBiz ? '#1B4DDB' : '#64748b') + '">' + (t.category || t.trip_type || t.type || 'Personal') + '</td>' +
+        '<td style="padding:8px 12px;font-size:13px;color:#16a34a;text-align:right">' + (isBiz ? '+$' + (miles * IRS).toFixed(2) : '') + '</td>' +
+      '</tr>';
+    }).join('');
+    
+    panel.innerHTML = 
+      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">' +
+        '<div style="background:#EBF0FF;border-radius:10px;padding:14px;text-align:center"><div style="font-size:22px;font-weight:700;color:#1B4DDB">' + trips.length + '</div><div style="font-size:11px;color:#64748b;margin-top:2px">Total Trips</div></div>' +
+        '<div style="background:#f0fdf4;border-radius:10px;padding:14px;text-align:center"><div style="font-size:22px;font-weight:700;color:#16a34a">' + bizMiles.toFixed(1) + '</div><div style="font-size:11px;color:#64748b;margin-top:2px">Business Miles</div></div>' +
+        '<div style="background:#fff7ed;border-radius:10px;padding:14px;text-align:center"><div style="font-size:22px;font-weight:700;color:#c2410c">$' + (bizMiles * IRS).toFixed(2) + '</div><div style="font-size:11px;color:#64748b;margin-top:2px">Tax Deduction</div></div>' +
+      '</div>' +
+      '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse">' +
+        '<thead><tr style="background:#f8fafc">' +
+          '<th style="padding:8px 12px;font-size:12px;text-align:left;color:#64748b;font-weight:600">DATE</th>' +
+          '<th style="padding:8px 12px;font-size:12px;text-align:left;color:#64748b;font-weight:600">ROUTE</th>' +
+          '<th style="padding:8px 12px;font-size:12px;text-align:right;color:#64748b;font-weight:600">MILES</th>' +
+          '<th style="padding:8px 12px;font-size:12px;text-align:left;color:#64748b;font-weight:600">TYPE</th>' +
+          '<th style="padding:8px 12px;font-size:12px;text-align:right;color:#64748b;font-weight:600">DEDUCTION</th>' +
+        '</tr></thead>' +
+        '<tbody>' + rows + '</tbody>' +
+      '</table></div>';
+    
+    // Show the dashboard section
+    panel.style.display = 'block';
+    var dashSection = document.getElementById('dashboardSection');
+    if(dashSection) dashSection.style.display = 'block';
+  }
+
+  // ── FIX 4: Toast notification ──
+  function showToast(msg){
+    var t = document.createElement('div');
+    t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:12px 24px;border-radius:100px;font-size:14px;font-weight:500;z-index:99999;box-shadow:0 8px 24px rgba(0,0,0,.2);transition:opacity .3s';
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(function(){ t.style.opacity='0'; setTimeout(function(){ t.remove(); }, 300); }, 4000);
+  }
+
+  window.sbSignInGoogle = function(){ _db.auth.signInWithOAuth({provider:'google',options:{redirectTo:'https://mymilesai.com'}}); };
+  window.sbSignInApple = function(){ _db.auth.signInWithOAuth({provider:'apple',options:{redirectTo:'https://mymilesai.com'}}); };
+  // Send OTP code (6-digit) to email — NOT a magic link
+  window.sbSendOtpCode = function(email){
+    return _db.auth.signInWithOtp({
+      email: email,
+      options: { shouldCreateUser: true }
+      // NO emailRedirectTo → Supabase sends a 6-digit code instead of a link
+    }).then(function(res){ 
+      console.log('OTP send result:', res.error ? res.error.message : 'sent OK');
+      return !res.error; 
+    });
+  };
+  // Verify the 6-digit OTP code entered by user
+  window.sbVerifyOtpCode = function(email, token){
+    return _db.auth.verifyOtp({
+      email: email,
+      token: token,
+      type: 'email'
+    }).then(function(res){
+      console.log('OTP verify result:', res.error ? res.error.message : 'verified OK', res.data?.session?.user?.email);
+      return !res.error;
+    });
+  };
+  window.sbSignInMagicLink = window.sbSendOtpCode; // backwards compat
+  window.sbSaveTrip = function(trip){
+    if(!window._currentUser) return Promise.resolve(null);
+    return _db.from('trips').insert(Object.assign({},trip,{user_id:window._currentUser.id})).select().single().then(function(r){ return r.data; });
+  };
+  window.sbDeleteTrip = function(id){
+    if(!window._currentUser) return Promise.resolve();
+    return _db.from('trips').delete().eq('id',id).eq('user_id',window._currentUser.id);
+  };
+  window.sbSignOut = function(){ _db.auth.signOut().then(function(){ window.location.reload(); }); };
+})();
+</script>
 </head>
 <body>
 
@@ -826,9 +996,9 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
   <div class="nav-links">
     <a href="#features">Features</a><a href="#how">How It Works</a><a href="#pricing">Pricing</a><a href="blog/">Blog</a><a href="about.html">About</a>
     <button class="locale-toggle" id="localeToggle" onclick="toggleLocale()"><span class="lt-flag" id="locFlag">🇺🇸</span><span class="lt-label" id="locLabel">MI</span></button>
-    <a href="#" onclick="openSignIn();return false;" id="navSignInBtn" style="display:inline-flex;align-items:center;padding:9px 22px;border-radius:100px;font-size:14px;font-weight:600;color:#374151;border:1.5px solid #d1d5db;text-decoration:none;margin-right:8px;background:transparent;transition:background .2s;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='transparent'">Sign In</a>
-    <a href="#" onclick="if(window._user)showDash();else openSignIn();return false;" id="navDashBtn" style="display:none;align-items:center;padding:9px 22px;border-radius:100px;font-size:14px;font-weight:600;color:#2563EB;border:1.5px solid rgba(37,99,235,.3);text-decoration:none;margin-right:8px;background:rgba(37,99,235,.06);">Dashboard</a>
-    <a href="#cta" class="btn btn-primary">Start Free Trial <svg width="14" height="14" style="margin-left:2px"><use href="#i-arrow"/></svg></a>
+    <a href="#" onclick="openSignIn();return false;" id="navSignInBtn" onclick="document.getElementById('authModal').style.display='flex'" style="cursor:pointer" onclick="openAuthModal()" style="cursor:pointer" style="display:inline-flex;align-items:center;padding:9px 22px;border-radius:100px;font-size:14px;font-weight:600;color:#374151;border:1.5px solid #d1d5db;text-decoration:none;margin-right:8px;background:transparent;transition:background .2s;" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background='transparent'">Sign In</a>
+    <a href="#" onclick="if(window._user)showDash();else openSignIn();return false;" id="navDashBtn" onclick="document.getElementById('dashboardSection').scrollIntoView({behavior:'smooth'})" title="View your trips" style="display:none;align-items:center;padding:9px 22px;border-radius:100px;font-size:14px;font-weight:600;color:#2563EB;border:1.5px solid rgba(37,99,235,.3);text-decoration:none;margin-right:8px;background:rgba(37,99,235,.06);">Dashboard</a>
+    
   </div>
   <button class="mobile-toggle" onclick="document.getElementById('mobileNav').classList.add('open')">&#9776;</button>
 </div>
@@ -841,7 +1011,7 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
   <a href="blog/" onclick="this.parentElement.classList.remove('open')">Blog</a>
   <a href="#faq" onclick="this.parentElement.classList.remove('open')">FAQ</a>
   <a href="#contact" onclick="this.parentElement.classList.remove('open')">Contact</a>
-  <a href="#cta" class="btn btn-primary" onclick="this.parentElement.classList.remove('open')">Start Free Trial</a>
+  <a href="#cta" class="btn btn-primary" onclick="this.parentElement.classList.remove('open')">Sign In</a>
 </div>
 
 <!-- HERO -->
@@ -849,11 +1019,11 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
   <div class="hero-bg"><div class="hero-orb o1"></div><div class="hero-orb o2"></div><div class="hero-orb o3"></div><div class="hero-grid"></div></div>
   <div class="container hero-inner">
     <div class="hero-content">
-      <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span> <span class="hero-beta-badge">Pro</span> Now on TestFlight &middot; Free to try</div>
+      
       <h1>Track every <span class="loc" data-us="mile" data-ca="kilometre">mile</span>.<br>Claim every <em>dollar.</em></h1>
       <p class="hero-desc">MyMilesAI automatically logs your trips with GPS, classifies them with AI, and calculates your <span class="loc" data-us="IRS" data-ca="CRA">IRS</span> tax deductions &mdash; all hands-free.</p>
       <div class="hero-ctas">
-        <a href="#cta" class="btn btn-primary btn-lg">Start Free Trial <svg width="16" height="16"><use href="#i-arrow"/></svg></a>
+        <a href="#" onclick="openSignUp();return false;" class="btn btn-primary btn-lg">Start Free Trial <svg width="16" height="16"><use href="#i-arrow"/></svg></a>
         <a href="#calculator" class="btn btn-outline btn-lg">Calculate My Savings</a>
       </div>
       <div class="hero-trust">
@@ -1040,7 +1210,7 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
     <div class="s-desc" style="margin:0 auto">No complicated setup. Download, drive, and watch your deductions grow automatically.</div>
   </div>
   <div class="how-steps">
-    <div class="how-step reveal"><div class="how-step-icon"><svg><use href="#i-phone"/></svg></div><div class="how-step-num">1</div><h3>Download &amp; Setup</h3><p>Install MyMilesAI via TestFlight, enter your name, choose miles or km, and enable GPS. Under 30 seconds.</p></div>
+    <div class="how-step reveal"><div class="how-step-icon"><svg><use href="#i-phone"/></svg></div><div class="how-step-num">1</div><h3>Download &amp; Setup</h3><p>Install MyMilesAI via MyMilesAI, enter your name, choose miles or km, and enable GPS. Under 30 seconds.</p></div>
     <div class="how-step reveal"><div class="how-step-icon"><svg><use href="#i-car"/></svg></div><div class="how-step-num">2</div><h3>Just Drive</h3><p>MyMilesAI detects driving automatically. Every trip logged with distance, route, time, and speed &mdash; fully hands-free.</p></div>
     <div class="how-step reveal"><div class="how-step-icon"><svg><use href="#i-dollar"/></svg></div><div class="how-step-num">3</div><h3>Claim Deductions</h3><p>Export IRS/CRA-ready reports at tax time. Business miles calculated at the standard rate, instantly.</p></div>
   </div>
@@ -1121,8 +1291,8 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
   </div>
   <div class="pain-vs reveal" style="margin-top:28px;">
     <h3>All of this for <em style="color:var(--sapphire-l)">$6.99/mo.</em></h3>
-    <p>10-day free trial. Cancel anytime, no questions asked.</p>
-    <a href="#cta" class="btn btn-primary btn-lg" style="display:inline-flex">Start Tracking Free <svg width="16" height="16"><use href="#i-arrow"/></svg></a>
+    <p>10-day free trial. No credit card required. Cancel anytime, no questions asked.</p>
+    <a href="#" onclick="openSignUp();return false;" class="btn btn-primary btn-lg" style="display:inline-flex">Start Free Trial <svg width="16" height="16"><use href="#i-arrow"/></svg></a>
   </div>
 </div>
 </section>
@@ -1132,15 +1302,15 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
 <div class="container">
   <div class="reveal" style="text-align:center">
     <div class="s-label sapphire"><svg width="12" height="12"><use href="#i-star"/></svg> Early Feedback</div>
-    <h2 class="s-title">What early users <em>are saying.</em></h2>
-    <div class="s-desc" style="margin:0 auto">Real feedback from our TestFlight community.</div>
+    <h2 class="s-title">What beta testers <em>are saying.</em></h2>
+    <div class="s-desc" style="margin:0 auto">Real feedback from our MyMilesAI community.</div>
   </div>
   <div class="test-grid">
-    <div class="test-card reveal"><div class="test-stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><div class="test-text">&ldquo;I was losing trips with my old mileage app and paying $9/month for the privilege. MyMilesAI catches every drive, the AI classification saves me 20 minutes a day, and it costs half the price.&rdquo;</div><div class="test-author"><div class="test-av" style="background:linear-gradient(135deg,var(--sapphire),var(--sapphire-l))"><svg><use href="#i-user"/></svg></div><div><div class="test-name">Sarah M.</div><div class="test-role">Real Estate Agent &middot; Early Adopter</div></div></div></div>
-    <div class="test-card reveal"><div class="test-stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><div class="test-text">&ldquo;Finally an app that doesn&rsquo;t upload my location to some server. The on-device privacy sold me instantly. Plus the UI is beautiful.&rdquo;</div><div class="test-author"><div class="test-av" style="background:linear-gradient(135deg,var(--mint),#6EE7B7)"><svg><use href="#i-user"/></svg></div><div><div class="test-name">Marcus K.</div><div class="test-role">Freelance Consultant &middot; Early Adopter</div></div></div></div>
-    <div class="test-card reveal"><div class="test-stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><div class="test-text">&ldquo;My accountant loved the PDF reports. Everything formatted perfectly for filing. At $6.99 this will pay for itself on the first drive.&rdquo;</div><div class="test-author"><div class="test-av" style="background:linear-gradient(135deg,var(--gold),var(--gold-l))"><svg><use href="#i-user"/></svg></div><div><div class="test-name">Lisa R.</div><div class="test-role">Sales Manager &middot; Early Adopter</div></div></div></div>
+    <div class="test-card reveal"><div class="test-stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><div class="test-text">&ldquo;I was losing trips with my old mileage app and paying $9/month for the privilege. MyMilesAI catches every drive, the AI classification saves me 20 minutes a day, and it costs half the price.&rdquo;</div><div class="test-author"><div class="test-av" style="background:linear-gradient(135deg,var(--sapphire),var(--sapphire-l))"><svg><use href="#i-user"/></svg></div><div><div class="test-name">Sarah M.</div><div class="test-role">Real Estate Agent &middot; Beta Tester</div></div></div></div>
+    <div class="test-card reveal"><div class="test-stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><div class="test-text">&ldquo;Finally an app that doesn&rsquo;t upload my location to some server. The on-device privacy sold me instantly. Plus the UI is beautiful.&rdquo;</div><div class="test-author"><div class="test-av" style="background:linear-gradient(135deg,var(--mint),#6EE7B7)"><svg><use href="#i-user"/></svg></div><div><div class="test-name">Marcus K.</div><div class="test-role">Freelance Consultant &middot; Beta Tester</div></div></div></div>
+    <div class="test-card reveal"><div class="test-stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><div class="test-text">&ldquo;My accountant loved the PDF reports. Everything formatted perfectly for filing. At $6.99 this will pay for itself on the first drive.&rdquo;</div><div class="test-author"><div class="test-av" style="background:linear-gradient(135deg,var(--gold),var(--gold-l))"><svg><use href="#i-user"/></svg></div><div><div class="test-name">Lisa R.</div><div class="test-role">Sales Manager &middot; Beta Tester</div></div></div></div>
   </div>
-  <div class="test-note reveal">* Beta feedback from TestFlight testers. Names changed for privacy.</div>
+  <div class="test-note reveal">* Beta feedback from MyMilesAI testers. Names changed for privacy.</div>
 </div>
 </section>
 <!-- PRICING -->
@@ -1150,35 +1320,14 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
 <div class="container pricing-inner">
   <div class="reveal" style="text-align:center">
     <div class="s-label"><svg width="12" height="12" style="color:var(--sapphire-l)"><use href="#i-zap"/></svg> Pricing</div>
-    <h2 class="s-title">Simple, <em>founding member</em> pricing.</h2>
-    <div class="s-desc" style="margin:0 auto">One plan. One price. Locked in forever for founding members.</div>
+    <h2 class="s-title">One plan. <em>Everything</em> included.</h2>
+    <div class="s-desc" style="margin:0 auto">10-day free trial. Lock in early pricing before we launch publicly.</div>
   </div>
-  <div class="reveal" style="max-width:460px;margin:48px auto 0;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));border:1.5px solid rgba(110,231,183,.28);border-radius:28px;padding:40px 36px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.35),0 0 0 1px rgba(110,231,183,.08) inset;">
-    <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:100px;background:rgba(110,231,183,.12);border:1px solid rgba(110,231,183,.25);font-size:11px;font-weight:800;color:#6EE7B7;letter-spacing:.12em;text-transform:uppercase;margin-bottom:22px;">
-      <svg width="12" height="12"><use href="#i-zap"/></svg> Founding Member Rate
-    </div>
-    <div style="font-size:15px;color:rgba(255,255,255,.5);margin-bottom:6px;">
-      Regular: <span style="font-weight:700;color:rgba(255,255,255,.7)">$6.99/month</span>
-      <span style="text-decoration:line-through;color:rgba(255,255,255,.35);margin-left:6px;">($83.88/year)</span>
-    </div>
-    <div style="font-family:var(--serif);font-size:64px;font-weight:700;color:#6EE7B7;line-height:1.05;letter-spacing:-2px;margin:10px 0 4px;">$69.99<span style="font-size:22px;font-weight:600;color:rgba(110,231,183,.75);letter-spacing:0;">/year</span></div>
-    <div style="font-size:13px;color:rgba(255,255,255,.55);margin-bottom:24px;">Save $13.89 &middot; Lock in this rate forever</div>
-    <div style="font-size:13px;color:rgba(255,255,255,.6);margin-bottom:24px;line-height:1.7;">
-      10-day free trial &middot; Credit card required &middot; Cancel anytime
-    </div>
-    <button class="price-btn primary" style="width:100%;" onclick="openSignUp()">Start 10-day Free Trial <svg width="14" height="14"><use href="#i-arrow"/></svg></button>
-    <ul class="price-features" style="margin-top:26px;text-align:left;">
-      <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Unlimited trips</li>
-      <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Auto GPS tracking</li>
-      <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>AI trip classification</li>
-      <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>PDF &amp; CSV reports</li>
-      <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Live map view</li>
-      <li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Work hours auto-classify</li>
-    </ul>
-  </div>
+  <div class="price-cards" style="justify-content:center"><div class="price-card pop reveal" style="max-width:440px;width:100%"><div class="price-name">MyMilesAI Pro</div><div class="price-desc">Everything included — unlimited, hands-free</div><div class="price-amt"><span style="font-size:18px;color:var(--text3);text-decoration:line-through;font-weight:500">$699</span>&nbsp;<span class="price-dollar">$69.99</span><span class="price-period">/year</span><p style="margin:6px 0 0;font-size:13px;color:var(--text2)">or <strong>$6.99/month</strong> — cancel anytime</p><p style="margin:8px 0 16px;font-size:11px;font-weight:800;color:#d4a843;letter-spacing:.05em;font-family:monospace;">&#127881; FOUNDING MEMBER RATE — limited time</p></div><div class="price-trial" style="background:rgba(27,77,219,.1);border-color:rgba(27,77,219,.15);color:var(--sapphire-l)">10-day free trial &mdash; no credit card required</div><ul class="price-features"><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Unlimited trips &mdash; no caps ever</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Auto GPS tracking</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>AI trip classification</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>IRS &amp; CRA compliant PDF reports</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>CSV, Excel &amp; Google Sheets export</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Live map view &amp; route history</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>AI tax assistant</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Accountant portal</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>Privacy-first — data stays on your device</li><li><span class="pf-check"><svg><use href="#i-check"/></svg></span>US &amp; Canada locale auto-detect</li></ul><button class="price-btn primary" onclick="openSignUp()">Start 10-day Free Trial <svg width="14" height="14"><use href="#i-arrow"/></svg></button><p style="text-align:center;font-size:12px;color:var(--text3);margin-top:12px">Credit card required &nbsp;&middot;&nbsp; Cancel anytime during trial</p></div></div>
+  <div class="pricing-note">Beta access is completely free &middot; Lock in early pricing when we launch</div>
   <div class="pricing-cards-note">
     <span><svg width="14" height="14" style="color:#6EE7B7"><use href="#i-lock"/></svg> Privacy-first design</span>
-    <span><svg width="14" height="14" style="color:#6EE7B7"><use href="#i-shield"/></svg> 10-day free trial</span>
+    <span><svg width="14" height="14" style="color:#6EE7B7"><use href="#i-shield"/></svg> No credit card for beta</span>
     <span><svg width="14" height="14" style="color:#6EE7B7"><use href="#i-check"/></svg> Cancel anytime, no penalties</span>
     <span><svg width="14" height="14" style="color:#6EE7B7"><use href="#i-check"/></svg> 30-day money-back guarantee</span>
   </div>
@@ -1193,14 +1342,14 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
     <h2 class="s-title">Frequently asked <em>questions.</em></h2>
   </div>
   <div class="faq-grid">
-    <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Does MyMilesAI drain my battery?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>We use low-power GPS and intelligent motion detection. Most early users report less than 5% additional battery per day &mdash; comparable to having Google Maps in the background.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Does MyMilesAI drain my battery?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>We use low-power GPS and intelligent motion detection. Most beta testers report less than 5% additional battery per day &mdash; comparable to having Google Maps in the background.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How accurate is the GPS tracking?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>MyMilesAI uses native GPS with road-snapping algorithms for accuracy within 2&ndash;3% of actual distance. This meets IRS mileage log requirements for deduction claims.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Is my location data private?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>All trip data is stored locally on your device. We never upload your location, sell data, or serve ads. See our <a href="#privacy">Privacy Policy</a> for details.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Does it work offline?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>Yes &mdash; unlike many mileage apps that require an internet connection. MyMilesAI tracks and stores trips entirely on your device. No signal? No problem.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What&rsquo;s the current IRS mileage rate?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>For 2026, the IRS rate is $0.725/mile for business. In Canada, the CRA rate is $0.73/km for the first 5,000 km and $0.67/km after. MyMilesAI updates rates automatically.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How does AI classification work?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>It learns your patterns &mdash; frequent destinations, time of day, work hours. Over time it auto-classifies trips. You can always swipe to override.</p></div></div>
-    <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I join the beta?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>Enter your email below and we&rsquo;ll send a TestFlight invite. Beta is free with all Pro features unlocked. Currently iOS only; Android coming soon.</p></div></div>
-    <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Will my beta data transfer to the live app?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>Yes. All trips logged during beta carry over. Your data is on-device so it persists through updates.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I join the beta?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>Enter your email below and we&rsquo;ll send a MyMilesAI invite. Beta is free with all Pro features unlocked. Currently iOS only; Android coming soon.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Will my beta data transfer to the live app?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>Yes. All trips logged on your trial carry over. Your data is on-device so it persists through updates.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I switch from another mileage app?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>Absolutely. Export your CSV from your current app, install MyMilesAI, and start tracking immediately. No data migration needed &mdash; your new trips begin logging on day one.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I cancel my subscription?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>You can cancel anytime with zero hassle. If you subscribed via the App Store, go to Settings &gt; Apple ID &gt; Subscriptions &gt; MyMilesAI &gt; Cancel. If you subscribed via our website, go to your account settings or email <a href="/cdn-cgi/l/email-protection#5e2d2b2e2e312c2a1e33273337323b2d3f37703d3133"><span class="__cf_email__" data-cfemail="f4878184849b8680b4998d999d989187959dda979b99">[email&#160;protected]</span></a> and we&rsquo;ll cancel it immediately. No cancellation fees, no penalties, no questions asked. Your Pro features stay active until the end of your billing period.</p></div></div>
     <div class="faq-item"><button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What&rsquo;s your refund policy?<span class="icon"><svg><use href="#i-plus"/></svg></span></button><div class="faq-a"><p>If you&rsquo;re not satisfied within the first 30 days of a paid subscription, email <a href="/cdn-cgi/l/email-protection#2655535656495452664b5f4b4f4a4355474f0845494b"><span class="__cf_email__" data-cfemail="5b282e2b2b34292f1b36223632373e283a3275383436">[email&#160;protected]</span></a> for a full refund. For App Store purchases, you can also request a refund directly through Apple. After 30 days, you can cancel anytime but refunds are prorated at our discretion.</p></div></div>
@@ -1380,13 +1529,13 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
     <div class="cta-box-grid"></div>
     <div class="s-label sapphire"><svg width="12" height="12"><use href="#i-fire"/></svg> Limited Beta</div>
     <h2 class="s-title">Get early access <em>free.</em></h2>
-    <div class="s-desc" style="margin:0 auto 12px">Join our TestFlight beta and get all Pro features unlocked at no cost.</div>
+    <div class="s-desc" style="margin:0 auto 12px">Join our MyMilesAI beta and get all Pro features unlocked at no cost.</div>
     <div class="cta-spots"><span class="icon" style="color:var(--rose)"><svg><use href="#i-fire"/></svg></span><span id="spotsLeft">47 beta spots remaining this week</span></div>
     <div class="cta-form">
       <input type="email" class="cta-input" id="ctaEmail" placeholder="Enter your email address...">
-      <button class="cta-btn-primary" id="ctaBtn" onclick="handleBetaSignup()">Get Access <svg width="14" height="14"><use href="#i-arrow"/></svg></button>
+      <button class="cta-btn-primary" id="ctaBtn" onclick="openSignUp()">Get Access <svg width="14" height="14"><use href="#i-arrow"/></svg></button>
     </div>
-    <div class="cta-note">iOS via TestFlight &middot; Android coming soon &middot; No credit card required</div>
+    <div class="cta-note">iOS via MyMilesAI &middot; Android coming soon &middot; No credit card required</div>
     <div class="cta-earlybird"><svg width="16" height="16" style="flex-shrink:0"><use href="#i-lock"/></svg> Beta users lock in $6.99/mo pricing forever when we launch</div>
   </div>
 </div>
@@ -1400,8 +1549,8 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
     <p style="margin-bottom:16px;">MyMilesAI is a mile tracker app built for self-employed professionals, freelancers, 1099 contractors, gig workers, real estate agents, delivery drivers, rideshare drivers, and anyone who drives for business. The app automatically tracks every trip using GPS, classifies drives as business or personal using AI, and calculates your tax deductions in real time based on the current IRS standard mileage rate ($0.725 per mile for 2026) or the CRA automobile allowance rate ($0.73 per kilometre in Canada).</p>
     <p style="margin-bottom:16px;">Unlike other mileage trackers, MyMilesAI is built with a privacy-first approach. All trip data, GPS coordinates, routes, work mileage records, and odometer readings are stored locally on your device. Nothing is uploaded to the cloud. The app works fully offline, tracks trips in low-signal areas, and never requires an internet connection to start logging a drive. Your business expense data stays on your phone.</p>
     <p style="margin-bottom:16px;">MyMilesAI generates IRS-compliant and CRA-compliant mileage logs that can be exported as PDF or CSV files and shared directly with your accountant. These reports support Schedule C filings, tax write-off documentation, and mileage reimbursement claims. The built-in mileage calculator shows your deductions in real time. Features include work-hours auto-classification, swipe-to-classify gestures, Smart Pause GPS logic, and undo-delete for accidentally removed trips. Your daily commute is automatically excluded from business mileage calculations.</p>
-    <p style="margin-bottom:16px;">The app offers a free tier with 20 trips per month and a Pro plan at $6.99 per month with unlimited trips, auto GPS tracking, AI classification, and full export capabilities. During the current beta period, all Pro features are available for free via Apple TestFlight. MyMilesAI supports both the United States and Canada with automatic locale detection, making it the ideal business expense tracker for professionals in both countries.</p>
-    <p>For questions or support, contact <a href="/cdn-cgi/l/email-protection#72010702021d0006321f0b1f1b1e1701131b5c111d1f" style="color:var(--sapphire);"><span class="__cf_email__" data-cfemail="7e0d0b0e0e110c0a3e13071317121b0d1f17501d1113">[email&#160;protected]</span></a>. MyMilesAI is available as a free beta on iOS via TestFlight, with Android support coming soon.</p>
+    <p style="margin-bottom:16px;">The app offers a free tier with 20 trips per month and a Pro plan at $6.99 per month with unlimited trips, auto GPS tracking, AI classification, and full export capabilities. During the current beta period, all Pro features are available for free via Apple MyMilesAI. MyMilesAI supports both the United States and Canada with automatic locale detection, making it the ideal business expense tracker for professionals in both countries.</p>
+    <p>For questions or support, contact <a href="/cdn-cgi/l/email-protection#72010702021d0006321f0b1f1b1e1701131b5c111d1f" style="color:var(--sapphire);"><span class="__cf_email__" data-cfemail="7e0d0b0e0e110c0a3e13071317121b0d1f17501d1113">[email&#160;protected]</span></a>. MyMilesAI is available as a free beta on iOS via MyMilesAI, with Android support coming soon.</p>
   </div>
 </div>
 </section>
@@ -1439,7 +1588,7 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
 <div class="container sticky-bar-inner">
   <div class="sticky-bar-text"><strong>MyMilesAI Beta</strong> &mdash; All Pro features free. Limited spots.</div>
   <div class="sticky-bar-cta">
-    <a href="#cta" class="btn btn-primary">Get Beta Access <svg width="14" height="14"><use href="#i-arrow"/></svg></a>
+    <a href="#" onclick="openSignUp();return false;" class="btn btn-primary">Start Free Trial <svg width="14" height="14"><use href="#i-arrow"/></svg></a>
   </div>
 </div>
 </div>
@@ -1449,15 +1598,55 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
   <div style="max-width:640px;margin:0 auto;background:var(--white);border-radius:24px;padding:48px 40px;position:relative;box-shadow:0 40px 80px rgba(0,0,0,.12);">
     <button onclick="document.getElementById('privacyModal').style.display='none'" style="position:absolute;top:16px;right:20px;background:none;border:none;font-size:24px;cursor:pointer;color:var(--text3);">&times;</button>
     <h2 style="font-family:var(--serif);font-size:32px;margin-bottom:8px;color:var(--dark)">Privacy Policy</h2>
-    <p style="font-size:13px;color:var(--text3);margin-bottom:24px;">Last updated: March 2026</p>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:24px;">Last updated: April 2026</p>
     <div style="font-size:15px;color:var(--text2);line-height:1.75;">
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">Your data stays on your device.</strong> MyMilesAI is built with a privacy-first architecture. All trip data, GPS coordinates, and mileage records are stored locally on your phone. We do not upload, transmit, or store your location data on external servers.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">What we collect:</strong> When you sign up for beta access, we collect your email address solely to send TestFlight invitations and product updates. We do not share this with third parties.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">GPS &amp; Location:</strong> Location data is used exclusively within the app to calculate trip distances and routes. This data never leaves your device. GPS permissions can be revoked at any time.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">No advertising:</strong> We do not serve ads, use advertising SDKs, or share data with ad networks.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">Data exports:</strong> When you export reports, files are generated locally and shared only through your device&rsquo;s share sheet.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">Account deletion:</strong> You can request complete account deletion at any time by emailing <a href="/cdn-cgi/l/email-protection#3141435847505248715c485c585d544250581f525e5c" style="color:var(--sapphire)"><span class="__cf_email__" data-cfemail="a6d6d4cfd0c7c5dfe6cbdfcbcfcac3d5c7cf88c5c9cb">[email&#160;protected]</span></a>. We will delete your email and any associated records within 30 days. Trip data on your device is only accessible to you.</p>
-      <p><strong style="color:var(--dark)">Contact:</strong> <a href="/cdn-cgi/l/email-protection#6414160d1205071d24091d090d080117050d4a070b09" style="color:var(--sapphire)"><span class="__cf_email__" data-cfemail="5a2a28332c3b39231a37233733363f293b3374393537">[email&#160;protected]</span></a></p>
+      <p style="margin-bottom:16px">MyMilesAI (&ldquo;we&rdquo;, &ldquo;our&rdquo;, &ldquo;us&rdquo;) is operated by Harijas LLC. This Privacy Policy describes how we collect, use, and protect your information when you use the MyMilesAI mobile app and web dashboard (collectively, &ldquo;the Service&rdquo;).</p>
+      <p style="margin-bottom:8px"><strong style="color:var(--dark)">Information We Collect:</strong></p>
+      <p style="margin-bottom:8px"><strong style="color:var(--dark)">a) Account Information:</strong> When you create an account, we collect your email address for authentication purposes. If you sign in via Google or Apple, we receive your name and email from those providers. We do not store passwords.</p>
+      <p style="margin-bottom:8px"><strong style="color:var(--dark)">b) Trip Data (On-Device):</strong> GPS coordinates, routes, speeds, and detailed trip data are stored locally on your device. This data is NOT uploaded to our servers unless you explicitly choose to sync.</p>
+      <p style="margin-bottom:8px"><strong style="color:var(--dark)">c) Trip Metadata (Synced):</strong> If you use the web dashboard, basic trip metadata (distance, category, date, trip purpose) is synced to our secure database (hosted on Supabase). GPS coordinates and detailed route data are NOT synced.</p>
+      <p style="margin-bottom:8px"><strong style="color:var(--dark)">d) Payment Information:</strong> Payment processing is handled by Apple (App Store) or Stripe (website). We do not store credit card numbers or payment details on our servers.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">e) What We Do NOT Collect:</strong> We do not collect browsing history, contacts, photos, microphone data, advertising identifiers, device fingerprints, or usage analytics.</p>
+      <p style="margin-bottom:8px"><strong style="color:var(--dark)">How We Use Your Information:</strong></p>
+      <ul style="margin-bottom:16px;padding-left:20px">
+        <li style="margin-bottom:6px">Email: Account authentication, password resets, important service notifications, and optional product updates</li>
+        <li style="margin-bottom:6px">Trip metadata: Display on web dashboard, generate reports, calculate tax deductions</li>
+        <li style="margin-bottom:6px">We do NOT use your data for advertising, profiling, or sale to third parties</li>
+      </ul>
+      <p style="margin-bottom:8px"><strong style="color:var(--dark)">Data Storage &amp; Security:</strong></p>
+      <ul style="margin-bottom:16px;padding-left:20px">
+        <li style="margin-bottom:6px">On-device data is protected by your device&rsquo;s security (passcode, biometrics)</li>
+        <li style="margin-bottom:6px">Synced data is stored on Supabase (hosted on AWS) with encryption at rest and in transit</li>
+        <li style="margin-bottom:6px">Authentication uses industry-standard protocols (OAuth 2.0, OTP verification)</li>
+        <li style="margin-bottom:6px">We conduct regular security reviews of our infrastructure</li>
+      </ul>
+      <p style="margin-bottom:8px"><strong style="color:var(--dark)">Third-Party Services:</strong></p>
+      <ul style="margin-bottom:16px;padding-left:20px">
+        <li style="margin-bottom:6px">Supabase (authentication and optional data sync) &mdash; supabase.com/privacy</li>
+        <li style="margin-bottom:6px">Apple App Store (app distribution and in-app purchases) &mdash; apple.com/privacy</li>
+        <li style="margin-bottom:6px">Stripe (website payment processing, coming soon) &mdash; stripe.com/privacy</li>
+        <li style="margin-bottom:6px">We do NOT use Google Analytics, Facebook SDK, or any advertising trackers</li>
+      </ul>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">Data Sharing:</strong> We do not sell, trade, or rent your personal information to third parties. We may share information only: (a) with your explicit consent; (b) to comply with legal obligations; (c) to protect our rights or safety.</p>
+      <p style="margin-bottom:8px"><strong style="color:var(--dark)">Data Retention:</strong></p>
+      <ul style="margin-bottom:16px;padding-left:20px">
+        <li style="margin-bottom:6px">On-device trip data: Retained until you delete it from the app</li>
+        <li style="margin-bottom:6px">Synced trip metadata: Retained until you delete it from the dashboard or request account deletion</li>
+        <li style="margin-bottom:6px">Account data (email): Retained until you request account deletion</li>
+        <li style="margin-bottom:6px">After account deletion request, all data is permanently deleted within 30 days</li>
+      </ul>
+      <p style="margin-bottom:8px"><strong style="color:var(--dark)">Your Rights:</strong></p>
+      <ul style="margin-bottom:16px;padding-left:20px">
+        <li style="margin-bottom:6px">Access: Request a copy of all data we hold about you</li>
+        <li style="margin-bottom:6px">Export: Download your trip data as CSV or PDF at any time</li>
+        <li style="margin-bottom:6px">Delete: Delete individual trips or request complete account deletion</li>
+        <li style="margin-bottom:6px">Portability: Export your data in standard formats (CSV, PDF)</li>
+        <li style="margin-bottom:6px">For any of these requests, email <a href="mailto:support@mymilesai.com" style="color:var(--sapphire)">support@mymilesai.com</a></li>
+      </ul>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">Children&rsquo;s Privacy:</strong> MyMilesAI is not intended for use by children under 13 (or under 16 in the EU). We do not knowingly collect personal information from children.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">International Users:</strong> Our servers are located in the United States. If you are accessing the Service from outside the US, your data may be transferred to and processed in the US.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">Changes to This Policy:</strong> We will notify you of material changes via email or in-app notification at least 14 days before they take effect. Your continued use of the Service after changes constitutes acceptance.</p>
+      <p><strong style="color:var(--dark)">Contact Us:</strong> For privacy questions, data requests, or concerns, contact <a href="mailto:support@mymilesai.com" style="color:var(--sapphire)">support@mymilesai.com</a>.</p>
     </div>
   </div>
 </div>
@@ -1467,21 +1656,26 @@ footer::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
   <div style="max-width:640px;margin:0 auto;background:var(--white);border-radius:24px;padding:48px 40px;position:relative;box-shadow:0 40px 80px rgba(0,0,0,.12);">
     <button onclick="document.getElementById('termsModal').style.display='none'" style="position:absolute;top:16px;right:20px;background:none;border:none;font-size:24px;cursor:pointer;color:var(--text3);">&times;</button>
     <h2 style="font-family:var(--serif);font-size:32px;margin-bottom:8px;color:var(--dark)">Terms of Service</h2>
-    <p style="font-size:13px;color:var(--text3);margin-bottom:24px;">Last updated: March 2026</p>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:24px;">Last updated: April 2026</p>
     <div style="font-size:15px;color:var(--text2);line-height:1.75;">
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">1. Acceptance of Terms.</strong> By downloading, accessing, or using MyMilesAI (&ldquo;the App&rdquo;), you agree to be bound by these Terms of Service. If you do not agree, do not use the App.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">2. Description of Service.</strong> MyMilesAI is a mileage tracking application that uses GPS to log trips, classify them using AI, and calculate tax deductions based on IRS (US) and CRA (Canada) standard mileage rates. The App is provided &ldquo;as is&rdquo; for informational purposes and is not a substitute for professional tax advice.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">3. Subscriptions &amp; Billing.</strong> MyMilesAI offers Free and paid subscription tiers. Paid subscriptions (Pro and Business) are billed monthly through Apple&rsquo;s App Store, Google Play, or Stripe via our website. Prices are listed in USD and may vary by region. Subscriptions auto-renew unless cancelled at least 24 hours before the end of the current billing period.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">4. Easy Cancellation.</strong> You may cancel your subscription at any time through your App Store or Google Play subscription settings, through your account on our website, or by emailing <a href="/cdn-cgi/l/email-protection#cebdbbbebea1bcba8ea3b7a3a7a2abbdafa7e0ada1a3" style="color:var(--sapphire)"><span class="__cf_email__" data-cfemail="e3909693938c9197a38e9a8e8a8f8690828acd808c8e">[email&#160;protected]</span></a>. Cancellation takes effect at the end of your current billing period. There are no cancellation fees or penalties. After cancellation, you retain access to the Free tier and all your trip data remains on your device.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">5. Refund Policy.</strong> We offer a 30-day money-back guarantee for new paid subscribers. If you are not satisfied within 30 days of your first paid subscription, contact <a href="/cdn-cgi/l/email-protection#52212722223d2026123f2b3f3b3e3721333b7c313d3f" style="color:var(--sapphire)"><span class="__cf_email__" data-cfemail="a3d0d6d3d3ccd1d7e3cedacecacfc6d0c2ca8dc0ccce">[email&#160;protected]</span></a> for a full refund. For App Store or Google Play purchases, you may also request refunds through the respective platform. After 30 days, refunds are handled on a case-by-case basis at our discretion.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">6. Free Tier &amp; Beta Access.</strong> Beta access is free with all Pro features unlocked. When the beta period ends, beta users will be notified and given the option to subscribe at the locked-in early pricing or continue on the Free tier. No automatic charges will occur without your explicit consent.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">7. Your Data.</strong> All trip data, GPS coordinates, and mileage records are stored locally on your device. We do not upload, access, or store your location data. You own your data and can export it at any time. See our <a href="#privacy" style="color:var(--sapphire)" onclick="document.getElementById('termsModal').style.display='none';document.getElementById('privacyModal').style.display='block';">Privacy Policy</a> for full details.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">8. Accuracy Disclaimer.</strong> While MyMilesAI strives for GPS accuracy within 2&ndash;3% of actual distance, mileage calculations are estimates and may vary based on GPS signal quality, device settings, and environmental conditions. Users should verify mileage records before submitting tax claims. MyMilesAI is not responsible for inaccurate deduction claims.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">9. Tax Disclaimer.</strong> MyMilesAI provides mileage calculations based on published IRS and CRA standard rates. This does not constitute tax advice. Consult a qualified tax professional for advice specific to your situation. We are not liable for any tax penalties or audits resulting from the use of our calculations.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">10. Limitation of Liability.</strong> To the maximum extent permitted by law, MyMilesAI and its creators shall not be liable for any indirect, incidental, or consequential damages arising from the use of the App, including but not limited to lost data, lost profits, or inaccurate mileage records.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">11. Changes to Terms.</strong> We may update these Terms from time to time. Material changes will be communicated via email or in-app notification at least 14 days before taking effect. Continued use of the App after changes constitutes acceptance.</p>
-      <p style="margin-bottom:16px"><strong style="color:var(--dark)">12. Account Termination.</strong> We reserve the right to terminate accounts that violate these terms or engage in fraudulent activity. You may delete your account at any time by emailing <a href="/cdn-cgi/l/email-protection#b0c3c5c0c0dfc2c4f0ddc9ddd9dcd5c3d1d99ed3dfdd" style="color:var(--sapphire)"><span class="__cf_email__" data-cfemail="582b2d2828372a2c1835213531343d2b3931763b3735">[email&#160;protected]</span></a>.</p>
-      <p><strong style="color:var(--dark)">13. Contact.</strong> For questions about these Terms, email <a href="/cdn-cgi/l/email-protection#1c6f696c6c736e685c7165717570796f7d75327f7371" style="color:var(--sapphire)"><span class="__cf_email__" data-cfemail="a8dbddd8d8c7dadce8c5d1c5c1c4cddbc9c186cbc7c5">[email&#160;protected]</span></a></p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">1. Acceptance of Terms.</strong> By downloading, accessing, or using MyMilesAI (&ldquo;the App&rdquo; or &ldquo;Service&rdquo;), you agree to be bound by these Terms of Service (&ldquo;Terms&rdquo;). If you do not agree to all of these Terms, do not use the Service.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">2. Description of Service.</strong> MyMilesAI is a mileage tracking application that uses GPS to log trips, classify them using AI, and calculate tax deductions based on IRS (US) and CRA (Canada) standard mileage rates. The Service includes the iOS mobile app and the web dashboard at mymilesai.com. The Service is provided &ldquo;as is&rdquo; for informational and record-keeping purposes only and is not a substitute for professional tax, legal, or financial advice.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">3. Subscriptions &amp; Billing.</strong> MyMilesAI offers a Pro subscription plan at $69.99/year or $6.99/month, with a 10-day free trial. No credit card is required for the trial. Paid subscriptions are billed through Apple&rsquo;s App Store or Stripe via our website. Prices are listed in USD and may vary by region. Subscriptions auto-renew unless cancelled at least 24 hours before the end of the current billing period.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">4. Easy Cancellation.</strong> You may cancel your subscription at any time through your App Store subscription settings, through your account on our website, or by emailing <a href="mailto:support@mymilesai.com" style="color:var(--sapphire)">support@mymilesai.com</a>. Cancellation takes effect at the end of your current billing period. There are no cancellation fees or penalties.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">5. Refund Policy.</strong> We offer a 30-day money-back guarantee for new paid subscribers. If you are not satisfied within 30 days, contact <a href="mailto:support@mymilesai.com" style="color:var(--sapphire)">support@mymilesai.com</a> for a full refund. After 30 days, refunds are handled on a case-by-case basis at our discretion.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">6. Web Dashboard.</strong> The web dashboard at mymilesai.com allows authenticated users to view synced trip data, export reports, and manage their subscription. Dashboard access requires authentication via Google, Apple, or email verification code.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">7. Your Data.</strong> All trip data, GPS coordinates, and mileage records are stored locally on your device by default. If you choose to sync trips via the web dashboard, basic trip metadata (distance, category, date) is stored in our secure database. You own your data and can export or delete it at any time. See our <a href="#privacy" style="color:var(--sapphire)" onclick="document.getElementById('termsModal').style.display='none';document.getElementById('privacyModal').style.display='block';">Privacy Policy</a> for full details.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">8. Disclaimer of Warranties.</strong> THE SERVICE IS PROVIDED &ldquo;AS IS&rdquo; AND &ldquo;AS AVAILABLE&rdquo; WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. WE DO NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED, ERROR-FREE, OR COMPLETELY SECURE.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">9. Limitation of Liability.</strong> TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL MYMILESAI, HARIJAS LLC, ITS OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, OR AFFILIATES BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM (A) YOUR USE OF OR INABILITY TO USE THE SERVICE; (B) ANY UNAUTHORIZED ACCESS TO OR USE OF OUR SERVERS AND/OR ANY PERSONAL INFORMATION STORED THEREIN; (C) ANY INTERRUPTION OR CESSATION OF THE SERVICE; (D) ANY INACCURACIES IN MILEAGE CALCULATIONS, TAX DEDUCTION ESTIMATES, OR GPS DATA; OR (E) ANY OTHER MATTER RELATING TO THE SERVICE. OUR TOTAL LIABILITY SHALL NOT EXCEED THE AMOUNT YOU PAID US IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">10. Tax Disclaimer.</strong> MyMilesAI provides mileage calculations based on published IRS and CRA standard mileage rates. THIS DOES NOT CONSTITUTE TAX, LEGAL, OR FINANCIAL ADVICE. You are solely responsible for verifying all mileage records and deduction claims before filing taxes. Consult a qualified tax professional for advice specific to your situation. We are not liable for any tax penalties, audits, fines, or financial losses resulting from the use of our calculations or reports.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">11. Accuracy Disclaimer.</strong> While MyMilesAI strives for GPS accuracy within 2&ndash;3% of actual distance, mileage calculations are estimates and may vary based on GPS signal quality, device settings, and environmental conditions. Users should independently verify mileage records before submitting claims.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">12. Indemnification.</strong> You agree to indemnify, defend, and hold harmless MyMilesAI, Harijas LLC, its officers, directors, employees, and agents from and against any and all claims, damages, obligations, losses, liabilities, costs, and expenses arising from: (a) your use of the Service; (b) your violation of these Terms; (c) your violation of any rights of another party; or (d) any tax filings or claims made using data from the Service.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">13. Dispute Resolution &amp; Arbitration.</strong> Any dispute arising out of or relating to these Terms or the Service shall be resolved through binding arbitration in accordance with the rules of the Canadian Arbitration Association, rather than in court. You agree to waive your right to participate in a class action lawsuit or class-wide arbitration. The arbitration shall take place in Winnipeg, Manitoba, Canada.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">14. Governing Law.</strong> These Terms shall be governed by and construed in accordance with the laws of the Province of Manitoba, Canada, without regard to conflict of law principles.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">15. Changes to Terms.</strong> We may update these Terms from time to time. Material changes will be communicated via email or in-app notification at least 14 days before taking effect. Continued use of the Service after changes constitutes acceptance of the new Terms.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">16. Account Termination.</strong> We reserve the right to suspend or terminate accounts that violate these terms, engage in fraudulent activity, or abuse the Service. You may delete your account at any time by emailing <a href="mailto:support@mymilesai.com" style="color:var(--sapphire)">support@mymilesai.com</a>.</p>
+      <p style="margin-bottom:16px"><strong style="color:var(--dark)">17. Entire Agreement.</strong> These Terms, together with the Privacy Policy, constitute the entire agreement between you and MyMilesAI regarding the Service and supersede all prior agreements.</p>
+      <p><strong style="color:var(--dark)">18. Contact.</strong> For questions about these Terms, email <a href="mailto:support@mymilesai.com" style="color:var(--sapphire)">support@mymilesai.com</a>.</p>
     </div>
   </div>
 </div>
@@ -1507,6 +1701,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     const h=a.getAttribute('href');
     if(h==='#privacy'){e.preventDefault();document.getElementById('privacyModal').style.display='block';return;}
     if(h==='#terms'){e.preventDefault();document.getElementById('termsModal').style.display='block';return;}
+    if(h==='#') return;
     const t=document.querySelector(h);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
   });
 });
@@ -1756,35 +1951,82 @@ setLocale(detectLocale());
 <button class="mmBtn mmBtnApple" onclick="doApple()" style="margin-bottom:20px"><svg width="14" height="18" viewBox="0 0 814 1000" fill="white"><path d="M788.1 340.9c-5.8 4.5-108.2 62.2-108.2 190.5 0 148.4 130.3 200.9 134.2 202.2-.6 3.2-20.7 71.9-68.7 141.9-42.8 61.6-87.5 123.1-155.5 123.1s-85.5-39.5-164-39.5c-76 0-103.7 40.8-165.9 40.8s-105-57.8-155.5-127.4C46 790.7 0 663 0 541.8c0-207.5 135.4-317.3 269-317.3 70.1 0 128.4 45.8 170.5 45.8 40.4 0 103.6-48.2 183.6-48.2zM520.2 93.3c33.3-40.9 57.2-97.7 57.2-154.5 0-8.1-.7-16.2-2.1-23.7-54.3 2.1-118.5 36.2-157.6 83.7-30.1 34.8-58.6 91.6-58.6 149.2 0 8.8 1.5 17.6 2.2 20.3 3.5.5 9.1 1.3 14.6 1.3 48.6 0 109.5-32.4 144.3-76.3z"/></svg>Continue with Apple</button>
 <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div style="flex:1;height:1px;background:#e5e7eb"></div><span style="font-size:12px;color:#9ca3af;font-weight:500">or email</span><div style="flex:1;height:1px;background:#e5e7eb"></div></div>
 <input type="email" id="aEm" class="mmInput" placeholder="your@email.com" style="margin-bottom:12px" onfocus="this.style.borderColor='#2563EB';this.style.background='#fff'" onblur="this.style.borderColor='#e5e7eb';this.style.background='#f9fafb'" onkeydown="if(event.key==='Enter')doEmail()">
-<button class="mmBtn mmBtnPrimary" onclick="doEmail()">Send Magic Link &#x2192;</button>
-<p style="text-align:center;font-size:12px;color:#9ca3af;margin-top:14px">No password &#xB7; Privacy-first &#xB7; Free to start</p>
+<button class="mmBtn mmBtnPrimary" onclick="doEmail()">Send Verification Code &#x2192;</button>
+<p style="text-align:center;font-size:12px;color:#9ca3af;margin-top:14px">No password &#xB7; Privacy-first &#xB7; </p>
 </div></div>
 <div id="dashPg" style="display:none;position:fixed;inset:0;background:#F5F4F2;z-index:9000;overflow-y:auto">
 <nav style="position:sticky;top:0;z-index:10;height:64px;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;padding:0 32px">
-<div style="display:flex;align-items:center;gap:10px;font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;color:#111827"><div style="width:34px;height:34px;background:linear-gradient(135deg,#2563EB,#7C3AED);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px">&#x1F697;</div>MyMilesAI</div>
-<div style="display:flex;align-items:center;gap:12px"><span id="dUN" style="font-size:14px;color:#6b7280"></span>
-<button onclick="openAt()" style="padding:9px 20px;border-radius:100px;background:linear-gradient(135deg,#2563EB,#7C3AED);color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer">+ Add Trip</button>
-<button onclick="doOut()" style="padding:9px 20px;border-radius:100px;border:1.5px solid #e5e7eb;background:transparent;font-size:14px;font-weight:600;color:#374151;cursor:pointer">Sign Out</button></div></nav>
-<div style="max-width:1200px;margin:0 auto;padding:32px 24px">
-<h1 id="dGr" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#111827;margin-bottom:4px">Good morning &#x1F44B;</h1>
-<p style="font-size:14px;color:#9ca3af;margin-bottom:28px">Your 2026 mileage summary</p>
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px">
-<div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px 24px"><div style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">&#x1F4BC; Business Miles</div><div id="kB" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#111827">0.0</div></div>
-<div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px 24px"><div style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">&#x1F4B0; Tax Deduction</div><div id="kD" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#16a34a">$0.00</div></div>
-<div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px 24px"><div style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">&#x1F464; Personal Miles</div><div id="kP" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#111827">0.0</div></div>
-<div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;padding:20px 24px"><div style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px">&#x1F697; Total Trips</div><div id="kT" style="font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:700;color:#111827">0</div></div></div>
-<div style="background:#fff;border:1px solid #e5e7eb;border-radius:20px;overflow:hidden;margin-bottom:20px">
-<div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid #e5e7eb"><div style="font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;color:#111827">Recent Trips</div><button onclick="openAt()" style="font-size:13px;font-weight:700;color:#2563EB;background:none;border:none;cursor:pointer">+ Add Trip</button></div>
-<table style="width:100%;border-collapse:collapse"><thead><tr style="background:#f9fafb">
-<th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb">Route</th>
-<th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb">Category</th>
-<th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb">Miles</th>
-<th style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.07em;text-transform:uppercase;padding:10px 24px;text-align:left;border-bottom:1px solid #e5e7eb">Deduction</th>
-</tr></thead><tbody id="dBdy"><tr><td colspan="4" style="text-align:center;padding:48px;color:#9ca3af;font-size:14px">No trips yet &#x2014; <span onclick="openAt()" style="color:#2563EB;cursor:pointer;font-weight:600">add your first &#x2192;</span></td></tr></tbody></table></div>
-<div style="background:linear-gradient(135deg,rgba(37,99,235,.05),rgba(124,58,237,.03));border:1px solid rgba(37,99,235,.12);border-radius:16px;padding:20px 28px;display:flex;align-items:center;justify-content:space-between">
-<div><div style="font-size:15px;font-weight:700;color:#111827;margin-bottom:4px">&#x1F4B0; 2026 IRS Standard Mileage Rate</div><div style="font-size:13px;color:#6b7280">Every business mile = <strong>$0.70</strong> tax deduction. Medical &amp; charity also qualify.</div></div>
-<div style="font-family:'Playfair Display',Georgia,serif;font-size:40px;font-weight:700;color:#16a34a">$0.70<span style="font-size:16px;font-weight:500;color:#9ca3af">/mi</span></div>
-</div></div></div>
+<div style="display:flex;align-items:center;gap:10px;font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;color:#0f172a"><div style="width:34px;height:34px;background:linear-gradient(135deg,#16a34a,#059669);border-radius:9px;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="11" width="22" height="9" rx="2"/><path d="M5 11V8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/><circle cx="7" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg></div>MyMilesAI</div>
+<div style="display:flex;align-items:center;gap:12px">
+<button onclick="openAt()" style="padding:9px 20px;border-radius:100px;background:linear-gradient(135deg,#16a34a,#059669);color:#fff;font-size:14px;font-weight:700;border:none;cursor:pointer">+ Add Trip</button>
+<button onclick="doOut()" style="padding:9px 20px;border-radius:100px;border:1.5px solid #e5e7eb;background:transparent;font-size:14px;font-weight:600;color:#374151;cursor:pointer">Sign Out</button>
+</div></nav>
+<div style="max-width:1100px;margin:0 auto;padding:32px 24px">
+<!-- User header -->
+<div style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
+<div id="dAv" style="width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#7C3AED,#1B4DDB);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0">M</div>
+<div style="flex:1">
+<div id="dGr" style="font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;color:#0f172a">Good morning</div>
+<div style="display:flex;align-items:center;gap:8px;margin-top:3px"><div style="width:8px;height:8px;border-radius:50%;background:#22c55e;flex-shrink:0"></div><span id="dUN" style="font-size:13px;color:#64748b"></span></div>
+</div>
+<button onclick="doOut()" style="padding:8px 18px;border-radius:100px;border:1.5px solid #e5e7eb;background:#fff;font-size:13px;font-weight:600;color:#64748b;cursor:pointer">Sign Out</button>
+</div>
+<!-- Dark hero card -->
+<div style="background:#0f172a;border-radius:20px;padding:28px 32px;margin-bottom:20px">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:8px">
+<div><div style="font-size:11px;font-weight:700;color:#475569;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px">2026 Tax Year Summary</div>
+<div style="display:flex;align-items:center;gap:8px"><div style="width:24px;height:24px;border-radius:6px;background:linear-gradient(135deg,#16a34a,#059669);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="11" width="22" height="9" rx="2"/><path d="M5 11V8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v3"/><circle cx="7" cy="20" r="1"/><circle cx="17" cy="20" r="1"/></svg></div><span style="font-family:'Playfair Display',Georgia,serif;font-size:17px;font-weight:700;color:#f8fafc">MyMilesAI</span></div></div>
+<span style="font-size:12px;color:#475569">Auto-synced</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+<div style="background:rgba(27,77,219,.18);border:1px solid rgba(27,77,219,.3);border-radius:14px;padding:16px 18px"><div style="font-size:11px;font-weight:700;color:#93c5fd;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Business <span class="lbl-unit">mi</span></div><div id="kB" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#60a5fa">0.0</div></div>
+<div style="background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.25);border-radius:14px;padding:16px 18px"><div style="font-size:11px;font-weight:700;color:#f9a8d4;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Personal <span class="lbl-unit">mi</span></div><div id="kP" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#ec4899">0.0</div></div>
+<div style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);border-radius:14px;padding:16px 18px"><div style="font-size:11px;font-weight:700;color:#86efac;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Tax Deduction</div><div id="kD" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#22c55e">$0.00</div></div>
+<div style="background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.25);border-radius:14px;padding:16px 18px"><div style="font-size:11px;font-weight:700;color:#c4b5fd;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px">Total Trips</div><div id="kT" style="font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:700;color:#a78bfa">0</div></div>
+</div></div>
+<!-- Three info cards row -->
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px">
+<div style="background:#fff;border-radius:16px;padding:20px;border:1px solid #f1f5f9">
+<div style="font-size:11px;font-weight:700;color:#64748b;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span class="lbl-rate-label">IRS</span> Rate 2026</div>
+<div style="font-family:'Playfair Display',Georgia,serif;font-size:30px;font-weight:700;color:#22c55e"><span class="lbl-rate">$0.725/mi</span></div>
+<div style="font-size:12px;color:#94a3b8;margin-top:6px">Per <span class="lbl-unit">mi</span> business deduction</div>
+</div>
+<div style="background:#0f172a;border-radius:16px;padding:20px">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px"><div style="font-size:11px;font-weight:700;color:#475569;letter-spacing:.06em;text-transform:uppercase">Subscription</div><span id="subStatusBadge" style="padding:3px 10px;border-radius:100px;background:rgba(34,197,94,.15);color:#22c55e;font-size:11px;font-weight:700">Pro Trial</span></div>
+<div id="subStatusText" style="font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;color:#f8fafc;margin-bottom:12px">All features unlocked</div>
+<button id="subStatusBtn" style="width:100%;padding:9px;border-radius:10px;background:linear-gradient(135deg,#16a34a,#059669);color:#fff;font-size:13px;font-weight:700;border:none;cursor:pointer;margin-bottom:6px">Pro Member &#10004;</button>
+<button onclick="openSubModal()" style="width:100%;padding:8px;border-radius:10px;background:rgba(255,255,255,.06);color:#94a3b8;font-size:12px;font-weight:600;border:1px solid rgba(255,255,255,.08);cursor:pointer">Manage subscription</button>
+</div>
+<div style="background:#fff;border-radius:16px;padding:20px;border:1px solid #f1f5f9">
+<div style="font-size:11px;font-weight:700;color:#64748b;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:5px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#eab308" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Year-to-Date Savings</div>
+<div id="ytdAmount" style="font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;color:#0f172a;margin-bottom:10px">$0.00 saved this year</div>
+<div style="background:#f1f5f9;border-radius:100px;height:8px;overflow:hidden"><div id="ytdBar" style="height:100%;width:0%;background:linear-gradient(90deg,#f59e0b,#22c55e);border-radius:100px;transition:width .5s ease"></div></div>
+<div style="font-size:11px;color:#94a3b8;margin-top:6px">Goal: $5,000 deduction</div>
+</div></div>
+<!-- Export reports -->
+<div style="background:#fff;border-radius:16px;padding:20px 24px;margin-bottom:20px;border:1px solid #f1f5f9">
+<div style="font-size:14px;font-weight:700;color:#0f172a;margin-bottom:14px">Export Reports</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+<button onclick="exportCSV()" style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:10px;border:1.5px solid #e2e8f0;background:#f8fafc;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer"><svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#22c55e" stroke-width="2" stroke-linejoin="round"/><polyline points="14,2 14,8 20,8" stroke="#22c55e" stroke-width="2" stroke-linejoin="round"/><line x1="8" y1="13" x2="16" y2="13" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="17" x2="16" y2="17" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/></svg>Excel / CSV</button>
+<button onclick="exportPDF()" style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:10px;border:1.5px solid #e2e8f0;background:#f8fafc;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer"><svg width="16" height="16" fill="none" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#ef4444" stroke-width="2" stroke-linejoin="round"/><polyline points="14,2 14,8 20,8" stroke="#ef4444" stroke-width="2" stroke-linejoin="round"/></svg>PDF</button>
+<button onclick="exportSheets()" style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:10px;border:1.5px solid #e2e8f0;background:#f8fafc;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer"><svg width="16" height="16" fill="none" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke="#1B4DDB" stroke-width="2"/><line x1="3" y1="9" x2="21" y2="9" stroke="#1B4DDB" stroke-width="2"/><line x1="9" y1="3" x2="9" y2="21" stroke="#1B4DDB" stroke-width="2"/></svg>Google Sheets</button>
+<button onclick="emailReport()" style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:10px;border:1.5px solid #e2e8f0;background:#f8fafc;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1B4DDB" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg>Email Report</button>
+<button onclick="exportQB()" style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:10px;border:1.5px solid #e2e8f0;background:#f8fafc;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer"><svg width="16" height="16" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke="#7C3AED" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>QuickBooks</button>
+<button onclick="exportFreshBooks()" style="display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:10px;border:1.5px solid #e2e8f0;background:#f8fafc;font-size:13px;font-weight:600;color:#0f172a;cursor:pointer"><svg width="16" height="16" fill="none" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2" stroke="#22c55e" stroke-width="2"/><line x1="2" y1="10" x2="22" y2="10" stroke="#22c55e" stroke-width="2"/><line x1="6" y1="15" x2="10" y2="15" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/></svg>FreshBooks</button>
+</div></div>
+<!-- Recent trips -->
+<div style="background:#fff;border-radius:16px;border:1px solid #f1f5f9;overflow:hidden">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:18px 24px;border-bottom:1px solid #f1f5f9">
+<div style="display:flex;align-items:center;gap:10px"><span style="font-family:'Playfair Display',Georgia,serif;font-size:18px;font-weight:700;color:#0f172a">Recent Trips</span><span id="tripCount" style="padding:2px 10px;border-radius:100px;background:#f1f5f9;font-size:12px;font-weight:700;color:#64748b">0 trips</span></div>
+<button onclick="openAt()" style="display:flex;align-items:center;gap:6px;padding:9px 18px;border-radius:100px;background:linear-gradient(135deg,#16a34a,#059669);color:#fff;font-size:13px;font-weight:700;border:none;cursor:pointer">+ Add Trip</button>
+</div>
+<div style="padding:14px 18px 2px;border-bottom:1px solid #f8fafc">
+  <div id="periodFilters" style="display:flex;gap:6px;margin-bottom:10px;align-items:center"><button onclick="filterPeriod('day')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#f1f5f9;color:#64748b;border:none">Day</button><button onclick="filterPeriod('week')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#f1f5f9;color:#64748b;border:none">Week</button><button onclick="filterPeriod('month')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#f1f5f9;color:#64748b;border:none">Month</button><button onclick="filterPeriod('year')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#1B4DDB;color:#fff;border:none">Year</button><span style="flex:1"></span><span style="font-size:12px;color:#94a3b8" id="periodLabel">This Year</span></div>
+  <div id="catFilters" style="display:flex;gap:6px;margin-bottom:14px;align-items:center"><button onclick="filterCat('all')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#0f172a;color:#fff;border:none">All</button><button onclick="filterCat('business')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#f1f5f9;color:#64748b;border:none">Business</button><button onclick="filterCat('personal')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#f1f5f9;color:#64748b;border:none">Personal</button><button onclick="filterCat('unclassified')" style="font-size:12px;padding:6px 16px;border-radius:100px;font-weight:600;cursor:pointer;background:#f1f5f9;color:#64748b;border:none">Unclass.</button></div>
+</div>
+<div id="tripsList" style="padding:14px 18px"></div>
+</div>
+</div></div>
 <div id="atOv" class="mmOv" onclick="if(event.target===this)closeAt()">
 <div class="mmBox" style="max-width:480px"><button class="mmClose" onclick="closeAt()">&#x2715;</button>
 <h3 style="font-family:'Playfair Display',Georgia,serif;font-size:24px;font-weight:700;color:#111827;margin-bottom:24px">Add Trip</h3>
@@ -1796,238 +2038,589 @@ setLocale(detectLocale());
 <div><label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px">Miles</label><input id="tMi" type="number" class="mmInput" placeholder="0.0" step="0.1" min="0" oninput="calcDed()" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"></div></div>
 <label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:8px">Category</label>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px" id="cBts">
-<button onclick="pCat(this)" data-cat="business" style="padding:11px;border-radius:10px;border:1.5px solid #2563EB;background:rgba(37,99,235,.06);color:#2563EB;font-size:13px;font-weight:700;cursor:pointer">&#x1F4BC; Business</button>
-<button onclick="pCat(this)" data-cat="personal" style="padding:11px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;color:#374151;font-size:13px;font-weight:600;cursor:pointer">&#x1F464; Personal</button>
-<button onclick="pCat(this)" data-cat="medical" style="padding:11px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;color:#374151;font-size:13px;font-weight:600;cursor:pointer">&#x1F3E5; Medical</button>
-<button onclick="pCat(this)" data-cat="charity" style="padding:11px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;color:#374151;font-size:13px;font-weight:600;cursor:pointer">&#x2764;&#xFE0F; Charity</button></div>
+<button onclick="pCat(this)" data-cat="business" style="padding:11px;border-radius:10px;border:1.5px solid #2563EB;background:rgba(37,99,235,.06);color:#2563EB;font-size:13px;font-weight:700;cursor:pointer">Business</button>
+<button onclick="pCat(this)" data-cat="personal" style="padding:11px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;color:#374151;font-size:13px;font-weight:600;cursor:pointer">Personal</button>
+<button onclick="pCat(this)" data-cat="medical" style="padding:11px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;color:#374151;font-size:13px;font-weight:600;cursor:pointer">Medical</button>
+<button onclick="pCat(this)" data-cat="charity" style="padding:11px;border-radius:10px;border:1.5px solid #e5e7eb;background:#f9fafb;color:#374151;font-size:13px;font-weight:600;cursor:pointer">Charity</button></div>
 <div id="dPv" style="display:none;background:rgba(22,163,74,.06);border:1px solid rgba(22,163,74,.2);border-radius:10px;padding:10px 14px;font-size:13px;font-weight:700;color:#16a34a;margin-bottom:14px"></div>
 <input id="tNt" class="mmInput" placeholder="Notes &#x2014; client name, purpose..." style="margin-bottom:16px" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'">
 <button class="mmBtn mmBtnPrimary" onclick="saveTr()">Save Trip &#x2192;</button>
 </div></div>
 <script>
 (function(){
-var _u=null,_tr=[],IRS=0.70;
-function fmt(n){return(n<0?"":"")+n.toFixed(2);}
-function login(e,n){_u={email:e,name:n||e.split("@")[0]};closeSignIn();showDash();}
-window.openSignIn=function(){document.getElementById("authOv").style.display="flex";};
-window.closeSignIn=function(){document.getElementById("authOv").style.display="none";};
-window.doGoogle=function(){login("user@gmail.com","Demo User");};
-window.doApple=function(){login("user@icloud.com","Demo User");};
+// ── Locale detection via timezone ──
+var _u=null,_tr=[];window._tr=_tr;
+var _tz=(typeof Intl!=='undefined')?Intl.DateTimeFormat().resolvedOptions().timeZone:'';
+var _CA=['Toronto','Vancouver','Winnipeg','Edmonton','Calgary','Regina','Halifax','Moncton','Whitehorse','Yellowknife','Iqaluit','Glace_Bay','Goose_Bay','Dawson','Creston','Thunder_Bay','Rankin_Inlet'].some(function(z){return _tz.indexOf(z)>-1;});
+var UNIT=_CA?'km':'mi';
+var RATE_LABEL=_CA?'CRA':'IRS';
+var RATE=_CA?0.73:0.725;
+
+function calcDeduction(dist,cat){
+  if(!['business','medical','charity'].includes(cat)) return 0;
+  if(_CA&&cat==='business'){
+    var prev=_tr.filter(function(t){return t.c==='business';}).reduce(function(s,t){return s+t.m;},0);
+    var total=prev+dist;
+    var tier1=Math.min(total,5000)-Math.min(prev,5000);
+    var tier2=Math.max(0,total-5000)-Math.max(0,prev-5000);
+    return Math.max(0,tier1)*0.73+Math.max(0,tier2)*0.67;
+  }
+  return dist*RATE;
+}
+function fmt(n){return n.toFixed(2);}
+
+if(typeof window.showToast!=='function'){
+  window.showToast=function(msg){
+    var t=document.createElement('div');
+    t.style.cssText='position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:12px 28px;border-radius:14px;font-size:14px;font-weight:600;z-index:99999;box-shadow:0 8px 32px rgba(0,0,0,.3);white-space:nowrap;pointer-events:none;transition:opacity .3s;';
+    t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.style.opacity='0';setTimeout(function(){t.remove();},300);},4000);
+  };
+}
+
+window.openSignIn=function(){document.getElementById('authModal').style.display='flex';};
+window.closeSignIn=function(){document.getElementById('authOv').style.display='none';};
+window.doGoogle=function(){sbSignInGoogle();};
+window.doApple=function(){sbSignInApple();};
 window.doEmail=function(){
-  var em=document.getElementById("aEm").value.trim();
-  if(!em||!em.includes("@")){document.getElementById("aEm").style.borderColor="#ef4444";return;}
-  login(em);
+  var em=document.getElementById('aEm').value.trim();
+  if(!em||!em.includes('@')){document.getElementById('aEm').style.borderColor='#ef4444';return;}
+  sbSendOtpCode(em);
 };
+
 window.showDash=function(){
+  if(!_u&&window._currentUser) _u={email:window._currentUser.email,name:window._currentUser.email.split('@')[0]};
+  if(!_u) return;
   window._user=_u;
-  document.getElementById("dashPg").style.display="block";
+  document.getElementById('dashPg').style.display='block';
+  var rawName=(_u.name||_u.email.split('@')[0]);
+  var cleanName=rawName.replace(/[_\.]/g,' ').replace(/[0-9]+$/g,'').trim().split(' ').map(function(w){return w?w.charAt(0).toUpperCase()+w.slice(1):''}).join(' ').trim()||rawName;
   var h=new Date().getHours();
-  var g=h<12?"Good morning":h<17?"Good afternoon":"Good evening";
-  document.getElementById("dGr").textContent=g+", "+_u.name+" 👋";
-  document.getElementById("dUN").textContent=_u.email;
-  var si=document.getElementById("navSignInBtn");if(si)si.style.display="none";
-  var db=document.getElementById("navDashBtn");if(db){db.style.display="inline-flex";db.onclick=function(){document.getElementById("dashPg").style.display="block";return false;};}
+  var g=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+  document.getElementById('dGr').textContent=g+', '+cleanName;
+  document.getElementById('dUN').textContent=_u.email;
+  var av=document.getElementById('dAv');if(av) av.textContent=cleanName.charAt(0).toUpperCase();
+  document.querySelectorAll('.lbl-unit').forEach(function(el){el.textContent=UNIT;});
+  document.querySelectorAll('.lbl-rate-label').forEach(function(el){el.textContent=RATE_LABEL;});
+  document.querySelectorAll('.lbl-rate').forEach(function(el){el.textContent='$'+RATE+'/'+UNIT;});
+  var si=document.getElementById('navSignInBtn');if(si)si.style.display='none';
+  var db=document.getElementById('navDashBtn');if(db){db.style.display='inline-flex';db.onclick=function(){document.getElementById('dashPg').style.display='block';return false;};}
+  if(window._userTrips&&window._userTrips.length>0){
+    _tr=window._userTrips.map(function(t){
+      var dist=parseFloat(t.distance_miles||t.miles||t.distance||t.distance_km||0);
+      var cat=(t.category||t.trip_type||t.type||'business').toLowerCase();
+      if(!['business','personal','medical','charity'].includes(cat)) cat='business';
+      return {f:t.start_location||t.from_location||t.origin||t.start_address||'\u2014',t:t.end_location||t.to_location||t.destination||t.end_address||'\u2014',m:dist,dt:(t.date||t.created_at)?new Date(t.date||t.created_at).toLocaleDateString():'',c:cat,d:dist*RATE,n:t.notes||''};
+    });
+  }
   refresh();
 };
+
 window.doOut=function(){
-  _u=null;_tr=[];window._user=null;
-  document.getElementById("dashPg").style.display="none";
-  var si=document.getElementById("navSignInBtn");if(si)si.style.display="inline-flex";
-  var db=document.getElementById("navDashBtn");if(db)db.style.display="none";
+  var el=document.getElementById('signOutConfirmModal');if(el)el.remove();
+  var m=document.createElement('div');m.id='signOutConfirmModal';
+  m.style.cssText='position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1rem';
+  m.innerHTML='<div style="background:#fff;border-radius:20px;padding:2rem;max-width:360px;width:100%;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.2)">'
+    +'<p style="font-size:17px;font-weight:700;color:#0f172a;margin:0 0 8px">Sign out?</p>'
+    +'<p style="font-size:14px;color:#64748b;margin:0 0 24px;line-height:1.5">Are you sure you want to sign out?</p>'
+    +'<div style="display:flex;gap:10px">'
+    +'<button onclick="document.getElementById(\'signOutConfirmModal\').remove();sbSignOut();window._user=null;window._u=null;window._tr=[];document.getElementById(\'dashPg\').style.display=\'none\';var si=document.getElementById(\'navSignInBtn\');if(si)si.style.display=\'inline-flex\';var db=document.getElementById(\'navDashBtn\');if(db)db.style.display=\'none\';" style="flex:1;padding:11px;border-radius:12px;background:#0f172a;color:#fff;font-size:14px;font-weight:600;border:none;cursor:pointer">Yes, sign out</button>'
+    +'<button onclick="document.getElementById(\'signOutConfirmModal\').remove()" style="flex:1;padding:11px;border-radius:12px;background:#f1f5f9;color:#374151;font-size:14px;font-weight:600;border:none;cursor:pointer">Cancel</button>'
+    +'</div></div>';
+  m.addEventListener('click',function(e){if(e.target===m)m.remove();});
+  document.body.appendChild(m);
 };
+
 function refresh(){
   var b=0,p=0,d=0;
-  _tr.forEach(function(t){if(t.c==="business")b+=t.m;else if(t.c==="personal")p+=t.m;d+=t.d;});
-  document.getElementById("kB").textContent=b.toFixed(1);
-  document.getElementById("kP").textContent=p.toFixed(1);
-  document.getElementById("kD").textContent="$"+d.toFixed(2);
-  document.getElementById("kT").textContent=_tr.length;
-  var body=document.getElementById("dBdy");
-  if(!_tr.length){body.innerHTML="<tr><td colspan='4' style='text-align:center;padding:48px;color:#9ca3af;font-size:14px'>No trips yet — <span onclick='openAt()' style='color:#2563EB;cursor:pointer;font-weight:600'>add your first →<\/span><\/td><\/tr>";return;}
-  var cl={business:"#2563EB",personal:"#ef4444",medical:"#16a34a",charity:"#dc2626"};
-  var lb={business:"💼 Business",personal:"👤 Personal",medical:"🏥 Medical",charity:"❤ Charity"};
-  body.innerHTML=_tr.slice(0,15).map(function(t){
-    var fc=cl[t.c];
-    var from=t.f.length>22?t.f.slice(0,22)+"…":t.f;
-    var to=t.t.length>22?t.t.slice(0,22)+"…":t.t;
-    var ded=t.d>0?"+$"+t.d.toFixed(2):"—";
-    var dedColor=t.d>0?"#16a34a":"#9ca3af";
-    return "<tr style='border-bottom:1px solid #f3f4f6'>"
-      +"<td style='padding:14px 24px'><div style='font-weight:600;color:#111827;font-size:14px'>"+from+" → "+to+"<\/div><div style='font-size:12px;color:#9ca3af;margin-top:2px'>"+t.dt+"<\/div><\/td>"
-      +"<td style='padding:14px 24px'><span style='border-radius:100px;padding:3px 10px;font-size:11px;font-weight:700;color:"+fc+";background:"+fc+"1a'>"+lb[t.c]+"<\/span><\/td>"
-      +"<td style='padding:14px 24px;font-size:14px;font-weight:600;color:#111827'>"+t.m.toFixed(1)+" mi<\/td>"
-      +"<td style='padding:14px 24px;font-size:14px;font-weight:700;color:"+dedColor+"'>"+ded+"<\/td><\/tr>";
-  }).join("");
+  _tr.forEach(function(t){
+    if(t.c==='business'){b+=t.m;d+=t.d;}
+    else if(t.c==='personal') p+=t.m;
+    else d+=t.d;
+  });
+  var kB=document.getElementById('kB');if(kB)kB.textContent=b.toFixed(1);
+  var kP=document.getElementById('kP');if(kP)kP.textContent=p.toFixed(1);
+  var kD=document.getElementById('kD');if(kD)kD.textContent='$'+fmt(d);
+  var kT=document.getElementById('kT');if(kT)kT.textContent=_tr.length;
+  var pct=Math.min(100,(d/5000)*100);
+  var ytdBar=document.getElementById('ytdBar');if(ytdBar)ytdBar.style.width=pct.toFixed(1)+'%';
+  var ytdAmt=document.getElementById('ytdAmount');if(ytdAmt)ytdAmt.textContent='$'+fmt(d)+' saved this year';
+  var tc=document.getElementById('tripCount');if(tc)tc.textContent=_tr.length+' trip'+(_tr.length===1?'':'s');
+  renderFilteredTrips();
 }
+
+window.renderTrips=function(){
+  var el=document.getElementById('tripsList');if(!el) return;
+  if(!_tr.length){
+    el.innerHTML='<div style="text-align:center;padding:48px 24px;color:#94a3b8"><div style="margin-bottom:12px"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><div style="font-size:15px;font-weight:600;color:#64748b;margin-bottom:4px">No trips yet</div><div style="font-size:13px">Add your first trip to start tracking</div><button onclick="openAt()" style="margin-top:16px;padding:10px 24px;background:#1B4DDB;color:#fff;border:none;border-radius:100px;font-size:14px;font-weight:600;cursor:pointer">+ Add Trip</button></div>';
+    return;
+  }
+  var catColor={business:'#1B4DDB',personal:'#ec4899',medical:'#22c55e',charity:'#f59e0b'};
+  var catLabel={business:'Business',personal:'Personal',medical:'Medical',charity:'Charity'};
+  el.innerHTML=_tr.map(function(t,i){
+    var col=catColor[t.c]||'#64748b';
+    var from=(t.f||'').length>28?(t.f||'').slice(0,28)+'\u2026':(t.f||'\u2014');
+    var to=(t.t||'').length>28?(t.t||'').slice(0,28)+'\u2026':(t.t||'\u2014');
+    var ded=t.d>0?'+$'+fmt(t.d):'\u2014';
+    var dedCol=t.d>0?'#22c55e':'#94a3b8';
+    return '<div style="background:#fff;border-radius:14px;padding:14px 18px;margin-bottom:8px;border:1px solid #f1f5f9;display:flex;align-items:center;gap:14px">'
+      +'<div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex-shrink:0;width:12px">'
+      +'<div style="width:10px;height:10px;border-radius:50%;background:'+col+'"></div>'
+      +'<div style="width:2px;height:20px;background:'+col+'33"></div>'
+      +'<div style="width:10px;height:10px;border-radius:50%;border:2px solid '+col+';background:'+col+'22"></div>'
+      +'</div>'
+      +'<div style="flex:1;min-width:0">'
+      +'<div style="font-size:14px;font-weight:600;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+from+' \u2192 '+to+'</div>'
+      +'<div style="font-size:12px;color:#94a3b8;margin-top:2px">'+t.dt+'</div>'
+      +'</div>'
+      +'<span style="padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700;color:'+col+';background:'+col+'1a;flex-shrink:0">'+catLabel[t.c]+'</span>'
+      +'<div style="text-align:right;flex-shrink:0">'
+      +'<div style="font-family:\'Playfair Display\',Georgia,serif;font-size:17px;font-weight:700;color:#0f172a">'+t.m.toFixed(1)+'<span style="font-size:12px;font-weight:500;color:#94a3b8"> '+UNIT+'</span></div>'
+      +'<div style="font-size:13px;font-weight:700;color:'+dedCol+'">'+ded+'</div>'
+      +'</div>'
+      +'<button onclick="window._deleteTr('+i+')" style="width:26px;height:26px;border-radius:50%;border:1px solid #e2e8f0;background:#f8fafc;color:#94a3b8;font-size:16px;cursor:pointer;flex-shrink:0;line-height:1;padding:0">\xD7</button>'
+      +'</div>';
+  }).join('');
+};
+window._deleteTr=function(i){_tr.splice(i,1);refresh();};
+
 window.openAt=function(){
   if(!_u){openSignIn();return;}
-  document.getElementById("tDt").value=new Date().toISOString().slice(0,10);
-  ["tF","tTo","tMi","tNt"].forEach(function(id){document.getElementById(id).value="";});
-  document.getElementById("dPv").style.display="none";
-  document.querySelectorAll("#cBts button").forEach(function(b,i){
-    b.style.borderColor=i===0?"#2563EB":"#e5e7eb";
-    b.style.background=i===0?"rgba(37,99,235,.06)":"#f9fafb";
-    b.style.color=i===0?"#2563EB":"#374151";
+  document.getElementById('tDt').value=new Date().toISOString().slice(0,10);
+  ['tF','tTo','tMi','tNt'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('dPv').style.display='none';
+  document.querySelectorAll('#cBts button').forEach(function(b,i){
+    b.style.borderColor=i===0?'#2563EB':'#e5e7eb';
+    b.style.background=i===0?'rgba(37,99,235,.06)':'#f9fafb';
+    b.style.color=i===0?'#2563EB':'#374151';
   });
-  document.getElementById("atOv").style.display="flex";
+  document.getElementById('atOv').style.display='flex';
 };
-window.closeAt=function(){document.getElementById("atOv").style.display="none";};
+window.closeAt=function(){document.getElementById('atOv').style.display='none';};
 window.pCat=function(el){
-  document.querySelectorAll("#cBts button").forEach(function(b){b.style.borderColor="#e5e7eb";b.style.background="#f9fafb";b.style.color="#374151";});
-  el.style.borderColor="#2563EB";el.style.background="rgba(37,99,235,.06)";el.style.color="#2563EB";
+  document.querySelectorAll('#cBts button').forEach(function(b){b.style.borderColor='#e5e7eb';b.style.background='#f9fafb';b.style.color='#374151';});
+  el.style.borderColor='#2563EB';el.style.background='rgba(37,99,235,.06)';el.style.color='#2563EB';
   calcDed();
 };
 window.calcDed=function(){
-  var m=parseFloat(document.getElementById("tMi").value)||0;
+  var m=parseFloat(document.getElementById('tMi').value)||0;
   var sel=document.querySelector("#cBts button[style*='#2563EB']");
-  var c=sel?sel.dataset.cat:"business";
-  var d=["business","medical","charity"].includes(c)?m*IRS:0;
-  var el=document.getElementById("dPv");
-  if(m>0&&d>0){el.textContent="💰 Est. deduction: +$"+d.toFixed(2)+" ("+m.toFixed(1)+" mi × $"+IRS+"/mi)";el.style.display="block";}
-  else el.style.display="none";
+  var c=sel?sel.dataset.cat:'business';
+  var d=calcDeduction(m,c);
+  var el=document.getElementById('dPv');
+  if(m>0&&d>0){el.textContent='Est. deduction: +$'+fmt(d)+' ('+m.toFixed(1)+' '+UNIT+' \xD7 $'+RATE+'/'+UNIT+')';el.style.display='block';}
+  else el.style.display='none';
 };
 window.saveTr=function(){
-  var f=document.getElementById("tF").value.trim();
-  var to=document.getElementById("tTo").value.trim();
-  var m=parseFloat(document.getElementById("tMi").value)||0;
-  var dt=document.getElementById("tDt").value;
-  var nt=document.getElementById("tNt").value.trim();
+  var f=document.getElementById('tF').value.trim();
+  var to=document.getElementById('tTo').value.trim();
+  var m=parseFloat(document.getElementById('tMi').value)||0;
+  var dt=document.getElementById('tDt').value;
+  var nt=document.getElementById('tNt').value.trim();
   if(!f||!to||!m){
-    if(!f)document.getElementById("tF").style.borderColor="#ef4444";
-    if(!to)document.getElementById("tTo").style.borderColor="#ef4444";
-    if(!m)document.getElementById("tMi").style.borderColor="#ef4444";
+    if(!f)document.getElementById('tF').style.borderColor='#ef4444';
+    if(!to)document.getElementById('tTo').style.borderColor='#ef4444';
+    if(!m)document.getElementById('tMi').style.borderColor='#ef4444';
     return;
   }
   var sel=document.querySelector("#cBts button[style*='#2563EB']");
-  var c=sel?sel.dataset.cat:"business";
-  var d=["business","medical","charity"].includes(c)?m*IRS:0;
+  var c=sel?sel.dataset.cat:'business';
+  var d=calcDeduction(m,c);
   _tr.unshift({f:f,t:to,m:m,dt:dt,c:c,d:d,n:nt});
+  if(_u&&typeof sbSaveTrip==='function') sbSaveTrip({from:f,to:to,distance:m,category:c,date:dt,notes:nt,deduction:d});
   closeAt();refresh();
-  var toast=document.createElement("div");
-  toast.style.cssText="position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#111827;color:#fff;padding:12px 28px;border-radius:14px;font-size:13px;font-weight:600;z-index:99999;box-shadow:0 8px 32px rgba(0,0,0,.3);white-space:nowrap;animation:mmUp .3s ease;";
-  toast.innerHTML=d>0?"✅ Trip saved — +$"+d.toFixed(2)+" deduction":"✅ Trip saved";
-  document.body.appendChild(toast);
-  setTimeout(function(){toast.remove();},3000);
+  showToast(d>0?'Trip saved — +$'+fmt(d)+' deduction':'Trip saved');
 };
-})();
-</script>
-
-<!-- MYMILESAI SIGN UP (Stripe Checkout) -->
-<div id="signupOv" class="mmOv" onclick="if(event.target===this)closeSignUp()">
-<div class="mmBox" style="max-width:460px">
-<button class="mmClose" onclick="closeSignUp()">&#x2715;</button>
-
-<!-- STEP 1: EMAIL -->
-<div id="signupStep1">
-  <div style="text-align:center;margin-bottom:28px">
-    <div style="width:56px;height:56px;background:linear-gradient(135deg,#16a34a,#059669);border-radius:16px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 8px 24px rgba(22,163,74,.3)">&#x1F697;</div>
-    <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:26px;font-weight:700;color:#111827;margin-bottom:8px">Start your free trial</h2>
-    <p style="font-size:14px;color:#6b7280">10 days free &middot; Cancel anytime</p>
-  </div>
-  <label style="font-size:12px;font-weight:700;color:#6b7280;letter-spacing:.04em;text-transform:uppercase;display:block;margin-bottom:8px">Email address</label>
-  <input type="email" id="signupEmail" class="mmInput" placeholder="you@email.com" style="margin-bottom:16px" onfocus="this.style.borderColor='#16a34a';this.style.background='#fff'" onblur="this.style.borderColor='#e5e7eb';this.style.background='#f9fafb'" onkeydown="if(event.key==='Enter')signupNext()">
-  <button class="mmBtn mmBtnPrimary" style="background:linear-gradient(135deg,#16a34a,#059669);box-shadow:0 4px 20px rgba(22,163,74,.3)" onclick="signupNext()">Continue &#x2192;</button>
-  <p style="text-align:center;font-size:12px;color:#9ca3af;margin-top:14px">Already have an account? <a href="#" onclick="closeSignUp();openSignIn();return false;" style="color:#16a34a;font-weight:600;text-decoration:none">Sign in</a></p>
-</div>
-
-<!-- STEP 2: PLAN -->
-<div id="signupStep2" style="display:none">
-  <div style="text-align:center;margin-bottom:24px">
-    <div style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:100px;background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.2);font-size:11px;font-weight:800;color:#16a34a;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px">Founding Member Rate</div>
-    <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:24px;font-weight:700;color:#111827;margin-bottom:6px">Confirm your plan</h2>
-    <p style="font-size:13px;color:#6b7280"><span id="signupEmailDisplay"></span></p>
-  </div>
-  <div style="border:1.5px solid #16a34a;background:linear-gradient(180deg,rgba(22,163,74,.06),rgba(22,163,74,.02));border-radius:18px;padding:24px;text-align:center;margin-bottom:20px">
-    <div style="font-size:13px;color:#6b7280;margin-bottom:4px">
-      <span style="text-decoration:line-through">$83.88/year</span>
-    </div>
-    <div style="font-family:'Playfair Display',Georgia,serif;font-size:42px;font-weight:700;color:#16a34a;line-height:1.05;letter-spacing:-1px;">$69.99<span style="font-size:16px;font-weight:600;color:#16a34a;opacity:.8">/year</span></div>
-    <div style="font-size:12px;color:#6b7280;margin-top:6px">Save $13.89 &middot; Locked in forever</div>
-    <div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(22,163,74,.15);font-size:13px;color:#374151;font-weight:600">
-      &#x2713; 10-day free trial included<br>
-      <span style="font-weight:400;color:#6b7280;font-size:12px">You won't be charged until <span id="trialEndDate"></span></span>
-    </div>
-  </div>
-  <button class="mmBtn mmBtnPrimary" style="background:linear-gradient(135deg,#16a34a,#059669);box-shadow:0 4px 20px rgba(22,163,74,.3)" onclick="signupComplete()">Continue to payment &#x2192;</button>
-  <p style="text-align:center;font-size:11px;color:#9ca3af;margin-top:14px">Secure payment by <strong>Stripe</strong> &middot; Cancel anytime</p>
-  <p style="text-align:center;font-size:12px;margin-top:10px"><a href="#" onclick="signupBack();return false;" style="color:#6b7280;text-decoration:none">&larr; Back</a></p>
-</div>
-</div></div>
-
-<script>
-window.showToast=function(msg,kind){
-  var t=document.createElement('div');
-  var bg=kind==='success'?'#16a34a':(kind==='error'?'#ef4444':'#111827');
-  t.style.cssText='position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:'+bg+';color:#fff;padding:14px 28px;border-radius:14px;font-size:13px;font-weight:600;z-index:99999;box-shadow:0 8px 32px rgba(0,0,0,.3);max-width:90vw;text-align:center;';
-  t.textContent=msg;
-  document.body.appendChild(t);
-  setTimeout(function(){t.style.transition='opacity .3s';t.style.opacity='0';setTimeout(function(){t.remove();},300);},4000);
+window.exportCSV=function(){
+  if(!_tr.length){showToast('No trips to export');return;}
+  var rows=[['Date','From','To','Category',UNIT,'Deduction ($)','Notes']];
+  _tr.forEach(function(t){rows.push([t.dt,t.f,t.t,t.c,t.m.toFixed(2),t.d.toFixed(2),t.n]);});
+  var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+  var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement('a');
+  a.href=url;
+  a.download='mymilesai_trips_'+new Date().toISOString().slice(0,10)+'.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 };
+window.exportPDF=function(){
+  if(!_tr||!_tr.length){showToast('No trips to export');return;}
+  var b=0,p=0,d=0;_tr.forEach(function(t){if(t.c==='business'){b+=t.m;d+=t.d;}else if(t.c==='personal')p+=t.m;else d+=t.d;});
+  var w=window.open('','_blank');
+  w.document.write('<html><head><title>MyMilesAI Mileage Report</title><style>body{font-family:Arial,sans-serif;margin:40px;color:#111}h1{color:#1B4DDB;margin-bottom:4px}table{width:100%;border-collapse:collapse;margin-top:20px}th{background:#1B4DDB;color:#fff;padding:10px;text-align:left;font-size:13px}td{padding:8px 10px;border-bottom:1px solid #e5e7eb;font-size:13px}.summary{display:flex;gap:24px;margin:20px 0}.stat{background:#f8fafc;border-radius:8px;padding:16px 20px;flex:1}.stat-val{font-size:24px;font-weight:700}.stat-lbl{font-size:12px;color:#6b7280;margin-top:4px}.green{color:#16a34a}.blue{color:#1B4DDB}@media print{body{margin:20px}}</style></head><body>');
+  w.document.write('<h1>MyMilesAI</h1><p style="color:#6b7280;margin-top:0">Mileage Report \u2014 2026 Tax Year</p>');
+  w.document.write('<p style="font-size:13px;color:#6b7280">'+(_u?_u.email:'')+' \u00b7 Generated '+new Date().toLocaleDateString()+'</p>');
+  w.document.write('<div class="summary"><div class="stat"><div class="stat-val blue">'+b.toFixed(1)+'</div><div class="stat-lbl">Business '+UNIT+'</div></div><div class="stat"><div class="stat-val" style="color:#ec4899">'+p.toFixed(1)+'</div><div class="stat-lbl">Personal '+UNIT+'</div></div><div class="stat"><div class="stat-val green">$'+d.toFixed(2)+'</div><div class="stat-lbl">Tax Deduction</div></div><div class="stat"><div class="stat-val">'+_tr.length+'</div><div class="stat-lbl">Total Trips</div></div></div>');
+  w.document.write('<table><thead><tr><th>Date</th><th>From</th><th>To</th><th>'+UNIT.toUpperCase()+'</th><th>Category</th><th>Deduction</th></tr></thead><tbody>');
+  _tr.forEach(function(t){w.document.write('<tr><td>'+(t.dt||'')+'</td><td>'+t.f+'</td><td>'+t.t+'</td><td>'+t.m.toFixed(1)+'</td><td>'+t.c+'</td><td>'+(t.d>0?'$'+t.d.toFixed(2):'\u2014')+'</td></tr>');});
+  w.document.write('</tbody></table><div style="margin-top:30px;padding-top:16px;border-top:1px solid #e5e7eb;font-size:11px;color:#9ca3af">MyMilesAI \u00b7 mymilesai.com</div></body></html>');
+  w.document.close();
+  setTimeout(function(){w.print();},500);
+  showToast('PDF report opened \u2014 use Print > Save as PDF');
+};
+window.exportSheets=function(){
+  if(!_tr||!_tr.length){showToast('No trips to export');return;}
+  var csv='Date,From,To,'+UNIT+',Category,Deduction\n';
+  _tr.forEach(function(t){csv+=(t.dt||'')+',"'+t.f+'","'+t.t+'",'+t.m.toFixed(1)+','+t.c+','+(t.d>0?'$'+t.d.toFixed(2):'')+"\n";});
+  var blob=new Blob([csv],{type:'text/csv'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mymilesai-trips.csv';a.click();
+  setTimeout(function(){window.open('https://sheets.google.com','_blank');showToast('CSV downloaded — open it in Google Sheets');},500);
+};
+window.exportQB=function(){var el=document.getElementById('integrationModal');if(el)el.remove();var m=document.createElement('div');m.id='integrationModal';m.style.cssText='position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1rem';m.innerHTML='<div style="background:#fff;border-radius:20px;padding:2rem 2.5rem;max-width:420px;width:100%;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.2)"><button onclick="document.getElementById(\'integrationModal\').remove()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8">\u00d7</button><div style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><div style="width:44px;height:44px;border-radius:12px;background:#f0f9ff;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#7C3AED" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><p style="font-size:18px;font-weight:700;color:#111827;margin:0">QuickBooks</p><p style="font-size:13px;color:#6b7280;margin:0">Accounting integration</p></div></div><p style="font-size:14px;color:#374151;line-height:1.6;margin:0 0 16px">Auto-sync MyMilesAI trips as mileage expenses in QuickBooks. Business trips appear as deductible expenses.</p><div style="background:#f8fafc;border-radius:12px;padding:14px 16px;margin-bottom:16px"><p style="font-size:12px;font-weight:600;color:#111827;margin:0 0 8px">What you\'ll get:</p><p style="font-size:12px;color:#6b7280;margin:0 0 4px">\u2022 Auto-sync trips as mileage expenses</p><p style="font-size:12px;color:#6b7280;margin:0 0 4px">\u2022 IRS/CRA compliant categorization</p><p style="font-size:12px;color:#6b7280;margin:0">\u2022 One-click tax season export</p></div><button onclick="showToast(\'We will notify you when QuickBooks is ready\');document.getElementById(\'integrationModal\').remove()" style="width:100%;padding:12px;border-radius:12px;background:#7C3AED;color:#fff;font-size:14px;font-weight:600;border:none;cursor:pointer;margin-bottom:8px">Notify me when ready</button><button onclick="exportCSV();document.getElementById(\'integrationModal\').remove()" style="width:100%;padding:10px;border-radius:12px;background:transparent;color:#6b7280;font-size:13px;border:1px solid #e2e8f0;cursor:pointer">Download CSV to import manually</button></div>';document.body.appendChild(m);};
+window.emailReport=function(){
+  if(!_tr.length){showToast('No trips to export');return;}
+  var b=0,p=0,d=0;
+  _tr.forEach(function(t){if(t.c==='business'){b+=t.m;d+=t.d;}else if(t.c==='personal')p+=t.m;});
+  var subject=encodeURIComponent('MyMilesAI Mileage Report - 2026');
+  var body=encodeURIComponent('MyMilesAI Mileage Report\n2026 Tax Year\n\nSummary:\n- Business '+UNIT+': '+b.toFixed(1)+'\n- Personal '+UNIT+': '+p.toFixed(1)+'\n- Total deduction: $'+d.toFixed(2)+'\n- Total trips: '+_tr.length+'\n- Rate: '+RATE_LABEL+' $'+RATE+'/'+UNIT+'\n\nDetailed trip log attached as CSV.\n\nGenerated by MyMilesAI - mymilesai.com');
+  window.open('mailto:?subject='+subject+'&body='+body);
+};
+window.exportFreshBooks=function(){var el=document.getElementById('integrationModal');if(el)el.remove();var m=document.createElement('div');m.id='integrationModal';m.style.cssText='position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1rem';m.innerHTML='<div style="background:#fff;border-radius:20px;padding:2rem 2.5rem;max-width:420px;width:100%;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.2)"><button onclick="document.getElementById(\'integrationModal\').remove()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8">\u00d7</button><div style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><div style="width:44px;height:44px;border-radius:12px;background:#f0fdf4;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#16a34a" stroke-width="2"/><line x1="3" y1="10" x2="21" y2="10" stroke="#16a34a" stroke-width="2"/><line x1="7" y1="15" x2="11" y2="15" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/></svg></div><div><p style="font-size:18px;font-weight:700;color:#111827;margin:0">FreshBooks</p><p style="font-size:13px;color:#6b7280;margin:0">Accounting integration</p></div></div><p style="font-size:14px;color:#374151;line-height:1.6;margin:0 0 16px">Auto-sync MyMilesAI trips as mileage expenses in FreshBooks. Perfect for freelancers and small businesses.</p><div style="background:#f8fafc;border-radius:12px;padding:14px 16px;margin-bottom:16px"><p style="font-size:12px;font-weight:600;color:#111827;margin:0 0 8px">What you\'ll get:</p><p style="font-size:12px;color:#6b7280;margin:0 0 4px">\u2022 Auto-sync trips as mileage expenses</p><p style="font-size:12px;color:#6b7280;margin:0 0 4px">\u2022 Client-tagged trip categorization</p><p style="font-size:12px;color:#6b7280;margin:0">\u2022 Invoice-ready mileage reports</p></div><button onclick="showToast(\'We will notify you when FreshBooks is ready\');document.getElementById(\'integrationModal\').remove()" style="width:100%;padding:12px;border-radius:12px;background:#16a34a;color:#fff;font-size:14px;font-weight:600;border:none;cursor:pointer;margin-bottom:8px">Notify me when ready</button><button onclick="exportCSV();document.getElementById(\'integrationModal\').remove()" style="width:100%;padding:10px;border-radius:12px;background:transparent;color:#6b7280;font-size:13px;border:1px solid #e2e8f0;cursor:pointer">Download CSV to import manually</button></div>';document.body.appendChild(m);};
+window.upgradeSubscription=function(){showToast('Stripe billing coming soon — thank you for your patience!');};
+window.manageSubscription=function(){
+  var el=document.getElementById('subMgmtModal');if(el)el.remove();
+  var m=document.createElement('div');m.id='subMgmtModal';
+  m.style.cssText='position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1rem';
+  m.innerHTML='<div style="background:#fff;border-radius:20px;padding:2rem 2.5rem;max-width:420px;width:100%;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.2)">'
+    +'<button onclick="document.getElementById(\'subMgmtModal\').remove()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8">\u00d7</button>'
+    +'<h3 style="font-size:18px;font-weight:700;color:#0f172a;margin:0 0 20px">Manage Subscription</h3>'
+    +'<div style="background:#f8fafc;border-radius:12px;padding:14px 16px;margin-bottom:16px">'
+    +'<p style="font-size:12px;font-weight:600;color:#64748b;margin:0 0 4px;text-transform:uppercase;letter-spacing:.05em">Current plan</p>'
+    +'<p style="font-size:15px;font-weight:700;color:#0f172a;margin:0">MyMilesAI Pro &mdash; $69.99/year</p>'
+    +'</div>'
+    +'<div style="background:#f0fdf4;border-radius:12px;padding:14px 16px;margin-bottom:20px">'
+    +'<p style="font-size:12px;font-weight:600;color:#64748b;margin:0 0 4px;text-transform:uppercase;letter-spacing:.05em">Trial status</p>'
+    +'<p id="subTrialStatus" style="font-size:14px;font-weight:600;color:#16a34a;margin:0">10-day free trial (active)</p>'
+    +'</div>'
+    +'<button onclick="window._showCancelConfirm()" style="width:100%;padding:10px;border-radius:12px;background:#fff;color:#dc2626;font-size:14px;font-weight:600;border:1.5px solid #dc2626;cursor:pointer;margin-bottom:8px">Cancel Subscription</button>'
+    +'<div id="cancelConfirmBox" style="display:none;background:#fff5f5;border:1px solid #fecaca;border-radius:12px;padding:14px 16px;margin-bottom:8px">'
+    +'<p style="font-size:13px;color:#374151;margin:0 0 12px;line-height:1.5">Are you sure? You\'ll keep access until the end of your billing period. Cancel anytime with no fees.</p>'
+    +'<div style="display:flex;gap:8px">'
+    +'<button onclick="showToast(\'Stripe cancellation coming soon \u2014 email support@mymilesai.com to cancel\');document.getElementById(\'subMgmtModal\').remove()" style="flex:1;padding:9px;border-radius:10px;background:#dc2626;color:#fff;font-size:13px;font-weight:600;border:none;cursor:pointer">Yes, Cancel</button>'
+    +'<button onclick="document.getElementById(\'cancelConfirmBox\').style.display=\'none\'" style="flex:1;padding:9px;border-radius:10px;background:#f1f5f9;color:#374151;font-size:13px;font-weight:600;border:none;cursor:pointer">Keep Subscription</button>'
+    +'</div></div>'
+    +'<button onclick="showToast(\'Stripe billing portal coming soon\');document.getElementById(\'subMgmtModal\').remove()" style="width:100%;padding:10px;border-radius:12px;background:#f8fafc;color:#374151;font-size:14px;font-weight:600;border:1.5px solid #e2e8f0;cursor:pointer;margin-bottom:16px">Update Payment Method</button>'
+    +'<p style="font-size:12px;color:#94a3b8;text-align:center;margin:0">Questions? Email <a href="mailto:support@mymilesai.com" style="color:#1B4DDB">support@mymilesai.com</a></p>'
+    +'</div>';
+  m.addEventListener('click',function(e){if(e.target===m)m.remove();});
+  document.body.appendChild(m);
+};
+window._showCancelConfirm=function(){
+  var box=document.getElementById('cancelConfirmBox');
+  if(box)box.style.display=box.style.display==='none'?'block':'none';
+};
+
+window.loadSupabaseTrips=function(trips){
+  _tr=[];window._tr=_tr;
+  trips.forEach(function(t){
+    var fromName='Unknown';
+    var toName='Unknown';
+    if(t.path){
+      try{
+        var p=typeof t.path==='string'?JSON.parse(t.path):t.path;
+        if(Array.isArray(p)&&p.length>=2){
+          var first=p[0];
+          var last=p[p.length-1];
+          fromName=first.name||first.address||first.formatted_address||(first.latitude?first.latitude.toFixed(4)+', '+first.longitude.toFixed(4):'Start');
+          toName=last.name||last.address||last.formatted_address||(last.latitude?last.latitude.toFixed(4)+', '+last.longitude.toFixed(4):'End');
+        } else if(p.start&&p.end){
+          fromName=p.start.name||p.start.address||'Start';
+          toName=p.end.name||p.end.address||'End';
+        } else if(p.from&&p.to){
+          fromName=p.from.name||p.from.address||p.from;
+          toName=p.to.name||p.to.address||p.to;
+        } else if(p.origin&&p.destination){
+          fromName=p.origin.name||p.origin.address||p.origin;
+          toName=p.destination.name||p.destination.address||p.destination;
+        }
+      } catch(e){ console.log('Path parse error:',e); }
+    }
+    if(!fromName||fromName==='Unknown'||fromName==='\u2014') fromName=t.purpose||('Trip on '+(t.trip_date||''));
+    if(!toName||toName==='Unknown'||toName==='\u2014') toName=t.notes||(t.miles?parseFloat(t.miles).toFixed(1)+' '+UNIT:'');
+    var cat=(t.type||'personal').toLowerCase();
+    if(cat==='biz') cat='business';
+    if(cat==='pers') cat='personal';
+    if(cat!=='business'&&cat!=='personal'&&cat!=='medical'&&cat!=='charity') cat='personal';
+    var dist=parseFloat(t.miles)||0;
+    var ded=calcDeduction(dist,cat);
+    _tr.push({
+      f:typeof fromName==='string'?fromName:String(fromName),
+      t:typeof toName==='string'?toName:String(toName),
+      m:dist,
+      dt:t.trip_date||(t.created_at?t.created_at.split('T')[0]:''),
+      c:cat,
+      d:ded,
+      n:t.purpose||t.notes||'',
+      sbId:t.id
+    });
+  });
+  window._tr=_tr;
+  refresh();
+};
+
 window.openSignUp=function(){
+  document.getElementById('signupModal').style.display='flex';
   document.getElementById('signupStep1').style.display='block';
   document.getElementById('signupStep2').style.display='none';
-  document.getElementById('signupOv').style.display='flex';
-  setTimeout(function(){var e=document.getElementById('signupEmail');if(e)e.focus();},100);
+  document.getElementById('signupStep3').style.display='none';
 };
-window.closeSignUp=function(){document.getElementById('signupOv').style.display='none';};
-window.signupNext=function(){
-  var em=document.getElementById('signupEmail').value.trim();
-  if(!em||!em.includes('@')){
-    var input=document.getElementById('signupEmail');
-    input.style.borderColor='#ef4444';
-    input.focus();
-    return;
-  }
-  document.getElementById('signupEmailDisplay').textContent=em;
-  var end=new Date(Date.now()+10*24*60*60*1000);
-  var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  document.getElementById('trialEndDate').textContent=months[end.getMonth()]+' '+end.getDate()+', '+end.getFullYear();
+window.closeSignUp=function(){document.getElementById('signupModal').style.display='none';};
+window.signupToStep2=function(){
+  var name=document.getElementById('signupName').value.trim();
+  var email=document.getElementById('signupEmail').value.trim();
+  var agree=document.getElementById('signupAgree');
+  if(!name){showToast('Please enter your name');return;}
+  if(!email||!email.includes('@')){showToast('Please enter a valid email');return;}
+  if(agree&&!agree.checked){showToast('Please agree to Terms of Service');return;}
   document.getElementById('signupStep1').style.display='none';
   document.getElementById('signupStep2').style.display='block';
 };
-window.signupBack=function(){
+window.signupToStep3=function(plan){
+  window._selectedPlan=plan;
   document.getElementById('signupStep2').style.display='none';
-  document.getElementById('signupStep1').style.display='block';
+  document.getElementById('signupStep3').style.display='block';
 };
 window.signupComplete=function(){
-  var email=document.getElementById('signupEmail').value.trim();
-  if(!email){showToast('Please go back and enter your email');return;}
-  var btn=event.target;btn.textContent='Redirecting to Stripe...';btn.disabled=true;
-  var stripe=Stripe('pk_test_51TI142PDX1EjEZICSFjN9hemsw5DKHQy7yRKaNVdUz8qTTY1pGx0THNV7OzbpVP95R8a2QSXTEUvfn6qRV5KQgFK005ySp3dqc');
-  stripe.redirectToCheckout({
-    lineItems:[{price:'price_1TI1ETPDX1EjEZICkTMmklbN',quantity:1}],
-    mode:'subscription',
-    successUrl:'https://mymilesai.com?signup=success',
-    cancelUrl:'https://mymilesai.com?signup=cancelled',
-    customerEmail:email
-  }).then(function(result){
-    if(result.error){showToast(result.error.message);btn.textContent='Start free trial';btn.disabled=false;}
-  });
+  showToast('Stripe integration coming soon \u2014 sign in with your email to access the dashboard');
+  closeSignUp();
+  openSignIn();
 };
-
-// URL parameter handler for Stripe redirect
-(function(){
-  try{
-    var params=new URLSearchParams(window.location.search);
-    var status=params.get('signup');
-    if(status==='success'){
-      setTimeout(function(){
-        showToast('Welcome aboard! Your 10-day free trial is active. Check your email for next steps.','success');
-        if(window.openSignIn)window.openSignIn();
-      },400);
-      if(window.history&&window.history.replaceState){
-        window.history.replaceState({},'',window.location.pathname);
-      }
-    }else if(status==='cancelled'){
-      setTimeout(function(){
-        showToast('Signup cancelled. You can start your free trial anytime.','error');
-      },400);
-      if(window.history&&window.history.replaceState){
-        window.history.replaceState({},'',window.location.pathname);
-      }
-    }
-  }catch(e){}
+var _filterPeriod='year';var _filterCat='all';window._filterPeriod=_filterPeriod;window._filterCat=_filterCat;
+window.openSubModal=function(){var m=document.getElementById('subModal');if(m){m.style.display='flex';}};
+window.closeSubModal=function(){var m=document.getElementById('subModal');if(m)m.style.display='none';var c=document.getElementById('cancelConfirm');if(c)c.style.display='none';};
+window.filterPeriod=function(p){_filterPeriod=p;window._filterPeriod=_filterPeriod;document.querySelectorAll('#periodFilters button').forEach(function(b){b.style.background='#f1f5f9';b.style.color='#64748b';});event.target.style.background='#1B4DDB';event.target.style.color='#fff';var labels={day:'Today',week:'This Week',month:'This Month',year:'This Year'};var el=document.getElementById('periodLabel');if(el)el.textContent=labels[p]||p;renderFilteredTrips();};
+window.filterCat=function(c){_filterCat=c;window._filterCat=_filterCat;document.querySelectorAll('#catFilters button').forEach(function(b){b.style.background='#f1f5f9';b.style.color='#64748b';});event.target.style.background='#0f172a';event.target.style.color='#fff';renderFilteredTrips();};
+window.renderFilteredTrips=function renderFilteredTrips(){var now=new Date();var filtered=_tr.filter(function(t){var tripDate=null;if(t.dt){var d=t.dt;if(d.match(/^\d{4}-\d{2}-\d{2}/))tripDate=new Date(d);else{var parsed=Date.parse(d);if(!isNaN(parsed))tripDate=new Date(parsed);else{parsed=Date.parse(d+', '+now.getFullYear());if(!isNaN(parsed))tripDate=new Date(parsed);}}}if(!tripDate)tripDate=new Date();var pass=true;if(_filterPeriod==='day'){pass=tripDate.toDateString()===now.toDateString();}else if(_filterPeriod==='week'){var wa=new Date(now);wa.setDate(wa.getDate()-7);pass=tripDate>=wa;}else if(_filterPeriod==='month'){pass=tripDate.getMonth()===now.getMonth()&&tripDate.getFullYear()===now.getFullYear();}if(_filterCat!=='all'){if(_filterCat==='unclassified')pass=pass&&(!t.c||t.c==='unclassified');else pass=pass&&(t.c===_filterCat);}return pass;});var el=document.getElementById('tripCount');if(el)el.textContent=filtered.length+' trip'+(filtered.length!==1?'s':'');var body=document.getElementById('tripsList');if(!body)return;if(!filtered.length){var labels={day:'today',week:'this week',month:'this month',year:'this year'};body.innerHTML='<div style="text-align:center;padding:40px 20px;color:#94a3b8;font-size:14px">No trips '+labels[_filterPeriod]+(_filterCat!=='all'?' in '+_filterCat:'')+' <br><span onclick="openAt()" style="color:#1B4DDB;cursor:pointer;font-weight:600;margin-top:8px;display:inline-block">+ Add a trip</span></div>';return;}var catColor={business:'#1B4DDB',personal:'#ec4899',medical:'#16a34a',charity:'#dc2626'};var catBg={business:'rgba(27,77,219,.06)',personal:'rgba(236,72,153,.06)',medical:'rgba(22,163,74,.06)',charity:'rgba(220,38,38,.06)'};var catLabel={business:'Business',personal:'Personal',medical:'Medical',charity:'Charity'};body.innerHTML=filtered.slice(0,50).map(function(t){var dd=t.dt||'';var cc=catColor[t.c]||'#6b7280';var cb=catBg[t.c]||'#f3f4f6';var cl=catLabel[t.c]||t.c;return '<div style="border:1px solid #f1f5f9;border-radius:14px;padding:16px 20px;margin-bottom:10px"><div style="display:flex;align-items:center;gap:14px"><div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="width:10px;height:10px;border-radius:50%;border:2.5px solid '+cc+'"></div><div style="width:2.5px;height:20px;border-radius:2px;background:'+cc+'44"></div><div style="width:10px;height:10px;border-radius:50%;background:'+cc+'"></div></div><div style="flex:1"><p style="font-size:14px;font-weight:500;color:#111827;margin:0">'+t.f+' \u2192 '+t.t+'</p><p style="font-size:12px;color:#94a3b8;margin:4px 0 0">'+dd+'</p></div><span style="font-size:11px;font-weight:500;padding:3px 12px;border-radius:100px;background:'+cb+';color:'+cc+'">'+cl+'</span><div style="text-align:right"><p style="font-family:Playfair Display,serif;font-size:24px;font-weight:700;color:#111827;margin:0">'+t.m.toFixed(1)+'</p><p style="font-size:11px;color:#94a3b8;margin:0">km</p></div>'+(t.d>0?'<span style="font-size:12px;font-weight:600;color:#16a34a">+$'+t.d.toFixed(2)+'</span>':'')+'<button onclick="deleteTrip('+_tr.indexOf(t)+')" style="background:none;border:none;font-size:16px;color:#cbd5e1;cursor:pointer">\u00d7</button></div></div>';}).join('');if(filtered.length>50)body.innerHTML+='<p style="text-align:center;font-size:12px;color:#94a3b8">Showing 50 of '+filtered.length+'</p>';}
 })();
 </script>
+<div id="authModal" style="display:none;position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:1rem">
+  <div style="background:#fff;border-radius:20px;padding:2rem 2.5rem;width:100%;max-width:380px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.2)">
+    <button onclick="document.getElementById('authModal').style.display='none'" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8;line-height:1">&#x2715;</button>
+    <div style="text-align:center;margin-bottom:1.5rem">
+      <svg width="36" height="36" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#1B4DDB"/><path d="M5 20c0-2 1-3.5 2.5-4.5L10 12h12l2.5 3.5c1.5 1 2.5 2.5 2.5 4.5v1H5v-1z" fill="white"/><circle cx="10" cy="22" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg>
+      <h2 id="authModalTitle" style="font-size:22px;font-weight:700;margin:12px 0 4px;font-family:inherit">Welcome to MyMilesAI</h2>
+      <p id="authModalSubtitle" style="font-size:13px;color:#64748b;margin:0">Sign in to your account</p>
+    </div>
+    <!-- Step 1: Social + Email -->
+    <div id="authStep1">
+      <div onclick="document.getElementById('authModal').style.display='none';document.getElementById('pricing').scrollIntoView({behavior:'smooth'})" style="font-size:12px;color:#1B4DDB;text-align:center;cursor:pointer;margin-bottom:12px;padding:8px 12px;background:rgba(27,77,219,.04);border-radius:8px">New here? Start your 10-day free trial &rarr;</div>
+      <button onclick="var ag=document.getElementById('authAgree');if(ag&&!ag.checked){var m1=document.getElementById('authMsg1');if(m1){m1.textContent='Please agree to Terms of Service first';m1.style.color='#dc2626';}return;}sbSignInGoogle();" style="width:100%;padding:11px;margin-bottom:10px;border:1.5px solid #e2e8f0;border-radius:12px;background:#fff;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;color:#0f172a;box-sizing:border-box">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Continue with Google
+      </button>
+      <button onclick="var ag=document.getElementById('authAgree');if(ag&&!ag.checked){var m1=document.getElementById('authMsg1');if(m1){m1.textContent='Please agree to Terms of Service first';m1.style.color='#dc2626';}return;}sbSignInApple();" style="width:100%;padding:11px;margin-bottom:16px;border:1.5px solid #e2e8f0;border-radius:12px;background:#fff;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;color:#0f172a;box-sizing:border-box">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Continue with Apple
+      </button>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:12px;color:#94a3b8">
+        <span style="flex:1;height:1px;background:#e2e8f0"></span>or sign in with email<span style="flex:1;height:1px;background:#e2e8f0"></span>
+      </div>
+      <input type="email" id="authEmail" placeholder="your@email.com" autocomplete="email"
+        style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:8px;box-sizing:border-box;outline:none"
+        onfocus="this.style.borderColor='#1B4DDB';this.style.background='#fff'"
+        onblur="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'"
+        onkeydown="if(event.key==='Enter')document.getElementById('authSendBtn').click()">
+      <div style="display:flex;align-items:flex-start;gap:8px;margin:8px 0 4px"><input type="checkbox" id="authAgree" style="margin-top:3px;width:16px;height:16px;accent-color:#1B4DDB;cursor:pointer;flex-shrink:0"><label for="authAgree" style="font-size:12px;color:#64748b;line-height:1.4;cursor:pointer">By signing in, I agree to the <a href="#terms" style="color:#1B4DDB;text-decoration:underline" onclick="event.preventDefault();event.stopPropagation();document.getElementById('termsModal').style.display='block'">Terms of Service</a> and <a href="#privacy" style="color:#1B4DDB;text-decoration:underline" onclick="event.preventDefault();event.stopPropagation();document.getElementById('privacyModal').style.display='block'">Privacy Policy</a></label></div>
+      <p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:4px">New users will have an account created automatically. Existing users will be signed in.</p>
+      <p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:4px">By agreeing, you consent to our data practices described in our Privacy Policy. For questions, contact support@mymilesai.com</p>
+      <button id="authSendBtn" onclick="(async function(){
+        var ag=document.getElementById('authAgree');if(ag&&!ag.checked){var m1=document.getElementById('authMsg1');if(m1){m1.textContent='Please agree to Terms of Service first';m1.style.color='#dc2626';}return;}
+        var email = document.getElementById('authEmail').value.trim();
+        var msg = document.getElementById('authMsg1');
+        var btn = document.getElementById('authSendBtn');
+        if(!email || !email.includes('@')){msg.textContent='Please enter a valid email.';msg.style.color='#dc2626';return;}
+        btn.textContent='Sending...';btn.disabled=true;btn.style.opacity='0.7';
+        var ok = await sbSendOtpCode(email);
+        if(ok){
+          document.getElementById('authStep1').style.display='none';
+          document.getElementById('authStep2').style.display='block';
+          document.getElementById('authModalTitle').textContent='Enter your code';
+          document.getElementById('authModalSubtitle').textContent='We sent a 6-digit code to ' + email;
+          document.getElementById('authCodeInput').focus();
+        } else {
+          msg.textContent='Could not send code. Check your email and try again.';
+          msg.style.color='#dc2626';
+          btn.textContent='Send code →';btn.disabled=false;btn.style.opacity='1';
+        }
+      })()" style="width:100%;padding:12px;font-size:14px;font-weight:600;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;box-sizing:border-box;transition:opacity .15s">
+        Send verification code &rarr;
+      </button>
+      <p id="authMsg1" style="text-align:center;font-size:12px;margin:8px 0 0;min-height:16px"></p>
+      <p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:12px"></p>
+    </div>
+
+    <!-- Step 2: Enter 6-digit code -->
+    <div id="authStep2" style="display:none">
+      <div style="text-align:center;margin-bottom:20px">
+        <div style="display:flex;justify-content:center;gap:8px;margin-bottom:16px">
+          <input id="authCodeInput" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="000000" autocomplete="one-time-code"
+            style="width:160px;padding:14px;font-size:28px;font-weight:700;text-align:center;letter-spacing:8px;border:2px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:monospace;box-sizing:border-box;outline:none"
+            onfocus="this.style.borderColor='#1B4DDB';this.style.background='#fff'"
+            onblur="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'"
+            oninput="this.value=this.value.replace(/[^0-9]/g,'');if(this.value.length===6)document.getElementById('authVerifyBtn').click()"
+            onkeydown="if(event.key==='Enter')document.getElementById('authVerifyBtn').click()">
+        </div>
+        <p style="font-size:12px;color:#94a3b8;margin:0">Enter the 6-digit code from your email</p>
+      </div>
+      <button id="authVerifyBtn" onclick="(async function(){
+        var email = document.getElementById('authEmail').value.trim();
+        var code = document.getElementById('authCodeInput').value.trim();
+        var msg = document.getElementById('authMsg2');
+        var btn = document.getElementById('authVerifyBtn');
+        if(code.length !== 6){msg.textContent='Please enter the 6-digit code.';msg.style.color='#dc2626';return;}
+        btn.textContent='Verifying...';btn.disabled=true;btn.style.opacity='0.7';
+        var ok = await sbVerifyOtpCode(email, code);
+        if(ok){
+          msg.textContent='Success! Signing you in...';msg.style.color='#16a34a';
+          document.getElementById('authModal').style.display='none';
+          // Reset modal for next use
+          setTimeout(function(){
+            document.getElementById('authStep1').style.display='block';
+            document.getElementById('authStep2').style.display='none';
+            document.getElementById('authCodeInput').value='';
+            document.getElementById('authEmail').value='';
+            document.getElementById('authSendBtn').textContent='Send verification code →';
+            document.getElementById('authSendBtn').disabled=false;
+            document.getElementById('authSendBtn').style.opacity='1';
+            document.getElementById('authModalTitle').textContent='Welcome to MyMilesAI';
+            document.getElementById('authModalSubtitle').textContent='Sign in to your account';
+          }, 500);
+        } else {
+          msg.textContent='Invalid or expired code. Please try again.';msg.style.color='#dc2626';
+          btn.textContent='Verify code';btn.disabled=false;btn.style.opacity='1';
+          document.getElementById('authCodeInput').value='';
+          document.getElementById('authCodeInput').focus();
+        }
+      })()" style="width:100%;padding:12px;font-size:14px;font-weight:600;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;box-sizing:border-box;transition:opacity .15s">
+        Verify code
+      </button>
+      <p id="authMsg2" style="text-align:center;font-size:12px;margin:8px 0 0;min-height:16px"></p>
+      <button onclick="document.getElementById('authStep1').style.display='block';document.getElementById('authStep2').style.display='none';document.getElementById('authSendBtn').textContent='Send verification code →';document.getElementById('authSendBtn').disabled=false;document.getElementById('authSendBtn').style.opacity='1'" 
+        style="width:100%;padding:10px;margin-top:8px;background:none;border:none;font-size:13px;color:#64748b;cursor:pointer;font-family:inherit">
+        &larr; Use a different email
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SUBSCRIPTION MANAGEMENT MODAL -->
+<div id="subModal" style="display:none;position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:1rem">
+  <div style="background:#fff;border-radius:20px;padding:2rem 2.5rem;width:100%;max-width:400px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.2)">
+    <button onclick="closeSubModal()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8;line-height:1">&#x2715;</button>
+    <h3 style="font-size:18px;font-weight:700;color:#0f172a;margin:0 0 20px;font-family:inherit">Manage Subscription</h3>
+    <!-- Plan card -->
+    <div style="background:#f8fafc;border-radius:14px;padding:16px 18px;margin-bottom:16px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <span style="font-size:15px;font-weight:700;color:#0f172a">MyMilesAI Pro</span>
+        <span style="padding:3px 10px;border-radius:100px;background:rgba(34,197,94,.12);color:#16a34a;font-size:11px;font-weight:700">Active</span>
+      </div>
+      <div style="font-size:22px;font-weight:700;color:#1B4DDB;font-family:'Playfair Display',Georgia,serif">$69.99<span style="font-size:14px;font-weight:500;color:#64748b">/year</span></div>
+    </div>
+    <!-- Buttons -->
+    <button onclick="showToast('Stripe billing portal coming soon');closeSubModal()" style="width:100%;padding:11px;border-radius:12px;background:#f8fafc;color:#0f172a;font-size:14px;font-weight:600;border:1.5px solid #e2e8f0;cursor:pointer;margin-bottom:8px;font-family:inherit">Update Payment Method</button>
+    <button onclick="document.getElementById('cancelConfirm').style.display=document.getElementById('cancelConfirm').style.display==='block'?'none':'block'" style="width:100%;padding:11px;border-radius:12px;background:#fff;color:#dc2626;font-size:14px;font-weight:600;border:1.5px solid #fecaca;cursor:pointer;margin-bottom:12px;font-family:inherit">Cancel Subscription</button>
+    <!-- Cancel confirmation -->
+    <div id="cancelConfirm" style="display:none;background:#fff5f5;border:1px solid #fecaca;border-radius:12px;padding:16px;margin-bottom:16px">
+      <p style="font-size:14px;font-weight:600;color:#0f172a;margin:0 0 6px">Are you sure you want to cancel?</p>
+      <p style="font-size:12px;color:#64748b;margin:0 0 14px;line-height:1.5">You will keep access until end of billing period. No cancellation fees.</p>
+      <div style="display:flex;gap:8px">
+        <button onclick="showToast('Email support@mymilesai.com to cancel. We will process within 24 hours.');document.getElementById('cancelConfirm').style.display='none'" style="flex:1;padding:10px;border-radius:10px;background:#dc2626;color:#fff;font-size:13px;font-weight:600;border:none;cursor:pointer;font-family:inherit">Yes, Cancel</button>
+        <button onclick="document.getElementById('cancelConfirm').style.display='none'" style="flex:1;padding:10px;border-radius:10px;background:#1B4DDB;color:#fff;font-size:13px;font-weight:600;border:none;cursor:pointer;font-family:inherit">Keep Subscription</button>
+      </div>
+    </div>
+    <p style="font-size:12px;color:#94a3b8;text-align:center;margin:0">Questions? Contact <a href="mailto:support@mymilesai.com" style="color:#1B4DDB;text-decoration:none">support@mymilesai.com</a></p>
+  </div>
+</div>
+
+<!-- SIGN UP MODAL -->
+<div id="signupModal" style="display:none;position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:1rem;overflow-y:auto">
+  <div style="background:#fff;border-radius:20px;padding:2rem 2.5rem;width:100%;max-width:420px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.2);margin:auto">
+    <button onclick="closeSignUp()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8;line-height:1">&#x2715;</button>
+
+    <!-- Step 1: Name / Email / Phone -->
+    <div id="signupStep1">
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <svg width="36" height="36" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#1B4DDB"/><path d="M5 20c0-2 1-3.5 2.5-4.5L10 12h12l2.5 3.5c1.5 1 2.5 2.5 2.5 4.5v1H5v-1z" fill="white"/><circle cx="10" cy="22" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg>
+        <h2 style="font-size:22px;font-weight:700;margin:12px 0 4px;font-family:inherit;color:#0f172a">Start your free trial</h2>
+        <p style="font-size:13px;color:#64748b;margin:0">10 days free, then $69.99/year. Cancel anytime.</p>
+      </div>
+      <input id="signupName" type="text" placeholder="Your full name" autocomplete="name"
+        style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:10px;box-sizing:border-box;outline:none"
+        onfocus="this.style.borderColor='#1B4DDB';this.style.background='#fff'"
+        onblur="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'">
+      <input id="signupEmail" type="email" placeholder="your@email.com" autocomplete="email"
+        style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:10px;box-sizing:border-box;outline:none"
+        onfocus="this.style.borderColor='#1B4DDB';this.style.background='#fff'"
+        onblur="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'">
+      <input id="signupPhone" type="tel" placeholder="Phone number (optional)" autocomplete="tel"
+        style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:12px;box-sizing:border-box;outline:none"
+        onfocus="this.style.borderColor='#1B4DDB';this.style.background='#fff'"
+        onblur="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'">
+      <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:16px">
+        <input type="checkbox" id="signupAgree" style="margin-top:3px;width:16px;height:16px;accent-color:#1B4DDB;cursor:pointer;flex-shrink:0">
+        <label for="signupAgree" style="font-size:12px;color:#64748b;line-height:1.4;cursor:pointer">I agree to the <a href="#terms" style="color:#1B4DDB;text-decoration:underline" onclick="event.preventDefault();event.stopPropagation();document.getElementById('termsModal').style.display='block'">Terms of Service</a> and <a href="#privacy" style="color:#1B4DDB;text-decoration:underline" onclick="event.preventDefault();event.stopPropagation();document.getElementById('privacyModal').style.display='block'">Privacy Policy</a></label>
+      </div>
+      <button id="signupContinueBtn" onclick="signupToStep2()"
+        style="width:100%;padding:12px;font-size:14px;font-weight:600;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;margin-bottom:14px">
+        Continue to payment &#8594;
+      </button>
+      <p style="text-align:center;font-size:13px;color:#94a3b8;margin:0">Already have an account? <a href="#" onclick="event.preventDefault();closeSignUp();openSignIn();" style="color:#1B4DDB;text-decoration:none;font-weight:600">Sign in</a></p>
+    </div>
+
+    <!-- Step 2: Plan selection -->
+    <div id="signupStep2" style="display:none">
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <h2 style="font-size:22px;font-weight:700;margin:0 0 4px;font-family:inherit;color:#0f172a">Choose your plan</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
+        <!-- Monthly card -->
+        <div onclick="signupToStep3('monthly')" style="border:1.5px solid #e2e8f0;border-radius:14px;padding:18px 14px;cursor:pointer;transition:border-color .2s" onmouseover="this.style.borderColor='#1B4DDB'" onmouseout="this.style.borderColor='#e2e8f0'">
+          <div style="font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Monthly</div>
+          <div style="font-size:24px;font-weight:700;color:#0f172a;font-family:'Playfair Display',Georgia,serif">$6.99<span style="font-size:13px;font-weight:500;color:#64748b">/mo</span></div>
+          <ul style="list-style:none;padding:0;margin:12px 0 14px;font-size:12px;color:#64748b">
+            <li style="margin-bottom:4px">&#10003; Unlimited trips</li>
+            <li>&#10003; Cancel anytime</li>
+          </ul>
+          <button style="width:100%;padding:9px;border-radius:10px;background:#f1f5f9;color:#374151;font-size:13px;font-weight:600;border:none;cursor:pointer">Select</button>
+        </div>
+        <!-- Annual card -->
+        <div onclick="signupToStep3('annual')" style="border:2px solid #1B4DDB;border-radius:14px;padding:18px 14px;cursor:pointer;background:rgba(27,77,219,.02);position:relative">
+          <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#1B4DDB;color:#fff;font-size:10px;font-weight:700;padding:2px 10px;border-radius:100px;white-space:nowrap">Best value</div>
+          <div style="font-size:11px;font-weight:700;color:#1B4DDB;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Annual &mdash; save 17%</div>
+          <div style="font-size:24px;font-weight:700;color:#0f172a;font-family:'Playfair Display',Georgia,serif">$69.99<span style="font-size:13px;font-weight:500;color:#64748b">/yr</span></div>
+          <ul style="list-style:none;padding:0;margin:12px 0 14px;font-size:12px;color:#64748b">
+            <li style="margin-bottom:4px">&#10003; Unlimited trips</li>
+            <li style="margin-bottom:4px">&#10003; Cancel anytime</li>
+            <li>&#10003; Save $13.89/yr</li>
+          </ul>
+          <button style="width:100%;padding:9px;border-radius:10px;background:#1B4DDB;color:#fff;font-size:13px;font-weight:600;border:none;cursor:pointer">Select</button>
+        </div>
+      </div>
+      <p style="text-align:center;font-size:13px;color:#94a3b8;margin:0"><a href="#" onclick="event.preventDefault();document.getElementById('signupStep2').style.display='none';document.getElementById('signupStep1').style.display='block';" style="color:#1B4DDB;text-decoration:none">&#8592; Back</a></p>
+    </div>
+
+    <!-- Step 3: Payment -->
+    <div id="signupStep3" style="display:none">
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <h2 style="font-size:22px;font-weight:700;margin:0 0 4px;font-family:inherit;color:#0f172a">Payment details</h2>
+        <p style="font-size:13px;color:#64748b;margin:0">Your card will not be charged during the 10-day trial</p>
+      </div>
+      <div id="stripeCardElement" style="border:1.5px solid #e2e8f0;border-radius:12px;padding:14px 16px;background:#f8fafc;color:#94a3b8;font-size:13px;margin-bottom:16px;min-height:48px;display:flex;align-items:center">Stripe payment form will load here</div>
+      <button onclick="signupComplete()"
+        style="width:100%;padding:12px;font-size:14px;font-weight:600;background:linear-gradient(135deg,#16a34a,#059669);color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;margin-bottom:12px">
+        Start free trial &#8594;
+      </button>
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:14px">
+        <span style="font-size:11px;color:#94a3b8;display:flex;align-items:center;gap:4px">&#128274; 256-bit SSL encrypted</span>
+        <span style="font-size:11px;color:#94a3b8">&#10003; Cancel anytime</span>
+      </div>
+      <p style="text-align:center;font-size:13px;color:#94a3b8;margin:0"><a href="#" onclick="event.preventDefault();document.getElementById('signupStep3').style.display='none';document.getElementById('signupStep2').style.display='block';" style="color:#1B4DDB;text-decoration:none">&#8592; Back</a></p>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
+
