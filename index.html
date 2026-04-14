@@ -807,12 +807,6 @@ window.addEventListener('DOMContentLoaded',function(){
   // ── FIX 1: Proper auth state change + load trips ──
   _db.auth.onAuthStateChange(function(event, session){
       if(event==='SIGNED_IN'){
-        // Two-factor check: if password was verified but OTP not yet done, 
-        // this SIGNED_IN is from the password step — ignore it (signOut follows immediately)
-        if(window._passwordVerified && !window._otpVerified){
-          console.log('AUTH: Password SIGNED_IN — ignoring, waiting for OTP');
-          return;
-        }
         // Check profile exists and subscription is active before redirecting
         (async function(){
           try {
@@ -960,23 +954,12 @@ window.addEventListener('DOMContentLoaded',function(){
   window.sbSignInGoogle = function(){ _db.auth.signInWithOAuth({provider:'google',options:{redirectTo:'https://mymilesai.com'}}); };
   window.sbSignInApple = function(){ _db.auth.signInWithOAuth({provider:'apple',options:{redirectTo:'https://mymilesai.com'}}); };
   // Sign in with email+password (step 1 of 2-factor)
-  window.sbSignInWithPassword = function(email, password){
-    return _db.auth.signInWithPassword({
-      email: email,
-      password: password
-    }).then(async function(res){
-      if(res.error){
-        console.log('Password sign in error:', res.error.message);
-        return {ok: false, msg: res.error.message};
-      }
-      // Password correct — IMMEDIATELY sign out so session is not active
-      // User must complete OTP verification to actually sign in
-      await _db.auth.signOut();
-      window._passwordVerified = true;
-      window._verifiedEmail = email;
-      console.log('Password verified, signed out, waiting for OTP');
-      return {ok: true, msg: 'Password verified'};
-    });
+  // Step 1: Just store password locally — don't verify with Supabase yet
+  // Password will be verified AFTER OTP is confirmed
+  window.sbStorePasswordForVerification = function(email, password){
+    window._pendingEmail = email;
+    window._pendingPassword = password;
+    return {ok: true};
   };
   // Check profile exists and has active subscription
   window.sbCheckProfile = async function(userId){
@@ -3010,27 +2993,18 @@ var _ml=document.getElementById('tMiLbl');if(_ml)_ml.textContent=UNIT==='km'?'Ki
         if(!/[0-9]/.test(password)){msg.textContent='Password needs a number.';msg.style.color='#dc2626';return;}
         if(!/[!@#$%^&*()_+\-=\[\]{};:,.<>?]/.test(password)){msg.textContent='Password needs a special character (!@#$%^&*).';msg.style.color='#dc2626';return;}
         btn.textContent='Verifying...';btn.disabled=true;btn.style.opacity='0.7';
-        var result = await sbSignInWithPassword(email, password);
-        if(result.ok){
-          msg.textContent='Password verified. Sending verification code...';msg.style.color='#16a34a';
-          var otpOk = await sbSendOtpCode(email);
-          if(otpOk){
-            document.getElementById('authStep1').style.display='none';
-            document.getElementById('authStep2').style.display='block';
-            document.getElementById('authModalTitle').textContent='Enter your code';
-            document.getElementById('authModalSubtitle').textContent='We sent a 6-digit code to ' + email;
-            document.getElementById('authCodeInput').focus();
-          } else {
-            msg.textContent='Could not send verification code. Try again.';msg.style.color='#dc2626';
-            btn.textContent='Sign In';btn.disabled=false;btn.style.opacity='1';
-          }
+        // Store password locally — will verify after OTP
+        sbStorePasswordForVerification(email, password);
+        msg.textContent='Sending verification code...';msg.style.color='#16a34a';
+        var otpOk = await sbSendOtpCode(email);
+        if(otpOk){
+          document.getElementById('authStep1').style.display='none';
+          document.getElementById('authStep2').style.display='block';
+          document.getElementById('authModalTitle').textContent='Enter your code';
+          document.getElementById('authModalSubtitle').textContent='We sent a 6-digit code to ' + email;
+          document.getElementById('authCodeInput').focus();
         } else {
-          if(result.msg && result.msg.includes('Invalid login')){
-            msg.textContent='Invalid email or password. If you don\'t have an account, please sign up through the app first.';
-          } else {
-            msg.textContent=result.msg || 'Sign in failed. Please check your credentials.';
-          }
-          msg.style.color='#dc2626';
+          msg.textContent='No account found or could not send code.';msg.style.color='#dc2626';
           btn.textContent='Sign In';btn.disabled=false;btn.style.opacity='1';
         }
       })()" style="width:100%;padding:12px;font-size:14px;font-weight:600;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;box-sizing:border-box;transition:opacity .15s">
@@ -3062,7 +3036,25 @@ var _ml=document.getElementById('tMiLbl');if(_ml)_ml.textContent=UNIT==='km'?'Ki
         btn.textContent='Verifying...';btn.disabled=true;btn.style.opacity='0.7';
         var ok = await sbVerifyOtpCode(email, code);
         if(ok){
-          window._otpVerified = true;
+          // OTP verified — now verify password
+          if(window._pendingPassword){
+            msg.textContent='Verifying password...';msg.style.color='#16a34a';
+            // Sign out first (OTP created a session), then sign in with password
+            await _db.auth.signOut();
+            var pwdRes = await _db.auth.signInWithPassword({email: window._pendingEmail, password: window._pendingPassword});
+            window._pendingPassword = null;
+            if(pwdRes.error){
+              msg.textContent='Incorrect password. Please try again.';msg.style.color='#dc2626';
+              // Reset to step 1
+              document.getElementById('authStep1').style.display='block';
+              document.getElementById('authStep2').style.display='none';
+              document.getElementById('authCodeInput').value='';
+              document.getElementById('authModalTitle').textContent='Welcome to MyMilesAI';
+              document.getElementById('authModalSubtitle').textContent='Sign in to your account';
+              btn.textContent='Verify code';btn.disabled=false;btn.style.opacity='1';
+              return;
+            }
+          }
           msg.textContent='Success! Signing you in...';msg.style.color='#16a34a';
           document.getElementById('authModal').style.display='none';
           // Reset modal for next use
