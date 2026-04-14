@@ -536,7 +536,6 @@ async function initAuth(){
   });
 }
 function setUser(u,profile){
-function setUser(u,profile){
   user=u;
   const n=(profile?.name)||u.user_metadata?.full_name||u.email?.split('@')[0]||'User';
   document.getElementById('userName').textContent=n;
