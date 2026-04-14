@@ -474,8 +474,9 @@ function updLocale(v){locale=v;document.getElementById('localeLabel').textConten
 function updLbls(){const u=gu(),U=u[0].toUpperCase()+u.slice(1);document.getElementById('distLbl').textContent='Distance ('+u+')';document.getElementById('bizLbl').textContent='Business '+U;document.getElementById('persLbl').textContent='Personal '+U}
 
 async function initAuth(){
+  await new Promise(r=>setTimeout(r,300));
   // 1. Get current session (persisted via localStorage by Supabase SDK)
-  const{data:{session},error:sessErr}=await sb.auth.getSession();
+  let _sessResult; try { const _tp=new Promise((_,rj)=>setTimeout(()=>rj(new Error("timeout")),8000)); _sessResult=await Promise.race([sb.auth.getSession(),_tp]); } catch(e){ window.location.href="/"; return; } const{data:{session},error:sessErr}=_sessResult;
 
   if(!session?.user){
     // No session at all — bounce to home immediately, no demo fallback
