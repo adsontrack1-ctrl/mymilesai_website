@@ -2593,47 +2593,71 @@ window.exportPDF=function(){
       <p id="signupMsg3" style="text-align:center;font-size:12px;margin:8px 0 0;min-height:16px"></p>
     </div>
 
-    <!-- Step 4: Start Trial (with optional Stripe) -->
+    <!-- Step 4: Start Trial — Stripe collects card → 10-day trial → auto-charge day 10 -->
     <div id="signupStep4" style="display:none">
       <div style="background:linear-gradient(135deg,#1B4DDB 0%,#378ADD 100%);border-radius:14px;padding:20px;color:#fff;margin-bottom:16px;text-align:center">
         <div style="font-size:20px;font-weight:700;margin-bottom:4px">MyMilesAI Pro</div>
-        <div style="font-size:13px;opacity:.85;margin-bottom:12px">10-day free trial — no credit card required</div>
-        <div style="display:flex;justify-content:center;gap:16px;font-size:12px;opacity:.9">
+        <div style="font-size:13px;opacity:.85;margin-bottom:8px">10-day free trial — cancel anytime</div>
+        <div style="display:flex;justify-content:center;gap:14px;font-size:12px;opacity:.9;flex-wrap:wrap">
           <span>&#10003; Unlimited trips</span>
           <span>&#10003; Tax reports</span>
           <span>&#10003; AI classify</span>
         </div>
       </div>
-      <div style="background:#f8fafc;border-radius:12px;padding:14px;margin-bottom:12px">
-        <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:13px;color:#64748b">After trial</span><span style="font-size:13px;font-weight:600;color:#0f172a">$6.99/mo or $69.99/yr</span></div>
-        <div style="font-size:11px;color:#94a3b8">Cancel anytime before trial ends — no charge</div>
+      <div style="background:#f8fafc;border-radius:12px;padding:14px;margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="font-size:13px;color:#64748b">Trial period</span>
+          <span style="font-size:13px;font-weight:600;color:#16a34a">10 days free</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span style="font-size:13px;color:#64748b">After trial</span>
+          <span style="font-size:13px;font-weight:700;color:#0f172a">$69.99/year</span>
+        </div>
+        <div style="font-size:11px;color:#94a3b8;margin-top:4px">Card required to start trial. Cancel before day 10 — no charge.</div>
       </div>
       <button id="signupTrialBtn" onclick="(async function(){
         var btn=document.getElementById('signupTrialBtn');
         var msg=document.getElementById('signupMsg4');
-        btn.textContent='Activating trial...';btn.disabled=true;btn.style.opacity='0.7';
-        try {
+        btn.textContent='Redirecting to payment...';btn.disabled=true;btn.style.opacity='0.7';
+        try{
+          // Get current authenticated user from OTP session
           var user=window._signupSession?.user;
           if(!user){var s=await _db.auth.getSession();user=s.data.session?.user;}
-          if(!user){msg.textContent='Session expired. Please try again.';msg.style.color='#dc2626';btn.textContent='Start Free Trial';btn.disabled=false;btn.style.opacity='1';return;}
-          var trialEnd=new Date();trialEnd.setDate(trialEnd.getDate()+10);
-          var profileData={id:user.id,email:user.email,name:user.email.split('@')[0],subscription_tier:'free',trial_ends_at:trialEnd.toISOString(),subscription_started_at:new Date().toISOString(),auth_provider:'email'};
-          var res=await _db.from('profiles').upsert(profileData,{onConflict:'id'});
-          if(res.error){msg.textContent='Error: '+res.error.message;msg.style.color='#dc2626';btn.textContent='Start Free Trial';btn.disabled=false;btn.style.opacity='1';return;}
-          msg.textContent='Trial activated! Redirecting...';msg.style.color='#16a34a';
-          setTimeout(function(){
-            document.getElementById('signupModal').style.display='none';
-            window.location.href='/dashboard.html';
-          },1000);
-        } catch(e){
-          msg.textContent='Error: '+e.message;msg.style.color='#dc2626';
+          if(!user){msg.textContent='Session expired — please go back to step 1.';msg.style.color='#dc2626';btn.textContent='Start Free Trial';btn.disabled=false;btn.style.opacity='1';return;}
+
+          // Store email for post-checkout recovery
+          try{localStorage.setItem('_mm_signup_email',user.email);localStorage.setItem('_mm_signup_uid',user.id);}catch(e){}
+
+          // Call create-checkout Edge Function — returns Stripe Checkout URL
+          // Stripe will create a subscription with 10-day trial and auto-charge on day 10
+          var res=await _db.functions.invoke('create-checkout',{
+            body:{
+              email:user.email,
+              user_id:user.id,
+              price_id:'price_1TI1ETPDX1EjEZICkTMmklbN',
+              trial_days:10,
+              success_url:window.location.origin+'/?checkout=success',
+              cancel_url:window.location.origin+'/?checkout=cancel'
+            }
+          });
+          if(res.error)throw new Error(res.error.message||'Checkout error');
+          var url=res.data&&res.data.url;
+          if(!url)throw new Error('No checkout URL returned from server');
+          // Redirect to Stripe Checkout
+          window.location.href=url;
+        }catch(e){
+          console.error('Checkout error:',e);
+          msg.textContent='Payment error: '+e.message;msg.style.color='#dc2626';
           btn.textContent='Start Free Trial';btn.disabled=false;btn.style.opacity='1';
         }
       })()" style="width:100%;padding:14px;font-size:15px;font-weight:700;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;box-sizing:border-box;transition:all .15s">
-        Start Free Trial
+        Start Free Trial — Enter Card
       </button>
       <p id="signupMsg4" style="text-align:center;font-size:12px;margin:8px 0 0;min-height:16px"></p>
-      <p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:8px">No credit card required for trial. You can add payment later.</p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span style="font-size:11px;color:#94a3b8">Secured by Stripe. Cancel anytime before day 10.</span>
+      </div>
     </div>
   </div>
 </div>
@@ -2782,13 +2806,49 @@ window.signupToPayment=async function(){
   var p=new URLSearchParams(window.location.search);
   if(p.get('checkout')==='success'){
     history.replaceState({},'',window.location.pathname);
-    var pe=localStorage.getItem('_signupEmail')||'';
-    localStorage.removeItem('_signupEmail');localStorage.removeItem('_signupName');
-    setTimeout(function(){
-      showToast('Payment successful! Sign in below to access your dashboard.');
-      window.openSignIn();
-      if(pe){var el=document.getElementById('authEmail');if(el)el.value=pe;}
-    },600);
+    // After successful Stripe checkout, create/update profile with trial info
+    // User is already authenticated (OTP session from Step 2)
+    (async function(){
+      try{
+        var s=await window._db.auth.getSession();
+        var user=s.data.session?.user;
+        if(!user){
+          // Try to recover from localStorage
+          var savedEmail=localStorage.getItem('_mm_signup_email');
+          if(savedEmail){
+            showToast('Payment successful! Please sign in to access your dashboard.');
+            setTimeout(function(){window.openSignIn();var el=document.getElementById('authEmail');if(el)el.value=savedEmail;},800);
+          } else {
+            showToast('Payment successful! Please sign in to access your dashboard.');
+            setTimeout(window.openSignIn,800);
+          }
+          return;
+        }
+        // Create/update profile — Stripe webhook will also update subscription_tier to 'pro'
+        // but we set trial here as fallback
+        var trialEnd=new Date();trialEnd.setDate(trialEnd.getDate()+10);
+        var uid=user.id||localStorage.getItem('_mm_signup_uid');
+        await window._db.from('profiles').upsert({
+          id:user.id,
+          email:user.email,
+          name:user.user_metadata?.full_name||user.email.split('@')[0],
+          subscription_tier:'free',       // webhook will upgrade to 'pro'
+          trial_ends_at:trialEnd.toISOString(),
+          subscription_started_at:new Date().toISOString(),
+          auth_provider:'email'
+        },{onConflict:'id'});
+        try{localStorage.removeItem('_mm_signup_email');localStorage.removeItem('_mm_signup_uid');}catch(e){}
+        showToast('Payment successful! Redirecting to dashboard...');
+        setTimeout(function(){window.location.href='/dashboard.html';},1200);
+      }catch(e){
+        console.error('Post-checkout error:',e);
+        showToast('Payment successful! Please sign in to access your dashboard.');
+        setTimeout(window.openSignIn,800);
+      }
+    })();
+  } else if(p.get('checkout')==='cancel'){
+    history.replaceState({},'',window.location.pathname);
+    setTimeout(function(){showToast('Checkout cancelled. You can try again anytime.');},400);
   }
 })();
 var _filterPeriod='year';var _filterCat='all';window._filterPeriod=_filterPeriod;window._filterCat=_filterCat;

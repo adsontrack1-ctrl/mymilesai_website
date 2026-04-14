@@ -474,43 +474,89 @@ function updLocale(v){locale=v;document.getElementById('localeLabel').textConten
 function updLbls(){const u=gu(),U=u[0].toUpperCase()+u.slice(1);document.getElementById('distLbl').textContent='Distance ('+u+')';document.getElementById('bizLbl').textContent='Business '+U;document.getElementById('persLbl').textContent='Personal '+U}
 
 async function initAuth(){
-  const{data:{session}}=await sb.auth.getSession();
-  if(session?.user){
-    // Check profile exists and subscription is active
-    const{data:profile,error:profErr}=await sb.from('profiles').select('id,subscription_tier,trial_ends_at,subscription_expires_at,name').eq('id',session.user.id).single();
-    if(profErr||!profile){
-      document.getElementById('userName').textContent='No Account';
-      document.getElementById('userEmail').textContent='Sign up required';
-      document.getElementById('userAvatar').textContent='!';
-      document.getElementById('pageSub').textContent='Account not found';
-      alert('No MyMilesAI account found. Please sign up through the app first.');
-      await sb.auth.signOut();
+  // 1. Get current session (persisted via localStorage by Supabase SDK)
+  const{data:{session},error:sessErr}=await sb.auth.getSession();
+
+  if(!session?.user){
+    // No session at all — bounce to home immediately, no demo fallback
+    window.location.href='/';
+    return;
+  }
+
+  const user=session.user;
+
+  // 2. Check profile exists
+  const{data:profile,error:profErr}=await sb.from('profiles')
+    .select('id,subscription_tier,trial_ends_at,subscription_expires_at,stripe_customer_id,stripe_subscription_id,name')
+    .eq('id',user.id).single();
+
+  if(profErr||!profile){
+    // Profile missing — sign out and send back
+    await sb.auth.signOut();
+    window.location.href='/?err=no_profile';
+    return;
+  }
+
+  // 3. Check subscription gate
+  const now=new Date();
+  const tier=profile.subscription_tier||'free';
+  const trialOk=profile.trial_ends_at&&new Date(profile.trial_ends_at)>now;
+  const subActive=tier==='pro'||tier==='premium';
+  const subExpired=profile.subscription_expires_at&&new Date(profile.subscription_expires_at)<now;
+
+  // Allow access if: active paid sub, or within trial window
+  const hasAccess=(subActive&&!subExpired)||trialOk;
+
+  if(!hasAccess){
+    await sb.auth.signOut();
+    window.location.href='/?err=subscription_expired';
+    return;
+  }
+
+  // 4. User is valid — load dashboard
+  setUser(user,profile);
+
+  // 5. Keep session fresh — handle token refresh events
+  sb.auth.onAuthStateChange(async(event,s)=>{
+    if(event==='SIGNED_OUT'){
       window.location.href='/';
-      return;
+    } else if(event==='TOKEN_REFRESHED'&&s?.user){
+      // Session refreshed silently — no action needed
     }
+  });
+}
+function setUser(u,profile){
+function setUser(u,profile){
+  user=u;
+  const n=(profile?.name)||u.user_metadata?.full_name||u.email?.split('@')[0]||'User';
+  document.getElementById('userName').textContent=n;
+  document.getElementById('userEmail').textContent=u.email||'';
+  document.getElementById('userAvatar').textContent=n[0].toUpperCase();
+  document.getElementById('pageSub').textContent='Welcome back, '+n.split(' ')[0];
+  document.getElementById('settEmail').textContent=u.email||'';
+  // Populate subscription panel
+  if(profile){
     const now=new Date();
     const tier=profile.subscription_tier||'free';
-    const trialOk=profile.trial_ends_at&&new Date(profile.trial_ends_at)>now;
-    const subOk=tier==='pro'||tier==='premium';
-    const subExpired=profile.subscription_expires_at&&new Date(profile.subscription_expires_at)<now;
-    if((subOk&&!subExpired)||trialOk||tier==='free'){
-      setUser(session.user);
+    const trialEnds=profile.trial_ends_at?new Date(profile.trial_ends_at):null;
+    const trialOk=trialEnds&&trialEnds>now;
+    const subExpires=profile.subscription_expires_at?new Date(profile.subscription_expires_at):null;
+    const statusEl=document.getElementById('subStatusText');
+    const trialEl=document.getElementById('trialEnds');
+    const billEl=document.getElementById('nextBill');
+    if(tier==='pro'||tier==='premium'){
+      if(statusEl)statusEl.textContent='Pro — Active';
+      if(trialEl)trialEl.textContent=trialOk?trialEnds.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'—';
+      if(billEl)billEl.textContent=subExpires?subExpires.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'—';
     } else {
-      alert('Your subscription has expired. Please renew to continue.');
-      await sb.auth.signOut();
-      window.location.href='/';
-      return;
+      const daysLeft=trialEnds?Math.max(0,Math.ceil((trialEnds-now)/(1000*60*60*24))):0;
+      if(statusEl)statusEl.textContent=trialOk?`Free Trial — ${daysLeft} day${daysLeft!==1?'s':''} left`:'Trial Expired';
+      if(trialEl)trialEl.textContent=trialEnds?trialEnds.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'—';
+      if(billEl)billEl.textContent=trialOk?'Auto-charges on trial end':'—';
     }
-  } else {
-    document.getElementById('userName').textContent='Demo User';
-    document.getElementById('userEmail').textContent='Sign in to save';
-    document.getElementById('userAvatar').textContent='D';
-    document.getElementById('pageSub').textContent='Demo mode';
-    loadDemo();
   }
-  sb.auth.onAuthStateChange(async(_,s)=>{if(s?.user)setUser(s.user)});
+  loadTrips();
 }
-function setUser(u){user=u;const n=u.user_metadata?.full_name||u.email?.split('@')[0]||'User';document.getElementById('userName').textContent=n;document.getElementById('userEmail').textContent=u.email||'';document.getElementById('userAvatar').textContent=n[0].toUpperCase();document.getElementById('pageSub').textContent='Welcome back, '+n.split(' ')[0];document.getElementById('settEmail').textContent=u.email||'';loadTrips()}
 async function signOut(){await sb.auth.signOut();window.location.href='/'}
 async function loadTrips(){if(!user)return;const{data}=await sb.from('trips').select('*').eq('user_id',user.id).order('trip_date',{ascending:false});allTrips=(data||[]).map(function(t){return Object.assign({},t,{miles:Number(t.miles)||0,from_addr:t.from_addr||'Unknown',to_addr:t.to_addr||'Unknown',trip_date:t.trip_date||new Date().toISOString().split('T')[0],type:t.type||'uncl'})});refreshUI()}
 function loadDemo(){const t=new Date(),d=[];const a=[['123 Main St, New York','456 Broadway, Manhattan'],['789 Oak Ave, Brooklyn','321 Pine St, Queens'],['100 Tech Blvd, Austin','500 Congress Ave, Austin'],['200 Market St, SF','400 Mission St, SF'],['55 Elm Dr, Chicago','900 Michigan Ave, Chicago'],['12 Maple Ln, Dallas','88 Commerce St, Dallas'],['300 King St, Seattle','150 Pike Pl, Seattle'],['42 Harbor Rd, Boston','77 Beacon St, Boston'],['600 Peachtree, Atlanta','150 Spring St, Atlanta'],['900 Sunset, LA','200 Vine St, LA']];const c=['biz','biz','pers','biz','uncl','biz','pers','biz','uncl','pers'];const p=['Client Meeting','Site Visit','Grocery','Office','','Supplies','Gym','Networking','','Shopping'];for(let i=0;i<10;i++){const dt=new Date(t);dt.setDate(dt.getDate()-i*2-Math.floor(Math.random()*3));d.push({id:'d-'+i,from_addr:a[i][0],to_addr:a[i][1],miles:+(4+Math.random()*40).toFixed(1),trip_date:dt.toISOString().split('T')[0],type:c[i],purpose:p[i],notes:'',tolls:i%4===0?2.50:0,parking:i%5===0?5:0,user_id:'demo'})}allTrips=d;refreshUI()}
