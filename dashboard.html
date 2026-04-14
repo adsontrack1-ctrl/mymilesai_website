@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdIn2U1A-aSpB1-0vXIVUDK1J5icG_GE&libraries=places&callback=Function.prototype" async defer></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -478,7 +479,7 @@ async function signOut(){await sb.auth.signOut();window.location.href='/'}
 async function loadTrips(){if(!user)return;const{data}=await sb.from('trips').select('*').eq('user_id',user.id).order('trip_date',{ascending:false});allTrips=(data||[]).map(function(t){return Object.assign({},t,{miles:Number(t.miles)||0,from_addr:t.from_addr||'Unknown',to_addr:t.to_addr||'Unknown',trip_date:t.trip_date||new Date().toISOString().split('T')[0],type:t.type||'uncl'})});refreshUI()}
 function loadDemo(){const t=new Date(),d=[];const a=[['123 Main St, New York','456 Broadway, Manhattan'],['789 Oak Ave, Brooklyn','321 Pine St, Queens'],['100 Tech Blvd, Austin','500 Congress Ave, Austin'],['200 Market St, SF','400 Mission St, SF'],['55 Elm Dr, Chicago','900 Michigan Ave, Chicago'],['12 Maple Ln, Dallas','88 Commerce St, Dallas'],['300 King St, Seattle','150 Pike Pl, Seattle'],['42 Harbor Rd, Boston','77 Beacon St, Boston'],['600 Peachtree, Atlanta','150 Spring St, Atlanta'],['900 Sunset, LA','200 Vine St, LA']];const c=['biz','biz','pers','biz','uncl','biz','pers','biz','uncl','pers'];const p=['Client Meeting','Site Visit','Grocery','Office','','Supplies','Gym','Networking','','Shopping'];for(let i=0;i<10;i++){const dt=new Date(t);dt.setDate(dt.getDate()-i*2-Math.floor(Math.random()*3));d.push({id:'d-'+i,from_addr:a[i][0],to_addr:a[i][1],miles:+(4+Math.random()*40).toFixed(1),trip_date:dt.toISOString().split('T')[0],type:c[i],purpose:p[i],notes:'',tolls:i%4===0?2.50:0,parking:i%5===0?5:0,user_id:'demo'})}allTrips=d;refreshUI()}
 
-async function saveTrip(){const f=document.getElementById('tripFrom').value.trim(),t=document.getElementById('tripTo').value.trim(),d=parseFloat(document.getElementById('tripDist').value),dt=document.getElementById('tripDate').value,c=document.getElementById('tripCat').value,p=document.getElementById('tripPurpose').value.trim(),n=document.getElementById('tripNotes').value.trim(),tl=parseFloat(document.getElementById('tripTolls').value)||0,pk=parseFloat(document.getElementById('tripParking').value)||0;if(!f||!t||!d||!dt){showToast('Fill required fields','error');return}const trip={from_addr:f,to_addr:t,miles:d,trip_date:dt,type:c,purpose:p,notes:n+(tl?' | Tolls:$'+tl.toFixed(2):'')+(pk?' | Parking:$'+pk.toFixed(2):''),tolls:tl,parking:pk};if(user){trip.user_id=user.id;const dbTrip={from_addr:f,to_addr:t,miles:d,trip_date:dt,type:c,purpose:p,notes:trip.notes};if(editId){await sb.from('trips').update(dbTrip).eq('id',editId)}else{await sb.from('trips').insert(dbTrip)}await loadTrips()}else{if(editId){const i=allTrips.findIndex(x=>x.id===editId);if(i>=0)allTrips[i]={...allTrips[i],...trip}}else{trip.id='d-'+Date.now();trip.user_id='demo';allTrips.unshift(trip)}refreshUI()}editId=null;closeModal('addTripModal');showToast('Trip saved!','success')}
+async function saveTrip(){const f=document.getElementById('tripFrom').value.trim(),t=document.getElementById('tripTo').value.trim(),d=parseFloat(document.getElementById('tripDist').value),dt=document.getElementById('tripDate').value,c=document.getElementById('tripCat').value,p=document.getElementById('tripPurpose').value.trim(),n=document.getElementById('tripNotes').value.trim(),tl=parseFloat(document.getElementById('tripTolls').value)||0,pk=parseFloat(document.getElementById('tripParking').value)||0;if(!f||!t||!d||!dt){showToast('Fill required fields','error');return}const trip={from_addr:f,to_addr:t,miles:d,trip_date:dt,type:c,purpose:p,notes:n+(tl?' | Tolls:$'+tl.toFixed(2):'')+(pk?' | Parking:$'+pk.toFixed(2):''),tolls:tl,parking:pk};if(user){trip.user_id=user.id;const dbTrip={user_id:user.id,from_addr:f,to_addr:t,miles:d,trip_date:dt,type:c,purpose:p,notes:trip.notes};if(editId){await sb.from('trips').update(dbTrip).eq('id',editId)}else{const{error:insertErr}=await sb.from('trips').insert(dbTrip);if(insertErr){showToast('Save failed: '+insertErr.message,'error');return}}await loadTrips()}else{if(editId){const i=allTrips.findIndex(x=>x.id===editId);if(i>=0)allTrips[i]={...allTrips[i],...trip}}else{trip.id='d-'+Date.now();trip.user_id='demo';allTrips.unshift(trip)}refreshUI()}editId=null;closeModal('addTripModal');showToast('Trip saved!','success')}
 async function deleteTrip(id){if(!confirm('Delete this trip?'))return;if(user&&!id.startsWith('d-')){await sb.from('trips').delete().eq('id',id);await loadTrips()}else{allTrips=allTrips.filter(x=>x.id!==id);refreshUI()}showToast('Deleted','success')}
 function editTrip(id){const t=allTrips.find(x=>x.id===id);if(!t)return;editId=id;document.getElementById('tripModalTitle').textContent='Edit Trip';document.getElementById('tripFrom').value=t.from_addr||'';document.getElementById('tripTo').value=t.to_addr||'';document.getElementById('tripDist').value=t.miles||'';document.getElementById('tripDate').value=t.trip_date||'';document.getElementById('tripCat').value=t.type||'uncl';document.getElementById('tripPurpose').value=t.purpose||'';document.getElementById('tripNotes').value=t.notes||'';document.getElementById('tripTolls').value=t.tolls||'';document.getElementById('tripParking').value=t.parking||'';openModal('addTripModal')}
 async function reclass(id,c){const t=allTrips.find(x=>x.id===id);if(!t)return;if(user&&!id.startsWith('d-')){await sb.from('trips').update({type:c}).eq('id',id);await loadTrips()}else{t.type=c;refreshUI()}showToast(c+' classified','success')}
@@ -525,7 +526,49 @@ function openAddTrip(){editId=null;document.getElementById('tripModalTitle').tex
 function showToast(m,t='success'){const e=document.getElementById('toast');e.textContent=m;e.className='toast '+t+' show';setTimeout(()=>e.classList.remove('show'),3000)}
 function showPage(p){document.querySelectorAll('.ps').forEach(s=>s.classList.remove('active'));document.getElementById('page-'+p)?.classList.add('active');document.querySelectorAll('.ni').forEach(i=>i.classList.remove('active'));document.querySelector('.ni[data-page="'+p+'"]')?.classList.add('active');const titles={overview:'Overview',drives:'Drives',reports:'Reports',vehicles:'Vehicles',locations:'Named Locations',settings:'Settings',subscription:'Subscription',help:'Help & Support'};document.getElementById('pageTitle').textContent=titles[p]||p;document.getElementById('sidebar').classList.remove('open')}
 
-document.addEventListener('DOMContentLoaded',()=>{const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'';if(tz.includes('Toronto')||tz.includes('Vancouver')||tz.includes('Edmonton')){locale='CA';document.getElementById('localeLabel').textContent='CA';document.getElementById('sLocale').value='CA'}updLbls();document.getElementById('tripDate').value=new Date().toISOString().split('T')[0];initAuth()});
+/* === GOOGLE PLACES AUTOCOMPLETE & DISTANCE === */
+let acFrom=null,acTo=null,placeFrom=null,placeTo=null;
+function initPlaces(){
+  if(typeof google==='undefined'||!google.maps||!google.maps.places){setTimeout(initPlaces,500);return}
+  const opts={types:['geocode','establishment'],fields:['formatted_address','geometry','name']};
+  const fromEl=document.getElementById('tripFrom');
+  const toEl=document.getElementById('tripTo');
+  acFrom=new google.maps.places.Autocomplete(fromEl,opts);
+  acTo=new google.maps.places.Autocomplete(toEl,opts);
+  acFrom.addListener('place_changed',()=>{placeFrom=acFrom.getPlace();fromEl.value=placeFrom.formatted_address||placeFrom.name||fromEl.value;calcDist()});
+  acTo.addListener('place_changed',()=>{placeTo=acTo.getPlace();toEl.value=placeTo.formatted_address||placeTo.name||toEl.value;calcDist()});
+  /* Style the pac-container to match our theme */
+  const style=document.createElement('style');
+  style.textContent='.pac-container{font-family:var(--font);border-radius:8px;border:1px solid var(--g5);box-shadow:var(--shm);margin-top:4px;z-index:9999}.pac-item{padding:8px 12px;font-size:13px;cursor:pointer;border-top:1px solid var(--g6)}.pac-item:hover{background:var(--sap-pale)}.pac-item-query{font-size:13px;font-weight:600}.pac-icon{display:none}';
+  document.head.appendChild(style);
+}
+function calcDist(){
+  if(!placeFrom||!placeTo||!placeFrom.geometry||!placeTo.geometry)return;
+  const svc=new google.maps.DistanceMatrixService();
+  svc.getDistanceMatrix({
+    origins:[placeFrom.geometry.location],
+    destinations:[placeTo.geometry.location],
+    travelMode:'DRIVING',
+    unitSystem:locale==='CA'?google.maps.UnitSystem.METRIC:google.maps.UnitSystem.IMPERIAL
+  },(res,status)=>{
+    if(status==='OK'&&res.rows[0]?.elements[0]?.status==='OK'){
+      const distMeters=res.rows[0].elements[0].distance.value;
+      const miles=distMeters/1609.344;
+      const km=distMeters/1000;
+      const val=locale==='CA'?km:miles;
+      document.getElementById('tripDist').value=val.toFixed(1);
+      /* Also show duration */
+      const durSecs=res.rows[0].elements[0].duration.value;
+      const durMins=Math.round(durSecs/60);
+      showToast(val.toFixed(1)+' '+gu()+' ('+durMins+' min drive)','success');
+    }
+  });
+}
+/* Reset places when modal opens */
+const origOpenAddTrip=openAddTrip;
+openAddTrip=function(){placeFrom=null;placeTo=null;origOpenAddTrip();}
+
+document.addEventListener('DOMContentLoaded',()=>{const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'';if(tz.includes('Toronto')||tz.includes('Vancouver')||tz.includes('Edmonton')){locale='CA';document.getElementById('localeLabel').textContent='CA';document.getElementById('sLocale').value='CA'}updLbls();document.getElementById('tripDate').value=new Date().toISOString().split('T')[0];initAuth();initPlaces()});
 </script>
 </body>
 </html>
