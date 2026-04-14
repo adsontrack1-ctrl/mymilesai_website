@@ -47,8 +47,8 @@
     "Automatic GPS mileage tracking",
     "AI-powered trip classification (business vs personal)",
     "Real-time IRS and CRA tax deduction calculator",
-    "Offline mode — works without internet",
-    "Privacy-first — all data stored on device",
+    "Offline mode - works without internet",
+    "Privacy-first - all data stored on device",
     "IRS-compliant PDF and CSV mileage reports",
     "Live map with route visualization",
     "Work hours auto-classification",
@@ -804,7 +804,7 @@ window.addEventListener('DOMContentLoaded',function(){
   });
   window._db = _db;
 
-  // ── FIX 1: Proper auth state change + load trips ──
+  // -- FIX 1: Proper auth state change + load trips --
   _db.auth.onAuthStateChange(function(event, session){
       if(event==='SIGNED_IN'){
         // Check profile exists and subscription is active before redirecting
@@ -813,7 +813,7 @@ window.addEventListener('DOMContentLoaded',function(){
             var uid = session.user.id;
             var pr = await _db.from('profiles').select('id,subscription_tier,trial_ends_at,subscription_expires_at').eq('id', uid).single();
             if(pr.error || !pr.data){
-              // No profile — user signed up via website but not through app
+              // No profile - user signed up via website but not through app
               alert('Account not found. Please sign up through the MyMilesAI app first.');
               await _db.auth.signOut();
               return;
@@ -882,7 +882,7 @@ window.addEventListener('DOMContentLoaded',function(){
     });
   }
 
-  // ── FIX 3: Show trips in a dashboard panel ──
+  // -- FIX 3: Show trips in a dashboard panel --
   function showTripsSummary(trips){
     var panel = document.getElementById('tripsDashboard');
     if(!panel) return;
@@ -912,7 +912,7 @@ window.addEventListener('DOMContentLoaded',function(){
       
       return '<tr style="border-bottom:1px solid #f1f5f9">' +
         '<td style="padding:8px 12px;font-size:13px">' + dateStr + '</td>' +
-        '<td style="padding:8px 12px;font-size:13px">' + (from + (to ? ' → ' + to : '')).slice(0,40) + '</td>' +
+        '<td style="padding:8px 12px;font-size:13px">' + (from + (to ? ' -> ' + to : '')).slice(0,40) + '</td>' +
         '<td style="padding:8px 12px;font-size:13px;text-align:right">' + miles.toFixed(1) + '</td>' +
         '<td style="padding:8px 12px;font-size:13px;color:' + (isBiz ? '#1B4DDB' : '#64748b') + '">' + (t.category || t.trip_type || t.type || 'Personal') + '</td>' +
         '<td style="padding:8px 12px;font-size:13px;color:#16a34a;text-align:right">' + (isBiz ? '+$' + (miles * IRS).toFixed(2) : '') + '</td>' +
@@ -942,7 +942,7 @@ window.addEventListener('DOMContentLoaded',function(){
     if(dashSection) dashSection.style.display = 'block';
   }
 
-  // ── FIX 4: Toast notification ──
+  // -- FIX 4: Toast notification --
   function showToast(msg){
     var t = document.createElement('div');
     t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;padding:12px 24px;border-radius:100px;font-size:14px;font-weight:500;z-index:99999;box-shadow:0 8px 24px rgba(0,0,0,.2);transition:opacity .3s';
@@ -954,7 +954,7 @@ window.addEventListener('DOMContentLoaded',function(){
   window.sbSignInGoogle = function(){ _db.auth.signInWithOAuth({provider:'google',options:{redirectTo:'https://mymilesai.com'}}); };
   window.sbSignInApple = function(){ _db.auth.signInWithOAuth({provider:'apple',options:{redirectTo:'https://mymilesai.com'}}); };
   // Sign in with email+password (step 1 of 2-factor)
-  // Step 1: Just store password locally — don't verify with Supabase yet
+  // Step 1: Just store password locally - don't verify with Supabase yet
   // Password will be verified AFTER OTP is confirmed
   window.sbStorePasswordForVerification = function(email, password){
     window._pendingEmail = email;
@@ -976,12 +976,12 @@ window.addEventListener('DOMContentLoaded',function(){
     if(tier === 'free' && !trialOk) return {ok: false, reason: 'trial_expired'};
     return {ok: true, tier: tier, name: p.name};
   };
-  // Send OTP code (6-digit) to email — NOT a magic link
+  // Send OTP code (6-digit) to email - NOT a magic link
   window.sbSendOtpCode = function(email){
     return _db.auth.signInWithOtp({
       email: email,
       options: { shouldCreateUser: false }
-      // NO emailRedirectTo → Supabase sends a 6-digit code instead of a link
+      // NO emailRedirectTo -> Supabase sends a 6-digit code instead of a link
     }).then(function(res){ 
       console.log('OTP send result:', res.error ? res.error.message : 'sent OK');
       return !res.error; 
@@ -2029,7 +2029,7 @@ if(phoneNotif){
   },8000);
 }
 
-// INIT — detect locale and apply
+// INIT - detect locale and apply
 setLocale(detectLocale());
 
 </script>
@@ -2225,7 +2225,7 @@ setLocale(detectLocale());
 </div></div>
 <script>
 (function(){
-// ── Locale detection via timezone ──
+// -- Locale detection via timezone --
 var _u=null,_tr=[];window._tr=_tr;
 var _tz=(typeof Intl!=='undefined')?Intl.DateTimeFormat().resolvedOptions().timeZone:'';
 var _CA=['Toronto','Vancouver','Winnipeg','Edmonton','Calgary','Regina','Halifax','Moncton','Whitehorse','Yellowknife','Iqaluit','Glace_Bay','Goose_Bay','Dawson','Creston','Thunder_Bay','Rankin_Inlet'].some(function(z){return _tz.indexOf(z)>-1;});
@@ -2429,7 +2429,7 @@ window.saveTr=function(){
   _tr.unshift({f:f,t:to,m:m,dt:dt,c:c,d:d,n:nt});
   if(_u&&typeof sbSaveTrip==='function') sbSaveTrip({from:f,to:to,distance:m,category:c,date:dt,notes:nt,deduction:d});
   closeAt();refresh();
-  showToast(d>0?'Trip saved — +$'+fmt(d)+' deduction':'Trip saved');
+  showToast(d>0?'Trip saved - +$'+fmt(d)+' deduction':'Trip saved');
 };
 window.exportCSV=function(){
   if(!_tr.length){showToast('No trips to export');return;}
@@ -2450,7 +2450,7 @@ window.exportPDF=function(){
   if(!_tr||!_tr.length){showToast('No trips to export');return;}
   var b=0,p=0,d=0;_tr.forEach(function(t){if(t.c==='business'){b+=t.m;d+=t.d;}else if(t.c==='personal')p+=t.m;else d+=t.d;});
   var w=window.open('','_blank');
-  w.document.write('<html><head><title>MyMilesAI Mileage Report</title><style>body{font-family:Arial,sans-serif;margin:40px;color:#111}h1{color:#1B4DDB;margin-bottom:4px}table{width:100%;border-collapse:collapse;margin-top:20px}th{background:#1B4DDB;color:#fff;padding:10px;text-align:left;font-size:13px}td{padding:8px 10px;border-bottom:1px solid #e5e7eb;font-size:13px}.summary{display:flex;gap:24px;margin:20px 0}.stat{background:#f8fafc;border-radius:8px;padding:16px 20px;flex:1}.stat-val{font-size:24px;font-weight:700}.stat-lbl{font-size:12px;color:#6b7280;margin-top:4px}.green{color:#16a34a}.blue{color:#1B4DDB}@media print{body{margin:20px}}</style><script src="https://js.stripe.com/v3/"></script>
+  w.document.write('<html><head><title>MyMilesAI Mileage Report</title><style>body{font-family:Arial,sans-serif;margin:40px;color:#111}h1{color:#1B4DDB;margin-bottom:4px}table{width:100%;border-collapse:collapse;margin-top:20px}th{background:#1B4DDB;color:#fff;padding:10px;text-align:left;font-size:13px}td{padding:8px 10px;border-bottom:1px solid #e5e7eb;font-size:13px}.summary{display:flex;gap:24px;margin:20px 0}.stat{background:#f8fafc;border-radius:8px;padding:16px 20px;flex:1}.stat-val{font-size:24px;font-weight:700}.stat-lbl{font-size:12px;color:#6b7280;margin-top:4px}.green{color:#16a34a}.blue{color:#1B4DDB}@media print{body{margin:20px}}</style>
 </head><body>');
   w.document.write('<h1>MyMilesAI</h1><p style="color:#6b7280;margin-top:0">Mileage Report \u2014 2026 Tax Year</p>');
   w.document.write('<p style="font-size:13px;color:#6b7280">'+(_u?_u.email:'')+' \u00b7 Generated '+new Date().toLocaleDateString()+'</p>');
@@ -2465,7 +2465,7 @@ window.exportPDF=function(){
     <div style="text-align:center;margin-bottom:1.2rem">
       <svg width="36" height="36" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#1B4DDB"/><path d="M5 20c0-2 1-3.5 2.5-4.5L10 12h12l2.5 3.5c1.5 1 2.5 2.5 2.5 4.5v1H5v-1z" fill="white"/><circle cx="10" cy="22" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg>
       <h2 id="signupTitle" style="font-size:22px;font-weight:700;margin:12px 0 4px;font-family:inherit">Create Your Account</h2>
-      <p id="signupSubtitle" style="font-size:13px;color:#64748b;margin:0">Step 1 of 4 — Verify your email</p>
+      <p id="signupSubtitle" style="font-size:13px;color:#64748b;margin:0">Step 1 of 4 - Verify your email</p>
     </div>
 
     <!-- Progress bar -->
@@ -2496,7 +2496,7 @@ window.exportPDF=function(){
           document.getElementById('signupStep1').style.display='none';
           document.getElementById('signupStep2').style.display='block';
           document.getElementById('signupTitle').textContent='Verify Email';
-          document.getElementById('signupSubtitle').textContent='Step 2 of 4 — Enter code sent to '+email;
+          document.getElementById('signupSubtitle').textContent='Step 2 of 4 - Enter code sent to '+email;
           document.getElementById('signupProg2').style.background='#1B4DDB';
           document.getElementById('signupOtpInput').focus();
         } else {
@@ -2534,7 +2534,7 @@ window.exportPDF=function(){
             document.getElementById('signupStep2').style.display='none';
             document.getElementById('signupStep3').style.display='block';
             document.getElementById('signupTitle').textContent='Set Your Password';
-            document.getElementById('signupSubtitle').textContent='Step 3 of 4 — Create a secure password';
+            document.getElementById('signupSubtitle').textContent='Step 3 of 4 - Create a secure password';
             document.getElementById('signupProg3').style.background='#1B4DDB';
             document.getElementById('signupPwd').focus();
           },500);
@@ -2580,7 +2580,7 @@ window.exportPDF=function(){
             document.getElementById('signupStep3').style.display='none';
             document.getElementById('signupStep4').style.display='block';
             document.getElementById('signupTitle').textContent='Start Free Trial';
-            document.getElementById('signupSubtitle').textContent='Step 4 of 4 — 10-day free trial, cancel anytime';
+            document.getElementById('signupSubtitle').textContent='Step 4 of 4 - 10-day free trial, cancel anytime';
             document.getElementById('signupProg4').style.background='#1B4DDB';
           },500);
         } else {
@@ -2593,11 +2593,11 @@ window.exportPDF=function(){
       <p id="signupMsg3" style="text-align:center;font-size:12px;margin:8px 0 0;min-height:16px"></p>
     </div>
 
-    <!-- Step 4: Start Trial — Stripe collects card → 10-day trial → auto-charge day 10 -->
+    <!-- Step 4: Start Trial - Stripe collects card -> 10-day trial -> auto-charge day 10 -->
     <div id="signupStep4" style="display:none">
       <div style="background:linear-gradient(135deg,#1B4DDB 0%,#378ADD 100%);border-radius:14px;padding:20px;color:#fff;margin-bottom:16px;text-align:center">
         <div style="font-size:20px;font-weight:700;margin-bottom:4px">MyMilesAI Pro</div>
-        <div style="font-size:13px;opacity:.85;margin-bottom:8px">10-day free trial — cancel anytime</div>
+        <div style="font-size:13px;opacity:.85;margin-bottom:8px">10-day free trial - cancel anytime</div>
         <div style="display:flex;justify-content:center;gap:14px;font-size:12px;opacity:.9;flex-wrap:wrap">
           <span>&#10003; Unlimited trips</span>
           <span>&#10003; Tax reports</span>
@@ -2613,7 +2613,7 @@ window.exportPDF=function(){
           <span style="font-size:13px;color:#64748b">After trial</span>
           <span style="font-size:13px;font-weight:700;color:#0f172a">$69.99/year</span>
         </div>
-        <div style="font-size:11px;color:#94a3b8;margin-top:4px">Card required to start trial. Cancel before day 10 — no charge.</div>
+        <div style="font-size:11px;color:#94a3b8;margin-top:4px">Card required to start trial. Cancel before day 10 - no charge.</div>
       </div>
       <button id="signupTrialBtn" onclick="(async function(){
         var btn=document.getElementById('signupTrialBtn');
@@ -2623,12 +2623,12 @@ window.exportPDF=function(){
           // Get current authenticated user from OTP session
           var user=window._signupSession?.user;
           if(!user){var s=await _db.auth.getSession();user=s.data.session?.user;}
-          if(!user){msg.textContent='Session expired — please go back to step 1.';msg.style.color='#dc2626';btn.textContent='Start Free Trial';btn.disabled=false;btn.style.opacity='1';return;}
+          if(!user){msg.textContent='Session expired - please go back to step 1.';msg.style.color='#dc2626';btn.textContent='Start Free Trial';btn.disabled=false;btn.style.opacity='1';return;}
 
           // Store email for post-checkout recovery
           try{localStorage.setItem('_mm_signup_email',user.email);localStorage.setItem('_mm_signup_uid',user.id);}catch(e){}
 
-          // Call create-checkout Edge Function — returns Stripe Checkout URL
+          // Call create-checkout Edge Function - returns Stripe Checkout URL
           // Stripe will create a subscription with 10-day trial and auto-charge on day 10
           var res=await _db.functions.invoke('create-checkout',{
             body:{
@@ -2651,7 +2651,7 @@ window.exportPDF=function(){
           btn.textContent='Start Free Trial';btn.disabled=false;btn.style.opacity='1';
         }
       })()" style="width:100%;padding:14px;font-size:15px;font-weight:700;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;box-sizing:border-box;transition:all .15s">
-        Start Free Trial — Enter Card
+        Start Free Trial - Enter Card
       </button>
       <p id="signupMsg4" style="text-align:center;font-size:12px;margin:8px 0 0;min-height:16px"></p>
       <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px">
@@ -2672,7 +2672,7 @@ window.exportSheets=function(){
   _tr.forEach(function(t){csv+=(t.dt||'')+',"'+t.f+'","'+t.t+'",'+t.m.toFixed(1)+','+t.c+','+(t.d>0?'$'+t.d.toFixed(2):'')+"\n";});
   var blob=new Blob([csv],{type:'text/csv'});
   var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mymilesai-trips.csv';a.click();
-  setTimeout(function(){window.open('https://sheets.google.com','_blank');showToast('CSV downloaded — open it in Google Sheets');},500);
+  setTimeout(function(){window.open('https://sheets.google.com','_blank');showToast('CSV downloaded - open it in Google Sheets');},500);
 };
 window.exportQB=function(){var el=document.getElementById('integrationModal');if(el)el.remove();var m=document.createElement('div');m.id='integrationModal';m.style.cssText='position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1rem';m.innerHTML='<div style="background:#fff;border-radius:20px;padding:2rem 2.5rem;max-width:420px;width:100%;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.2)"><button onclick="document.getElementById(\'integrationModal\').remove()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8">\u00d7</button><div style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><div style="width:44px;height:44px;border-radius:12px;background:#f0f9ff;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#7C3AED" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><p style="font-size:18px;font-weight:700;color:#111827;margin:0">QuickBooks</p><p style="font-size:13px;color:#6b7280;margin:0">Accounting integration</p></div></div><p style="font-size:14px;color:#374151;line-height:1.6;margin:0 0 16px">Auto-sync MyMilesAI trips as mileage expenses in QuickBooks. Business trips appear as deductible expenses.</p><div style="background:#f8fafc;border-radius:12px;padding:14px 16px;margin-bottom:16px"><p style="font-size:12px;font-weight:600;color:#111827;margin:0 0 8px">What you\'ll get:</p><p style="font-size:12px;color:#6b7280;margin:0 0 4px">\u2022 Auto-sync trips as mileage expenses</p><p style="font-size:12px;color:#6b7280;margin:0 0 4px">\u2022 IRS/CRA compliant categorization</p><p style="font-size:12px;color:#6b7280;margin:0">\u2022 One-click tax season export</p></div><button onclick="showToast(\'We will notify you when QuickBooks is ready\');document.getElementById(\'integrationModal\').remove()" style="width:100%;padding:12px;border-radius:12px;background:#7C3AED;color:#fff;font-size:14px;font-weight:600;border:none;cursor:pointer;margin-bottom:8px">Notify me when ready</button><button onclick="exportCSV();document.getElementById(\'integrationModal\').remove()" style="width:100%;padding:10px;border-radius:12px;background:transparent;color:#6b7280;font-size:13px;border:1px solid #e2e8f0;cursor:pointer">Download CSV to import manually</button></div>';document.body.appendChild(m);};
 window.emailReport=function(){
@@ -2684,7 +2684,7 @@ window.emailReport=function(){
   window.open('mailto:?subject='+subject+'&body='+body);
 };
 window.exportFreshBooks=function(){var el=document.getElementById('integrationModal');if(el)el.remove();var m=document.createElement('div');m.id='integrationModal';m.style.cssText='position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1rem';m.innerHTML='<div style="background:#fff;border-radius:20px;padding:2rem 2.5rem;max-width:420px;width:100%;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.2)"><button onclick="document.getElementById(\'integrationModal\').remove()" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8">\u00d7</button><div style="display:flex;align-items:center;gap:12px;margin-bottom:16px"><div style="width:44px;height:44px;border-radius:12px;background:#f0fdf4;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#16a34a" stroke-width="2"/><line x1="3" y1="10" x2="21" y2="10" stroke="#16a34a" stroke-width="2"/><line x1="7" y1="15" x2="11" y2="15" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/></svg></div><div><p style="font-size:18px;font-weight:700;color:#111827;margin:0">FreshBooks</p><p style="font-size:13px;color:#6b7280;margin:0">Accounting integration</p></div></div><p style="font-size:14px;color:#374151;line-height:1.6;margin:0 0 16px">Auto-sync MyMilesAI trips as mileage expenses in FreshBooks. Perfect for freelancers and small businesses.</p><div style="background:#f8fafc;border-radius:12px;padding:14px 16px;margin-bottom:16px"><p style="font-size:12px;font-weight:600;color:#111827;margin:0 0 8px">What you\'ll get:</p><p style="font-size:12px;color:#6b7280;margin:0 0 4px">\u2022 Auto-sync trips as mileage expenses</p><p style="font-size:12px;color:#6b7280;margin:0 0 4px">\u2022 Client-tagged trip categorization</p><p style="font-size:12px;color:#6b7280;margin:0">\u2022 Invoice-ready mileage reports</p></div><button onclick="showToast(\'We will notify you when FreshBooks is ready\');document.getElementById(\'integrationModal\').remove()" style="width:100%;padding:12px;border-radius:12px;background:#16a34a;color:#fff;font-size:14px;font-weight:600;border:none;cursor:pointer;margin-bottom:8px">Notify me when ready</button><button onclick="exportCSV();document.getElementById(\'integrationModal\').remove()" style="width:100%;padding:10px;border-radius:12px;background:transparent;color:#6b7280;font-size:13px;border:1px solid #e2e8f0;cursor:pointer">Download CSV to import manually</button></div>';document.body.appendChild(m);};
-window.upgradeSubscription=function(){showToast('Stripe billing coming soon — thank you for your patience!');};
+window.upgradeSubscription=function(){showToast('Stripe billing coming soon - thank you for your patience!');};
 window.manageSubscription=function(){
   var el=document.getElementById('subMgmtModal');if(el)el.remove();
   var m=document.createElement('div');m.id='subMgmtModal';
@@ -2824,7 +2824,7 @@ window.signupToPayment=async function(){
           }
           return;
         }
-        // Create/update profile — Stripe webhook will also update subscription_tier to 'pro'
+        // Create/update profile - Stripe webhook will also update subscription_tier to 'pro'
         // but we set trial here as fallback
         var trialEnd=new Date();trialEnd.setDate(trialEnd.getDate()+10);
         var uid=user.id||localStorage.getItem('_mm_signup_uid');
@@ -2952,7 +2952,7 @@ window._updateTr=function(){
 
 var _periodOffset=0;
 window.shiftPeriod=function(dir){_periodOffset+=dir;updatePeriodLabel();renderFilteredTrips();};
-window.updatePeriodLabel=function(){var now=new Date();var mo=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];var lb="";if(_filterPeriod==="day"){var d=new Date(now);d.setDate(d.getDate()+_periodOffset);lb=mo[d.getMonth()]+" "+d.getDate()+", "+d.getFullYear();}else if(_filterPeriod==="week"){var d=new Date(now);d.setDate(d.getDate()+(_periodOffset*7));var s=new Date(d);s.setDate(s.getDate()-s.getDay());var e=new Date(s);e.setDate(e.getDate()+6);lb=mo[s.getMonth()]+" "+s.getDate()+" – "+mo[e.getMonth()]+" "+e.getDate();}else if(_filterPeriod==="month"){var d=new Date(now.getFullYear(),now.getMonth()+_periodOffset,1);lb=mo[d.getMonth()]+" "+d.getFullYear();}else{lb=String(now.getFullYear()+_periodOffset);}var el=document.getElementById("periodNav");if(el)el.textContent=lb;var fw=document.getElementById("periodFwd");if(fw){fw.style.opacity=_periodOffset>=0?"0.3":"1";fw.style.pointerEvents=_periodOffset>=0?"none":"auto";}};
+window.updatePeriodLabel=function(){var now=new Date();var mo=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];var lb="";if(_filterPeriod==="day"){var d=new Date(now);d.setDate(d.getDate()+_periodOffset);lb=mo[d.getMonth()]+" "+d.getDate()+", "+d.getFullYear();}else if(_filterPeriod==="week"){var d=new Date(now);d.setDate(d.getDate()+(_periodOffset*7));var s=new Date(d);s.setDate(s.getDate()-s.getDay());var e=new Date(s);e.setDate(e.getDate()+6);lb=mo[s.getMonth()]+" "+s.getDate()+" - "+mo[e.getMonth()]+" "+e.getDate();}else if(_filterPeriod==="month"){var d=new Date(now.getFullYear(),now.getMonth()+_periodOffset,1);lb=mo[d.getMonth()]+" "+d.getFullYear();}else{lb=String(now.getFullYear()+_periodOffset);}var el=document.getElementById("periodNav");if(el)el.textContent=lb;var fw=document.getElementById("periodFwd");if(fw){fw.style.opacity=_periodOffset>=0?"0.3":"1";fw.style.pointerEvents=_periodOffset>=0?"none":"auto";}};
 window.initGoogleMaps=function(){
   var fEl=document.getElementById('tF');
   var tEl=document.getElementById('tTo');
