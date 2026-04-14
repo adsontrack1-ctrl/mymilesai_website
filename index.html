@@ -806,6 +806,7 @@ window.addEventListener('DOMContentLoaded',function(){
 
   // ── FIX 1: Proper auth state change + load trips ──
   _db.auth.onAuthStateChange(function(event, session){
+      if(event==='SIGNED_IN'){window.location.href='/dashboard.html';return;}
     console.log('AUTH EVENT:', event, session ? session.user.email : 'no user');
     var user = session ? session.user : null;
     window._currentUser = user;
