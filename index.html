@@ -1056,6 +1056,7 @@ window.addEventListener('DOMContentLoaded',function(){
 }
 </style>
 <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmdIn2U1A-aSpB1-0vXIVUDK1J5icG_GE&libraries=places&callback=initGoogleMaps"></script>
+<script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
 
@@ -2457,13 +2458,194 @@ window.exportPDF=function(){
   if(!_tr||!_tr.length){showToast('No trips to export');return;}
   var b=0,p=0,d=0;_tr.forEach(function(t){if(t.c==='business'){b+=t.m;d+=t.d;}else if(t.c==='personal')p+=t.m;else d+=t.d;});
   var w=window.open('','_blank');
-  w.document.write('<html><head><title>MyMilesAI Mileage Report</title><style>body{font-family:Arial,sans-serif;margin:40px;color:#111}h1{color:#1B4DDB;margin-bottom:4px}table{width:100%;border-collapse:collapse;margin-top:20px}th{background:#1B4DDB;color:#fff;padding:10px;text-align:left;font-size:13px}td{padding:8px 10px;border-bottom:1px solid #e5e7eb;font-size:13px}.summary{display:flex;gap:24px;margin:20px 0}.stat{background:#f8fafc;border-radius:8px;padding:16px 20px;flex:1}.stat-val{font-size:24px;font-weight:700}.stat-lbl{font-size:12px;color:#6b7280;margin-top:4px}.green{color:#16a34a}.blue{color:#1B4DDB}@media print{body{margin:20px}}</style></head><body>');
+  w.document.write('<html><head><title>MyMilesAI Mileage Report</title><style>body{font-family:Arial,sans-serif;margin:40px;color:#111}h1{color:#1B4DDB;margin-bottom:4px}table{width:100%;border-collapse:collapse;margin-top:20px}th{background:#1B4DDB;color:#fff;padding:10px;text-align:left;font-size:13px}td{padding:8px 10px;border-bottom:1px solid #e5e7eb;font-size:13px}.summary{display:flex;gap:24px;margin:20px 0}.stat{background:#f8fafc;border-radius:8px;padding:16px 20px;flex:1}.stat-val{font-size:24px;font-weight:700}.stat-lbl{font-size:12px;color:#6b7280;margin-top:4px}.green{color:#16a34a}.blue{color:#1B4DDB}@media print{body{margin:20px}}</style><script src="https://js.stripe.com/v3/"></script>
+</head><body>');
   w.document.write('<h1>MyMilesAI</h1><p style="color:#6b7280;margin-top:0">Mileage Report \u2014 2026 Tax Year</p>');
   w.document.write('<p style="font-size:13px;color:#6b7280">'+(_u?_u.email:'')+' \u00b7 Generated '+new Date().toLocaleDateString()+'</p>');
   w.document.write('<div class="summary"><div class="stat"><div class="stat-val blue">'+b.toFixed(1)+'</div><div class="stat-lbl">Business '+UNIT+'</div></div><div class="stat"><div class="stat-val" style="color:#ec4899">'+p.toFixed(1)+'</div><div class="stat-lbl">Personal '+UNIT+'</div></div><div class="stat"><div class="stat-val green">$'+d.toFixed(2)+'</div><div class="stat-lbl">Tax Deduction</div></div><div class="stat"><div class="stat-val">'+_tr.length+'</div><div class="stat-lbl">Total Trips</div></div></div>');
   w.document.write('<table><thead><tr><th>Date</th><th>From</th><th>To</th><th>'+UNIT.toUpperCase()+'</th><th>Category</th><th>Deduction</th></tr></thead><tbody>');
   _tr.forEach(function(t){w.document.write('<tr><td>'+(t.dt||'')+'</td><td>'+t.f+'</td><td>'+t.t+'</td><td>'+t.m.toFixed(1)+'</td><td>'+t.c+'</td><td>'+(t.d>0?'$'+t.d.toFixed(2):'\u2014')+'</td></tr>');});
-  w.document.write('</tbody></table><div style="margin-top:30px;padding-top:16px;border-top:1px solid #e5e7eb;font-size:11px;color:#9ca3af">MyMilesAI \u00b7 mymilesai.com</div></body></html>');
+  w.document.write('</tbody></table><div style="margin-top:30px;padding-top:16px;border-top:1px solid #e5e7eb;font-size:11px;color:#9ca3af">MyMilesAI \u00b7 mymilesai.com</div>
+<!-- SIGN UP MODAL - 4-Step Registration Flow -->
+<div id="signupModal" style="display:none;position:fixed;inset:0;background:rgba(10,20,41,.65);backdrop-filter:blur(8px);z-index:9999;align-items:center;justify-content:center;padding:1rem">
+  <div style="background:#fff;border-radius:20px;padding:2rem 2.5rem;width:100%;max-width:420px;position:relative;box-shadow:0 24px 64px rgba(0,0,0,.2)">
+    <button onclick="document.getElementById('signupModal').style.display='none'" style="position:absolute;top:14px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#94a3b8;line-height:1">&#x2715;</button>
+    <div style="text-align:center;margin-bottom:1.2rem">
+      <svg width="36" height="36" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="7" fill="#1B4DDB"/><path d="M5 20c0-2 1-3.5 2.5-4.5L10 12h12l2.5 3.5c1.5 1 2.5 2.5 2.5 4.5v1H5v-1z" fill="white"/><circle cx="10" cy="22" r="2.5" fill="white"/><circle cx="22" cy="22" r="2.5" fill="white"/></svg>
+      <h2 id="signupTitle" style="font-size:22px;font-weight:700;margin:12px 0 4px;font-family:inherit">Create Your Account</h2>
+      <p id="signupSubtitle" style="font-size:13px;color:#64748b;margin:0">Step 1 of 4 — Verify your email</p>
+    </div>
+
+    <!-- Progress bar -->
+    <div style="display:flex;gap:4px;margin-bottom:20px">
+      <div id="signupProg1" style="flex:1;height:3px;background:#1B4DDB;border-radius:2px"></div>
+      <div id="signupProg2" style="flex:1;height:3px;background:#e2e8f0;border-radius:2px"></div>
+      <div id="signupProg3" style="flex:1;height:3px;background:#e2e8f0;border-radius:2px"></div>
+      <div id="signupProg4" style="flex:1;height:3px;background:#e2e8f0;border-radius:2px"></div>
+    </div>
+
+    <!-- Step 1: Email + Terms -->
+    <div id="signupStep1">
+      <input type="email" id="signupEmail" placeholder="your@email.com" autocomplete="email"
+        style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:10px;box-sizing:border-box;outline:none"
+        onfocus="this.style.borderColor='#1B4DDB';this.style.background='#fff'"
+        onblur="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'">
+      <div style="display:flex;align-items:flex-start;gap:8px;margin:8px 0 12px"><input type="checkbox" id="signupAgree" style="margin-top:3px;width:16px;height:16px;accent-color:#1B4DDB;cursor:pointer;flex-shrink:0"><label for="signupAgree" style="font-size:12px;color:#64748b;line-height:1.4;cursor:pointer">I agree to the <a href="#terms" style="color:#1B4DDB;text-decoration:underline" onclick="event.preventDefault();event.stopPropagation();document.getElementById('termsModal').style.display='block'">Terms of Service</a> and <a href="#privacy" style="color:#1B4DDB;text-decoration:underline" onclick="event.preventDefault();event.stopPropagation();document.getElementById('privacyModal').style.display='block'">Privacy Policy</a></label></div>
+      <button id="signupSendBtn" onclick="(async function(){
+        var ag=document.getElementById('signupAgree');if(ag&&!ag.checked){document.getElementById('signupMsg').textContent='Please agree to Terms first';document.getElementById('signupMsg').style.color='#dc2626';return;}
+        var email=document.getElementById('signupEmail').value.trim();
+        var msg=document.getElementById('signupMsg');
+        var btn=document.getElementById('signupSendBtn');
+        if(!email||!email.includes('@')){msg.textContent='Please enter a valid email.';msg.style.color='#dc2626';return;}
+        btn.textContent='Sending code...';btn.disabled=true;btn.style.opacity='0.7';
+        var res=await _db.auth.signInWithOtp({email:email,options:{shouldCreateUser:true}});
+        if(!res.error){
+          window._signupEmail=email;
+          document.getElementById('signupStep1').style.display='none';
+          document.getElementById('signupStep2').style.display='block';
+          document.getElementById('signupTitle').textContent='Verify Email';
+          document.getElementById('signupSubtitle').textContent='Step 2 of 4 — Enter code sent to '+email;
+          document.getElementById('signupProg2').style.background='#1B4DDB';
+          document.getElementById('signupOtpInput').focus();
+        } else {
+          msg.textContent=res.error.message||'Could not send code.';msg.style.color='#dc2626';
+        }
+        btn.textContent='Send verification code';btn.disabled=false;btn.style.opacity='1';
+      })()" style="width:100%;padding:12px;font-size:14px;font-weight:600;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;box-sizing:border-box">
+        Send verification code
+      </button>
+      <p id="signupMsg" style="text-align:center;font-size:12px;margin:8px 0 0;min-height:16px"></p>
+      <p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:8px">Already have an account? <span onclick="document.getElementById('signupModal').style.display='none';openSignIn()" style="color:#1B4DDB;cursor:pointer;text-decoration:underline">Sign In</span></p>
+    </div>
+
+    <!-- Step 2: OTP Verification -->
+    <div id="signupStep2" style="display:none">
+      <div style="text-align:center;margin-bottom:16px">
+        <input id="signupOtpInput" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" placeholder="000000" autocomplete="one-time-code"
+          style="width:160px;padding:14px;font-size:28px;font-weight:700;text-align:center;letter-spacing:8px;border:2px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:monospace;box-sizing:border-box;outline:none"
+          onfocus="this.style.borderColor='#1B4DDB';this.style.background='#fff'"
+          onblur="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'"
+          oninput="this.value=this.value.replace(/[^0-9]/g,'');if(this.value.length===6)document.getElementById('signupVerifyBtn').click()">
+        <p style="font-size:12px;color:#94a3b8;margin:8px 0 0">Enter the 6-digit code from your email</p>
+      </div>
+      <button id="signupVerifyBtn" onclick="(async function(){
+        var code=document.getElementById('signupOtpInput').value.trim();
+        var msg=document.getElementById('signupMsg2');
+        var btn=document.getElementById('signupVerifyBtn');
+        if(code.length!==6){msg.textContent='Enter the 6-digit code.';msg.style.color='#dc2626';return;}
+        btn.textContent='Verifying...';btn.disabled=true;btn.style.opacity='0.7';
+        var res=await _db.auth.verifyOtp({email:window._signupEmail,token:code,type:'email'});
+        if(!res.error){
+          msg.textContent='Email verified!';msg.style.color='#16a34a';
+          window._signupSession=res.data.session;
+          setTimeout(function(){
+            document.getElementById('signupStep2').style.display='none';
+            document.getElementById('signupStep3').style.display='block';
+            document.getElementById('signupTitle').textContent='Set Your Password';
+            document.getElementById('signupSubtitle').textContent='Step 3 of 4 — Create a secure password';
+            document.getElementById('signupProg3').style.background='#1B4DDB';
+            document.getElementById('signupPwd').focus();
+          },500);
+        } else {
+          msg.textContent='Invalid code. Try again.';msg.style.color='#dc2626';
+          document.getElementById('signupOtpInput').value='';document.getElementById('signupOtpInput').focus();
+        }
+        btn.textContent='Verify';btn.disabled=false;btn.style.opacity='1';
+      })()" style="width:100%;padding:12px;font-size:14px;font-weight:600;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;box-sizing:border-box">
+        Verify
+      </button>
+      <p id="signupMsg2" style="text-align:center;font-size:12px;margin:8px 0 0;min-height:16px"></p>
+    </div>
+
+    <!-- Step 3: Set Password -->
+    <div id="signupStep3" style="display:none">
+      <input type="password" id="signupPwd" placeholder="Create password" autocomplete="new-password"
+        style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:8px;box-sizing:border-box;outline:none"
+        onfocus="this.style.borderColor='#1B4DDB';this.style.background='#fff'"
+        onblur="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'">
+      <input type="password" id="signupPwdConfirm" placeholder="Confirm password" autocomplete="new-password"
+        style="width:100%;padding:11px 14px;font-size:14px;border:1.5px solid #e2e8f0;border-radius:12px;background:#f8fafc;color:#0f172a;font-family:inherit;margin-bottom:4px;box-sizing:border-box;outline:none"
+        onfocus="this.style.borderColor='#1B4DDB';this.style.background='#fff'"
+        onblur="this.style.borderColor='#e2e8f0';this.style.background='#f8fafc'"
+        onkeydown="if(event.key==='Enter')document.getElementById('signupPwdBtn').click()">
+      <div style="font-size:10px;color:#94a3b8;margin-bottom:12px;line-height:1.5">Min 10 chars &#183; uppercase &#183; lowercase &#183; number &#183; special char (!@#$%^&*)</div>
+      <button id="signupPwdBtn" onclick="(async function(){
+        var pwd=document.getElementById('signupPwd').value;
+        var pwd2=document.getElementById('signupPwdConfirm').value;
+        var msg=document.getElementById('signupMsg3');
+        if(!pwd||pwd.length<10){msg.textContent='Password must be at least 10 characters.';msg.style.color='#dc2626';return;}
+        if(!/[A-Z]/.test(pwd)){msg.textContent='Needs an uppercase letter.';msg.style.color='#dc2626';return;}
+        if(!/[a-z]/.test(pwd)){msg.textContent='Needs a lowercase letter.';msg.style.color='#dc2626';return;}
+        if(!/[0-9]/.test(pwd)){msg.textContent='Needs a number.';msg.style.color='#dc2626';return;}
+        if(!/[!@#$%^&*()_+\-=\[\]{};:,.<>?]/.test(pwd)){msg.textContent='Needs a special character.';msg.style.color='#dc2626';return;}
+        if(pwd!==pwd2){msg.textContent='Passwords do not match.';msg.style.color='#dc2626';return;}
+        var btn=document.getElementById('signupPwdBtn');
+        btn.textContent='Setting password...';btn.disabled=true;btn.style.opacity='0.7';
+        var res=await _db.auth.updateUser({password:pwd});
+        if(!res.error){
+          msg.textContent='Password set!';msg.style.color='#16a34a';
+          setTimeout(function(){
+            document.getElementById('signupStep3').style.display='none';
+            document.getElementById('signupStep4').style.display='block';
+            document.getElementById('signupTitle').textContent='Start Free Trial';
+            document.getElementById('signupSubtitle').textContent='Step 4 of 4 — 10-day free trial, cancel anytime';
+            document.getElementById('signupProg4').style.background='#1B4DDB';
+          },500);
+        } else {
+          msg.textContent=res.error.message||'Failed to set password.';msg.style.color='#dc2626';
+        }
+        btn.textContent='Set Password & Continue';btn.disabled=false;btn.style.opacity='1';
+      })()" style="width:100%;padding:12px;font-size:14px;font-weight:600;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;box-sizing:border-box">
+        Set Password & Continue
+      </button>
+      <p id="signupMsg3" style="text-align:center;font-size:12px;margin:8px 0 0;min-height:16px"></p>
+    </div>
+
+    <!-- Step 4: Start Trial (with optional Stripe) -->
+    <div id="signupStep4" style="display:none">
+      <div style="background:linear-gradient(135deg,#1B4DDB 0%,#378ADD 100%);border-radius:14px;padding:20px;color:#fff;margin-bottom:16px;text-align:center">
+        <div style="font-size:20px;font-weight:700;margin-bottom:4px">MyMilesAI Pro</div>
+        <div style="font-size:13px;opacity:.85;margin-bottom:12px">10-day free trial — no credit card required</div>
+        <div style="display:flex;justify-content:center;gap:16px;font-size:12px;opacity:.9">
+          <span>&#10003; Unlimited trips</span>
+          <span>&#10003; Tax reports</span>
+          <span>&#10003; AI classify</span>
+        </div>
+      </div>
+      <div style="background:#f8fafc;border-radius:12px;padding:14px;margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:13px;color:#64748b">After trial</span><span style="font-size:13px;font-weight:600;color:#0f172a">$6.99/mo or $69.99/yr</span></div>
+        <div style="font-size:11px;color:#94a3b8">Cancel anytime before trial ends — no charge</div>
+      </div>
+      <button id="signupTrialBtn" onclick="(async function(){
+        var btn=document.getElementById('signupTrialBtn');
+        var msg=document.getElementById('signupMsg4');
+        btn.textContent='Activating trial...';btn.disabled=true;btn.style.opacity='0.7';
+        try {
+          var user=window._signupSession?.user;
+          if(!user){var s=await _db.auth.getSession();user=s.data.session?.user;}
+          if(!user){msg.textContent='Session expired. Please try again.';msg.style.color='#dc2626';btn.textContent='Start Free Trial';btn.disabled=false;btn.style.opacity='1';return;}
+          var trialEnd=new Date();trialEnd.setDate(trialEnd.getDate()+10);
+          var profileData={id:user.id,email:user.email,name:user.email.split('@')[0],subscription_tier:'free',trial_ends_at:trialEnd.toISOString(),subscription_started_at:new Date().toISOString(),auth_provider:'email'};
+          var res=await _db.from('profiles').upsert(profileData,{onConflict:'id'});
+          if(res.error){msg.textContent='Error: '+res.error.message;msg.style.color='#dc2626';btn.textContent='Start Free Trial';btn.disabled=false;btn.style.opacity='1';return;}
+          msg.textContent='Trial activated! Redirecting...';msg.style.color='#16a34a';
+          setTimeout(function(){
+            document.getElementById('signupModal').style.display='none';
+            window.location.href='/dashboard.html';
+          },1000);
+        } catch(e){
+          msg.textContent='Error: '+e.message;msg.style.color='#dc2626';
+          btn.textContent='Start Free Trial';btn.disabled=false;btn.style.opacity='1';
+        }
+      })()" style="width:100%;padding:14px;font-size:15px;font-weight:700;background:#1B4DDB;color:#fff;border:none;border-radius:12px;cursor:pointer;font-family:inherit;box-sizing:border-box;transition:all .15s">
+        Start Free Trial
+      </button>
+      <p id="signupMsg4" style="text-align:center;font-size:12px;margin:8px 0 0;min-height:16px"></p>
+      <p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:8px">No credit card required for trial. You can add payment later.</p>
+    </div>
+  </div>
+</div>
+</body></html>');
   w.document.close();
   setTimeout(function(){w.print();},500);
   showToast('PDF report opened \u2014 use Print > Save as PDF');
@@ -2781,7 +2963,7 @@ var _ml=document.getElementById('tMiLbl');if(_ml)_ml.textContent=UNIT==='km'?'Ki
     </div>
     <!-- Step 1: Social + Email -->
     <div id="authStep1">
-      <div onclick="document.getElementById('authModal').style.display='none';document.getElementById('pricing').scrollIntoView({behavior:'smooth'})" style="font-size:12px;color:#1B4DDB;text-align:center;cursor:pointer;margin-bottom:12px;padding:8px 12px;background:rgba(27,77,219,.04);border-radius:8px">New here? Start your 10-day free trial &rarr;</div>
+      <div onclick="document.getElementById('authModal').style.display='none';document.getElementById('signupModal').style.display='flex'" style="font-size:12px;color:#1B4DDB;text-align:center;cursor:pointer;margin-bottom:12px;padding:8px 12px;background:rgba(27,77,219,.04);border-radius:8px">New here? Start your 10-day free trial &rarr;</div>
       <button onclick="var ag=document.getElementById('authAgree');if(ag&&!ag.checked){var m1=document.getElementById('authMsg1');if(m1){m1.textContent='Please agree to Terms of Service first';m1.style.color='#dc2626';}return;}sbSignInGoogle();" style="width:100%;padding:11px;margin-bottom:10px;border:1.5px solid #e2e8f0;border-radius:12px;background:#fff;font-size:14px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;font-family:inherit;color:#0f172a;box-sizing:border-box">
         <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
         Continue with Google
