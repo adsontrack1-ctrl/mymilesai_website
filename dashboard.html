@@ -473,7 +473,43 @@ function toggleLocale(){locale=locale==='US'?'CA':'US';document.getElementById('
 function updLocale(v){locale=v;document.getElementById('localeLabel').textContent=locale;updLbls();refreshUI()}
 function updLbls(){const u=gu(),U=u[0].toUpperCase()+u.slice(1);document.getElementById('distLbl').textContent='Distance ('+u+')';document.getElementById('bizLbl').textContent='Business '+U;document.getElementById('persLbl').textContent='Personal '+U}
 
-async function initAuth(){const{data:{session}}=await sb.auth.getSession();if(session?.user)setUser(session.user);else{document.getElementById('userName').textContent='Demo User';document.getElementById('userEmail').textContent='Sign in to save';document.getElementById('userAvatar').textContent='D';document.getElementById('pageSub').textContent='Demo mode';loadDemo()}sb.auth.onAuthStateChange((_,s)=>{if(s?.user)setUser(s.user)})}
+async function initAuth(){
+  const{data:{session}}=await sb.auth.getSession();
+  if(session?.user){
+    // Check profile exists and subscription is active
+    const{data:profile,error:profErr}=await sb.from('profiles').select('id,subscription_tier,trial_ends_at,subscription_expires_at,name').eq('id',session.user.id).single();
+    if(profErr||!profile){
+      document.getElementById('userName').textContent='No Account';
+      document.getElementById('userEmail').textContent='Sign up required';
+      document.getElementById('userAvatar').textContent='!';
+      document.getElementById('pageSub').textContent='Account not found';
+      alert('No MyMilesAI account found. Please sign up through the app first.');
+      await sb.auth.signOut();
+      window.location.href='/';
+      return;
+    }
+    const now=new Date();
+    const tier=profile.subscription_tier||'free';
+    const trialOk=profile.trial_ends_at&&new Date(profile.trial_ends_at)>now;
+    const subOk=tier==='pro'||tier==='premium';
+    const subExpired=profile.subscription_expires_at&&new Date(profile.subscription_expires_at)<now;
+    if((subOk&&!subExpired)||trialOk||tier==='free'){
+      setUser(session.user);
+    } else {
+      alert('Your subscription has expired. Please renew to continue.');
+      await sb.auth.signOut();
+      window.location.href='/';
+      return;
+    }
+  } else {
+    document.getElementById('userName').textContent='Demo User';
+    document.getElementById('userEmail').textContent='Sign in to save';
+    document.getElementById('userAvatar').textContent='D';
+    document.getElementById('pageSub').textContent='Demo mode';
+    loadDemo();
+  }
+  sb.auth.onAuthStateChange(async(_,s)=>{if(s?.user)setUser(s.user)});
+}
 function setUser(u){user=u;const n=u.user_metadata?.full_name||u.email?.split('@')[0]||'User';document.getElementById('userName').textContent=n;document.getElementById('userEmail').textContent=u.email||'';document.getElementById('userAvatar').textContent=n[0].toUpperCase();document.getElementById('pageSub').textContent='Welcome back, '+n.split(' ')[0];document.getElementById('settEmail').textContent=u.email||'';loadTrips()}
 async function signOut(){await sb.auth.signOut();window.location.href='/'}
 async function loadTrips(){if(!user)return;const{data}=await sb.from('trips').select('*').eq('user_id',user.id).order('trip_date',{ascending:false});allTrips=(data||[]).map(function(t){return Object.assign({},t,{miles:Number(t.miles)||0,from_addr:t.from_addr||'Unknown',to_addr:t.to_addr||'Unknown',trip_date:t.trip_date||new Date().toISOString().split('T')[0],type:t.type||'uncl'})});refreshUI()}
