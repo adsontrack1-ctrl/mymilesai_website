@@ -807,6 +807,12 @@ window.addEventListener('DOMContentLoaded',function(){
   // ── FIX 1: Proper auth state change + load trips ──
   _db.auth.onAuthStateChange(function(event, session){
       if(event==='SIGNED_IN'){
+        // Two-factor check: if password was verified but OTP not yet done, 
+        // this SIGNED_IN is from the password step — ignore it (signOut follows immediately)
+        if(window._passwordVerified && !window._otpVerified){
+          console.log('AUTH: Password SIGNED_IN — ignoring, waiting for OTP');
+          return;
+        }
         // Check profile exists and subscription is active before redirecting
         (async function(){
           try {
@@ -958,15 +964,17 @@ window.addEventListener('DOMContentLoaded',function(){
     return _db.auth.signInWithPassword({
       email: email,
       password: password
-    }).then(function(res){
+    }).then(async function(res){
       if(res.error){
         console.log('Password sign in error:', res.error.message);
         return {ok: false, msg: res.error.message};
       }
-      // Password correct — now sign out (we need OTP verification too)
-      // Store that password was verified
+      // Password correct — IMMEDIATELY sign out so session is not active
+      // User must complete OTP verification to actually sign in
+      await _db.auth.signOut();
       window._passwordVerified = true;
       window._verifiedEmail = email;
+      console.log('Password verified, signed out, waiting for OTP');
       return {ok: true, msg: 'Password verified'};
     });
   };
@@ -3054,6 +3062,7 @@ var _ml=document.getElementById('tMiLbl');if(_ml)_ml.textContent=UNIT==='km'?'Ki
         btn.textContent='Verifying...';btn.disabled=true;btn.style.opacity='0.7';
         var ok = await sbVerifyOtpCode(email, code);
         if(ok){
+          window._otpVerified = true;
           msg.textContent='Success! Signing you in...';msg.style.color='#16a34a';
           document.getElementById('authModal').style.display='none';
           // Reset modal for next use
