@@ -474,9 +474,10 @@ function updLocale(v){locale=v;document.getElementById('localeLabel').textConten
 function updLbls(){const u=gu(),U=u[0].toUpperCase()+u.slice(1);document.getElementById('distLbl').textContent='Distance ('+u+')';document.getElementById('bizLbl').textContent='Business '+U;document.getElementById('persLbl').textContent='Personal '+U}
 
 async function initAuth(){
-  await new Promise(r=>setTimeout(r,300));
   // 1. Get current session (persisted via localStorage by Supabase SDK)
-  let _sessResult; try { const _tp=new Promise((_,rj)=>setTimeout(()=>rj(new Error("timeout")),8000)); _sessResult=await Promise.race([sb.auth.getSession(),_tp]); } catch(e){ window.location.href="/"; return; } const{data:{session},error:sessErr}=_sessResult;
+  // Add a small delay to ensure Supabase SDK has fully initialized
+  await new Promise(r=>setTimeout(r,300));
+  const{data:{session},error:sessErr}=await sb.auth.getSession();
 
   if(!session?.user){
     // No session at all — bounce to home immediately, no demo fallback
@@ -486,13 +487,21 @@ async function initAuth(){
 
   const user=session.user;
 
-  // 2. Check profile exists
-  const{data:profile,error:profErr}=await sb.from('profiles')
-    .select('id,subscription_tier,trial_ends_at,subscription_expires_at,stripe_customer_id,stripe_subscription_id,name')
-    .eq('id',user.id).single();
+  // 2. Check profile exists (with timeout fallback)
+  let profile = null;
+  try {
+    const profilePromise = sb.from('profiles')
+      .select('id,subscription_tier,trial_ends_at,subscription_expires_at,stripe_customer_id,stripe_subscription_id,name')
+      .eq('id',user.id).single();
+    const timeoutPromise = new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),5000));
+    const result = await Promise.race([profilePromise, timeoutPromise]);
+    if(!result.error) profile = result.data;
+  } catch(e) {
+    console.warn('Profile fetch failed:', e.message);
+  }
 
-  if(profErr||!profile){
-    // Profile missing — sign out and send back
+  if(!profile){
+    // Profile missing or fetch failed — sign out and send back
     await sb.auth.signOut();
     window.location.href='/?err=no_profile';
     return;
