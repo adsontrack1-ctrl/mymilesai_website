@@ -1001,7 +1001,11 @@ window.addEventListener('DOMContentLoaded',function(){
   window.sbSignInMagicLink = window.sbSendOtpCode; // backwards compat
   window.sbSaveTrip = function(trip){
     if(!window._currentUser) return Promise.resolve(null);
-    return _db.from('trips').insert(Object.assign({},trip,{user_id:window._currentUser.id})).select().single().then(function(r){ return r.data; });
+    var payload = Object.assign({}, trip, { user_id: window._currentUser.id });
+    return _db.from('trips')
+      .upsert(payload, { onConflict: 'trip_uid' })
+      .select().single()
+      .then(function(r){ return r.data; });
   };
   window.sbDeleteTrip = function(id){
     if(!window._currentUser) return Promise.resolve();
@@ -2431,8 +2435,19 @@ window.saveTr=function(){
   var sel=document.querySelector("#cBts button[style*='#2563EB']");
   var c=sel?sel.dataset.cat:'business';
   var d=calcDeduction(m,c);
-  _tr.unshift({f:f,t:to,m:m,dt:dt,c:c,d:d,n:nt});
-  if(_u&&typeof sbSaveTrip==='function') sbSaveTrip({from:f,to:to,distance:m,category:c,date:dt,notes:nt,deduction:d});
+  var _uid=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(ch){var r=Math.random()*16|0;return(ch==='x'?r:(r&0x3|0x8)).toString(16);});
+  var _type=c==='business'?'biz':c==='personal'?'pers':'uncl';
+  var _ts=dt?new Date(dt):new Date();
+  _tr.unshift({f:f,t:to,m:m,dt:dt,c:c,d:d,n:nt,_uid:_uid});
+  if(_u&&typeof sbSaveTrip==='function') sbSaveTrip({
+    trip_uid:_uid,
+    from_addr:f,to_addr:to,
+    miles:m,type:_type,
+    trip_date:_ts.toLocaleDateString('en-CA'),
+    trip_time:_ts.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'}),
+    deductible:_type==='biz',
+    notes:nt,purpose:''
+  });
   closeAt();refresh();
   showToast(d>0?'Trip saved - +$'+fmt(d)+' deduction':'Trip saved');
 };
