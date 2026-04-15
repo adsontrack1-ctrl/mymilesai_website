@@ -2382,7 +2382,12 @@ window.renderTrips=function(){
       +'</div>';
   }).join('');
 };
-window._deleteTr=function(i){_tr.splice(i,1);refresh();};
+window._deleteTr=function(i){
+  var trip=_tr[i];
+  if(trip&&trip.sbId) sbDeleteTrip(trip.sbId);
+  _tr.splice(i,1);
+  refresh();
+};
 
 window.openAt=function(){
   if(!_u){openSignIn();return;}
@@ -2899,7 +2904,12 @@ window.renderFilteredTrips=function renderFilteredTrips(){var now=new Date();var
     +'</div>'
     +'</div>';
 }).join('');if(filtered.length>50)body.innerHTML+='<p style="text-align:center;font-size:12px;color:#94a3b8">Showing 50 of '+filtered.length+'</p>';}
-window.deleteTrip=function(i){_tr.splice(i,1);refresh();};
+window.deleteTrip=function(i){
+  var trip=_tr[i];
+  if(trip&&trip.sbId) sbDeleteTrip(trip.sbId);
+  _tr.splice(i,1);
+  refresh();
+};
 window.resetAtForm=function(){
   window._editIdx=-1;
   var h=document.querySelector('#atOv h3');if(h)h.textContent='Add Trip';
