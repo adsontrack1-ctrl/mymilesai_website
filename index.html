@@ -2210,7 +2210,7 @@ setLocale(detectLocale());
 </div></div>
 <div id="atOv" class="mmOv" onclick="if(event.target===this){closeAt();resetAtForm();}">
 <div class="mmBox" style="max-width:480px"><button class="mmClose" onclick="closeAt();resetAtForm()">&#x2715;</button>
-<h3 style="font-family:'Instrument Serif',Georgia,serif;font-size:24px;font-weight:700;color:#111827;margin-bottom:24px">Add Trip</h3>
+<h3 id="atTitle" style="font-family:'Instrument Serif',Georgia,serif;font-size:24px;font-weight:700;color:#111827;margin-bottom:24px">Add Trip</h3>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
 <div><label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px">From</label><input id="tF" class="mmInput" placeholder="Start address" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"></div>
 <div><label style="font-size:11px;font-weight:700;color:#9ca3af;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:6px">To</label><input id="tTo" class="mmInput" placeholder="Destination" onfocus="this.style.borderColor='#2563EB'" onblur="this.style.borderColor='#e5e7eb'"></div></div>
@@ -2382,6 +2382,7 @@ window.renderTrips=function(){
       +'<div style="font-family:\'Playfair Display\',Georgia,serif;font-size:17px;font-weight:700;color:#0f172a">'+t.m.toFixed(1)+'<span style="font-size:12px;font-weight:500;color:#94a3b8"> '+UNIT+'</span></div>'
       +'<div style="font-size:13px;font-weight:700;color:'+dedCol+'">'+ded+'</div>'
       +'</div>'
+      +'<button onclick="window.editTr('+i+')" style="width:26px;height:26px;border-radius:50%;border:1px solid #bfdbfe;background:#eff6ff;color:#378add;font-size:14px;cursor:pointer;flex-shrink:0;line-height:1;padding:0" title="Edit">&#9998;</button>'
       +'<button onclick="window._deleteTr('+i+')" style="width:26px;height:26px;border-radius:50%;border:1px solid #e2e8f0;background:#f8fafc;color:#94a3b8;font-size:16px;cursor:pointer;flex-shrink:0;line-height:1;padding:0">\xD7</button>'
       +'</div>';
   }).join('');
@@ -2391,6 +2392,21 @@ window._deleteTr=function(i){
   if(trip&&trip.sbId) sbDeleteTrip(trip.sbId);
   _tr.splice(i,1);
   refresh();
+};
+window.editTr=function(i){
+  var trip=_tr[i];if(!trip)return;
+  window._editTripId=trip.trip_uid;
+  document.getElementById('tDt').value=trip.date||'';
+  document.getElementById('tF').value=trip.start_address||'';
+  document.getElementById('tTo').value=trip.end_address||'';
+  document.getElementById('tMi').value=trip.miles||'';
+  document.getElementById('tNt').value=trip.notes||'';
+  var cat=trip.category||'business';
+  document.querySelectorAll('#atOv .catBtn').forEach(function(b){b.classList.toggle('active',b.dataset.category===cat);});
+  var t=document.getElementById('atTitle');if(t)t.textContent='Edit Trip';
+  var sb=document.getElementById('atSaveBtn');if(sb)sb.textContent='Update Trip';
+  document.getElementById('dPv').style.display='none';
+  document.getElementById('atOv').style.display='flex';
 };
 
 window.openAt=function(){
@@ -2405,7 +2421,7 @@ window.openAt=function(){
   });
   document.getElementById('atOv').style.display='flex';
 };
-window.closeAt=function(){document.getElementById('atOv').style.display='none';};
+window.closeAt=function(){document.getElementById('atOv').style.display='none';window._editTripId=null;var t=document.getElementById('atTitle');if(t)t.textContent='Add Trip';var b=document.getElementById('atSaveBtn');if(b)b.textContent='Save Trip';};
 window.pCat=function(el){
   document.querySelectorAll('#cBts button').forEach(function(b){b.style.borderColor='#e5e7eb';b.style.background='#f9fafb';b.style.color='#374151';});
   el.style.borderColor='#2563EB';el.style.background='rgba(37,99,235,.06)';el.style.color='#2563EB';
