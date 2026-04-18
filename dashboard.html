@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MyMilesAI â Dashboard</title>
+<title>MyMilesAI — Dashboard</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -31,7 +31,7 @@ input,select,textarea{font-family:var(--font);font-size:inherit}
 .sb-brand{padding:20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,.08)}
 .sb-logo{width:36px;height:36px;background:var(--sapphire);border-radius:10px;display:flex;align-items:center;justify-content:center}
 .sb-logo svg{width:22px;height:22px;fill:var(--w)}
-.sb-bt{font-size:16px;font-weight:700;letter-spacing:-.3px}.sb-bt span{color:var(--gold)}
+.sb-bt{font-size:16px;font-weight:700;letter-spacing:-.3px}.sb-bt span{color:var(--sap-lt)}
 .sb-nav{flex:1;padding:12px;overflow-y:auto}
 .ns{margin-bottom:16px}
 .nsl{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--g3);padding:0 8px 6px;display:block}
@@ -76,7 +76,7 @@ input,select,textarea{font-family:var(--font);font-size:inherit}
 .sc{background:var(--w);border-radius:var(--r);padding:18px;border:1px solid var(--g5);transition:box-shadow .2s}.sc:hover{box-shadow:var(--shm)}
 .sc-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .si{width:38px;height:38px;border-radius:var(--rs);display:flex;align-items:center;justify-content:center}.si svg{width:18px;height:18px}
-.si.bl{background:var(--sap-pale);color:var(--sapphire)}.si.gr{background:var(--green-pale);color:var(--green)}.si.pk{background:var(--pink-pale);color:var(--pink)}.si.gd{background:var(--gold-lt);color:var(--gold)}
+.si.bl{background:var(--sap-pale);color:var(--sapphire)}.si.gr{background:var(--green-pale);color:var(--green)}.si.pk{background:var(--pink-pale);color:var(--pink)}.si.gd{background:var(--gold-lt);color:var(--sap-lt)}
 .sv{font-size:26px;font-weight:700;line-height:1.1;margin-bottom:3px}.sl{font-size:12px;color:var(--g2);font-weight:500}
 
 /* Charts */
@@ -194,7 +194,7 @@ input,select,textarea{font-family:var(--font);font-size:inherit}
 .loc-list{display:flex;flex-direction:column;gap:6px}
 .loc-item{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--w);border-radius:var(--rs);border:1px solid var(--g5);transition:box-shadow .15s}
 .loc-item:hover{box-shadow:var(--sh)}
-.loc-star{color:var(--gold);font-size:16px;flex-shrink:0}
+.loc-star{color:var(--sap-lt);font-size:16px;flex-shrink:0}
 .loc-info{flex:1;min-width:0}.loc-name{font-size:13px;font-weight:600}.loc-addr{font-size:11px;color:var(--g2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* Work hours schedule */
@@ -219,12 +219,17 @@ input,select,textarea{font-family:var(--font);font-size:inherit}
 .mob{display:none;width:38px;height:38px;align-items:center;justify-content:center;border-radius:var(--rs);border:1px solid var(--g5);background:var(--w)}.mob svg{width:18px;height:18px;color:var(--g1)}
 @media(max-width:900px){.sb{transform:translateX(-100%)}.sb.open{transform:translateX(0)}.mn{margin-left:0}.mob{display:flex}.sg{grid-template-columns:repeat(2,1fr)}.cr{grid-template-columns:1fr}.rfr{grid-template-columns:1fr 1fr}.dt{flex-direction:column;align-items:stretch}.sub-details{grid-template-columns:1fr}}
 @media(max-width:600px){.sg{grid-template-columns:1fr}.rfr{grid-template-columns:1fr}.ct{padding:14px}.help-grid{grid-template-columns:1fr}}
+/* Typography - match landing page serif/sans system */
+.tb-t{font-family:var(--fserif);font-weight:400;letter-spacing:-.5px}
+.cc-t{font-family:var(--fserif);font-weight:400;letter-spacing:-.3px}
+.rm-t{font-family:var(--fserif);font-weight:400;letter-spacing:-.3px}
+.sv{font-family:var(--fserif);font-style:italic;letter-spacing:-1px}
 </style>
 </head>
 <body>
 <!-- SIDEBAR -->
 <aside class="sb" id="sidebar">
-<div class="sb-brand"><div class="sb-logo"><svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg></div><div class="sb-bt">MyMiles<span>AI</span></div></div>
+<a href="https://mymilesai.com" class="sb-brand" style="text-decoration:none;color:inherit"><div class="sb-logo"><svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" rx="22" fill="#1B4DDB"/><g transform="translate(50,48)"><path d="M-32 6h64c2 0 3-1 3-3v-3c0-1-1-2-2-2h-8l-5-8c-1-2-3-3-5-3h-18c-3 0-5 1-7 3l-8 8h-11c-2 0-3 1-3 3v2c0 2 1 3 3 3z" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="-18" cy="8" r="5.5" fill="#1B4DDB" stroke="#fff" stroke-width="2.5"/><circle cx="20" cy="8" r="5.5" fill="#1B4DDB" stroke="#fff" stroke-width="2.5"/><line x1="-38" y1="-2" x2="-34" y2="-2" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-linecap="round"/><line x1="-40" y1="2" x2="-34" y2="2" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/><line x1="-38" y1="6" x2="-34" y2="6" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/></g></svg></div><div class="sb-bt" style="font-family:var(--fserif);font-size:18px;font-weight:400">MyMiles<span style="font-style:italic;color:var(--sap-lt)">AI</span></div></a>
 <nav class="sb-nav">
 <div class="ns"><span class="nsl">Main</span>
 <div class="ni active" data-page="overview" onclick="showPage('overview')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Overview</div>
