@@ -233,7 +233,7 @@ input,select,textarea{font-family:var(--font);font-size:inherit}
 <nav class="sb-nav">
 <div class="ns"><span class="nsl">Main</span>
 <div class="ni active" data-page="overview" onclick="showPage('overview')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Dashboard</div>
-<div class="ni" data-page="drives" onclick="showPage('drives')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>Drives<span class="ni-badge" id="unclassCount">0</span></div>
+<div class="ni" data-page="drives" onclick="showPage('drives')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>Trips<span class="ni-badge" id="unclassCount">0</span></div>
 <div class="ni" data-page="reports" onclick="showPage('reports')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Reports</div>
 </div>
 <div class="ns"><span class="nsl">Manage</span>
@@ -269,7 +269,7 @@ input,select,textarea{font-family:var(--font);font-size:inherit}
 <div class="sc"><div class="sc-h"><div class="si pk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div></div><div class="sv" id="statPers">0</div><div class="sl" id="persLbl">Personal Miles</div></div>
 </div>
 <div class="cr"><div class="cc"><div class="cc-h"><div class="cc-t">Mileage Trends</div><div class="cpg"><div class="cp active" onclick="setCP('week',this)">Week</div><div class="cp" onclick="setCP('month',this)">Month</div><div class="cp" onclick="setCP('year',this)">Year</div></div></div><div class="cb"><div id="barWrap"></div></div></div>
-<div class="cc"><div class="cc-h"><div class="cc-t">Drive Breakdown</div></div><div class="dw"><svg class="ds" id="donutChart" viewBox="0 0 140 140"></svg><div class="dl" id="donutLegend"></div></div></div></div>
+<div class="cc"><div class="cc-h"><div class="cc-t">Trip Breakdown</div></div><div class="dw"><svg class="ds" id="donutChart" viewBox="0 0 140 140"></svg><div class="dl" id="donutLegend"></div></div></div></div>
 <div class="rm"><div class="rm-h"><div class="rm-t">Recent Trips</div><div class="va" onclick="showPage('drives')">View all</div></div><div id="recentBody"><div style="padding:30px;text-align:center;color:var(--g3)">Loading...</div></div></div>
 </div>
 
