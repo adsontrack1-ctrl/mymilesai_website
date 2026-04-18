@@ -614,7 +614,7 @@ function calcDist(){
 const origOpenAddTrip=openAddTrip;
 openAddTrip=function(){placeFrom=null;placeTo=null;origOpenAddTrip();}
 
-document.addEventListener('DOMContentLoaded',()=>{const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'';if(tz.includes('Toronto')||tz.includes('Vancouver')||tz.includes('Edmonton')){locale='CA';document.getElementById('localeLabel').textContent='CA';document.getElementById('sLocale').value='CA'}updLbls();document.getElementById('tripDate').value=new Date().toISOString().split('T')[0];initAuth();initPlaces()});
+document.addEventListener('DOMContentLoaded',()=>{const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'';if(tz.includes('Toronto')||tz.includes('Vancouver')||tz.includes('Edmonton')||tz.includes('Winnipeg')||tz.includes('Halifax')||tz.includes('Regina')||tz.includes('St_Johns')||tz.includes('Canada')){locale='CA';document.getElementById('localeLabel').textContent='CA';document.getElementById('sLocale').value='CA'}updLbls();document.getElementById('tripDate').value=new Date().toISOString().split('T')[0];initAuth();initPlaces()});
 </script>
 </body>
 </html>
