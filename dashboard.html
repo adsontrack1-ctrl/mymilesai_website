@@ -190,7 +190,7 @@ input,select,textarea{font-family:var(--font);font-size:inherit}
 .contact-form{background:var(--w);border-radius:var(--r);border:1px solid var(--g5);padding:24px}
 .contact-form h3{font-size:15px;font-weight:700;margin-bottom:14px}
 
-/* Named Locations */
+/* Saved Places */
 .loc-list{display:flex;flex-direction:column;gap:6px}
 .loc-item{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--w);border-radius:var(--rs);border:1px solid var(--g5);transition:box-shadow .15s}
 .loc-item:hover{box-shadow:var(--sh)}
@@ -238,7 +238,7 @@ input,select,textarea{font-family:var(--font);font-size:inherit}
 </div>
 <div class="ns"><span class="nsl">Manage</span>
 <div class="ni" data-page="vehicles" onclick="showPage('vehicles')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 4v5h-3"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Vehicles</div>
-<div class="ni" data-page="locations" onclick="showPage('locations')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Named Locations</div>
+<div class="ni" data-page="locations" onclick="showPage('locations')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Saved Places</div>
 <div class="ni" data-page="settings" onclick="showPage('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Settings</div>
 </div>
 <div class="ns"><span class="nsl">Account</span>
@@ -306,7 +306,7 @@ input,select,textarea{font-family:var(--font);font-size:inherit}
 
 <!-- === NAMED LOCATIONS === -->
 <div class="ps" id="page-locations">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><h3 style="font-size:15px;font-weight:700">Named Locations</h3><button class="bp" onclick="openModal('addLocModal')">Add Location</button></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><h3 style="font-size:15px;font-weight:700">Saved Places</h3><button class="bp" onclick="openModal('addLocModal')">Add Location</button></div>
 <p style="font-size:13px;color:var(--g2);margin-bottom:16px">Save frequently visited addresses with custom names for faster drive classification and search.</p>
 <div class="loc-list" id="locList"></div>
 </div>
@@ -451,12 +451,12 @@ input,select,textarea{font-family:var(--font);font-size:inherit}
 </div>
 <div class="md-f"><button class="bc" onclick="closeModal('addVehModal')">Cancel</button><button class="bp" onclick="saveVehicle()">Add Vehicle</button></div></div></div>
 
-<div class="mo" id="addLocModal"><div class="md"><div class="md-h"><h3>Add Named Location</h3><button class="md-c" onclick="closeModal('addLocModal')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+<div class="mo" id="addLocModal"><div class="md"><div class="md-h"><h3>Add Saved Place</h3><button class="md-c" onclick="closeModal('addLocModal')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
 <div class="md-b">
 <div class="fg"><label>Name</label><input type="text" id="locName" placeholder="e.g. Main Office, Home"></div>
 <div class="fg"><label>Address</label><input type="text" id="locAddr" placeholder="Full address"></div>
 </div>
-<div class="md-f"><button class="bc" onclick="closeModal('addLocModal')">Cancel</button><button class="bp" onclick="saveLoc()">Save Location</button></div></div></div>
+<div class="md-f"><button class="bc" onclick="closeModal('addLocModal')">Cancel</button><button class="bp" onclick="saveLoc()">Save Place</button></div></div></div>
 
 <div class="toast" id="toast"></div>
 
@@ -554,7 +554,7 @@ function renderPurposes(){const c=document.getElementById('custPurposes');c.inne
 function addPurpose(){const n=prompt('Enter custom purpose name:');if(n){purposes.push(n);refreshUI()}}
 
 function saveVehicle(){const n=document.getElementById('vehName').value.trim();if(!n){showToast('Enter a name','error');return}vehicles.push({id:'v-'+Date.now(),name:n,make:document.getElementById('vehMake').value.trim(),model:document.getElementById('vehModel').value.trim(),year:document.getElementById('vehYear').value.trim(),odometer:parseInt(document.getElementById('vehOdo').value)||0,primary:document.getElementById('vehPrimary').checked});closeModal('addVehModal');refreshUI();showToast('Vehicle added!','success')}
-function saveLoc(){const n=document.getElementById('locName').value.trim(),a=document.getElementById('locAddr').value.trim();if(!n||!a){showToast('Fill all fields','error');return}locations.push({id:'l-'+Date.now(),name:n,addr:a});closeModal('addLocModal');refreshUI();showToast('Location saved!','success')}
+function saveLoc(){const n=document.getElementById('locName').value.trim(),a=document.getElementById('locAddr').value.trim();if(!n||!a){showToast('Fill all fields','error');return}locations.push({id:'l-'+Date.now(),name:n,addr:a});closeModal('addLocModal');refreshUI();showToast('Place saved!','success')}
 function toggleWH(){document.getElementById('whSchedule').style.display=document.getElementById('whToggle').checked?'block':'none'}
 
 function genReport(){const range=document.getElementById('rRange').value,type=document.getElementById('rType').value;let t=[...allTrips];const now=new Date();if(range==='this_month')t=t.filter(x=>{const d=new Date(x.trip_date);return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear()});else if(range==='this_year')t=t.filter(x=>new Date(x.trip_date).getFullYear()===now.getFullYear());else if(range==='last_year')t=t.filter(x=>new Date(x.trip_date).getFullYear()===now.getFullYear()-1);if(type!=='all')t=t.filter(x=>x.type===type);const td=t.filter(x=>x.type==='biz').reduce((s,x)=>s+calcDed(x.miles,'biz'),0);const list=document.getElementById('reportsList');const em=list.querySelector('.es');if(em)list.innerHTML='';const row=document.createElement('div');row.className='rr';row.innerHTML=`<div class="rn">Mileage Report - ${range.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}</div><div class="rdt">${now.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div><div class="rdr">${t.length} drives</div><div class="rv">${fm(td)}</div><div style="display:flex;gap:4px"><button class="bo" style="padding:3px 8px;font-size:10px" onclick="exportCSV()">CSV</button><button class="bo" style="padding:3px 8px;font-size:10px" onclick="showToast('PDF downloaded','success')">PDF</button><button class="bo" style="padding:3px 8px;font-size:10px" onclick="showToast('Emailed to your account','success')">Email</button></div>`;list.prepend(row);showToast('Report created!','success')}
@@ -565,7 +565,7 @@ function openModal(id){document.getElementById(id).classList.add('show')}
 function closeModal(id){document.getElementById(id).classList.remove('show');editId=null}
 function openAddTrip(){editId=null;document.getElementById('tripModalTitle').textContent='Add New Trip';['tripFrom','tripTo','tripDist','tripPurpose','tripNotes','tripTolls','tripParking'].forEach(x=>document.getElementById(x).value='');document.getElementById('tripDate').value=new Date().toISOString().split('T')[0];document.getElementById('tripCat').value=document.getElementById('defPurpose')?.value||'uncl';openModal('addTripModal')}
 function showToast(m,t='success'){const e=document.getElementById('toast');e.textContent=m;e.className='toast '+t+' show';setTimeout(()=>e.classList.remove('show'),3000)}
-function showPage(p){document.querySelectorAll('.ps').forEach(s=>s.classList.remove('active'));document.getElementById('page-'+p)?.classList.add('active');document.querySelectorAll('.ni').forEach(i=>i.classList.remove('active'));document.querySelector('.ni[data-page="'+p+'"]')?.classList.add('active');const titles={overview:'Overview',drives:'Drives',reports:'Reports',vehicles:'Vehicles',locations:'Named Locations',settings:'Settings',subscription:'Subscription',help:'Help & Support'};document.getElementById('pageTitle').textContent=titles[p]||p;document.getElementById('sidebar').classList.remove('open')}
+function showPage(p){document.querySelectorAll('.ps').forEach(s=>s.classList.remove('active'));document.getElementById('page-'+p)?.classList.add('active');document.querySelectorAll('.ni').forEach(i=>i.classList.remove('active'));document.querySelector('.ni[data-page="'+p+'"]')?.classList.add('active');const titles={overview:'Overview',drives:'Drives',reports:'Reports',vehicles:'Vehicles',locations:'Saved Places',settings:'Settings',subscription:'Subscription',help:'Help & Support'};document.getElementById('pageTitle').textContent=titles[p]||p;document.getElementById('sidebar').classList.remove('open')}
 
 /* === GOOGLE PLACES AUTOCOMPLETE & DISTANCE === */
 let acFrom=null,acTo=null,placeFrom=null,placeTo=null;
