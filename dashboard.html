@@ -578,6 +578,8 @@ function initPlaces(){
   acTo=new google.maps.places.Autocomplete(toEl,opts);
   acFrom.addListener('place_changed',()=>{placeFrom=acFrom.getPlace();fromEl.value=placeFrom.formatted_address||placeFrom.name||fromEl.value;calcDist()});
   acTo.addListener('place_changed',()=>{placeTo=acTo.getPlace();toEl.value=placeTo.formatted_address||placeTo.name||toEl.value;calcDist()});
+  const locEl=document.getElementById('locAddr');
+  if(locEl){const acLoc=new google.maps.places.Autocomplete(locEl,opts);acLoc.addListener('place_changed',()=>{locEl.value=acLoc.getPlace().formatted_address||locEl.value});}
   /* Style the pac-container to match our theme */
   const style=document.createElement('style');
   style.textContent='.pac-container{font-family:var(--font);border-radius:8px;border:1px solid var(--g5);box-shadow:var(--shm);margin-top:4px;z-index:9999}.pac-item{padding:8px 12px;font-size:13px;cursor:pointer;border-top:1px solid var(--g6)}.pac-item:hover{background:var(--sap-pale)}.pac-item-query{font-size:13px;font-weight:600}.pac-icon{display:none}';
