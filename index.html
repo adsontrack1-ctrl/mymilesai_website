@@ -2492,7 +2492,20 @@ window.exportPDF=function(){
   w.document.write('<div class="summary"><div class="stat"><div class="stat-val blue">'+b.toFixed(1)+'</div><div class="stat-lbl">Business '+UNIT+'</div></div><div class="stat"><div class="stat-val" style="color:#ec4899">'+p.toFixed(1)+'</div><div class="stat-lbl">Personal '+UNIT+'</div></div><div class="stat"><div class="stat-val green">$'+d.toFixed(2)+'</div><div class="stat-lbl">Tax Deduction</div></div><div class="stat"><div class="stat-val">'+_tr.length+'</div><div class="stat-lbl">Total Trips</div></div></div>');
   w.document.write('<table><thead><tr><th>Date</th><th>From</th><th>To</th><th>'+UNIT.toUpperCase()+'</th><th>Category</th><th>Deduction</th></tr></thead><tbody>');
   _tr.forEach(function(t){w.document.write('<tr><td>'+(t.dt||'')+'</td><td>'+t.f+'</td><td>'+t.t+'</td><td>'+t.m.toFixed(1)+'</td><td>'+t.c+'</td><td>'+(t.d>0?'$'+t.d.toFixed(2):'\u2014')+'</td></tr>');});
-  w.document.write('</tbody></table><div style="margin-top:30px;padding-top:16px;border-top:1px solid #e5e7eb;font-size:11px;color:#9ca3af">MyMilesAI \u00b7 mymilesai.com</div></body></html>');
+  w.document.write('</tbody></table><div style="margin-top:30px;padding-top:16px;border-top:1px solid #e5e7eb;font-size:11px;color:#9ca3af">MyMilesAI \u00b7 mymilesai.com</div>
+<script>
+if(typeof window.openSignUp==='undefined'){
+  window.openSignUp=function(){
+    var m=document.getElementById('signupModal');
+    if(m){m.style.display='flex';}
+    var s1=document.getElementById('signupStep1');
+    if(s1)s1.style.display='block';
+    var sc=document.getElementById('signupCountry');
+    if(sc&&typeof LOC!=='undefined')sc.value=LOC.country;
+  };
+}
+</script>
+</body></html>');
 w.document.close();
 }
 })();
@@ -2700,6 +2713,19 @@ w.document.close();
     </div>
   </div>
 </div>
+
+<script>
+if(typeof window.openSignUp==='undefined'){
+  window.openSignUp=function(){
+    var m=document.getElementById('signupModal');
+    if(m){m.style.display='flex';}
+    var s1=document.getElementById('signupStep1');
+    if(s1)s1.style.display='block';
+    var sc=document.getElementById('signupCountry');
+    if(sc&&typeof LOC!=='undefined')sc.value=LOC.country;
+  };
+}
+</script>
 </body></html>');
   w.document.close();
   setTimeout(function(){w.print();},500);
