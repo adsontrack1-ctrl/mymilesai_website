@@ -402,7 +402,7 @@ input,select,textarea{font-family:var(--font);font-size:inherit}
 <h3 style="font-size:15px;font-weight:700;margin-bottom:12px">Frequently Asked Questions</h3>
 <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">How does MyMilesAI track my drives?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">MyMilesAI uses your phone's GPS and motion sensors to automatically detect when you're driving. It logs every trip in the background - no need to press start or stop.</div></div>
 <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">What's the IRS mileage rate for 2026?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">The IRS standard mileage rate for 2026 is $0.725 per mile for business use. For Canada, the CRA rate is $0.73/km for the first 5,000 km and $0.67/km after that.</div></div>
-<div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Can I use MyMilesAI for tax deductions?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Yes! MyMilesAI generates IRS-compliant reports with drive date, purpose, start/end locations, and total mileage value. Export as CSV or PDF for your tax filing.</div></div>
+<div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Can I use MyMilesAI for tax deductions?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Yes — MyMilesAI generates reports in IRS Pub. 463 format with drive date, purpose, start/end locations, and total mileage. Export as CSV or PDF and review with your tax professional before filing.</div></div>
 <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">How do I cancel my subscription?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Go to Subscription in the sidebar, scroll to Cancel Subscription, and click Cancel. Your data is preserved and you can reactivate anytime.</div></div>
 <div class="faq-item" onclick="this.classList.toggle('open')"><div class="faq-q">Is my data secure?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Your data is encrypted and stored on Supabase (powered by PostgreSQL with Row Level Security). Only you can access your drives. We never share or sell your data.</div></div>
 
@@ -481,47 +481,68 @@ function toggleLocale(){locale=locale==='US'?'CA':'US';document.getElementById('
 function updLocale(v){locale=v;document.getElementById('localeLabel').textContent=locale;updLbls();refreshUI()}
 function updLbls(){const u=gu(),U=u[0].toUpperCase()+u.slice(1);document.getElementById('distLbl').textContent='Distance ('+u+')';document.getElementById('bizLbl').textContent='Business '+U;document.getElementById('persLbl').textContent='Personal '+U}
 
+async function handleSession(session){
+  const{data:profile,error:profErr}=await sb.from('profiles').select('id,subscription_tier,trial_ends_at,subscription_expires_at,name').eq('id',session.user.id).single();
+  if(profErr||!profile){
+    document.getElementById('userName').textContent='No Account';
+    document.getElementById('userEmail').textContent='Sign up required';
+    document.getElementById('userAvatar').textContent='!';
+    document.getElementById('pageSub').textContent='Account not found';
+    alert('No MyMilesAI account found. Please sign up through the app first.');
+    await sb.auth.signOut();
+    window.location.href='/';
+    return;
+  }
+  const now=new Date();
+  const tier=profile.subscription_tier||'free';
+  const trialOk=profile.trial_ends_at&&new Date(profile.trial_ends_at)>now;
+  const subOk=tier==='pro'||tier==='premium';
+  const subExpired=profile.subscription_expires_at&&new Date(profile.subscription_expires_at)<now;
+  if((subOk&&!subExpired)||trialOk||tier==='free'){
+    setUser(session.user);
+  }else{
+    alert('Your subscription has expired. Please renew to continue.');
+    await sb.auth.signOut();
+    window.location.href='/';
+  }
+}
 async function initAuth(){
+  sb.auth.onAuthStateChange(async(event,s)=>{
+    if(event==='SIGNED_OUT'){window.location.href='/';return}
+    if(s?.user&&(!user||user.id!==s.user.id)){await handleSession(s)}
+  });
   const{data:{session}}=await sb.auth.getSession();
   if(session?.user){
-    // Check profile exists and subscription is active
-    const{data:profile,error:profErr}=await sb.from('profiles').select('id,subscription_tier,trial_ends_at,subscription_expires_at,name').eq('id',session.user.id).single();
-    if(profErr||!profile){
-      document.getElementById('userName').textContent='No Account';
-      document.getElementById('userEmail').textContent='Sign up required';
-      document.getElementById('userAvatar').textContent='!';
-      document.getElementById('pageSub').textContent='Account not found';
-      alert('No MyMilesAI account found. Please sign up through the app first.');
-      await sb.auth.signOut();
-      window.location.href='/';
-      return;
-    }
-    const now=new Date();
-    const tier=profile.subscription_tier||'free';
-    const trialOk=profile.trial_ends_at&&new Date(profile.trial_ends_at)>now;
-    const subOk=tier==='pro'||tier==='premium';
-    const subExpired=profile.subscription_expires_at&&new Date(profile.subscription_expires_at)<now;
-    if((subOk&&!subExpired)||trialOk||tier==='free'){
-      setUser(session.user);
-    } else {
-      alert('Your subscription has expired. Please renew to continue.');
-      await sb.auth.signOut();
-      window.location.href='/';
-      return;
-    }
-  } else {
-    document.getElementById('userName').textContent='Demo User';
-    document.getElementById('userEmail').textContent='Sign in to save';
-    document.getElementById('userAvatar').textContent='D';
-    document.getElementById('pageSub').textContent='Demo mode';
-    loadDemo();
+    await handleSession(session);
+  }else{
+    window.location.href='/';
   }
-  sb.auth.onAuthStateChange(async(_,s)=>{if(s?.user)setUser(s.user)});
 }
 function setUser(u){user=u;const n=u.user_metadata?.full_name||u.email?.split('@')[0]||'User';document.getElementById('userName').textContent=n;document.getElementById('userEmail').textContent=u.email||'';document.getElementById('userAvatar').textContent=n[0].toUpperCase();const hr=new Date().getHours();const greeting=hr<12?'Good morning':hr<17?'Good afternoon':'Good evening';document.getElementById('pageSub').textContent=greeting+', '+n.split(' ')[0];document.getElementById('settEmail').textContent=u.email||'';loadTrips()}
 async function signOut(){await sb.auth.signOut();window.location.href='/'}
-async function loadTrips(){if(!user)return;const{data}=await sb.from('trips').select('*').eq('user_id',user.id).order('trip_date',{ascending:false});allTrips=(data||[]).map(function(t){return Object.assign({},t,{miles:Number(t.miles)||0,from_addr:t.from_addr||'Unknown',to_addr:t.to_addr||'Unknown',trip_date:t.trip_date||new Date().toISOString().split('T')[0],type:t.type||'uncl'})});refreshUI()}
-function loadDemo(){const t=new Date(),d=[];const a=[['123 Main St, New York','456 Broadway, Manhattan'],['789 Oak Ave, Brooklyn','321 Pine St, Queens'],['100 Tech Blvd, Austin','500 Congress Ave, Austin'],['200 Market St, SF','400 Mission St, SF'],['55 Elm Dr, Chicago','900 Michigan Ave, Chicago'],['12 Maple Ln, Dallas','88 Commerce St, Dallas'],['300 King St, Seattle','150 Pike Pl, Seattle'],['42 Harbor Rd, Boston','77 Beacon St, Boston'],['600 Peachtree, Atlanta','150 Spring St, Atlanta'],['900 Sunset, LA','200 Vine St, LA']];const c=['biz','biz','pers','biz','uncl','biz','pers','biz','uncl','pers'];const p=['Client Meeting','Site Visit','Grocery','Office','','Supplies','Gym','Networking','','Shopping'];for(let i=0;i<10;i++){const dt=new Date(t);dt.setDate(dt.getDate()-i*2-Math.floor(Math.random()*3));d.push({id:'d-'+i,from_addr:a[i][0],to_addr:a[i][1],miles:+(4+Math.random()*40).toFixed(1),trip_date:dt.toISOString().split('T')[0],type:c[i],purpose:p[i],notes:'',tolls:i%4===0?2.50:0,parking:i%5===0?5:0,user_id:'demo'})}allTrips=d;refreshUI()}
+async function loadTrips(){
+  if(!user)return;
+  try{
+    const{data,error}=await sb.from('trips').select('*').eq('user_id',user.id).is('deleted_at',null).order('trip_date',{ascending:false});
+    if(error)throw error;
+    const typeMap={business:'biz',personal:'pers',unclassified:'uncl'};
+    allTrips=(data||[]).map(function(t){
+      const rawType=t.type||'uncl';
+      return Object.assign({},t,{
+        miles:Number(t.miles)||0,
+        from_addr:t.from_addr||'Unknown',
+        to_addr:t.to_addr||'Unknown',
+        trip_date:t.trip_date||new Date().toISOString().split('T')[0],
+        type:typeMap[rawType]||rawType
+      });
+    });
+    refreshUI();
+  }catch(e){
+    allTrips=[];
+    refreshUI();
+    showToast('Failed to load trips: '+(e.message||e),'error');
+  }
+}
 
 async function saveTrip(){const f=document.getElementById('tripFrom').value.trim(),t=document.getElementById('tripTo').value.trim(),d=parseFloat(document.getElementById('tripDist').value),dt=document.getElementById('tripDate').value,c=document.getElementById('tripCat').value,p=document.getElementById('tripPurpose').value.trim(),n=document.getElementById('tripNotes').value.trim(),tl=parseFloat(document.getElementById('tripTolls').value)||0,pk=parseFloat(document.getElementById('tripParking').value)||0;if(!f||!t||!d||!dt){showToast('Fill required fields','error');return}const trip={from_addr:f,to_addr:t,miles:d,trip_date:dt,type:c,purpose:p,notes:n+(tl?' | Tolls:$'+tl.toFixed(2):'')+(pk?' | Parking:$'+pk.toFixed(2):''),tolls:tl,parking:pk};if(user){trip.user_id=user.id;const dbTrip={user_id:user.id,from_addr:f,to_addr:t,miles:d,trip_date:dt,type:c,purpose:p,notes:trip.notes,source:'web',trip_uid:crypto.randomUUID(),deductible:c==='biz'};if(editId){delete dbTrip.trip_uid;delete dbTrip.source;await sb.from('trips').update(dbTrip).eq('id',editId)}else{const{error:insertErr}=await sb.from('trips').insert(dbTrip);if(insertErr){showToast('Save failed: '+insertErr.message,'error');return}}await loadTrips()}else{if(editId){const i=allTrips.findIndex(x=>x.id===editId);if(i>=0)allTrips[i]={...allTrips[i],...trip}}else{trip.id='d-'+Date.now();trip.user_id='demo';allTrips.unshift(trip)}refreshUI()}editId=null;closeModal('addTripModal');showToast('Trip saved!','success')}
 async function deleteTrip(id){if(!confirm('Delete this trip?'))return;if(user&&!String(id).startsWith('d-')){await sb.from('trips').delete().eq('id',id);await loadTrips()}else{allTrips=allTrips.filter(x=>x.id!==id);refreshUI()}showToast('Deleted','success')}
@@ -538,10 +559,10 @@ function refreshUI(){const ft=getFiltered();updateStats();renderTrips(ft);render
 function updateStats(){const yt=allTrips.filter(t=>new Date(t.trip_date).getFullYear()===yr);const bm=yt.filter(t=>t.type==='biz').reduce((s,t)=>s+t.miles,0);const pm=yt.filter(t=>t.type==='pers').reduce((s,t)=>s+t.miles,0);document.getElementById('statTrips').textContent=yt.length;document.getElementById('statDed').textContent=fm(calcDed(bm,'biz'));document.getElementById('statBiz').textContent=fn(bm);document.getElementById('statPers').textContent=fn(pm)}
 function updateCnts(){const yt=allTrips.filter(t=>new Date(t.trip_date).getFullYear()===yr);document.getElementById('cAll').textContent=yt.length;document.getElementById('cBiz').textContent=yt.filter(t=>t.type==='biz').length;document.getElementById('cPers').textContent=yt.filter(t=>t.type==='pers').length;const u=yt.filter(t=>t.type==='uncl').length;document.getElementById('cUnc').textContent=u;document.getElementById('unclassCount').textContent=u}
 
-function renderTrips(ft){const c=document.getElementById('tripsList');if(!ft.length){c.innerHTML='<div class="es"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg><h3>No trips found</h3><p>Add a trip or adjust your filters.</p><button class="bp" onclick="openAddTrip()">Add Trip</button></div>';return}
+function renderTrips(ft){const c=document.getElementById('tripsList');if(!ft.length){if(!allTrips.length){c.innerHTML='<div class="es"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg><h3>No trips yet</h3><p>Start tracking in the MyMilesAI iOS app, or add a trip manually.</p><button class="bp" onclick="openAddTrip()">Add Trip</button></div>'}else{c.innerHTML='<div class="es"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg><h3>No trips match</h3><p>Adjust your filters to see more trips.</p></div>'}return}
 c.innerHTML=ft.map(t=>{const ct=t.type||'uncl',ded=calcDed(t.miles,ct),ds=new Date(t.trip_date+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});const extras=[];if(t.tolls>0)extras.push('Tolls: '+fm(t.tolls));if(t.parking>0)extras.push('Parking: '+fm(t.parking));return`<div class="tc"><div class="tc-ban ${ct}"></div><div class="tc-body"><div class="rt"><div class="rs"><div class="rms"><div class="rd from ${ct}"></div><div class="rstm ${ct}"></div><div class="rd to ${ct}"></div></div><div><div class="rl">From</div><div class="ra">${esc(t.from_addr)}</div><div style="height:8px"></div><div class="rl">To</div><div class="ra">${esc(t.to_addr)}</div></div></div></div><div class="tdc"><div class="tdn">${fn(t.miles)}</div><div class="tdu">${gu()}</div>${ct==='biz'?`<div class="tdd">${fm(ded)}</div>`:''}</div></div><div class="tc-f"><div class="tm"><span class="tdc2">${ds}</span><span class="tcb ${ct}">${({biz:"Business",pers:"Personal",uncl:"Unclassified",med:"Medical"}[ct]||ct)}</span>${t.purpose?`<span class="tdc2">${esc(t.purpose)}</span>`:''}${extras.map(e=>`<span class="tdc2">${e}</span>`).join('')}</div><div class="ta">${ct!=='biz'?`<button class="tab" onclick="reclass('${t.id}','biz')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Biz</button>`:''} ${ct!=='pers'?`<button class="tab" onclick="reclass('${t.id}','pers')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Pers</button>`:''}<button class="tab" onclick="editTrip('${t.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit</button><button class="tab del" onclick="deleteTrip('${t.id}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>Del</button></div></div></div>`}).join('')}
 
-function renderRecent(){const c=document.getElementById('recentBody'),r=allTrips.filter(t=>new Date(t.trip_date).getFullYear()===yr).slice(0,5);if(!r.length){c.innerHTML='<div style="padding:24px;text-align:center;color:var(--g3);font-size:13px">No trips this year</div>';return}c.innerHTML=r.map(t=>{const ct=t.type||'uncl',ded=calcDed(t.miles,ct),ds=new Date(t.trip_date+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'});return`<div class="mt" onclick="showPage('drives')"><div class="mt-d ${ct}"></div><div class="mt-i"><div class="mt-r">${esc((t.from_addr||'').split(',')[0])} → ${esc((t.to_addr||'').split(',')[0])}</div><div class="mt-dt">${ds}${t.purpose?' Â· '+esc(t.purpose):''}</div></div><div style="text-align:right"><div class="mt-m">${fn(t.miles)} ${gu()}</div>${ct==='biz'?`<div class="mt-ded">${fm(ded)}</div>`:''}</div></div>`}).join('')}
+function renderRecent(){const c=document.getElementById('recentBody'),r=allTrips.filter(t=>new Date(t.trip_date).getFullYear()===yr).slice(0,5);if(!r.length){c.innerHTML='<div style="padding:24px;text-align:center;color:var(--g3);font-size:13px">No trips this year</div>';return}c.innerHTML=r.map(t=>{const ct=t.type||'uncl',ded=calcDed(t.miles,ct),ds=new Date(t.trip_date+'T12:00:00').toLocaleDateString('en-US',{month:'short',day:'numeric'});return`<div class="mt" onclick="showPage('drives')"><div class="mt-d ${ct}"></div><div class="mt-i"><div class="mt-r">${esc((t.from_addr||'').split(',')[0])} → ${esc((t.to_addr||'').split(',')[0])}</div><div class="mt-dt">${ds}${t.purpose?' · '+esc(t.purpose):''}</div></div><div style="text-align:right"><div class="mt-m">${fn(t.miles)} ${gu()}</div>${ct==='biz'?`<div class="mt-ded">${fm(ded)}</div>`:''}</div></div>`}).join('')}
 
 function renderBar(){const w=document.getElementById('barWrap'),yt=allTrips.filter(t=>new Date(t.trip_date).getFullYear()===yr);let lbl=[],bD=[],pD=[];const now=new Date();if(cPer==='year'){lbl='Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec'.split(' ');for(let m=0;m<12;m++){bD.push(yt.filter(t=>t.type==='biz'&&new Date(t.trip_date).getMonth()===m).reduce((s,t)=>s+t.miles,0));pD.push(yt.filter(t=>t.type==='pers'&&new Date(t.trip_date).getMonth()===m).reduce((s,t)=>s+t.miles,0))}}else if(cPer==='month'){for(let d=1;d<=30;d+=3){lbl.push(d+'');const e=Math.min(d+2,31);bD.push(yt.filter(t=>{const td=new Date(t.trip_date);return t.type==='biz'&&td.getMonth()===now.getMonth()&&td.getDate()>=d&&td.getDate()<=e}).reduce((s,t)=>s+t.miles,0));pD.push(yt.filter(t=>{const td=new Date(t.trip_date);return t.type==='pers'&&td.getMonth()===now.getMonth()&&td.getDate()>=d&&td.getDate()<=e}).reduce((s,t)=>s+t.miles,0))}}else{lbl='Mon Tue Wed Thu Fri Sat Sun'.split(' ');const day=now.getDay();for(let i=0;i<7;i++){const tg=new Date(now);tg.setDate(now.getDate()-((day+6)%7)+i);const ds=tg.toISOString().split('T')[0];bD.push(yt.filter(t=>t.type==='biz'&&t.trip_date===ds).reduce((s,t)=>s+t.miles,0));pD.push(yt.filter(t=>t.type==='pers'&&t.trip_date===ds).reduce((s,t)=>s+t.miles,0))}}
 const W=580,H=180,pd=38,n=lbl.length,mx=Math.max(1,...bD.map((b,i)=>b+pD[i])),bW=Math.min(26,(W-pd*2)/n*.6),gp=(W-pd*2)/n;let svg=`<svg viewBox="0 0 ${W} ${H+42}" style="width:100%;height:230px">`;for(let i=0;i<=4;i++){const y=8+(H-8)*(1-i/4),v=Math.round(mx*i/4);svg+=`<line x1="${pd}" y1="${y}" x2="${W-8}" y2="${y}" stroke="var(--g5)" stroke-width=".5"/><text x="${pd-5}" y="${y+4}" text-anchor="end" font-size="9" fill="var(--g3)" font-family="var(--font)">${v}</text>`}for(let i=0;i<n;i++){const x=pd+gp*i+gp/2-bW/2,bH=(bD[i]/mx)*(H-8),pH=(pD[i]/mx)*(H-8),bY=H-bH,pY=bY-pH;svg+=`<rect x="${x}" y="${bY}" width="${bW}" height="${bH}" rx="3" fill="var(--sapphire)" opacity=".9"/>`;svg+=`<rect x="${x}" y="${pY}" width="${bW}" height="${pH}" rx="3" fill="var(--pink)" opacity=".7"/>`;svg+=`<text x="${x+bW/2}" y="${H+14}" text-anchor="middle" font-size="9" fill="var(--g3)" font-family="var(--font)">${lbl[i]}</text>`}svg+=`<rect x="${W-150}" y="${H+24}" width="8" height="8" rx="2" fill="var(--sapphire)"/><text x="${W-138}" y="${H+32}" font-size="9" fill="var(--g2)" font-family="var(--font)">Business</text><rect x="${W-78}" y="${H+24}" width="8" height="8" rx="2" fill="var(--pink)" opacity=".7"/><text x="${W-66}" y="${H+32}" font-size="9" fill="var(--g2)" font-family="var(--font)">Personal</text></svg>`;w.innerHTML=svg}
